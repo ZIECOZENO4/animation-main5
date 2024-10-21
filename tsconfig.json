@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    "types": ["next-video"],
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",

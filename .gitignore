@@ -34,8 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-<<<<<<< HEAD
+
+.next-video
+videos/**/*.json
 
 .env
-=======
->>>>>>> 6eaa690b345dd6a709980015fbe17c4972e21e74
+
