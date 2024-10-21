@@ -20,7 +20,7 @@ const BackgroundVideo = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      video.playbackRate = 0.5; // Adjust this value to change the speed (0.5 is half speed, 2 is double speed)
+      video.playbackRate = 0.5; 
     }
   }, []);
 
@@ -29,7 +29,7 @@ const BackgroundVideo = () => {
       {isLoading && (
         <div className="flex items-center justify-center w-[100vw] h-[100vh] bg-black">
           <Image
-            src="/images/main.PNG" // Replace with your loading image path
+            src="/images/main.PNG" 
             alt="Loading"
             width={100}
             height={100}
@@ -39,7 +39,7 @@ const BackgroundVideo = () => {
       {hasError && (
         <div className="flex items-center justify-center w-[100vw] h-[100vh] bg-black">
           <Image
-            src="/images/loading.PNG" // Replace with your error image path
+            src="/images/loading.PNG" 
             alt="Error"
             width={100}
             height={100}
