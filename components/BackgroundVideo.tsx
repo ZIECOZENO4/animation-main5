@@ -4,7 +4,7 @@ import React from 'react';
 
 const BackgroundVideo = () => {
   return (
-    <div className="fixed inset-0 -z-10 w-full h-full overflow-hidden">
+    <div className="fixed inset-0 -z-10 w-[100vw] h-[100vh] overflow-hidden" >
       <video
         autoPlay
         loop
