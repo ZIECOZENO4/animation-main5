@@ -69,7 +69,7 @@ const BackgroundVideo: React.FC = () => {
       </video>
       {!isVideoReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-black text-white">
-          Loading video...
+      <img src='/images/main.PNG' alt='loading' className='h-[100vh] w-[100vw]' />
         </div>
       )}
     </div>
