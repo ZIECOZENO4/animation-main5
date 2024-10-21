@@ -30,9 +30,9 @@ export default function RootLayout({
     <html lang="en">
        <body className={`${workbench.variable} dark text-[#F7F2DA] antialiased relative font-workbench`}>
        <Providers>
-        <div className="relative min-h-screen">
+        <div className=" min-h-screen">
           <BackgroundVideo />
-          <div className="relative z-10">
+          <div className=" z-10">
           <MdNavBar  />
             <Suspense fallback={<Loading />}>
               {children}
