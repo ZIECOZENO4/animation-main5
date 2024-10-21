@@ -4,9 +4,9 @@ import VideoBackground from '@/components/VideoBackground';
 import { VideoUploader } from '@/components/VideoUploader';
 import { useState } from 'react';
 
+
 export default function Home() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {!videoUrl && (
