@@ -51,27 +51,10 @@ const BackgroundVideo: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      // Function to handle loop
-      const handleLoop = () => {
-        if (video.currentTime >= video.duration - 0.1) {
-          video.currentTime = 0;
-        }
-      };
-
-      // Add event listener
-      video.addEventListener('timeupdate', handleLoop);
-
-      // Start playing
-      video.play().catch((error: Error) => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((error: Error) => {
         console.error("Error attempting to play", error);
       });
-
-      // Cleanup
-      return () => {
-        video.removeEventListener('timeupdate', handleLoop);
-      };
     }
   }, []);
 
@@ -79,12 +62,12 @@ const BackgroundVideo: React.FC = () => {
     <div className="fixed inset-0 -z-10 w-[100vw] h-[100vh] overflow-hidden">
       <video
         ref={videoRef}
-        autoPlay
+        loop
         muted
         playsInline
         className="object-cover w-full h-full"
       >
-        <source src="https://utfs.io/f/09Bv5dtKx6OwK45Rnc6kiqwpz0IV69AOL3Uro5Sa4eHXlnWE" type="video/mp4" />
+        <source    src="https://utfs.io/f/09Bv5dtKx6OwK45Rnc6kiqwpz0IV69AOL3Uro5Sa4eHXlnWE" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
