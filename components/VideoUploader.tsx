@@ -4,7 +4,7 @@ import { OurFileRouter } from "../app/api/uploadthing/core";
 
 export function VideoUploader({ onUploadComplete }: { onUploadComplete: (url: string) => void }) {
   return (
-    <UploadButton<OurFileRouter>
+    <UploadButton<OurFileRouter, "videoUploader">
       endpoint="videoUploader"
       onClientUploadComplete={(res) => {
         if (res && res[0]) {
