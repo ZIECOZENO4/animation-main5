@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 import { Suspense } from 'react';
 import Loading from './loading';
 import BottomMore from "@/components/BottomMore";
-import BackgroundVideo from "@/components/VideoBackground";
+import BackgroundVideo from "@/components/BackgroundVideo";
 
 const workbench = Workbench({
   weight: '400', 
