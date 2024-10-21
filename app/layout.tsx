@@ -28,15 +28,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-       <body className={`${workbench.variable} dark text-[#F7F2DA] antialiased relative font-workbench`}>
+       <body className={`${workbench.variable} dark text-[#F7F2DA] antialiased font-workbench`}>
        <Providers>
         <div className=" min-h-screen">
           <BackgroundVideo />
-          <div className=" z-10">
+          <div className="">
           <MdNavBar  />
             <Suspense fallback={<Loading />}>
               {children}
             </Suspense>
+            <BackgroundVideo />
             <BottomMore />
           </div>
         </div>
