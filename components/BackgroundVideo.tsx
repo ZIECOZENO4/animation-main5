@@ -12,7 +12,7 @@ const BackgroundVideo = () => {
         playsInline
         className="object-cover w-full h-full"
       >
-        <source src='/videos/first.mp4' type="video/mp4" />
+        <source src='https://u.pcloud.link/publink/show?code=XZAnEo0ZI6KfIxDbJHHoNRyhfR4nozA5QS9V' type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
