@@ -20,29 +20,41 @@ const BackgroundVideo = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      video.playbackRate = 0.5; 
+      video.playbackRate = 0.5;
     }
   }, []);
 
+  useEffect(() => {
+    // Preload images
+    const preloadImage = (src: string) => {
+      const img = new window.Image();
+      img.src = src;
+    };
+    preloadImage('/images/main.PNG');
+    preloadImage('/images/loading.PNG');
+  }, []);
+
   return (
-    <div className="fixed inset-0 -z-10 w-[100vw] h-[100vh] overflow-hidden">
+    <div className="fixed inset-0 -z-10 w-screen h-screen overflow-hidden">
       {isLoading && (
-        <div className="flex items-center justify-center w-[100vw] h-[100vh] bg-black">
+        <div className="flex items-center justify-center w-screen h-screen bg-black" aria-label="Loading">
           <Image
-            src="/images/main.PNG" 
+            src="/images/main.PNG"
             alt="Loading"
             width={100}
             height={100}
+            priority
           />
         </div>
       )}
       {hasError && (
-        <div className="flex items-center justify-center w-[100vw] h-[100vh] bg-black">
+        <div className="flex items-center justify-center w-screen h-screen bg-black" aria-label="Error loading video">
           <Image
-            src="/images/loading.PNG" 
+            src="/images/loading.PNG"
             alt="Error"
             width={100}
             height={100}
+            priority
           />
         </div>
       )}
@@ -54,9 +66,10 @@ const BackgroundVideo = () => {
           loop
           muted
           playsInline
-          className="object-cover w-[100vw] h-[100vh]"
+          className="object-cover w-screen h-screen"
           onLoadedData={handleLoadedData}
           onError={handleError}
+          aria-hidden="true"
         />
       )}
     </div>
