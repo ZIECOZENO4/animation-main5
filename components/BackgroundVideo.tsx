@@ -41,7 +41,7 @@ const BackgroundVideo: React.FC = () => {
       video.addEventListener('error', handleError);
       video.addEventListener('pause', handlePause);
 
-      // Attempt to play when component mounts
+ 
       playVideo();
 
       return () => {
