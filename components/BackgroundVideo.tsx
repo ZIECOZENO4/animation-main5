@@ -5,10 +5,31 @@ import React, { useRef, useEffect, useState } from 'react';
 const BackgroundVideo: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const cacheKey = 'cachedVideoSrc';
+    const cachedSrc = localStorage.getItem(cacheKey);
+
+    if (cachedSrc) {
+      setVideoSrc(cachedSrc);
+    } else {
+      const videoUrl = "https://utfs.io/f/09Bv5dtKx6OwK45Rnc6kiqwpz0IV69AOL3Uro5Sa4eHXlnWE";
+      
+      fetch(videoUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          const objectURL = URL.createObjectURL(blob);
+          setVideoSrc(objectURL);
+          localStorage.setItem(cacheKey, objectURL);
+        })
+        .catch(error => console.error("Error fetching video:", error));
+    }
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
+    if (video && videoSrc) {
       const playVideo = () => {
         video.play().catch((error: Error) => {
           console.error("Error attempting to play", error);
@@ -41,7 +62,6 @@ const BackgroundVideo: React.FC = () => {
       video.addEventListener('error', handleError);
       video.addEventListener('pause', handlePause);
 
- 
       playVideo();
 
       return () => {
@@ -51,25 +71,27 @@ const BackgroundVideo: React.FC = () => {
         video.removeEventListener('pause', handlePause);
       };
     }
-  }, []);
+  }, [videoSrc]);
 
   return (
     <div className="fixed inset-0 -z-10 w-[100vw] h-[100vh] overflow-hidden">
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        autoPlay
-        loop
-        preload="auto"
-        className="object-cover w-full h-full"
-      >
-        <source src="https://utfs.io/f/09Bv5dtKx6OwK45Rnc6kiqwpz0IV69AOL3Uro5Sa4eHXlnWE" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {videoSrc && (
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          autoPlay
+          loop
+          preload="auto"
+          className="object-cover w-full h-full"
+        >
+          <source src={videoSrc} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       {!isVideoReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-black text-white">
-      <img src='/images/main.PNG' alt='loading' className='h-[100vh] w-[100vw]' />
+          <img src='/images/main.PNG' alt='loading' className='h-[100vh] w-[100vw]' />
         </div>
       )}
     </div>
