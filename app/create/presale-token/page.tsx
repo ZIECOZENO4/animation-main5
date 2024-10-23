@@ -1,8 +1,8 @@
 import React from 'react'
-
+import PreSaleComponent from './content'
 const PreSale = () => {
   return (
-    <div>PreSale</div>
+    <div><PreSaleComponent /></div>
   )
 }
 
