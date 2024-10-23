@@ -33,7 +33,7 @@ const CreatePage = () => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="relative w-80 bg-black border-[#F7F2DA] rounded-lg shadow-lg overflow-hidden"
+        className="relative w-80 bg-black border border-[#F7F2DA] rounded-lg shadow-lg overflow-hidden"
       >
         <motion.div
           className="absolute inset-0 opacity-20"

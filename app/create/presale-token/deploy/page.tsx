@@ -4,6 +4,45 @@ import { Upload, ChevronUp, ChevronDown } from "lucide-react";
 import { Progress, Modal, ModalBody, ModalFooter, ModalHeader, Button, useDisclosure } from "@nextui-org/react";
 import { FileUpload } from "@/components/file-upload";
 
+const PresaleInfoCard = ({ presaleDuration }: { presaleDuration: number }) => {
+  const [timeRemaining, setTimeRemaining] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+
+  useEffect(() => {
+    if (presaleDuration > 0) {
+      // Calculate end date
+      const currentDate = new Date();
+      const endDateTime = new Date(currentDate.getTime() + presaleDuration * 24 * 60 * 60 * 1000);
+      
+      // Format end date
+      const formattedEndDate = endDateTime.toLocaleString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+      setEndDate(formattedEndDate);
+
+      // Set time remaining text
+      const daysText = presaleDuration === 1 ? "in 1 day" : `in ${presaleDuration} days`;
+      setTimeRemaining(daysText);
+    }
+  }, [presaleDuration]);
+
+  return (
+    <div className="bg-black/90 rounded-lg p-4 mt-2 ">
+    <h3 className="text-slate-500 mb-2">Presale Information</h3>
+    <div className="space-y-1 ">
+      <p>Presale Duration: {presaleDuration} days</p>
+      <p>Estimated End Date: {endDate}</p>
+      <p>Time remaining: {timeRemaining}</p>
+    </div>
+  </div>
+  );
+};
+
 export default function PreSalePage() {
   const [showMore, setShowMore] = useState(false);
   const [ethAmount, setEthAmount] = useState(0);
@@ -15,6 +54,7 @@ export default function PreSalePage() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [presaleDuration, setPresaleDuration] = useState(0);
 
   useEffect(() => {
     if (liquidity > 0) {
@@ -24,7 +64,7 @@ export default function PreSalePage() {
   }, [ethAmount, liquidity]);
 
   const isFormValid = () => {
-    return name && ticker && description  && ethAmount > 0 && liquidity > 0 && lockPercentage > 0;
+    return name && ticker && description && ethAmount > 0 && liquidity > 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,6 +74,11 @@ export default function PreSalePage() {
     }
   };
 
+  const handlePresaleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const days = parseFloat(e.target.value) || 0;
+    setPresaleDuration(days);
+    setLockPercentage(days);
+  };
   return (
     <div className="min-h-screen mt-8 text-gray-300 p-4">
       <style jsx global>{`
@@ -132,19 +177,22 @@ export default function PreSalePage() {
             </div>
           </div>
           <div>
-            <label className="block mb-2">
-              Percentage of liquidity to be locked
-            </label>
-            <input
-              type="number"
-              placeholder="0"
-              className="w-full md:w-1/2 bg-black rounded p-2 border border-gray-700"
-              onChange={(e) =>
-                setLockPercentage(parseFloat(e.target.value) || 0)
-              }
-              required
-            />
-          </div>
+  <label className="block mb-2">
+    Presale Duration (days)
+  </label>
+  <input
+    type="number"
+    placeholder="1"
+    className="w-full md:w-1/2 bg-black rounded p-2 border border-gray-700"
+    onChange={(e) => {
+      const days = parseFloat(e.target.value) || 0;
+      setPresaleDuration(days);
+      setLockPercentage(days);
+    }}
+    required
+  />
+
+</div>
           <div className="bg-black border border-gray-700 rounded p-4 flex flex-col md:flex-row md:justify-between gap-4">
             <div className="md:w-1/2 w-full flex flex-col">
               <h3 className="font-bold mb-2">Liquidity Information</h3>
@@ -158,14 +206,15 @@ export default function PreSalePage() {
                   className="max-w-md"
                 />
               </div>
-            </div>
-            <div className="md:w-1/2 w-full flex flex-col">
-              <p className="mt-2">
+              <p className="gap-4">
                 <span className="font-bold mb-2">Initial Price</span>
                 <br />
                 The initial price will be approximately:{" "}
                 {initialPrice.toFixed(8)} ETH per token
               </p>
+            </div>
+            <div className="md:w-1/2 w-full flex flex-col">
+            {presaleDuration > 0 && <PresaleInfoCard presaleDuration={presaleDuration} />}
             </div>
           </div>
           <button

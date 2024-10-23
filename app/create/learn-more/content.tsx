@@ -78,9 +78,9 @@ export function LearnMoreAboutDifferentTokens() {
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         onClick={() => setActiveSection(section.id)}
-                                        className={`w-full flex items-center space-x-2 px-4 py-2 rounded-lg text-sm ${
+                                        className={`w-full flex items-center space-x-2 px-4 py-2  shadow-2xl rounded-lg text-sm ${
                                             activeSection === section.id
-                                                ? 'bg-gray-500   text-[#F7F2DA] '
+                                                ? 'bg-gray-600   text-[#F7F2DA] '
                                                 : 'hover:bg-accent'
                                         }`}
                                     >
