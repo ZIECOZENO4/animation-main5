@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 const DynamicBackgroundVideo = dynamic(() => import('@/components/BackgroundVideo'), {
   ssr: false,
-  loading: () =>  <div className="absolute inset-0 flex items-center justify-center bg-black text-white">
+  loading: () =>  <div className="absolute inset-0 flex items-center justify-center bg-black text-[#F7F2DA]">
   <img src='/images/main.PNG' alt='loading' className='h-[100vh] w-[100vw]' />
     </div>
 });

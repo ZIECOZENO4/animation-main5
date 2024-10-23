@@ -68,7 +68,7 @@
 //         Your browser does not support the video tag.
 //       </video>
 //       {!isVideoReady && (
-//         <div className="absolute inset-0 flex items-center justify-center bg-black text-white">
+//         <div className="absolute inset-0 flex items-center justify-center bg-black text-[#F7F2DA]">
 //       <img src='/images/main.PNG' alt='loading' className='h-[100vh] w-[100vw]' />
 //         </div>
 //       )}
@@ -179,7 +179,7 @@ const BackgroundVideo: React.FC = () => {
         </video>
       )}
       {!isVideoReady && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black text-white">
+        <div className="absolute inset-0 flex items-center justify-center bg-black text-[#F7F2DA]">
           <img src='/images/main.PNG' alt='loading' className='h-[100vh] w-[100vw]' />
         </div>
       )}

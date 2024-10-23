@@ -59,7 +59,7 @@ export function LearnMoreAboutDifferentTokens() {
                         animate="show"
                     >
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-bold text-primary">Documentation</h2>
+                            <h2 className="text-2xl font-bold   text-gray-500  ">Documentation</h2>
                             <Button
                                 variant="ghost"
                                 size="sm"
@@ -80,7 +80,7 @@ export function LearnMoreAboutDifferentTokens() {
                                         onClick={() => setActiveSection(section.id)}
                                         className={`w-full flex items-center space-x-2 px-4 py-2 rounded-lg text-sm ${
                                             activeSection === section.id
-                                                ? 'bg-primary text-primary-foreground'
+                                                ? 'bg-gray-500   text-gray-500  -foreground'
                                                 : 'hover:bg-accent'
                                         }`}
                                     >
@@ -112,7 +112,7 @@ export function LearnMoreAboutDifferentTokens() {
                         variants={fadeIn}
                         className={activeSection === "overview" ? "block" : "hidden"}
                     >
-                        <h1 className="text-3xl font-bold text-primary mb-6">
+                        <h1 className="text-3xl font-bold  text-gray-500  mb-6">
                             Token Creation Guide
                         </h1>
                         <div className="prose dark:prose-invert max-w-none">
@@ -128,7 +128,7 @@ export function LearnMoreAboutDifferentTokens() {
                         variants={fadeIn}
                         className={activeSection === "standard-tokens" ? "block" : "hidden"}
                     >
-                        <h2 className="text-2xl font-semibold text-primary mb-4">Standard Tokens</h2>
+                        <h2 className="text-2xl font-semibold  text-gray-500  mb-4">Standard Tokens</h2>
                         <div className="bg-card rounded-lg p-6 shadow-lg">
                             <h3 className="text-xl font-medium mb-4">Key Features</h3>
                             <ul className="space-y-3 text-muted-foreground">
@@ -136,21 +136,21 @@ export function LearnMoreAboutDifferentTokens() {
                                     className="flex items-center space-x-2"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <span className="w-2 h-2 bg-primary rounded-full" />
+                                    <span className="w-2 h-2 bg-gray-500 rounded-full" />
                                     <span>Immediate creation and liquidity addition</span>
                                 </motion.li>
                                 <motion.li 
                                     className="flex items-center space-x-2"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <span className="w-2 h-2 bg-primary rounded-full" />
+                                    <span className="w-2 h-2 bg-gray-500 rounded-full" />
                                     <span>Suitable for projects ready for immediate trading</span>
                                 </motion.li>
                                 <motion.li 
                                     className="flex items-center space-x-2"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <span className="w-2 h-2 bg-primary rounded-full" />
+                                    <span className="w-2 h-2 bg-gray-500 rounded-full" />
                                     <span>Requires ETH for initial liquidity</span>
                                 </motion.li>
                             </ul>
@@ -162,7 +162,7 @@ export function LearnMoreAboutDifferentTokens() {
                         variants={fadeIn}
                         className={activeSection === "presale-tokens" ? "block" : "hidden"}
                     >
-                        <h2 className="text-2xl font-semibold text-primary mb-4">Presale Tokens</h2>
+                        <h2 className="text-2xl font-semibold  text-gray-500  mb-4">Presale Tokens</h2>
                         <div className="bg-card rounded-lg p-6 shadow-lg">
                             <h3 className="text-xl font-medium mb-4">Key Features</h3>
                             <ul className="space-y-3 text-muted-foreground">
@@ -170,21 +170,21 @@ export function LearnMoreAboutDifferentTokens() {
                                     className="flex items-center space-x-2"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <span className="w-2 h-2 bg-primary rounded-full" />
+                                    <span className="w-2 h-2 bg-gray-500 rounded-full" />
                                     <span>Gradual token distribution following a bonding curve</span>
                                 </motion.li>
                                 <motion.li 
                                     className="flex items-center space-x-2"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <span className="w-2 h-2 bg-primary rounded-full" />
+                                    <span className="w-2 h-2 bg-gray-500 rounded-full" />
                                     <span>Ideal for projects seeking community-driven growth</span>
                                 </motion.li>
                                 <motion.li 
                                     className="flex items-center space-x-2"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <span className="w-2 h-2 bg-primary rounded-full" />
+                                    <span className="w-2 h-2 bg-gray-500 rounded-full" />
                                     <span>Lower initial investment</span>
                                 </motion.li>
                             </ul>
@@ -197,14 +197,14 @@ export function LearnMoreAboutDifferentTokens() {
                     >
                         <Link href="/create" passHref>
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <Button variant="ghost" size="lg" className="w-full">
+                                <Button variant="shadow" size="lg" className="w-full">
                                     Create Standard Token
                                 </Button>
                             </motion.div>
                         </Link>
                         <Link href="/create/presale-token" passHref>
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <Button variant="light" size="lg" className="w-full">
+                                <Button variant="ghost" size="lg" className="w-full">
                                     Start Presale Token
                                 </Button>
                             </motion.div>
