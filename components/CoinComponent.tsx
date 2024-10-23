@@ -12,20 +12,15 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-
+  ModalFooter
 } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { FaFilter } from "react-icons/fa";
-import {
-  SiEthereum,
-  SiBinance,
-  SiPolygon,
-} from "react-icons/si";
+import { SiEthereum, SiBinance, SiPolygon } from "react-icons/si";
 import CardDemo from "./CardDemo";
 import CardGrid from "./Test";
-import './WorkbenchFontTest.css'
-import Link from 'next/link'
+import "./WorkbenchFontTest.css";
+import Link from "next/link";
 const chainData = [
   { key: "all", name: "All Chains" },
   {
@@ -305,12 +300,8 @@ export default function ComponentCoin() {
   };
 
   return (
-    <motion.div
-      className="flex flex-col my-8 gap-4 px-4 md:px-8"
-    >
-      <motion.div
-        className="flex flex-row justify-between align-middle gap-4"
-      >
+    <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
+      <motion.div className="flex flex-row justify-between align-middle gap-4">
         <Tabs key="trending" variant="bordered" aria-label="Tabs variants">
           <Tab key="Trending" title="Trending" />
           <Tab key="Featured" title="Featured" />
@@ -319,21 +310,18 @@ export default function ComponentCoin() {
       </motion.div>
 
       <div className="flex-row justify-between md:hidden flex align-middle ">
-          <Switch defaultSelected color="default" className="md:text-xl">
-            Launched
-          </Switch>
-          <Button
-            startContent={<FaFilter />}
-            onClick={openModal}
-            className="md:hidden"
-          >
-            Filter
-          </Button>
-        </div>
-      <motion.div
-        className="flex flex-row gap-8 items-center"
-      
-      >
+        <Switch defaultSelected color="default" className="md:text-xl">
+          Launched
+        </Switch>
+        <Button
+          startContent={<FaFilter />}
+          onClick={openModal}
+          className="md:hidden"
+        >
+          Filter
+        </Button>
+      </div>
+      <motion.div className="flex flex-row gap-8 items-center">
         <div className="md:flex-row justify-between hidden md:flex align-middle ">
           <Switch defaultSelected color="default" className="md:text-xl">
             Launched
@@ -361,32 +349,31 @@ export default function ComponentCoin() {
                 key={chain.key}
                 value={chain.key}
                 className="bg-black max-w-2xl text-start"
-              >  
-              {chain.name}
-              
+              >
+                {chain.name}
               </SelectItem>
-            ))} 
+            ))}
           </Select>
           <Select
-  label="Market Cap"
-  value={selectedMarketCap}
-  variant="bordered"
-  className="w-[40rem]"
-  onChange={(e) => setSelectedMarketCap(e.target.value)}
->
-  <SelectItem key="all" value="all" className="bg-black max-w-2xl">
-    All Market Cap
-  </SelectItem>
-  <SelectItem key="low" value="low" className="bg-black max-w-2xl">
-    Low Cap (&lt; $1B)
-  </SelectItem>
-  <SelectItem key="mid" value="mid" className="bg-black max-w-2xl">
-    Mid Cap ($1B - $10B)
-  </SelectItem>
-  <SelectItem key="high" value="high" className="bg-black max-w-2xl">
-    High Cap (&gt; $10B)
-  </SelectItem>
-</Select>
+            label="Market Cap"
+            value={selectedMarketCap}
+            variant="bordered"
+            className="w-[40rem]"
+            onChange={(e) => setSelectedMarketCap(e.target.value)}
+          >
+            <SelectItem key="all" value="all" className="bg-black max-w-2xl">
+              All Market Cap
+            </SelectItem>
+            <SelectItem key="low" value="low" className="bg-black max-w-2xl">
+              Low Cap (&lt; $1B)
+            </SelectItem>
+            <SelectItem key="mid" value="mid" className="bg-black max-w-2xl">
+              Mid Cap ($1B - $10B)
+            </SelectItem>
+            <SelectItem key="high" value="high" className="bg-black max-w-2xl">
+              High Cap (&gt; $10B)
+            </SelectItem>
+          </Select>
           <Select
             label="Price"
             variant="bordered"
@@ -394,337 +381,340 @@ export default function ComponentCoin() {
             value={selectedChain}
             onChange={(e) => setSelectedChain(e.target.value)}
           >
-
-              <SelectItem key="button" className="bg-black">
-        
+            <SelectItem key="button" className="bg-black">
               <div className="space-y-4">
-                        <div className="flex space-x-2">
-                            <Input
-                                type="number"
-                                placeholder="Min"
-                                value={minMarketCap}
-                                onChange={(e) => setMinMarketCap(e.target.value)}
-                                className="flex-1 bg-input text-foreground"
-                            />
-                            <Input
-                                type="number"
-                                placeholder="Max"
-                                value={maxMarketCap}
-                                onChange={(e) => setMaxMarketCap(e.target.value)}
-                                className="flex-1 bg-input text-foreground"
-                            />
-                        </div>
-                        <div className="flex space-x-2">
-                            <Button onClick={resetFilters} variant="outline" className="flex-1 bg-destructive text-destructive-foreground">
-                                Reset
-                            </Button>
-                            <Button onClick={() => { }} className="flex-1 bg-primary text-primary-foreground">
-                                Apply filter
-                            </Button>
-                        </div>
-                    </div>
-                  
-              </SelectItem>
+                <div className="flex space-x-2">
+                  <Input
+                    type="number"
+                    placeholder="Min"
+                    value={minMarketCap}
+                    onChange={(e) => setMinMarketCap(e.target.value)}
+                    className="flex-1 bg-input text-foreground"
+                  />
+                  <Input
+                    type="number"
+                    placeholder="Max"
+                    value={maxMarketCap}
+                    onChange={(e) => setMaxMarketCap(e.target.value)}
+                    className="flex-1 bg-input text-foreground"
+                  />
+                </div>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="shadow"
+                    className="flex-1 bg-black text-slate-500"
+                  >
+                    Reset
+                  </Button>
+                  <Button
+                    variant="bordered"
+                    className="flex-1 bg-transparent text-slate-500"
+                  >
+                    Apply filter
+                  </Button>
+                </div>
+              </div>
+            </SelectItem>
           </Select>
         </div>
       </motion.div>
-      <div className='w-full'>
-      <CardDemo />
+      <div className="w-full">
+        <CardDemo />
       </div>
-      <div className='md:hidden'>
-      <CardGrid />
+      <div className="md:hidden">
+        <CardGrid />
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-      </div>
-
-<div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-<Link href='/omnicoin' >
-      <Card />
-    </Link>
-
-    <Link href='/omnicoin' >
-      <Card />
-    </Link>
-
-    <Link href='/omnicoin' >
-      <Card />
-    </Link>
-    <Link href='/omnicoin' >
-      <Card />
-    </Link>
-</div>
-
-<div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
-
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
 
-<div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-<Link href='/omnicoin' >
-      <Card />
-    </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-    <Link href='/omnicoin' >
-      <Card />
-    </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-    <Link href='/omnicoin' >
-      <Card />
-    </Link>
-    <Link href='/omnicoin' >
-      <Card />
-    </Link>
-</div>
-
-<div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
-
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
-      <div className='hidden md:flex md:justify-between align-middle flex-row my-4'>
-      <Link href='/omnicoin' >
-            <Card />
-          </Link>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
 
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
-          <Link href='/omnicoin' >
-            <Card />
-          </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+      </div>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+      </div>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+      </div>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
+        <Link href="/omnicoin">
+          <Card />
+        </Link>
       </div>
 
       <Modal
@@ -807,35 +797,34 @@ export default function ComponentCoin() {
   );
 }
 
-
 const Card = () => (
   <motion.div
-    className='w-full  md:w-[350px] px-2 mb-4'
+    className="w-full  md:w-[350px] px-2 mb-4"
     initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
   >
     <div
-      className='bg-[#0A0909] rounded-lg overflow-hidden'
+      className="bg-[#0A0909] rounded-lg overflow-hidden"
       style={{
-        height: '150px',
+        height: "150px"
       }}
     >
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
           <div className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]" />
-          
+
           <div className="text-right flex flex-col p-2">
             <div className="flex flex-row justify-between align-middle">
               <motion.h2
                 className="text-left text-[#F7F2DA] font-normal"
                 style={{
-                  width: '70px',
-                  height: '20px',
-                  top: '14px',
-                  left: '137px',
-                  fontSize: '20px',
-                  lineHeight: '20px',
+                  width: "70px",
+                  height: "20px",
+                  top: "14px",
+                  left: "137px",
+                  fontSize: "20px",
+                  lineHeight: "20px"
                 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -846,15 +835,15 @@ const Card = () => (
               <motion.h2
                 className="hover:underline text-[#F7F2DA] workbench-test"
                 style={{
-                  width: '20px',
-                  height: '10px',
-                  top: '9px',
-                  left: '302px',
-                  fontSize: '10px',
+                  width: "20px",
+                  height: "10px",
+                  top: "9px",
+                  left: "302px",
+                  fontSize: "10px",
                   fontWeight: 200,
-                  lineHeight: '20px',
-                  textAlign: 'left',
-                  color: '#F7F2DA',
+                  lineHeight: "20px",
+                  textAlign: "left",
+                  color: "#F7F2DA"
                 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -867,14 +856,14 @@ const Card = () => (
               <motion.p
                 className="text-[#F7F2DA] workbench-test flex flex-row mt-[5px]"
                 style={{
-                  width: '60px',
-                  height: '10px',
-                  left: '137px',
-                  fontSize: '10px',
+                  width: "60px",
+                  height: "10px",
+                  left: "137px",
+                  fontSize: "10px",
                   fontWeight: 200,
-                  lineHeight: '10px',
-                  textAlign: 'left',
-                  color: '#F7F2DA',
+                  lineHeight: "10px",
+                  textAlign: "left",
+                  color: "#F7F2DA"
                 }}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -882,56 +871,56 @@ const Card = () => (
               >
                 Pear Network
               </motion.p>
-        
+
               <motion.div
-                className='mt-[25px]'
+                className="mt-[25px]"
                 style={{
-                  width: '180px',
-                  height: '10px',
-                  top: '85px',
-                  left: '137px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  width: "180px",
+                  height: "10px",
+                  top: "85px",
+                  left: "137px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
                 }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
               >
                 <p
-                  className='workbench-test'
+                  className="workbench-test"
                   style={{
-                    fontSize: '10px',
+                    fontSize: "10px",
                     fontWeight: 400,
-                    lineHeight: '10px',
-                    textAlign: 'left',
-                    color: '#F7F2DA',
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
                   }}
                 >
                   Time to Launch:
                 </p>
                 <p
                   style={{
-                    fontSize: '12px', 
+                    fontSize: "12px",
                     fontWeight: 400,
-                    lineHeight: '10px',
-                    textAlign: 'left',
-                    color: '#F7F2DA',
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
                   }}
                 >
                   00D/4H/24m
                 </p>
               </motion.div>
               <motion.div
-                className='my-[8px] workbench-test'
+                className="my-[8px] workbench-test"
                 style={{
-                  width: '180px',
-                  height: '10px',
-                  top: '85px',
-                  left: '137px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  width: "180px",
+                  height: "10px",
+                  top: "85px",
+                  left: "137px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
                 }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -939,39 +928,39 @@ const Card = () => (
               >
                 <p
                   style={{
-                    fontSize: '10px',
+                    fontSize: "10px",
                     fontWeight: 400,
-                    lineHeight: '10px',
-                    textAlign: 'left',
-                    color: '#F7F2DA',
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
                   }}
                 >
                   Chain:
                 </p>
                 <p
                   style={{
-                    fontSize: '10px',
+                    fontSize: "10px",
                     fontWeight: 400,
-                    lineHeight: '10px',
-                    textAlign: 'left',
-                    color: '#F7F2DA',
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
                   }}
                 >
                   Arbitrum
                 </p>
               </motion.div>
               <motion.div
-                className='mb-[8px]'
+                className="mb-[8px]"
                 style={{
-                  width: '180px',
-                  height: '10px',
-                  top: '102px',
-                  left: '137px',
-                  fontSize: '10px',
+                  width: "180px",
+                  height: "10px",
+                  top: "102px",
+                  left: "137px",
+                  fontSize: "10px",
                   fontWeight: 400,
-                  lineHeight: '10px',
-                  textAlign: 'left',
-                  color: '#F7F2DA',
+                  lineHeight: "10px",
+                  textAlign: "left",
+                  color: "#F7F2DA"
                 }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -985,4 +974,4 @@ const Card = () => (
       </div>
     </div>
   </motion.div>
-)
+);
