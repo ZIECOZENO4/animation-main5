@@ -34,7 +34,7 @@ const PresaleInfoCard = ({ presaleDuration }: { presaleDuration: number }) => {
   return (
     <div className="bg-black/90 rounded-lg p-4 mt-2 ">
     <h3 className="text-slate-500 mb-2">Presale Information</h3>
-    <div className="space-y-1 ">
+    <div className="space-y-1 text-sm">
       <p>Presale Duration: {presaleDuration} days</p>
       <p>Estimated End Date: {endDate}</p>
       <p>Time remaining: {timeRemaining}</p>
@@ -206,8 +206,8 @@ export default function PreSalePage() {
                   className="max-w-md"
                 />
               </div>
-              <p className="gap-4">
-                <span className="font-bold mb-2">Initial Price</span>
+              <p className="gap-4 text-sm">
+                <span className="font-bold mb-4">Initial Price</span>
                 <br />
                 The initial price will be approximately:{" "}
                 {initialPrice.toFixed(8)} ETH per token

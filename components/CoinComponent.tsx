@@ -397,32 +397,32 @@ export default function ComponentCoin() {
 
               <SelectItem key="button" className="bg-black">
         
-                  <div className=" flex flex-col gap-4 ">
-                    <Input
-                      type="number"
-                      label="Min M-Cap"
-                      placeholder="0.00"
-                      value={minMarketCap}
-                      onChange={(e) => setMinMarketCap(e.target.value)}
-className=' mx-2'
-                    />
-                    <Input
-                      type="number"
-                      label="Max  M-Cap"
-                      placeholder="0.00"
-                      value={maxMarketCap}
-                      onChange={(e) => setMaxMarketCap(e.target.value)}
-                      className=' mx-2'
-                    />
-                    <div className=" gap-4 flex flex-col w-full justify-center mx-2">
-                    <Button color="primary" onClick={applyFilters}>
-                      Filter
-                    </Button>
-                    <Button color="secondary" onClick={resetFilters}>
-                      Reset
-                    </Button>
-                  </div>
-                  </div>
+              <div className="space-y-4">
+                        <div className="flex space-x-2">
+                            <Input
+                                type="number"
+                                placeholder="Min"
+                                value={minMarketCap}
+                                onChange={(e) => setMinMarketCap(e.target.value)}
+                                className="flex-1 bg-input text-foreground"
+                            />
+                            <Input
+                                type="number"
+                                placeholder="Max"
+                                value={maxMarketCap}
+                                onChange={(e) => setMaxMarketCap(e.target.value)}
+                                className="flex-1 bg-input text-foreground"
+                            />
+                        </div>
+                        <div className="flex space-x-2">
+                            <Button onClick={resetFilters} variant="outline" className="flex-1 bg-destructive text-destructive-foreground">
+                                Reset
+                            </Button>
+                            <Button onClick={() => { }} className="flex-1 bg-primary text-primary-foreground">
+                                Apply filter
+                            </Button>
+                        </div>
+                    </div>
                   
               </SelectItem>
           </Select>
