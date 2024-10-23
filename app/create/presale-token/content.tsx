@@ -15,7 +15,7 @@ export default function PreSaleComponent() {
       <h1 className="text-2xl md:text-3xl sm:text-4xl text-center mb-8 sm:mb-12">Select a Blockchain</h1>
       <div className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch space-y-6 sm:space-y-0 sm:space-x-4 md:space-x-6 lg:space-x-8 max-w-7xl min-h-screen  md:h-[100vh] mx-auto">
         {blockchains.map((blockchain) => (
-          <Link href='/create/preslae-token/deploy' key={blockchain.name} className="w-full sm:w-1/3 px-4 md:px-10 md:max-w-sm" >
+          <Link href='/create/presale-token/deploy' key={blockchain.name} className="w-full sm:w-1/3 px-4 md:px-10 md:max-w-sm" >
             <TiltCard blockchain={blockchain} />
           </Link>
         ))}

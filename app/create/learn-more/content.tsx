@@ -80,7 +80,7 @@ export function LearnMoreAboutDifferentTokens() {
                                         onClick={() => setActiveSection(section.id)}
                                         className={`w-full flex items-center space-x-2 px-4 py-2 rounded-lg text-sm ${
                                             activeSection === section.id
-                                                ? 'bg-gray-500   text-gray-500  -foreground'
+                                                ? 'bg-gray-500   text-[#F7F2DA] '
                                                 : 'hover:bg-accent'
                                         }`}
                                     >

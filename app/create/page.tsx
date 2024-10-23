@@ -33,7 +33,7 @@ const CreatePage = () => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="relative w-80 bg-black border-slate-800 rounded-lg shadow-lg overflow-hidden"
+        className="relative w-80 bg-black border-[#F7F2DA] rounded-lg shadow-lg overflow-hidden"
       >
         <motion.div
           className="absolute inset-0 opacity-20"
@@ -69,7 +69,7 @@ const CreatePage = () => {
                    onClick={() => handleNavigation("/create/presale-token")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full py-2 rounded-md  shadow-xl border-slate-800 bg-black text-[#F7F2DA] font-medium"
+            className="w-full py-2 rounded-md  shadow-xl border border-slate-300 hover:bg-slate-500 bg-black text-[#F7F2DA] font-medium"
           >
             Presale Token
           </motion.button>
