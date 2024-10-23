@@ -88,7 +88,7 @@ const BackgroundVideo: React.FC = () => {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    const videoUrl = "https://utfs.io/f/09Bv5dtKx6OwK45Rnc6kiqwpz0IV69AOL3Uro5Sa4eHXlnWE";
+    const videoUrl = "https://utfs.io/f/09Bv5dtKx6OwTflDVi2NvASUGXuB4oiJw5pyhV9QPclkse8t";
     const cacheName = 'video-cache';
 
     const fetchAndCacheVideo = async () => {
