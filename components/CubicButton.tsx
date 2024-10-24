@@ -20,7 +20,7 @@
 "use client"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Image from "next/image"
-import { useBalance } from 'wagmi' // Add this import
+import { useBalance } from 'wagmi'
 
 const CubicButton = () => {
   return (
@@ -33,10 +33,12 @@ const CubicButton = () => {
         openConnectModal,
         mounted,
       }) => {
-        // Get balance using the useBalance hook
-        const { data: balance } = useBalance({
-          address: account?.address,
-        })[1]
+        // Correct way to use useBalance hook
+        const { data: balanceData } = useBalance({
+          address: account?.address && account.address.startsWith('0x') 
+            ? (account.address as `0x${string}`)
+            : undefined,
+        })
 
         const ready = mounted
         const connected = ready && account && chain
@@ -97,7 +99,7 @@ const CubicButton = () => {
                           </span>
                         </div>
                         <span className="text-[#F7F2DA] text-sm font-normal">
-                          {balance?.formatted?.slice(0, 5)} {balance?.symbol}
+                          {balanceData?.formatted?.slice(0, 5)} {balanceData?.symbol}
                         </span>
                       </div>
                       <div className="w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
