@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Workbench } from 'next/font/google';
 import "./globals.css";
 import MdNavBar from "../components/MdNavBar";
-import { Providers } from "./providers";
 import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Loading from './loading';
 import BottomMore from "@/components/BottomMore";
+import Providers from "./providers";
+import { headers } from "next/headers";
 
 const workbench = Workbench({
   weight: '400', 
@@ -32,10 +33,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookie = headers().get("cookie");
   return (
     <html lang="en">
       <body className={`${workbench.variable} dark text-[#F7F2DA] antialiased font-workbench`}>
-        <Providers>
+        <Providers  cookie={cookie}>
           <div className="min-h-screen">
             <DynamicBackgroundVideo />
             <div className="">
