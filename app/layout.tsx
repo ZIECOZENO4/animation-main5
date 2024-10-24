@@ -8,6 +8,7 @@ import Loading from './loading';
 import BottomMore from "@/components/BottomMore";
 import Providers from "./providers";
 import { headers } from "next/headers";
+import "@rainbow-me/rainbowkit/styles.css";
 
 const workbench = Workbench({
   weight: '400', 
