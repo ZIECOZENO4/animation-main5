@@ -20,7 +20,7 @@ const Footer = () => {
 >
 ultimate{" "}
   <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-400 via-slate-300 to-sky-200">
-    Coin Marketplace
+    Token Marketplace
   </span>
 </span>
 
