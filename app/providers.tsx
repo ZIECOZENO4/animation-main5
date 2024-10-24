@@ -27,10 +27,10 @@ export default function Providers({ children, cookie }: Props) {
             <TenstackProviders>
               <RainbowKitProvider
                 theme={darkTheme({
-                  accentColor: "#0E76FD",
-                  accentColorForeground: "white",
+                  accentColor: "#F7F2DA",
+                  accentColorForeground: "#787878",
                   borderRadius: "large",
-                  fontStack: "system",
+                
                   overlayBlur: "small"
                 })}
               >

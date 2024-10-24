@@ -12,6 +12,7 @@ import {
 import Loading from "./loading";
 import Footer from "@/components/Footer";
 import ComponentCoin from "@/components/CoinComponent";
+import ImageComponent from "@/components/ImageList";
 
 const Content = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -32,6 +33,7 @@ const Content = () => {
   return (
     <div className='align-middle flex flex-col'>
       <HeroSection />
+      <ImageComponent />
       <ComponentCoin />
       <Footer />
       {showPopup && (
@@ -44,9 +46,9 @@ const Content = () => {
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
-      <ThirdwebProvider clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}>
+
         <Content />
-      </ThirdwebProvider>
+
     </Suspense>
   );
 }
