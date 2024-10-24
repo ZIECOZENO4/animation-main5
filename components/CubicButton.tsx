@@ -26,6 +26,9 @@ const CubicButton = () => {
         const ready = mounted
         const connected = ready && account && chain
 
+        const truncateChainName = (name: string) => {
+          return name.length <= 8 ? name : `${name.slice(0, 8)}...`
+        }
         return (
           <div
             {...(!ready && {
@@ -76,13 +79,13 @@ const CubicButton = () => {
                               className="rounded-full"
                             />
                           )}
-                          <span className="text-[#F7F2DA] text-sm font-normal px-1">
-                            {chain.name}
-                          </span>
+                       <span className="text-[#F7F2DA] text-xs font-normal px-1">
+  {truncateChainName(chain.name)}
+</span>
                           <ChevronDownIcon />
                         </div>
                         {chain.unsupported && (
-                          <span className="text-red-500 text-sm">
+                          <span className="text-red-500 text-xs">
                             ⚠️ Unsupported
                           </span>
                         )}
@@ -108,11 +111,11 @@ const CubicButton = () => {
                               className="rounded-full"
                             />
                           )}
-                          <span className="text-[#F7F2DA] text-md  font-normal">
+                          <span className="text-[#F7F2DA] text-sm  font-normal">
                           {balanceData?.formatted?.slice(0, 5)} {balanceData?.symbol}
                         </span>
                         </div>
-                        <span className="text-[#F7F2DA] text-sm pl-2 pr-1 font-normal">
+                        <span className="text-[#F7F2DA] text-xs pl-2 pr-1 font-normal">
                             {account.displayName}
                           </span>
                         <ChevronDownIcon />
