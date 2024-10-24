@@ -49,34 +49,30 @@ const MdNavBar = () => {
    <Link href="/" className="flex flex-row ">
  
    <motion.p
-  className="mt-2 leading-10 tracking-tight text-center sm:leading-none 
-             text-md md:text-2xl ml-2 md:ml-4 text-xl font-bold
-             transition-all duration-300 ease-in-out
-             text-[#F7F2DA]
-             [text-shadow:_0_0_7px_#F7F2DA,_
-                         0_0_10px_#F7F2DA,_
-                         0_0_21px_#F7F2DA,_
-                         0_0_42px_#787878,_
-                         0_0_82px_#787878,_
-                         0_0_92px_#787878,_
-                         0_0_102px_#787878,_
-                         0_0_151px_#787878]
-             hover:[text-shadow:_0_0_7px_#F7F2DA,_
-                               0_0_10px_#F7F2DA,_
-                               0_0_21px_#F7F2DA,_
-                               0_0_42px_#787878,_
-                               0_0_82px_#787878,_
-                               0_0_102px_#787878,_
-                               0_0_151px_#787878,_
-                               0_0_200px_#787878]
-             hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1"
-  whileHover={{
-    y: [-2, 2, -2],
-    transition: { repeat: Infinity, duration: 0.5 }
-  }}
->
-  OMNI PUMP
-</motion.p>
+        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
+        whileHover={{
+          y: [-2, 2, -2],
+          transition: { repeat: Infinity, duration: 0.5 }
+        }}
+      >
+        OMNI PUMP
+        <motion.span
+          className="absolute inset-0 text-transparent pointer-events-none"
+          style={{
+            textShadow: `
+              0 0 20px rgba(247, 242, 218, 0.7),
+              0 0 40px rgba(247, 242, 218, 0.5),
+              0 0 60px rgba(247, 242, 218, 0.3)
+            `,
+            WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          OMNI PUMP
+        </motion.span>
+      </motion.p>
           </Link>
 
       <div className={styles.headerWrapper}>
