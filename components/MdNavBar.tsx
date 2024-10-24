@@ -49,7 +49,7 @@ const MdNavBar = () => {
    <Link href="/" className="flex flex-row ">
  
             <motion.p
-              className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none  hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1 transition-all duration-300 ease-in-out  text-xl font-normal  "
+              className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none  hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1 transition-all duration-300 ease-in-out  text-xl font-normal [text-shadow:_0_4px_4px_rgb(0_0_0_/_50%),_0_8px_12px_rgb(0_0_0_/_40%),_0_16px_24px_rgb(0_0_0_/_30%)]"
               whileHover={{
                 y: [-2, 2, -2],
                 transition: { repeat: Infinity, duration: 0.5 }
@@ -96,6 +96,7 @@ const MdNavBar = () => {
 
        
       </div>
+      
       <div className="flex items-center justify-end ml-4">
         <div className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
               <CubicButton />
