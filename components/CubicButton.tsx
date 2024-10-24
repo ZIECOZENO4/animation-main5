@@ -26,9 +26,7 @@ const CubicButton = () => {
         const ready = mounted
         const connected = ready && account && chain
 
-        const truncateChainName = (name: string) => {
-          return name.length <= 8 ? name : `${name.slice(0, 8)}...`
-        }
+  
         return (
           <div
             {...(!ready && {
@@ -79,8 +77,10 @@ const CubicButton = () => {
                               className="rounded-full"
                             />
                           )}
-                       <span className="text-[#F7F2DA] text-xs font-normal px-1">
-  {truncateChainName(chain.name)}
+         <span className="text-[#F7F2DA] text-sm font-normal px-1">
+  {(chain.name ?? "Unknown").length <= 8 
+    ? chain.name 
+    : `${chain.name?.slice(0, 8)}...`}
 </span>
                           <ChevronDownIcon />
                         </div>
