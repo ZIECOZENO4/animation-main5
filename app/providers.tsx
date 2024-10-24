@@ -1,22 +1,45 @@
-'use client'
+"use client";
 
-import { NextUIProvider } from '@nextui-org/react'
-import { ThirdwebProvider } from 'thirdweb/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import {ThemeProvider as NextThemesProvider} from "next-themes";
+import { NextUIProvider } from "@nextui-org/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { WagmiProvider, cookieToInitialState } from "wagmi";
+import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
+import { config } from "@/lib/config";
+import { TenstackProviders } from "./tenstack-provider";
 
-const queryClient = new QueryClient()
 
-export function Providers({ children }: { children: React.ReactNode }) {
+
+const queryClient = new QueryClient();
+
+type Props = {
+  children: React.ReactNode;
+  cookie: string | null;
+};
+
+export default function Providers({ children, cookie }: Props) {
+  const initialState = cookieToInitialState(config, cookie);
   return (
-    <QueryClientProvider client={queryClient} >
+    <QueryClientProvider client={queryClient}>
       <NextUIProvider>
-        <ThirdwebProvider>
         <NextThemesProvider attribute="class" defaultTheme="dark">
-        {children}
-      </NextThemesProvider>
-        </ThirdwebProvider>
+          <WagmiProvider config={config} initialState={initialState}>
+            <TenstackProviders>
+              <RainbowKitProvider
+                theme={darkTheme({
+                  accentColor: "#0E76FD",
+                  accentColorForeground: "white",
+                  borderRadius: "large",
+                  fontStack: "system",
+                  overlayBlur: "small"
+                })}
+              >
+                {children}
+              </RainbowKitProvider>
+            </TenstackProviders>
+          </WagmiProvider>
+        </NextThemesProvider>
       </NextUIProvider>
     </QueryClientProvider>
-  )
+  );
 }

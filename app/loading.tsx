@@ -14,7 +14,7 @@ export default function Loading() {
       <div className="control maximize"></div>
     </div>
   </div>
-  <div className="text">please wait...</div>
+  <div className="text">Please wait...</div>
 </div>
         </div>
     );

@@ -1,12 +1,16 @@
-import BackgroundVideo from "@/components/BackgroundVideo";
-
+"use client";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function Home() {
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      the video test
-  <BackgroundVideo  />
+      <ConnectButton
+        showBalance={{ smallScreen: false, largeScreen: true }}
+        accountStatus={{
+          smallScreen: "avatar",
+          largeScreen: "full"
+        }}
+      />
     </main>
   );
 }

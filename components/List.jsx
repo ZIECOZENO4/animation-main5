@@ -20,6 +20,7 @@ import {
 import {PlusIcon} from "./PlusIcon";
 import {SearchIcon} from "./SearchIcon";
 import {ChevronDownIcon} from "./ChevronDownIcon";
+import Link from "next/link";
 
 const statusColorMap = {
   active: "success",
@@ -193,9 +194,11 @@ export default function ListContent() {
                 ))}
               </DropdownMenu>
             </Dropdown>
+            <Link href="/create" passHref>
             <Button color="default" endContent={<PlusIcon />}>
-             Create New
+             Create Token
             </Button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-between items-center">
