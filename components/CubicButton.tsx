@@ -60,7 +60,7 @@ const CubicButton = () => {
               return (
                 <div className="flex flex-col sm:flex-row gap-1">
                     <div 
-                    className='flex flex-row mx-2 w-auto shake-button cursor-pointer'
+                    className='flex flex-row mx-1 w-auto shake-button cursor-pointer'
                     onClick={openChainModal}
                   >
                     <div className="w-[2.84px] h-full bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
@@ -71,8 +71,8 @@ const CubicButton = () => {
                             <Image
                               src={chain.iconUrl}
                               alt={chain.name || "Network"}
-                              width={40}
-                              height={40}
+                              width={30}
+                              height={30}
                               className="rounded-full"
                             />
                           )}
@@ -108,13 +108,13 @@ const CubicButton = () => {
                               className="rounded-full"
                             />
                           )}
-                          <span className="text-[#F7F2DA] text-sm font-normal">
-                            {account.displayName}
-                          </span>
-                        </div>
-                        <span className="text-[#F7F2DA] text-sm font-normal">
+                          <span className="text-[#F7F2DA] text-md  font-normal">
                           {balanceData?.formatted?.slice(0, 5)} {balanceData?.symbol}
                         </span>
+                        </div>
+                        <span className="text-[#F7F2DA] text-sm pl-2 pr-1 font-normal">
+                            {account.displayName}
+                          </span>
                         <ChevronDownIcon />
                       </div>
                       <div className="w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
