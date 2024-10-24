@@ -48,15 +48,35 @@ const MdNavBar = () => {
     <div className='flex-row justify-between text-[#F7F2DA] h-20 flex md:gap-[80px] w-full p-[20px] md:px-[30px] px-[20px] sticky top-0 z-50 fixed'>
    <Link href="/" className="flex flex-row ">
  
-            <motion.p
-              className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none  hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1 transition-all duration-300 ease-in-out  text-xl font-normal [text-shadow:_0_4px_4px_rgb(0_0_0_/_50%),_0_8px_12px_rgb(0_0_0_/_40%),_0_16px_24px_rgb(0_0_0_/_30%)]"
-              whileHover={{
-                y: [-2, 2, -2],
-                transition: { repeat: Infinity, duration: 0.5 }
-              }}
-            >
-              OMNI PUMP
-            </motion.p>
+   <motion.p
+  className="mt-2 leading-10 tracking-tight text-center sm:leading-none 
+             text-md md:text-2xl ml-2 md:ml-4 text-xl font-bold
+             transition-all duration-300 ease-in-out
+             text-[#F7F2DA]
+             [text-shadow:_0_0_7px_#F7F2DA,_
+                         0_0_10px_#F7F2DA,_
+                         0_0_21px_#F7F2DA,_
+                         0_0_42px_#787878,_
+                         0_0_82px_#787878,_
+                         0_0_92px_#787878,_
+                         0_0_102px_#787878,_
+                         0_0_151px_#787878]
+             hover:[text-shadow:_0_0_7px_#F7F2DA,_
+                               0_0_10px_#F7F2DA,_
+                               0_0_21px_#F7F2DA,_
+                               0_0_42px_#787878,_
+                               0_0_82px_#787878,_
+                               0_0_102px_#787878,_
+                               0_0_151px_#787878,_
+                               0_0_200px_#787878]
+             hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1"
+  whileHover={{
+    y: [-2, 2, -2],
+    transition: { repeat: Infinity, duration: 0.5 }
+  }}
+>
+  OMNI PUMP
+</motion.p>
           </Link>
 
       <div className={styles.headerWrapper}>
