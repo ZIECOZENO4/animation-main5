@@ -69,7 +69,7 @@ const CryptoDisplay = () => {
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-8 bg-black/40 backdrop-blur-sm">
           <div className="mt-4 mb-10">
         <motion.p
-        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-left sm:leading-none hover:text-gray-500 text-inherit text-xl md:text-2xl md:ml-4 hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out font-bold relative"
+        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-left sm:leading-none hover:text-gray-500 text-inherit text-xl md:text-3xl md:ml-4 hover:scale-110 hover:text-xl md:hover:text-3xl hover:-translate-y-1 transition-all duration-300 ease-in-out font-bold relative"
         whileHover={{
           y: [-2, 2, -2],
           transition: { repeat: Infinity, duration: 0.5 }
@@ -95,7 +95,7 @@ const CryptoDisplay = () => {
       </motion.p>
         </div>  
             
-            <div className="text-slate-500 space-y-4 max-w-2xl mx-auto text-lg md:text-xl">
+            <div className="text-slate-500 space-y-4 max-w-2xl leading-8 mx-auto text-xs md:text-sm">
               <p>
                 700M OMNIPUMP TOKENS was distributed to the community across Season 1 and 2.
               </p>
@@ -127,7 +127,7 @@ const CryptoDisplay = () => {
               key={i}
               src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/ethereumLogo.png"
               alt="Ethereum Logo"
-              className="w-12 h-12 opacity-60"
+              className="w-8 h-8 opacity-60"
             />
           ))}
         </div>
