@@ -55,14 +55,14 @@ export default function CollectionsGrid() {
 
   return (
     <div className="min-h-screen  p-8">
- <motion.p
-        className="my-2 font-bold leading-10 tracking-tight text-[#F7F2DA]  sm:leading-none hover:text-gray-500 text-inherit text-2xl md:text-4xl hover:scale-110 hover:text-xl md:hover:text-4xl hover:-translate-y-1 transition-all duration-300 ease-in-out "
+         <motion.p
+        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-left sm:leading-none hover:text-gray-500 text-inherit text-2xl md:text-4xl md:ml-4 hover:scale-110 hover:text-xl md:hover:text-4xl hover:-translate-y-1 transition-all duration-300 ease-in-out font-bold relative"
         whileHover={{
           y: [-2, 2, -2],
           transition: { repeat: Infinity, duration: 0.5 }
         }}
       >
-        POPULAR TOKENS COLLECTION
+            POPULAR TOKENS COLLECTION
         <motion.span
           className="absolute inset-0 text-transparent pointer-events-none"
           style={{
@@ -77,9 +77,10 @@ export default function CollectionsGrid() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-                  POPULAR TOKENS COLLECTION
+            POPULAR TOKENS COLLECTION
         </motion.span>
       </motion.p>
+
       
       <motion.div 
         className="flex space-x-4 overflow-x-auto scrollbar-hide"
@@ -107,7 +108,7 @@ export default function CollectionsGrid() {
                 </div>
 
                 {/* Content Section */}
-                <div className="absolute bottom-2 left-2 right-2 bg-black bg-opacity-40 rounded-md p-4 z-20">
+                <div className="absolute bottom-2 left-2 right-2 bg-black bg-opacity-40 hover:bg-opacity-40 rounded-md p-4 z-20">
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <h3 className="text-[#F7F2DA] text-xl font-medium mb-1">
