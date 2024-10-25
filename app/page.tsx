@@ -13,6 +13,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import CollectionsGrid from "@/components/popular";
 import StatisticsComponent from "@/components/statistics";
 import CryptoDisplay from "@/components/CryptoDisplay";
+import SuppotersComponent from "@/components/supporters";
 
 
 
@@ -40,6 +41,7 @@ const Content = () => {
       <CollectionsGrid />
       <StatisticsComponent />
       <CryptoDisplay />
+      <SuppotersComponent />
       <Footer />
       {showPopup && (
         <WalletPopup onClose={handleClosePopup} />
