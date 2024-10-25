@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Twitter } from 'lucide-react'
 
-export default function Component() {
+export default function ImageContent1() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null)
 
   const nftItems = [

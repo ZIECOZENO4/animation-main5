@@ -14,6 +14,7 @@ import CollectionsGrid from "@/components/popular";
 import StatisticsComponent from "@/components/statistics";
 import CryptoDisplay from "@/components/CryptoDisplay";
 import SuppotersComponent from "@/components/supporters";
+import ImageContent1 from "@/components/Testimonial";
 
 
 
@@ -41,6 +42,7 @@ const Content = () => {
       <CollectionsGrid />
       <StatisticsComponent />
       <CryptoDisplay />
+      <ImageContent1 />
       <SuppotersComponent />
       <Footer />
       {showPopup && (
