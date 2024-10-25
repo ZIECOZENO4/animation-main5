@@ -55,7 +55,8 @@ export default function CollectionsGrid() {
 
   return (
     <div className="min-h-screen  p-8">
-         <motion.p
+        <div className="my-4">
+        <motion.p
         className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-left sm:leading-none hover:text-gray-500 text-inherit text-2xl md:text-4xl md:ml-4 hover:scale-110 hover:text-xl md:hover:text-4xl hover:-translate-y-1 transition-all duration-300 ease-in-out font-bold relative"
         whileHover={{
           y: [-2, 2, -2],
@@ -80,6 +81,8 @@ export default function CollectionsGrid() {
             POPULAR TOKENS COLLECTION
         </motion.span>
       </motion.p>
+        </div>
+     
 
       
       <motion.div 
