@@ -53,6 +53,11 @@
   }
 }
 
+:root {
+  --font-workbench: 'Workbench', system-ui;
+}
+
+
 .font-workbench {
   font-family: var(--font-workbench);
   font-optical-sizing: auto;

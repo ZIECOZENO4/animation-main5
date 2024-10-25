@@ -7,7 +7,7 @@ import Loading from "./loading";
 import Footer from "@/components/Footer";
 import ComponentCoin from "@/components/CoinComponent";
 import ImageComponent from "@/components/ImageList";
-import {RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 import '@rainbow-me/rainbowkit/styles.css';
 import CollectionsGrid from "@/components/popular";
@@ -54,12 +54,12 @@ export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
         <RainbowKitProvider 
-        theme={darkTheme({
-          accentColor: '#787878',
-          accentColorForeground: '#F7F2DA',
-          borderRadius: 'none',
-          fontStack: 'system'
-        })}
+          theme={darkTheme({
+            accentColor: '#787878',
+            accentColorForeground: '#F7F2DA',
+            borderRadius: 'none',
+            fontStack: 'system' // Use system or rounded
+          })}
         >
           <Content />
         </RainbowKitProvider>
