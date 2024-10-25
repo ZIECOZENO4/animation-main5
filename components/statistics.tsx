@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
-export default function Component() {
+export default function StatisticsComponent() {
   const [stats, setStats] = useState({
     fasterSweeping: 0,
     marketplaceFees: 0,
@@ -55,7 +55,7 @@ export default function Component() {
         variants={containerVariants}
       >
         <motion.h1
-          className="text-4xl md:text-6xl font-bold text-center mb-6"
+          className="text-2xl md:text-4xl font-bold text-center mb-6"
           style={{
             color: "#F7F2DA",
             textShadow: "0 0 10px rgba(247, 242, 218, 0.3)",
@@ -110,7 +110,7 @@ export default function Component() {
           ].map((item, index) => (
             <motion.div key={index} className="p-4 " variants={itemVariants}>
               <motion.p
-                className="text-2xl md:text-4xl font-bold mb-2"
+                className="text-xl md:text-2xl font-bold mb-2"
                 style={{
                   color: "#F7F2DA",
                   textShadow: "0 0 5px rgba(247, 242, 218, 0.2)",
