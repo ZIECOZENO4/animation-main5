@@ -109,19 +109,20 @@ export default function ImageComponent() {
               onHoverStart={() => setHoveredId(collection.id)}
               onHoverEnd={() => setHoveredId(null)}
             >
-              <Card className="w-72 h-64 overflow-hidden">
-                <div className="p-0 relative h-full">
-                  <motion.div
-                    className="absolute inset-0 z-10"
-                    initial={{ opacity: 0 }}
-                    animate={{ 
-                      opacity: hoveredId === collection.id ? 1 : 0,
-                      boxShadow: hoveredId === collection.id ? 
-                        "0 0 20px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.3)" : 
-                        "none"
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
+         <Card className="w-72 h-64 overflow-hidden relative">
+  <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-slate-700 to-black transform scale-[0.80] rounded-full blur-3xl" />
+  <div className="p-0 relative h-full bg-black border border-gray-900 rounded-2xl">
+    <motion.div
+      className="absolute inset-0 z-10"
+      initial={{ opacity: 0 }}
+      animate={{ 
+        opacity: hoveredId === collection.id ? 1 : 0,
+        boxShadow: hoveredId === collection.id ? 
+          "0 0 20px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.3)" : 
+          "none"
+      }}
+      transition={{ duration: 0.3 }}
+    />
                   <motion.img
                     src={collection.image}
                     alt={collection.name}
