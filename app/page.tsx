@@ -16,8 +16,6 @@ import CryptoDisplay from "@/components/CryptoDisplay";
 import SuppotersComponent from "@/components/supporters";
 import ImageContent1 from "@/components/Testimonial";
 
-
-
 const Content = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { isConnected } = useAccount();
