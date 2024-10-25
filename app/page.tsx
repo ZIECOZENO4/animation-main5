@@ -12,6 +12,7 @@ import { useAccount } from 'wagmi';
 import '@rainbow-me/rainbowkit/styles.css';
 import CollectionsGrid from "@/components/popular";
 import StatisticsComponent from "@/components/statistics";
+import CryptoDisplay from "@/components/CryptoDisplay";
 
 
 
@@ -38,6 +39,7 @@ const Content = () => {
       <ComponentCoin />
       <CollectionsGrid />
       <StatisticsComponent />
+      <CryptoDisplay />
       <Footer />
       {showPopup && (
         <WalletPopup onClose={handleClosePopup} />
