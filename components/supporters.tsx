@@ -22,7 +22,7 @@ const dotPattern = `data:image/svg+xml;base64,${btoa(
 export default function SuppotersComponent() {
   return (
     <div className="h-auto flex items-center justify-center p-8">
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-5xl">
         <motion.div
           className="bg-black relative overflow-hidden border-2 border-slate-500"
           initial={{ opacity: 0, y: 50 }}
