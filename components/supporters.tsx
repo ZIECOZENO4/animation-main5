@@ -17,9 +17,9 @@ const partners = [
 export default function SuppotersComponent() {
   return (
     <div className=" h-auto flex items-center justify-center p-8 ">
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-6xl">
         <motion.div
-          className="bg-black p-6 relative overflow-hidden border-2 border-slate-500"
+          className="bg-black  relative overflow-hidden border-2 border-slate-500"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -37,19 +37,20 @@ export default function SuppotersComponent() {
             transition={{ delay: 0.5, duration: 1 }}
           />
           <motion.h2
-            className="text-[#F7F2DA] text-3xl bg-black font-bold text-center mb-8 -mt-1 py-2"
+            className="text-[#F7F2DA] text-3xl p-6 bg-black font-bold text-center  -mt-1 py-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             style={{
               textShadow: "0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff",
-              fontFamily: "'Arial', sans-serif",
+         
               letterSpacing: "4px",
             }}
           >
             TRUSTED AND BACKED BY
           </motion.h2>
-          <div className="grid grid-cols-4 gap-8 sm:grid-cols-8">
+          <hr className='bg-slate-500 w-full mb-20' />
+          <div className="grid grid-cols-4 gap-8 sm:grid-cols-8 p-6 my-8">
             {partners.map((partner, index) => (
               <motion.div
                 key={partner.name}
@@ -70,11 +71,11 @@ export default function SuppotersComponent() {
                     src={partner.logo}
                     alt={`${partner.name} logo`}
                    
-                    className="rounded-full h-full w-full"
+                    className="rounded-full h-full w-full border border-slate-800"
                   />
                 </motion.div>
                 <motion.p
-                  className="text-slate-500 text-xs text-center"
+                  className="text-[#F7F2DA] text-xs text-center mt-3"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 * index, duration: 0.5 }}
