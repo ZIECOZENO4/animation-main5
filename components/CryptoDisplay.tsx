@@ -95,7 +95,7 @@ const CryptoDisplay = () => {
       </motion.p>
         </div>  
             
-            <div className="text-slate-500 space-y-4 max-w-2xl leading-8 mx-auto text-xs md:text-sm">
+            <div className="text-slate-500 space-y-4 my-8 max-w-2xl leading-8 mx-auto text-xs md:text-sm">
               <p>
                 700M OMNIPUMP TOKENS was distributed to the community across Season 1 and 2.
               </p>
@@ -119,19 +119,6 @@ const CryptoDisplay = () => {
         </div>
       </div>
 
-      {/* Optional: Floating Crypto Icons */}
-      <div className="absolute bottom-0 w-full">
-        <div className="flex gap-4 animate-float justify-center">
-        {[...Array(8)].map((_, i) => (
-            <img
-              key={i}
-              src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/ethereumLogo.png"
-              alt="Ethereum Logo"
-              className="w-8 h-8 opacity-60"
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
