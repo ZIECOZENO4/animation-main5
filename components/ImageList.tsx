@@ -111,7 +111,7 @@ export default function ImageComponent() {
             >
          <Card className="w-72 h-64 overflow-hidden relative">
  
-        <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />
+        <div className="absolute h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />
   <div className="p-0 relative h-full bg-black border border-gray-900 rounded-2xl">
     <motion.div
       className="absolute inset-0 z-10"

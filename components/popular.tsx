@@ -18,7 +18,7 @@ const collections: Collection[] = [
   {
     id: 1,
     name: "Milady",
-    image: "/path-to-milady-image.jpg",
+    image: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
     owners: 5377,
     floorPrice: 4.99,
     volume: 201.74
@@ -26,7 +26,7 @@ const collections: Collection[] = [
   {
     id: 2,
     name: "Opepen Edition",
-    image: "/path-to-opepen-image.jpg",
+    image: "https://s2.coinmarketcap.com/static/img/coins/64x64/52.png",
     owners: 3793,
     floorPrice: 0.14,
     volume: 4.22
@@ -34,7 +34,7 @@ const collections: Collection[] = [
   {
     id: 3,
     name: "Kanpai Pandas",
-    image: "/path-to-pandas-image.jpg",
+    image: "https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png",
     owners: 3128,
     floorPrice: 0.52,
     volume: 17.25
@@ -42,7 +42,7 @@ const collections: Collection[] = [
   {
     id: 4,
     name: "Pixelmon",
-    image: "/path-to-pixelmon-image.jpg",
+    image: "https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/ethereumLogo.png",
     owners: 1528,
     floorPrice: 0.32,
     volume: 0.61
@@ -54,15 +54,15 @@ export default function CollectionsGrid() {
   const [hoveredId, setHoveredId] = useState<number | null>(null)
 
   return (
-    <div className="min-h-screen  py-8">
+    <div className="min-h-screen  p-8">
  <motion.p
-        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none hover:text-gray-500 text-inherit text-md md:text-2xl hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
+        className="my-2 font-bold leading-10 tracking-tight text-[#F7F2DA]  sm:leading-none hover:text-gray-500 text-inherit text-2xl md:text-4xl hover:scale-110 hover:text-xl md:hover:text-4xl hover:-translate-y-1 transition-all duration-300 ease-in-out "
         whileHover={{
           y: [-2, 2, -2],
           transition: { repeat: Infinity, duration: 0.5 }
         }}
       >
-        POPULAR TOKENS
+        POPULAR TOKENS COLLECTION
         <motion.span
           className="absolute inset-0 text-transparent pointer-events-none"
           style={{
@@ -77,7 +77,7 @@ export default function CollectionsGrid() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-             POPULAR TOKENS
+                  POPULAR TOKENS COLLECTION
         </motion.span>
       </motion.p>
       
@@ -107,10 +107,10 @@ export default function CollectionsGrid() {
                 </div>
 
                 {/* Content Section */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                <div className="absolute bottom-2 left-2 right-2 bg-black bg-opacity-40 rounded-md p-4 z-20">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h3 className="text-white text-xl font-medium mb-1">
+                      <h3 className="text-[#F7F2DA] text-xl font-medium mb-1">
                         {collection.name}
                       </h3>
                       <p className="text-[#666666] text-sm">
@@ -121,7 +121,7 @@ export default function CollectionsGrid() {
                       whileHover={{ scale: 1.1 }}
                       className="bg-[#1A1A1A] p-2 rounded-lg cursor-pointer"
                     >
-                      <ArrowUpRight className="w-5 h-5 text-white" />
+                      <ArrowUpRight className="w-5 h-5 text-[#F7F2DA]" />
                     </motion.div>
                   </div>
 
@@ -135,7 +135,7 @@ export default function CollectionsGrid() {
                           alt="ETH" 
                           className="w-4 h-4 mr-1"
                         />
-                        <span className="text-white">
+                        <span className="text-[#F7F2DA]">
                           {collection.floorPrice.toFixed(2)}
                         </span>
                       </div>
@@ -148,7 +148,7 @@ export default function CollectionsGrid() {
                           alt="ETH" 
                           className="w-4 h-4 mr-1"
                         />
-                        <span className="text-white">
+                        <span className="text-[#F7F2DA]">
                           {collection.volume.toFixed(2)}
                         </span>
                       </div>
