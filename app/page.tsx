@@ -3,28 +3,27 @@
 import { useState, useEffect, Suspense } from "react";
 import { HeroSection } from "../components/Hero";
 import { WalletPopup } from "@/components/Introduction";
-import {
-  ThirdwebProvider,
-  ConnectWallet,
-  darkTheme,
-  useConnectionStatus,
-} from "@thirdweb-dev/react";
 import Loading from "./loading";
 import Footer from "@/components/Footer";
 import ComponentCoin from "@/components/CoinComponent";
 import ImageComponent from "@/components/ImageList";
+import {RainbowKitProvider} from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
+import '@rainbow-me/rainbowkit/styles.css';
+
+
 
 const Content = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const connectionStatus = useConnectionStatus();
+  const { isConnected } = useAccount();
 
   useEffect(() => {
-    if (connectionStatus !== "connected") {
+    if (!isConnected) {
       setShowPopup(true);
     } else {
       setShowPopup(false);
     }
-  }, [connectionStatus]);
+  }, [isConnected]);
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -37,7 +36,7 @@ const Content = () => {
       <ComponentCoin />
       <Footer />
       {showPopup && (
-       <WalletPopup onClose={handleClosePopup} />
+        <WalletPopup onClose={handleClosePopup} />
       )}
     </div>
   );
@@ -46,9 +45,10 @@ const Content = () => {
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
-
-        <Content />
-
+        <RainbowKitProvider 
+        >
+          <Content />
+        </RainbowKitProvider>
     </Suspense>
   );
 }
