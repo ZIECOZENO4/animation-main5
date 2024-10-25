@@ -54,7 +54,7 @@ export default function CollectionsGrid() {
   const [hoveredId, setHoveredId] = useState<number | null>(null)
 
   return (
-    <div className="min-h-screen  p-8">
+    <div className="min-h-screen  px-8 py-2">
         <div className="my-4">
         <motion.p
         className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-left sm:leading-none hover:text-gray-500 text-inherit text-2xl md:text-4xl md:ml-4 hover:scale-110 hover:text-xl md:hover:text-4xl hover:-translate-y-1 transition-all duration-300 ease-in-out font-bold relative"

@@ -90,7 +90,7 @@ export default function  StatisticsComponent() {
        
         </motion.h1>
         <motion.div
-          className="text-slate-500 text-center my-10 p-4 "
+          className="text-slate-500 text-center my-20 p-4 "
     
           variants={itemVariants}
         >
