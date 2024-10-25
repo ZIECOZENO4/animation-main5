@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
-export default function StatisticsComponent() {
+export default function  StatisticsComponent() {
   const [stats, setStats] = useState({
     fasterSweeping: 0,
     marketplaceFees: 0,
@@ -47,7 +47,7 @@ export default function StatisticsComponent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center  p-8">
+    <div className="min-h-screen flex items-center justify-center  px-8 pb-2">
       <motion.div
         className="max-w-3xl w-full"
         initial="hidden"
@@ -55,7 +55,7 @@ export default function StatisticsComponent() {
         variants={containerVariants}
       >
         <motion.h1
-          className="text-2xl md:text-4xl font-bold text-center mb-6"
+          className="text-4xl md:text-6xl font-bold text-center mb-6"
           style={{
             color: "#F7F2DA",
             textShadow: "0 0 10px rgba(247, 242, 218, 0.3)",
@@ -90,11 +90,8 @@ export default function StatisticsComponent() {
        
         </motion.h1>
         <motion.div
-          className="text-slate-500 text-center mb-8 p-4 "
-          style={{
-            backgroundColor: "rgba(15, 23, 42, 0.8)", // slate-900 with opacity
-            backdropFilter: "blur(10px)",
-          }}
+          className="text-slate-500 text-center my-10 p-4 "
+    
           variants={itemVariants}
         >
           <p className="text-lg md:text-xl ">
@@ -110,7 +107,7 @@ export default function StatisticsComponent() {
           ].map((item, index) => (
             <motion.div key={index} className="p-4 " variants={itemVariants}>
               <motion.p
-                className="text-xl md:text-2xl font-bold mb-2"
+                className="text-2xl md:text-4xl font-bold mb-2"
                 style={{
                   color: "#F7F2DA",
                   textShadow: "0 0 5px rgba(247, 242, 218, 0.2)",
