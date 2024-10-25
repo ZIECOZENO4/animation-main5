@@ -17,6 +17,16 @@
   50% { gap: 6.1px; }
 }
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .animate-gap {
   animation: gapAnimation 30s infinite ease-in-out;
 }
