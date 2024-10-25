@@ -1,6 +1,8 @@
 "use client"
+"use client"
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { motion } from "framer-motion"
 
 const CryptoDisplay = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -27,23 +29,21 @@ const CryptoDisplay = () => {
 
       {/* Top Right Ethereum */}
       <div className="absolute top-4 right-4 w-32 h-32">
-        <Image
-          src="https://commons.wikimedia.org/wiki/File:Rotating_earth_animated_transparent.gif" // Replace with actual Ethereum rotating GIF URL
+        <img
+          src="/gifs/world.gif" // Replace with actual Ethereum rotating GIF URL
           alt="Rotating Ethereum"
-          width={128}
-          height={128}
-          className="rounded-full"
+        
+          className="rounded-full h-auto w-auto"
         />
       </div>
 
       {/* Bottom Left World */}
       <div className="absolute bottom-4 left-4 w-32 h-32">
-        <Image
-          src=" https://icons8.com/preloaders/en/cryptocurrency_and_money/ethereum-gold-coin/" // Replace with actual rotating world GIF URL
+        <img
+          src="/gifs/eth.gif" // Replace with actual rotating world GIF URL
           alt="Rotating World"
-          width={128}
-          height={128}
-          className="rounded-full"
+          className="rounded-full h-auto w-auto"
+ 
         />
       </div>
 
@@ -67,9 +67,33 @@ const CryptoDisplay = () => {
 
           {/* Content Overlay */}
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-8 bg-black/40 backdrop-blur-sm">
-            <h1 className="text-[#F7F2DA] text-4xl md:text-6xl font-bold mb-6">
-              OMNIPUMP FOR THE COMMUNITY GROWTH
-            </h1>
+          <div className="mt-4 mb-10">
+        <motion.p
+        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-left sm:leading-none hover:text-gray-500 text-inherit text-xl md:text-2xl md:ml-4 hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out font-bold relative"
+        whileHover={{
+          y: [-2, 2, -2],
+          transition: { repeat: Infinity, duration: 0.5 }
+        }}
+      >
+            OMNIPUMP FOR COMMUNITY GROWTH
+        <motion.span
+          className="absolute inset-0 text-transparent pointer-events-none"
+          style={{
+            textShadow: `
+              0 0 20px rgba(247, 242, 218, 0.7),
+              0 0 40px rgba(247, 242, 218, 0.5),
+              0 0 60px rgba(247, 242, 218, 0.3)
+            `,
+            WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+            OMNIPUMP FOR COMMUNITY GROWTH
+        </motion.span>
+      </motion.p>
+        </div>  
             
             <div className="text-slate-500 space-y-4 max-w-2xl mx-auto text-lg md:text-xl">
               <p>
@@ -85,9 +109,12 @@ const CryptoDisplay = () => {
               </p>
             </div>
 
-            <button className="mt-8 px-8 py-3 bg-slate-500 text-white rounded-md hover:bg-slate-600 transition-colors text-lg font-medium">
+            <motion.button
+
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }} className="mt-8 px-8 py-3 bg-slate-500 text-white rounded-md hover:bg-slate-600 transition-colors text-lg font-medium">
               JOIN COMMUNITY
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
@@ -96,12 +123,10 @@ const CryptoDisplay = () => {
       <div className="absolute bottom-0 w-full">
         <div className="flex gap-4 animate-float justify-center">
         {[...Array(8)].map((_, i) => (
-            <Image
+            <img
               key={i}
               src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/ethereumLogo.png"
               alt="Ethereum Logo"
-              width={48}
-              height={48}
               className="w-12 h-12 opacity-60"
             />
           ))}
