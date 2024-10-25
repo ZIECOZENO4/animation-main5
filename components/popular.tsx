@@ -94,16 +94,23 @@ export default function CollectionsGrid() {
             whileHover={{ scale: 1.02 }}
             onHoverStart={() => setHoveredId(collection.id)}
             onHoverEnd={() => setHoveredId(null)}
+            transition={{ duration: 0.3 }}
           >
             <Card className="w-[320px] h-[400px] bg-[#0A0A0A] border border-[#1A1A1A] overflow-hidden">
               <div className="relative h-full">
                 {/* Main Image */}
                 <div className="h-[70%] relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0A0A0A] z-10" />
-                  <img
+                  <motion.img
                     src={collection.image}
                     alt={collection.name}
                     className="w-full h-full object-cover"
+                    initial={{ opacity: 0.8, scale: 1 }}
+                    animate={{ 
+                      opacity: hoveredId === collection.id ? 1 : 0.8,
+                      scale: hoveredId === collection.id ? 1.1 : 1
+                    }}
+                    transition={{ duration: 0.3 }}
                   />
                 </div>
 
@@ -132,7 +139,7 @@ export default function CollectionsGrid() {
                       <p className="text-[#666666] text-sm mb-1">FLOOR PRICE</p>
                       <div className="flex items-center">
                         <img 
-                          src="/eth-icon.svg" 
+                          src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/ethereumLogo.png" 
                           alt="ETH" 
                           className="w-4 h-4 mr-1"
                         />
@@ -145,7 +152,7 @@ export default function CollectionsGrid() {
                       <p className="text-[#666666] text-sm mb-1">1D VOLUME</p>
                       <div className="flex items-center">
                         <img 
-                          src="/eth-icon.svg" 
+                          src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/ethereumLogo.png" 
                           alt="ETH" 
                           className="w-4 h-4 mr-1"
                         />
