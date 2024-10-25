@@ -79,7 +79,7 @@ const collections = [
     }
   },
   { 
-    id: 7, 
+    id: 8, 
     name: "ZenoToken2", 
     image: "https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/images/gt1.jpg", 
     verified: true,
