@@ -14,6 +14,7 @@ import CollectionsGrid from "@/components/popular";
 import StatisticsComponent from "@/components/statistics";
 import CryptoDisplay from "@/components/CryptoDisplay";
 import SuppotersComponent from "@/components/supporters";
+import TrustedPartners from "@/components/TrustedPartners";
 
 
 
@@ -42,6 +43,7 @@ const Content = () => {
       <StatisticsComponent />
       <CryptoDisplay />
       <SuppotersComponent />
+      <TrustedPartners />
       <Footer />
       {showPopup && (
         <WalletPopup onClose={handleClosePopup} />
