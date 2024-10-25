@@ -58,7 +58,7 @@ export default function Home() {
             accentColor: '#787878',
             accentColorForeground: '#F7F2DA',
             borderRadius: 'none',
-            fontStack: 'system' // Use system or rounded
+           
           })}
         >
           <Content />
