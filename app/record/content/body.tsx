@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useState } from "react";
 import { motion } from 'framer-motion';
 import { Card, Chip, Tabs, Tab } from "@nextui-org/react";
 import FullConnectButton from '@/components/fullConnectButton';
