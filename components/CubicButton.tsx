@@ -16,7 +16,7 @@ const CubicButton = () => {
         openConnectModal,
         mounted,
       }) => {
-        // Correct way to use useBalance hook
+  
         const { data: balanceData } = useBalance({
           address: account?.address && account.address.startsWith('0x') 
             ? (account.address as `0x${string}`)
@@ -82,13 +82,14 @@ const CubicButton = () => {
     ? chain.name 
     : `${chain.name?.slice(0, 8)}...`}
 </span>
-                          <ChevronDownIcon />
-                        </div>
-                        {chain.unsupported && (
-                          <span className="text-red-500 text-xs">
+{chain.unsupported && (
+                          <span className="text-red-500 text-sm">
                             ⚠️ Unsupported
                           </span>
                         )}
+                          <ChevronDownIcon />
+                        </div>
+                     
                       </div>
                       <div className="w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
                     </div>

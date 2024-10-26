@@ -1,16 +1,10 @@
 "use client";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import TokenHeader from "./content/header";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ConnectButton
-        showBalance={{ smallScreen: false, largeScreen: true }}
-        accountStatus={{
-          smallScreen: "avatar",
-          largeScreen: "full"
-        }}
-      />
+    <main className="">
+ <TokenHeader />
     </main>
   );
 }
