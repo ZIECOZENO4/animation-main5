@@ -11,8 +11,8 @@ export default function Dashboard() {
   const [expandedRightBottom, setExpandedRightBottom] = React.useState(false);
 
   // Calculate widths based on expansion states
-  const leftPanelWidth = expandedLeft ? 'w-[20px]' : 'w-1/8'; // 20px when expanded
-  const rightPanelWidth = expandedRight ? 'w-[20px]' : 'w-1/8'; // 20px when expanded
+  const leftPanelWidth = expandedLeft ? 'w-1/10' : 'w-1/4'; // 20px when expanded
+  const rightPanelWidth = expandedRight ? 'w-1/10' : 'w-1/4'; // 20px when expanded
   
   // Middle panel will take remaining space
   const middlePanelWidth = (expandedLeft || expandedRight) ? 'w-3/5' : 'w-1/2'; // Adjust according to side expansions
