@@ -14,11 +14,11 @@ export default function Dashboard() {
   const leftPanelWidth = expandedLeft ? 'w-1/10' : 'w-1/8';
   const rightPanelWidth = expandedRight ? 'w-1/10' : 'w-1/8';
   
-  // Middle panel will expand based on left and right expansions
+  // Middle panel will take remaining space
   const middlePanelWidth = expandedLeft || expandedRight ? 'w-3/5' : 'w-1/2';
 
   return (
-    <div className="flex justify-center items-start h-screen">
+    <div className="flex justify-center items-start h-[calc(100vh-5rem)] overflow-auto">
       {/* Left Panel */}
       <div className={`flex flex-col border-r transition-all duration-300 ${leftPanelWidth}`}>
         <motion.div
@@ -43,27 +43,21 @@ export default function Dashboard() {
 
       {/* Middle Panel */}
       <motion.div
-        className={`p-4 transition-all duration-300 ${middlePanelWidth}`}
+        className={`p-4 transition-all duration-300 ${middlePanelWidth} `} // Assuming nav bar height is 5rem (h-20)
       >
         <div className="cursor-pointer">
-          <button onClick={() => {
-            setExpandedRight(true);
-            setExpandedLeft(false); // Collapse left if expanding right
-          }} className="mr-2">
-            {expandedRight ? 'Collapse Right' : 'Expand Right'}
+          <button onClick={() => setExpandedRight(prev => !prev)} className="mr-2">
+            {expandedRight ? 'Restore Right' : 'Expand Right'}
           </button>
-          <button onClick={() => {
-            setExpandedLeft(true);
-            setExpandedRight(false); // Collapse right if expanding left
-          }}>
-            {expandedLeft ? 'Collapse Left' : 'Expand Left'}
+          <button onClick={() => setExpandedLeft(prev => !prev)}>
+            {expandedLeft ? 'Restore Left' : 'Expand Left'}
           </button>
         </div>
         {/* Content Here */}
       </motion.div>
 
       {/* Right Panel */}
-      <div className={`flex flex-col border-l transition-all duration-300 ${rightPanelWidth}`}>
+      <div className={`flex flex-col border-l transition-all duration-300 ${rightPanelWidth} `}>
         <motion.div
           className={`p-2 transition-all duration-300 ${expandedRightTop ? 'h-1/2' : 'h-1/4'}`}
           onClick={() => setExpandedRightTop(!expandedRightTop)}
