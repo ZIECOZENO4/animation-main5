@@ -104,7 +104,12 @@ export default function Dashboard() {
           <div className="cursor-pointer">
             {expandedLeftBottom ? '▼' : '►'} Bottom
           </div>
-          {/* Content Here */}
+          <Card className="bg-black rounded-none border border-slate-600 text-center p-4">
+            <h2 className="text-xl md:text-3xl text-[#F7F2DA] text-center mb-4">
+              Holders Distribution
+            </h2>
+            <p className="text-xs text-slate-600 my-8">No Current Distribution</p>
+          </Card>
         </motion.div>
       </div>
 
