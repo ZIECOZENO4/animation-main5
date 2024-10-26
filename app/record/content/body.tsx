@@ -3,48 +3,68 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function Dashboard() {
-  const [expandedLeft, setExpandedLeft] = React.useState(false);
-  const [expandedRight, setExpandedRight] = React.useState(false);
+  const [expandedMiddle, setExpandedMiddle] = React.useState(false);
+  const [expandedLeftTop, setExpandedLeftTop] = React.useState(false);
+  const [expandedLeftBottom, setExpandedLeftBottom] = React.useState(false);
+  const [expandedRightTop, setExpandedRightTop] = React.useState(false);
+  const [expandedRightBottom, setExpandedRightBottom] = React.useState(false);
 
   return (
     <div className="flex justify-center items-start h-screen">
       {/* Left Panel */}
-      <motion.div
-        className={`p-4 border-r transition-all duration-300 ${
-          expandedLeft ? 'w-1/2' : 'w-1/4'
-        }`}
-        onClick={() => setExpandedLeft(!expandedLeft)}
-      >
-        <div className="cursor-pointer">
-          {expandedLeft ? '▼' : '►'}
-        </div>
-        {/* Content Here */}
-        hello world
-      </motion.div>
+      <div className={`flex flex-col border-r transition-all duration-300 ${expandedMiddle ? 'w-1/4' : 'w-1/8'}`}>
+        <motion.div
+          className={`p-2 transition-all duration-300 ${expandedLeftTop ? 'h-1/2' : 'h-1/4'}`}
+          onClick={() => setExpandedLeftTop(!expandedLeftTop)}
+        >
+          <div className="cursor-pointer">
+            {expandedLeftTop ? '▼' : '►'} Top
+          </div>
+          {/* Content Here */}
+        </motion.div>
+        <motion.div
+          className={`p-2 transition-all duration-300 ${expandedLeftBottom ? 'h-1/2' : 'h-1/4'}`}
+          onClick={() => setExpandedLeftBottom(!expandedLeftBottom)}
+        >
+          <div className="cursor-pointer">
+            {expandedLeftBottom ? '▼' : '►'} Bottom
+          </div>
+          {/* Content Here */}
+        </motion.div>
+      </div>
 
       {/* Middle Panel */}
       <motion.div
-        className={`p-4 transition-all duration-300 ${
-          expandedLeft || expandedRight ? 'w-1/4' : 'w-1/2'
-        }`}
+        className={`p-4 transition-all duration-300 ${expandedMiddle ? 'w-full' : 'w-1/2'}`}
+        onClick={() => setExpandedMiddle(!expandedMiddle)}
       >
-            hello world
+        <div className="cursor-pointer">
+          {expandedMiddle ? '▼' : '►'} Expand Middle
+        </div>
         {/* Content Here */}
       </motion.div>
 
       {/* Right Panel */}
-      <motion.div
-        className={`p-4 border-l transition-all duration-300 ${
-          expandedRight ? 'w-1/2' : 'w-1/4'
-        }`}
-        onClick={() => setExpandedRight(!expandedRight)}
-      >
-        <div className="cursor-pointer">
-          {expandedRight ? '▼' : '►'}
-        </div>
-        hello world
-        {/* Content Here */}
-      </motion.div>
+      <div className={`flex flex-col border-l transition-all duration-300 ${expandedMiddle ? 'w-1/4' : 'w-1/8'}`}>
+        <motion.div
+          className={`p-2 transition-all duration-300 ${expandedRightTop ? 'h-1/2' : 'h-1/4'}`}
+          onClick={() => setExpandedRightTop(!expandedRightTop)}
+        >
+          <div className="cursor-pointer">
+            {expandedRightTop ? '▼' : '►'} Top
+          </div>
+          {/* Content Here */}
+        </motion.div>
+        <motion.div
+          className={`p-2 transition-all duration-300 ${expandedRightBottom ? 'h-1/2' : 'h-1/4'}`}
+          onClick={() => setExpandedRightBottom(!expandedRightBottom)}
+        >
+          <div className="cursor-pointer">
+            {expandedRightBottom ? '▼' : '►'} Bottom
+          </div>
+          {/* Content Here */}
+        </motion.div>
+      </div>
     </div>
   );
 }

@@ -49,7 +49,7 @@ export default function TokenHeader() {
               ZENO WEB
             </motion.h2>
       
-            <Star className="w-4 h-4 pb-2 align-middle text-center text-green-500" />
+            <Star className="w-6 h-6 pb-2 align-middle text-center text-green-500" />
           </div>
 
           <motion.div
