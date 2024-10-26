@@ -22,7 +22,7 @@ export default function TokenHeader() {
       transition={{ duration: 0.5 }}
     >
       <motion.div
-        className="flex items-center space-x-4 bg-opacity-80 p-2 rounded-lg w-auto"
+        className="flex items-center space-x-4 bg-opacity-80 p-2  rounded-lg w-auto"
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
         initial={{ opacity: 0, y: 20 }}
@@ -48,13 +48,7 @@ export default function TokenHeader() {
             >
               ZENO WEB
             </motion.h2>
-            <button onClick={handleCopy}>
-              {copied ? (
-                <Check className="w-6 h-6 text-green-400" />
-              ) : (
-                <Copy className="w-6 h-6 text-gray-400" />
-              )}
-            </button>
+      
             <Star className="w-8 h-8 ml-2 text-green-500" />
           </div>
 
@@ -64,6 +58,13 @@ export default function TokenHeader() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
+                  <button onClick={handleCopy}>
+              {copied ? (
+                <Check className="w-6 h-6 text-green-400" />
+              ) : (
+                <Copy className="w-6 h-6 text-gray-400" />
+              )}
+            </button>
             <Phone className="w-6 h-6 text-gray-400" />
             <Camera className="w-6 h-6 text-gray-400" />
             <Globe className="w-6 h-6 text-gray-400" />
@@ -73,7 +74,7 @@ export default function TokenHeader() {
       </motion.div>
       
       <motion.div 
-        className="flex space-x-4 p-2 pr-4"
+        className="flex space-x-4 p-2 mr-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
