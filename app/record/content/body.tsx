@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -11,14 +11,14 @@ export default function Dashboard() {
   const [expandedRightBottom, setExpandedRightBottom] = React.useState(false);
 
   // Calculate widths based on expansion states
-  const leftPanelWidth = expandedLeft ? 'w-1/20' : 'w-1/8'; // 5% when expanded
-  const rightPanelWidth = expandedRight ? 'w-1/20' : 'w-1/8'; // 5% when expanded
+  const leftPanelWidth = expandedLeft ? 'w-[20px]' : 'w-1/8'; // 20px when expanded
+  const rightPanelWidth = expandedRight ? 'w-[20px]' : 'w-1/8'; // 20px when expanded
   
   // Middle panel will take remaining space
-  const middlePanelWidth = expandedLeft || expandedRight ? 'w-3/5' : 'w-1/2'; // Adjust according to side expansions
+  const middlePanelWidth = (expandedLeft || expandedRight) ? 'w-3/5' : 'w-1/2'; // Adjust according to side expansions
 
   return (
-    <div className="flex justify-center items-start h-[calc(100vh-5rem)] overflow-auto">
+    <div className="flex justify-center items-start h-[calc(100vh-10rem)] overflow-auto">
       {/* Left Panel */}
       <div className={`flex flex-col border-r transition-all duration-300 ${leftPanelWidth}`}>
         <motion.div
@@ -42,25 +42,25 @@ export default function Dashboard() {
       </div>
 
       {/* Middle Panel */}
-      <motion.div
-        className={`p-4 transition-all duration-300 ${middlePanelWidth}`}
-      >
-        <div className="cursor-pointer">
-          <button onClick={() => {
-            if (!expandedLeft) {
-              setExpandedRight(prev => !prev);
-            }
-          }} className="mr-2">
-            {expandedRight ? 'Restore Right' : 'Expand Right'}
+      <motion.div className={`p-4 transition-all duration-300 ${middlePanelWidth}`}>
+        <div className="flex justify-between mb-4">
+          {/* Button to toggle left panel width */}
+          <button 
+            onClick={() => setExpandedLeft(prev => !prev)} 
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            {expandedLeft ? 'Restore Left' : 'Collapse Left'}
           </button>
-          <button onClick={() => {
-            if (!expandedRight) {
-              setExpandedLeft(prev => !prev);
-            }
-          }}>
-            {expandedLeft ? 'Restore Left' : 'Expand Left'}
+
+          {/* Button to toggle right panel width */}
+          <button 
+            onClick={() => setExpandedRight(prev => !prev)} 
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            {expandedRight ? 'Restore Right' : 'Collapse Right'}
           </button>
         </div>
+
         {/* Content Here */}
       </motion.div>
 
