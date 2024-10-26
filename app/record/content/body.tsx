@@ -18,7 +18,7 @@ export default function Dashboard() {
   const middlePanelWidth = (expandedLeft || expandedRight) ? 'w-3/5' : 'w-1/2'; // Adjust according to side expansions
 
   return (
-    <div className="flex justify-center items-start h-[calc(100vh-10rem)] overflow-auto">
+    <div className="flex justify-center items-start h-[calc(100vh-10rem)] overflow-auto w-[100vw]">
       {/* Left Panel */}
       <div className={`flex flex-col border-r transition-all duration-300 ${leftPanelWidth}`}>
         <motion.div
