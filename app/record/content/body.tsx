@@ -11,9 +11,11 @@ export default function Dashboard() {
   const [expandedRightBottom, setExpandedRightBottom] = React.useState(false);
 
   // Calculate widths based on expansion states
-  const leftPanelWidth = expandedLeft ? 'w-1/4' : 'w-1/8';
-  const rightPanelWidth = expandedRight ? 'w-1/4' : 'w-1/8';
-  const middlePanelWidth = expandedLeft || expandedRight ? 'w-1/2' : 'w-1/2';
+  const leftPanelWidth = expandedLeft ? 'w-1/10' : 'w-1/8';
+  const rightPanelWidth = expandedRight ? 'w-1/10' : 'w-1/8';
+  
+  // Middle panel will expand based on left and right expansions
+  const middlePanelWidth = expandedLeft || expandedRight ? 'w-3/5' : 'w-1/2';
 
   return (
     <div className="flex justify-center items-start h-screen">
@@ -44,10 +46,16 @@ export default function Dashboard() {
         className={`p-4 transition-all duration-300 ${middlePanelWidth}`}
       >
         <div className="cursor-pointer">
-          <button onClick={() => setExpandedRight(!expandedRight)} className="mr-2">
+          <button onClick={() => {
+            setExpandedRight(true);
+            setExpandedLeft(false); // Collapse left if expanding right
+          }} className="mr-2">
             {expandedRight ? 'Collapse Right' : 'Expand Right'}
           </button>
-          <button onClick={() => setExpandedLeft(!expandedLeft)}>
+          <button onClick={() => {
+            setExpandedLeft(true);
+            setExpandedRight(false); // Collapse right if expanding left
+          }}>
             {expandedLeft ? 'Collapse Left' : 'Expand Left'}
           </button>
         </div>
