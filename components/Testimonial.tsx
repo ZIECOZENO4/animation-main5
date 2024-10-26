@@ -122,21 +122,21 @@ export default function ImageContent1() {
       </div>
 
       {/* Second Card */}
-      <div className="flex flex-col md:flex-row gap-20 ">
+      <div className="flex flex-col md:flex-row gap-20 my-8">
       <motion.div
-          className="flex-1"
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        ref={rightRef}
+        className="flex-1"
+        initial={{ x: 100, opacity: 0 }}
+        animate={controlsRight}
+      >
           <img alt='image2' src='/images/image.PNG' className='w-full h-full  shadow-lg' />
         </motion.div>
         <motion.div
-          className="flex-1"
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        ref={leftRef}
+        className="flex-1"
+        initial={{ x: -100, opacity: 0 }}
+        animate={controlsLeft}
+      >
           <motion.p
             className="mt-2 leading-10 tracking-tight text-left sm:leading-none hover:text-gray-500 text-md md:text-2xl hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
             whileHover={{
@@ -198,13 +198,13 @@ export default function ImageContent1() {
         
       </div>
       {/* Repeat similar structure for additional cards */}
-      <div className="flex flex-col md:flex-row gap-20">
-        <motion.div
-          className="flex-1"
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+      <div className="flex flex-col md:flex-row gap-20 my-8">
+      <motion.div
+        ref={leftRef}
+        className="flex-1"
+        initial={{ x: -100, opacity: 0 }}
+        animate={controlsLeft}
+      >
           <motion.p
             className="mt-2 leading-10 tracking-tight text-left sm:leading-none hover:text-gray-500 text-md md:text-2xl hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
             whileHover={{
@@ -264,11 +264,11 @@ export default function ImageContent1() {
 
         {/* Image */}
         <motion.div
-          className="flex-1"
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        ref={rightRef}
+        className="flex-1"
+        initial={{ x: 100, opacity: 0 }}
+        animate={controlsRight}
+      >
           <img alt='image3' src='/images/image3.PNG' className='w-full h-full shadow-lg' />
         </motion.div>
       </div>
