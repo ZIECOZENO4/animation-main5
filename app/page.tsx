@@ -35,7 +35,6 @@ const Content = () => {
   return (
     <div className='align-middle flex flex-col'>
       <HeroSection />
-      <ImageComponent />
       <ComponentCoin />
       <CollectionsGrid />
       <StatisticsComponent />
