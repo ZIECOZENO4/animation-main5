@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Chip, Tabs, Tab } from "@nextui-org/react";
 import FullConnectButton from '@/components/fullConnectButton';
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
+import FinancialGraph from "./financial-graph";
+import ActivityComponent from "./activity-table";
 
 interface Holder {
   address: string
@@ -256,24 +258,8 @@ export default function Dashboard() {
 
       {/* Middle Panel */}
       <motion.div className={`p-4 transition-all duration-300 ${middlePanelWidth}`}>
-        <div className="flex justify-between mb-4">
-          {/* Button to toggle left panel width */}
-          <button 
-            onClick={() => setExpandedLeft(prev => !prev)} 
-            className="bg-blue-500 text-white p-2 rounded"
-          >
-            {expandedLeft ? 'Restore Left' : 'Collapse Left'}
-          </button>
-
-          {/* Button to toggle right panel width */}
-          <button 
-            onClick={() => setExpandedRight(prev => !prev)} 
-            className="bg-blue-500 text-white p-2 rounded"
-          >
-            {expandedRight ? 'Restore Right' : 'Collapse Right'}
-          </button>
-        </div>
-
+    
+<MainComponent />
         {/* Content Here */}
       </motion.div>
 
@@ -286,7 +272,7 @@ export default function Dashboard() {
           <div className="cursor-pointer">
             {expandedRightTop ? '▼' : '►'} Top
           </div>
-          <div className="bg-black text-[#F7F2DA]  w-full mx-auto">
+          <div className="bg-black text-[#F7F2DA]  w-full ">
       <div className="mb-4 flex justify-end">
         <div className="relative">
           <select
@@ -304,7 +290,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <table className="w-full">
+      <table className="w-full overflow-auto text-xs">
         <thead>
           <tr className="text-left border-b border-slate-500">
             <th className="py-2">Account</th>
@@ -331,9 +317,9 @@ export default function Dashboard() {
                   {transaction.account}
                 </td>
                 <td>
-                  <span className={`px-2 py-1 rounded text-xs ${transaction.type === 'SELL' ? 'bg-orange-500 text-orange-900' : 'bg-green-500 text-green-900'}`}>
+                  <Chip className={`px-2 py-1 rounded text-xs ${transaction.type === 'SELL' ? 'bg-slate-800 ' : 'bg-slate-500 '}`}>
                     {transaction.type}
-                  </span>
+                  </Chip>
                 </td>
                 <td>{transaction.in}</td>
                 <td>{transaction.out}</td>
@@ -345,6 +331,8 @@ export default function Dashboard() {
         </tbody>
       </table>
     </div>
+    <hr className='text-slate-slate-500 bg-slate-500 border-slate-500 my-2' />
+    <ActivityComponent />
         </motion.div>
         <motion.div
           className={`p-2 transition-all duration-300 ${expandedRightBottom ? 'h-full' : 'h-1/2'}`}
@@ -353,7 +341,7 @@ export default function Dashboard() {
           <div className="cursor-pointer">
             {expandedRightBottom ? '▼' : '►'} Bottom
           </div>
-          {/* Content Here */}
+         <FinancialGraph />
         </motion.div>
       </div>
     </div>
