@@ -35,7 +35,14 @@ const config: Config = {
     },
   },
  darkMode: "class",
-plugins: [nextui(),  addVariablesForColors],
+ plugins: [
+  nextui(),
+  addVariablesForColors,
+  require('tailwind-scrollbar')({
+    nocompatible: true
+  })
+],
+
 };
 export default config;
 

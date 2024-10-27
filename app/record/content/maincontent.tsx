@@ -24,14 +24,21 @@ const nftItems: NFTItem[] = [
   { id: '4', image: '/placeholder.svg?height=50&width=50', name: 'Sappy Seal...', rarity: 8650, buyNow: 0.292, lastSale: 0.28, topBid: 0.28, owner: 'F8V4VE', held: 8, time: '12h ago' },
 ]
 
-const tabs = ['ITEMS', 'BIDS', 'LOANS', 'HOLDERS', 'GRAPH']
+const tabs = ['GRAPH', 'BIDS', 'TRADES', 'HOLDERS', ,'SUPPORT' ]
 
 export default function MainComponent() {
-  const [activeTab, setActiveTab] = useState('ITEMS')
+  const [activeTab, setActiveTab] = useState('GRAPH')
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [optimizeSweep, setOptimizeSweep] = useState(false)
   const [quantity, setQuantity] = useState(0)
+  const [value, setValue] = useState<string>('');
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value !== undefined) {
+      setValue(e.target.value);
+    }
+  };
+  
   const handleItemSelect = (id: string) => {
     setSelectedItems(prev => 
       prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
@@ -49,7 +56,7 @@ export default function MainComponent() {
           {tabs.map(tab => (
             <motion.button
               key={tab}
-              className={`px-3 py-2 rounded ${activeTab === tab ? 'text-yellow-500' : 'text-gray-400'}`}
+              className={`px-2 py-2 rounded ${activeTab === tab ? 'text-[#F7F2DA]' : 'text-gray-500'}`}
               onClick={() => setActiveTab(tab)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -62,13 +69,13 @@ export default function MainComponent() {
           <div className="relative">
             <input
               type="text"
-              placeholder="Item ID"
-              className="bg-gray-800 text-gray-300 px-3 py-1 rounded-md pl-8"
+              placeholder="TOKEN ID"
+              className="bg-black border border-slate-500 text-[#F7F2DA] p-2 rounded-md pl-8"
             />
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
           </div>
          
-          <button   aria-label='number' className="p-2 hover:bg-gray-800 rounded"><LayoutGrid className="w-4 h-4" /></button>
+          <button   aria-label='number' className="p-2 hover:bg-black rounded"><LayoutGrid className="w-4 h-4" /></button>
           
         </div>
       </nav>
@@ -146,7 +153,7 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="h-64 bg-gray-800 rounded-lg flex items-center justify-center"
+            className="h-64 bg-black bg-opacity-50 border-slate-500 rounded-lg flex items-center justify-center"
           >
             <p>Graph view coming soon...</p>
           </motion.div>
@@ -165,7 +172,7 @@ export default function MainComponent() {
         )}
       </AnimatePresence>
 
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex items-center bottom-0 justify-between">
         <motion.button
           className="bg-yellow-600 text-black px-4 py-2 rounded flex items-center"
           whileHover={{ scale: 1.05 }}
