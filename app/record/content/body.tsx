@@ -25,7 +25,12 @@ export default function Dashboard() {
   const [expandedRightTop, setExpandedRightTop] = React.useState(false);
   const [expandedRightBottom, setExpandedRightBottom] = React.useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
+  const [includeBondingCurve, setIncludeBondingCurve] = useState(true)
 
+  const toggleBondingCurve = () => {
+    setIncludeBondingCurve(!includeBondingCurve)
+  }
+  
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCurrency(event.target.value);
   };
@@ -117,14 +122,17 @@ export default function Dashboard() {
           <div className="cursor-pointer">
             {expandedLeftBottom ? '▼' : '►'} Bottom
           </div>
-          <div className="bg-black text-[#F7F2DA]   w-full">
-      <div className="flex justify-between  items-center mb-4">
+          <div className="bg-black text-[#F7F2DA] border-slate-500 w-full">
+      <div className="flex justify-center flex-col gap-4 items-center mb-4 p-4">
         <h2 className="text-xl gap-4 font-bold">Holders Distribution</h2>
-        <span className="bg-slate-500 text-slate-900 text-xs font-medium px-2.5 py-0.5 rounded-full">
-          Including Bonding Curve
-        </span>
+        <button
+          onClick={toggleBondingCurve}
+          className="bg-slate-500 text-xs font-medium px-2.5 py-0.5 rounded-full hover:bg-slate-600 transition-colors"
+        >
+          {includeBondingCurve ? "Including" : "Excluding"} Bonding Curve
+        </button>
       </div>
-      <hr className='w-full text-slate-500 bg-slate-500 mb-4' />
+      <hr className='w-full text-slate-500 bg-slate-500 mb-4 px-4' />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -136,30 +144,52 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="mb-4"
+            className="mb-4 px-4"
           >
             <div className="flex justify-between text-sm mb-1">
               <span>{holder.address}</span>
-              <span>{holder.percentage.toFixed(5)}%</span>
+              <AnimatePresence>
+                {includeBondingCurve && (
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {holder.percentage.toFixed(5)}%
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </div>
             <div className="flex items-center">
-              <motion.div
-                className="h-2 rounded-full bg-gradient-to-r from-slate-300 to-slate-600"
-                initial={{ width: 0 }}
-                animate={{ width: `${holder.percentage}%` }}
-                transition={{ duration: 1, ease: "easeOut" }}
-              />
-              {holder.label && (
-                <span className="ml-2 text-xs bg-slate-500 text-slate-900 px-2 py-0.5 rounded-full">
-                  {holder.label}
-                </span>
-              )}
+              <AnimatePresence>
+                {includeBondingCurve && (
+                  <motion.div
+                    className="h-2 rounded-full bg-gradient-to-r from-slate-300 to-slate-600"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${holder.percentage}%` }}
+                    exit={{ width: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  />
+                )}
+              </AnimatePresence>
+              <AnimatePresence>
+                {includeBondingCurve && holder.label && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    className="ml-2 text-xs bg-slate-500 px-2 py-0.5 rounded-full"
+                  >
+                    {holder.label}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         ))}
       </motion.div>
       <hr className='w-full text-slate-500 bg-slate-500' />
-      <div className="flex justify-between items-center mt-6 text-gray-500">
+      <div className="flex justify-between text-xs items-center my-6 text-gray-500 px-4">
         <button className="flex items-center">
           <ChevronLeft className="w-4 h-4 mr-1" />
           Previous
