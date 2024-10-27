@@ -6,6 +6,7 @@ import FullConnectButton from '@/components/fullConnectButton';
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import FinancialGraph from "./financial-graph";
 import ActivityComponent from "./activity-table";
+import MainComponent from "./maincontent";
 
 interface Holder {
   address: string

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const data = [
   { time: '5 PM', price: 0.285 },
@@ -19,25 +19,97 @@ const data = [
 
 const highlightPoints = ['5 PM', '11 PM', '5 AM', '11 AM']
 
+const buttonVariants = {
+  initial: { scale: 1 },
+  hover: { scale: 1.05 },
+  tap: { scale: 0.95 },
+}
+
+const chartVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+}
+
+const tooltipVariants = {
+  initial: { scale: 0, opacity: 0 },
+  animate: { 
+    scale: 1, 
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20
+    }
+  },
+  exit: { 
+    scale: 0, 
+    opacity: 0,
+    transition: {
+      duration: 0.2
+    }
+  }
+}
+
 export default function FinancialGraph() {
-  const [activePoint, setActivePoint] = useState(null)
+  const [activePoint, setActivePoint] = useState<number | null>(null)
+  const [selectedTimeframe, setSelectedTimeframe] = useState('1D')
 
   return (
-    <div className="bg-black  border border-slate-500">
+    <motion.div 
+      className="bg-black border border-slate-500 p-4 rounded-lg"
+      initial="hidden"
+      animate="visible"
+      variants={chartVariants}
+    >
       <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center space-x-4">
+        <motion.div 
+          className="flex items-center space-x-4"
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           <span className="text-gray-500">DEPTH</span>
           <span className="text-orange-500">SALES</span>
-        </div>
+        </motion.div>
         <div className="flex items-center space-x-2">
-          <button className="bg-orange-500 text-black px-2 py-1 rounded">1D</button>
-          <button className="text-gray-500">1W</button>
-          <button className="text-gray-500">1M</button>
-          <button className="text-gray-500">⛶</button>
+          {['1D', '1W', '1M'].map((timeframe) => (
+            <motion.button
+              key={timeframe}
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              className={`px-3 py-1 rounded transition-colors ${
+                selectedTimeframe === timeframe 
+                  ? 'bg-orange-500 text-black' 
+                  : 'text-gray-500 hover:text-gray-400'
+              }`}
+              onClick={() => setSelectedTimeframe(timeframe)}
+            >
+              {timeframe}
+            </motion.button>
+          ))}
+          <motion.button
+            variants={buttonVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            className="text-gray-500 hover:text-gray-400"
+          >
+            ⛶
+          </motion.button>
         </div>
       </div>
-      <ResponsiveContainer width="100%" height={200}>
-        <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
+
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
           <XAxis
             dataKey="time"
             axisLine={{ stroke: '#333' }}
@@ -55,21 +127,34 @@ export default function FinancialGraph() {
             content={({ active, payload }) => {
               if (active && payload && payload.length) {
                 return (
-                  <div className="bg-gray-800 border border-gray-700 p-2 rounded">
-                    <p className="text-orange-500">{`${payload[0].value}`}</p>
-                  </div>
+                  <AnimatePresence>
+                    <motion.div
+                      variants={tooltipVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      className="bg-gray-800 border border-gray-700 p-3 rounded-lg shadow-lg"
+                    >
+                      <p className="text-orange-500 font-medium">
+                        ${payload[0].value}
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        {payload[0].payload.time}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
                 )
               }
               return null
             }}
           />
           <Line
-            type="stepAfter"
+            type="monotone"
             dataKey="price"
             stroke="#ff6b00"
+            strokeWidth={2}
             dot={false}
             activeDot={false}
-            strokeWidth={2}
           />
           {data.map((entry, index) => (
             highlightPoints.includes(entry.time) && (
@@ -80,8 +165,15 @@ export default function FinancialGraph() {
                 r={4}
                 fill={activePoint === index ? '#fff' : '#ff6b00'}
                 initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
+                animate={{ 
+                  scale: activePoint === index ? 1.5 : 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }
+                }}
+                whileHover={{ scale: 1.5 }}
                 onMouseEnter={() => setActivePoint(index)}
                 onMouseLeave={() => setActivePoint(null)}
               />
@@ -89,6 +181,6 @@ export default function FinancialGraph() {
           ))}
         </LineChart>
       </ResponsiveContainer>
-    </div>
+    </motion.div>
   )
 }
