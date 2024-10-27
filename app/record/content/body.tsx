@@ -271,7 +271,7 @@ export default function Dashboard() {
       {/* Right Panel */}
       <div className={`flex flex-col border-l transition-all duration-300 ${rightPanelWidth}`}>
         <motion.div
-          className={`p-2 transition-all duration-300 ${expandedRightTop ? 'h-1/2' : 'h-1/4'}`}
+          className={`transition-all duration-300 ${expandedRightTop ? 'h-1/2' : 'h-1/4'}`}
           onClick={() => setExpandedRightTop(!expandedRightTop)}
         >
           <div className="cursor-pointer">
@@ -340,7 +340,7 @@ export default function Dashboard() {
     <ActivityComponent />
         </motion.div>
         <motion.div
-          className={`p-2 transition-all duration-300 ${expandedRightBottom ? 'h-full' : 'h-1/2'}`}
+          className={` transition-all duration-300 ${expandedRightBottom ? 'h-full' : 'h-1/2'}`}
           onClick={() => setExpandedRightBottom(!expandedRightBottom)}
         >
           <div className="cursor-pointer">
