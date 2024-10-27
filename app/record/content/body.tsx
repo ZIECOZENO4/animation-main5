@@ -3,6 +3,19 @@ import React, { useState } from "react";
 import { motion } from 'framer-motion';
 import { Card, Chip, Tabs, Tab } from "@nextui-org/react";
 import FullConnectButton from '@/components/fullConnectButton';
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+interface Holder {
+  address: string
+  label: string
+  percentage: number
+}
+
+const holders: Holder[] = [
+  { address: '0xe33b...38a1', label: 'Kannon', percentage: 68.33 },
+  { address: '0xfedc...a2b1', label: 'Pool', percentage: 31.87 },
+  { address: '0x5531...8512', label: 'Sale', percentage: 63.33 },
+]
 
 export default function Dashboard() {
   const [expandedLeft, setExpandedLeft] = React.useState(false);
@@ -98,18 +111,66 @@ export default function Dashboard() {
         </motion.div>
         
         <motion.div
-          className={` transition-all duration-300 mb-[10rem] ${expandedLeftBottom ? 'h-[80vh]' : 'h-1/2'}`}
+          className={` transition-all duration-300 mb-[10rem] ${expandedLeftBottom ? 'h-[80vh] top-2' : 'h-1/2'}`}
           onClick={() => setExpandedLeftBottom(!expandedLeftBottom)}
         >
           <div className="cursor-pointer">
             {expandedLeftBottom ? '▼' : '►'} Bottom
           </div>
-          <Card className="bg-black rounded-none border border-slate-600 text-center p-4">
-            <h2 className="text-md md:text-xl text-[#F7F2DA] text-center mb-4">
-              Holders Distribution
-            </h2>
-            <p className="text-xs text-slate-600 my-8">No Current Distribution</p>
-          </Card>
+          <div className="bg-black text-[#F7F2DA]   w-full">
+      <div className="flex justify-between  items-center mb-4">
+        <h2 className="text-xl gap-4 font-bold">Holders Distribution</h2>
+        <span className="bg-slate-500 text-slate-900 text-xs font-medium px-2.5 py-0.5 rounded-full">
+          Including Bonding Curve
+        </span>
+      </div>
+      <hr className='w-full text-slate-500 bg-slate-500 mb-4' />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {holders.map((holder, index) => (
+          <motion.div
+            key={holder.address}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="mb-4"
+          >
+            <div className="flex justify-between text-sm mb-1">
+              <span>{holder.address}</span>
+              <span>{holder.percentage.toFixed(5)}%</span>
+            </div>
+            <div className="flex items-center">
+              <motion.div
+                className="h-2 rounded-full bg-gradient-to-r from-slate-300 to-slate-600"
+                initial={{ width: 0 }}
+                animate={{ width: `${holder.percentage}%` }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
+              {holder.label && (
+                <span className="ml-2 text-xs bg-slate-500 text-slate-900 px-2 py-0.5 rounded-full">
+                  {holder.label}
+                </span>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+      <hr className='w-full text-slate-500 bg-slate-500' />
+      <div className="flex justify-between items-center mt-6 text-gray-500">
+        <button className="flex items-center">
+          <ChevronLeft className="w-4 h-4 mr-1" />
+          Previous
+        </button>
+        <span>Page 1</span>
+        <button className="flex items-center">
+          Next
+          <ChevronRight className="w-4 h-4 ml-1" />
+        </button>
+      </div>
+    </div>
         </motion.div>
       </div>
 

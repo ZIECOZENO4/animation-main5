@@ -86,9 +86,9 @@ export default function BottomStatus() {
 
         <Section ref={(el) => (sectionRefs.current['collect'] = el)} onHover={handleMouseEnter} id="collect">
           <div className="flex items-center space-x-2 px-2 py-1">
-            <p className=" text-xs">STANDARD</p>
+            <p className=" text-xs"> PRESALE</p>
             <Switch defaultSelected color="default" className="text-xs">
-              PRESALE
+            STANDARD
             </Switch>
           </div>
         </Section>
