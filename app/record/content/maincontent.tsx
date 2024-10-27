@@ -24,7 +24,10 @@ const nftItems: NFTItem[] = [
   { id: '4', image: '/placeholder.svg?height=50&width=50', name: 'Sappy Seal...', rarity: 8650, buyNow: 0.292, lastSale: 0.28, topBid: 0.28, owner: 'F8V4VE', held: 8, time: '12h ago' },
 ]
 
-const tabs = ['GRAPH', 'BIDS', 'TRADES', 'HOLDERS', ,'SUPPORT' ]
+type TabType = 'GRAPH' | 'BIDS' | 'TRADES' | 'HOLDERS' | 'SUPPORT';
+
+// Fix the tabs array to remove the empty element
+const tabs: TabType[] = ['GRAPH', 'BIDS', 'TRADES', 'HOLDERS', 'SUPPORT'];
 
 export default function MainComponent() {
   const [activeTab, setActiveTab] = useState('GRAPH')
@@ -53,7 +56,8 @@ export default function MainComponent() {
     <div className="bg-black border border-slate-500 text-gray-300 ">
       <nav className="flex justify-between items-center mb-4">
         <div className="flex space-x-4">
-          {tabs.map(tab => (
+        
+           {tabs.map(tab => (
             <motion.button
               key={tab}
               className={`px-2 py-2 rounded ${activeTab === tab ? 'text-[#F7F2DA]' : 'text-gray-500'}`}
