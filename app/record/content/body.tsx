@@ -3,13 +3,53 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Chip, Tabs, Tab } from "@nextui-org/react";
 import FullConnectButton from '@/components/fullConnectButton';
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 
 interface Holder {
   address: string
   label: string
   percentage: number
 }
+
+interface Transaction {
+  id: string
+  account: string
+  type: 'SELL' | 'BUY'
+  in: string
+  out: string
+  chains: string
+  time: string
+}
+
+const initialTransactions: Transaction[] = [
+  {
+    id: '1',
+    account: '0xfaffedce',
+    type: 'SELL',
+    in: '0.349002400000 test2',
+    out: '0.005855625957 ETH',
+    chains: 'ETH',
+    time: 'Oct 25, 2024 07:27:14 (2 days ago)'
+  },
+  {
+    id: '2',
+    account: '0xfaffedce',
+    type: 'SELL',
+    in: '0.500000000000 test2',
+    out: '0.009846226006 ETH',
+    chains: 'ETH',
+    time: 'Oct 25, 2024 07:26:33 (2 days ago)'
+  },
+  {
+    id: '3',
+    account: '0xfaffedce',
+    type: 'BUY',
+    in: '0.015789455460 ETH',
+    out: '0.849024021284 test2',
+    chains: 'ETH',
+    time: 'Oct 25, 2024 07:19:46 (2 days ago)'
+  }
+]
 
 const holders: Holder[] = [
   { address: '0xe33b...38a1', label: 'Kannon', percentage: 68.33 },
@@ -26,7 +66,17 @@ export default function Dashboard() {
   const [expandedRightBottom, setExpandedRightBottom] = React.useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
   const [includeBondingCurve, setIncludeBondingCurve] = useState(true)
+  const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions)
+  const [filter, setFilter] = useState<'ALL' | 'SELL' | 'BUY'>('ALL')
 
+  const handleFilter = (type: 'ALL' | 'SELL' | 'BUY') => {
+    setFilter(type)
+    if (type === 'ALL') {
+      setTransactions(initialTransactions)
+    } else {
+      setTransactions(initialTransactions.filter(t => t.type === type))
+    }
+  }
   const toggleBondingCurve = () => {
     setIncludeBondingCurve(!includeBondingCurve)
   }
@@ -56,7 +106,7 @@ export default function Dashboard() {
   
             <div className="flex text-xs justify-between py-2">
               <span>Total Supply:10001</span>
-              <span className=" text-xs text-gray-400">1 $1 is 0.000010 ETH ($0.023)</span>
+              <span className=" text-xs text-slate-500">1 $1 is 0.000010 ETH ($0.023)</span>
             </div>
             <div className="flex justify-center align-middle w-full mb-4 p-2">
             <Tabs 
@@ -80,13 +130,13 @@ export default function Dashboard() {
               <input
                 type="text"
                 placeholder="Enter amount"
-                className="flex-grow bg-black border border-gray-700 p-2 rounded-xl"
+                className="flex-grow bg-black border border-slate-500 p-2 rounded-xl"
               />
                <select
       value={selectedCurrency}
       onChange={handleChange}
       aria-label="Select Currency"
-      className="bg-black text-[#F7F2DA] border border-gray-700 p-2 rounded-xl"
+      className="bg-black text-[#F7F2DA] border border-slate-500 p-2 rounded-xl"
     >
       <option value="USD">USD</option>
       <option value="ETH">ETH</option>
@@ -236,7 +286,65 @@ export default function Dashboard() {
           <div className="cursor-pointer">
             {expandedRightTop ? '▼' : '►'} Top
           </div>
-          {/* Content Here */}
+          <div className="bg-black text-[#F7F2DA]  w-full mx-auto">
+      <div className="mb-4 flex justify-end">
+        <div className="relative">
+          <select
+            aria-label='number'
+            className="appearance-none bg-black border border-slate-500 text-[#F7F2DA] py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-slate-500 focus:border-slate-800"
+            value={filter}
+            onChange={(e) => handleFilter(e.target.value as 'ALL' | 'SELL' | 'BUY')}
+          >
+            <option value="ALL">All Transactions</option>
+            <option value="SELL">Sell</option>
+            <option value="BUY">Buy</option>
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+            <ChevronDown className="h-4 w-4" />
+          </div>
+        </div>
+      </div>
+      <table className="w-full">
+        <thead>
+          <tr className="text-left border-b border-slate-500">
+            <th className="py-2">Account</th>
+            <th className="py-2">Type</th>
+            <th className="py-2">In</th>
+            <th className="py-2">Out</th>
+            <th className="py-2">Chains</th>
+            <th className="py-2">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <AnimatePresence>
+            {transactions.map((transaction) => (
+              <motion.tr
+                key={transaction.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="border-b border-gray-800"
+              >
+                <td className="py-3 flex items-center">
+                  <span className="w-6 h-6 mr-2  rounded-full"></span>
+                  {transaction.account}
+                </td>
+                <td>
+                  <span className={`px-2 py-1 rounded text-xs ${transaction.type === 'SELL' ? 'bg-orange-500 text-orange-900' : 'bg-green-500 text-green-900'}`}>
+                    {transaction.type}
+                  </span>
+                </td>
+                <td>{transaction.in}</td>
+                <td>{transaction.out}</td>
+                <td>{transaction.chains}</td>
+                <td>{transaction.time}</td>
+              </motion.tr>
+            ))}
+          </AnimatePresence>
+        </tbody>
+      </table>
+    </div>
         </motion.div>
         <motion.div
           className={`p-2 transition-all duration-300 ${expandedRightBottom ? 'h-full' : 'h-1/2'}`}
