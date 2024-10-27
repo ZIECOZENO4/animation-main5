@@ -665,7 +665,7 @@ export default function Dashboard() {
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setLeftWidth, true)}
       />
-      <motion.div className={`transition-all duration-300 flex-grow overflow-auto`}>
+      <motion.div className={`transition-all duration-300  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
       <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setRightWidth, true)}
@@ -675,7 +675,7 @@ export default function Dashboard() {
       </motion.div>
 
       {/* Right Panel */}
-      <div className={`flex flex-col border-l w-1/4 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
+      <div className={`flex flex-col border-l w-1/4  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
         <motion.div
           className={`transition-all duration-300 `}
           style={{ height: rightTopHeight, overflow: 'auto' }}
