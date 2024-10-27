@@ -380,8 +380,7 @@ import FullConnectButton from '@/components/fullConnectButton';
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import ActivityComponent from "./activity-table";
 import MainComponent from "./maincontent";
-
-import TokenActivityChart from "./financial-graph";
+import ActivityPieChart from './ActivityPieChart';
 interface Holder {
   address: string
   label: string
@@ -754,10 +753,7 @@ export default function Dashboard() {
         
           </div>
           <div className="bg-black">
-  <TokenActivityChart 
-    tokenAddress="0x123..." 
-    chainId={1} 
-  />
+          <ActivityPieChart />
 </div>
         </motion.div>
       </div>
