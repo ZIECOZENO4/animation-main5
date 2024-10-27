@@ -108,8 +108,8 @@ export default function Dashboard() {
             {expandedLeftTop ? '▼' : '►'} 
           </div>
           </div>
-        
-          <Card className="bg-black border rounded-none border-slate-600 mt-2 p-4">
+          <div className="h-full overflow-y-auto">
+          <Card className="bg-black border rounded-none border-slate-600  p-4">
   
             <div className="flex text-xs justify-between py-2">
               <span>Total Supply:10001</span>
@@ -170,6 +170,7 @@ export default function Dashboard() {
             </div>
          
           </Card>
+          </div>
         </motion.div>
         
         <motion.div

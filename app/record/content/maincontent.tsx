@@ -67,10 +67,9 @@ export default function MainComponent() {
             />
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
           </div>
-          <button   aria-label='number' className="p-2 hover:bg-gray-800 rounded"><List className="w-4 h-4" /></button>
-          <button   aria-label='number' className="p-2 hover:bg-gray-800 rounded"><Grid className="w-4 h-4" /></button>
+         
           <button   aria-label='number' className="p-2 hover:bg-gray-800 rounded"><LayoutGrid className="w-4 h-4" /></button>
-          <button   aria-label='number' className="p-2 hover:bg-gray-800 rounded"><Settings className="w-4 h-4" /></button>
+          
         </div>
       </nav>
 
