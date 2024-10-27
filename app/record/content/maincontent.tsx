@@ -54,7 +54,7 @@ export default function MainComponent() {
 
   return (
     <div className="bg-black border m-0 border-slate-500 text-gray-300 ">
-      <nav className="flex justify-between items-center mb-4">
+      <nav className="flex justify-between items-center mb-1">
         <div className="flex space-x-4">
         
            {tabs.map(tab => (
@@ -69,7 +69,7 @@ export default function MainComponent() {
             </motion.button>
           ))}
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 mt-1">
           <div className="relative">
             <input
               type="text"
@@ -83,7 +83,7 @@ export default function MainComponent() {
           
         </div>
       </nav>
-
+<hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mb-4' />
       <AnimatePresence mode="wait">
         {activeTab === 'ITEMS' && (
           <motion.div
@@ -176,7 +176,7 @@ export default function MainComponent() {
         )}
       </AnimatePresence>
 
-      <div className="mt-4 flex items-center bottom-0 justify-between">
+      <div className="mt-4 flex items-center align-bottom bottom-0 justify-between">
         <motion.button
           className="bg-yellow-600 text-black px-4 py-2 rounded flex items-center"
           whileHover={{ scale: 1.05 }}
