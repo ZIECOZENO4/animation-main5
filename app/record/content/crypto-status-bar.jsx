@@ -33,7 +33,7 @@ export default function BottomStatus() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black bg-opacity-50 border text-[#F7F2DA] p-2 font-mono text-xs sm:text-sm">
+    <div className="fixed bottom-0 left-0 right-0  bg-black z-50 border border-slate-500 text-[#F7F2DA] p-2 font-mono text-xs sm:text-sm">
       <div className="flex items-center justify-between border-t border-b border-slate-500/30">
         <Section ref={(el) => (sectionRefs.current['live'] = el)} onHover={handleMouseEnter} id="live">
           <div>
@@ -86,7 +86,7 @@ export default function BottomStatus() {
 
         <Section ref={(el) => (sectionRefs.current['collect'] = el)} onHover={handleMouseEnter} id="collect">
           <div className="flex items-center space-x-2 px-2 py-1">
-            <p className="px-2 py-1 text-xs">STANDARD</p>
+            <p className=" text-xs">STANDARD</p>
             <Switch defaultSelected color="default" className="text-xs">
               PRESALE
             </Switch>

@@ -28,7 +28,7 @@ export default function Dashboard() {
       {/* Left Panel */}
       <div className={`flex flex-col border-r transition-all duration-300 ${leftPanelWidth}`}>
         <motion.div
-          className={` transition-all duration-300 ${expandedLeftTop ? 'h-1/2' : 'h-1/4'}`}
+          className={` transition-all duration-300 ${expandedLeftTop ?  'h-[80vh]' : 'h-1/2'}`}
           onClick={() => setExpandedLeftTop(!expandedLeftTop)}
         >
           <div className="cursor-pointer">
@@ -98,14 +98,14 @@ export default function Dashboard() {
         </motion.div>
         
         <motion.div
-          className={`p-2 transition-all duration-300 ${expandedLeftBottom ? 'h-full' : 'h-1/2'}`}
+          className={` transition-all duration-300 mb-[10rem] ${expandedLeftBottom ? 'h-[80vh]' : 'h-1/2'}`}
           onClick={() => setExpandedLeftBottom(!expandedLeftBottom)}
         >
           <div className="cursor-pointer">
             {expandedLeftBottom ? '▼' : '►'} Bottom
           </div>
           <Card className="bg-black rounded-none border border-slate-600 text-center p-4">
-            <h2 className="text-xl md:text-3xl text-[#F7F2DA] text-center mb-4">
+            <h2 className="text-md md:text-xl text-[#F7F2DA] text-center mb-4">
               Holders Distribution
             </h2>
             <p className="text-xs text-slate-600 my-8">No Current Distribution</p>
