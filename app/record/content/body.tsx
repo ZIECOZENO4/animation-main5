@@ -258,7 +258,7 @@ export default function Dashboard() {
       </div>
 
       {/* Middle Panel */}
-      <motion.div className={`p-4 transition-all duration-300 ${middlePanelWidth}`}>
+      <motion.div className={`transition-all duration-300 ${middlePanelWidth}`}>
     
 <MainComponent />
         {/* Content Here */}

@@ -24,7 +24,7 @@ export default function BottomStatus() {
   const [activePopup, setActivePopup] = useState<string | null>(null)
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black bg-opacity-50 border  text-[#F7F2DA] px-2 font-mono text-xs sm:text-sm">
+    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black  border-slate-500/30 text-[#F7F2DA] px-2 font-mono text-xs sm:text-sm">
       <div className="flex items-center justify-between border-t border-b border-slate-500/30">
         <Section onHover={setActivePopup} id="live">
           <motion.div
@@ -142,11 +142,11 @@ function Popup({ content, onClose }: { content: PopupContent, onClose: () => voi
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      className="absolute bottom-full left-1/2 text-xs transform -translate-x-1/2 mb-2 bg-black bg-opacity-50 border border-slate-500 rounded p-1 shadow-2xl"
+      className="absolute bottom-full left-1/2 text-xs transform -translate-x-1/2 mb-2 bg-black bg-opacity-70 border border-slate-500 rounded p-1 shadow-2xl"
     >
-      <h3 className="text-slate-500 font-bold mb-1">{content.title}</h3>
-      <p className="text-slate-400 text-[8px]">{content.description}</p>
-      <button   aria-label='number' onClick={onClose} className="absolute top-1 right-1 text-slate-500 hover:text-slate-400">
+      <h3 className="text-slate-300 font-bold mb-1">{content.title}</h3>
+      <p className=" text-[8px]">{content.description}</p>
+      <button   aria-label='number' onClick={onClose} className="absolute top-1 right-1 text-slate-300 hover:text-slate-100">
         <Info className="w-4 h-4" />
       </button>
     </motion.div>
