@@ -95,16 +95,20 @@ export default function Dashboard() {
   const middlePanelWidth = (expandedLeft || expandedRight) ? 'w-3/5' : 'w-1/2'; // Adjust according to side expansions
 
   return (
-    <div className="flex justify-between items-start h-[calc(100vh-10rem)] overflow-auto w-[100vw]">
+    <div className="flex justify-between items-start h-[calc(100vh-10rem)] md:overflow-hidden w-[100vw]">
       {/* Left Panel */}
-      <div className={`flex flex-col border-r transition-all duration-300 ${leftPanelWidth}`}>
+      <div className={`flex flex-col border-r transition-all overflow-auto duration-300 ${leftPanelWidth}`}>
         <motion.div
           className={` transition-all duration-300 ${expandedLeftTop ?  'h-[80vh]' : 'h-1/2'}`}
           onClick={() => setExpandedLeftTop(!expandedLeftTop)}
         >
+          <div className="p-2 bg-black border border-slate-500 text-sm flex flex-row justify-between gap-4 text-center align-middle text-slate-500 ">
+<p>Start Transaction</p>
           <div className="cursor-pointer">
-            {expandedLeftTop ? '▼' : '►'} Top
+            {expandedLeftTop ? '▼' : '►'} 
           </div>
+          </div>
+        
           <Card className="bg-black border rounded-none border-slate-600 mt-2 p-4">
   
             <div className="flex text-xs justify-between py-2">
