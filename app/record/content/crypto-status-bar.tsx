@@ -24,7 +24,7 @@ export default function BottomStatus() {
   const [activePopup, setActivePopup] = useState<string | null>(null)
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black  border-slate-500/30 text-[#F7F2DA] px-2 font-mono text-xs sm:text-sm">
+    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black  border-slate-500/30 text-[#F7F2DA] px-2  text-xs sm:text-sm">
       <div className="flex items-center justify-between border-t border-b border-slate-500/30">
         <Section onHover={setActivePopup} id="live">
           <motion.div

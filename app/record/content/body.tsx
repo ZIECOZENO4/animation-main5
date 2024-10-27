@@ -488,7 +488,7 @@ export default function Dashboard() {
   return (
     <div className="flex justify-between items-start h-[calc(100vh-10rem)] md:overflow-hidden w-[100vw]">
       {/* Left Panel */}
-      <div className={`flex flex-col border-r transition-all overflow-auto w-1/4  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
+      <div className={`flex flex-col border-slate-500 transition-all overflow-auto w-1/4  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
         <motion.div
           className={` transition-all duration-300 `}
      
@@ -561,13 +561,14 @@ export default function Dashboard() {
          
           </Card>
           </div>
-          <div 
+        
+        </motion.div>
+        <div 
           className="h-1 bg-gray-600 cursor-row-resize" 
           onMouseDown={startResize(setLeftTopHeight, false)}
         />
-        </motion.div>
-        
-        <motion.div
+           <div className="h-full overflow-y-auto">
+          <motion.div
           className={` transition-all duration-300 mb-[10rem] `}
           style={{ height: `calc(100% - ${leftTopHeight}px)`, overflow: 'auto' }}
     
@@ -657,23 +658,29 @@ export default function Dashboard() {
       </div>
     </div>
   
-        </motion.div>
+        </motion.div>    
+           </div>
+      
       </div>
 
       {/* Middle Panel */}
+      <div className="flex">
+
+      
       <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setLeftWidth, true)}
       />
-      <motion.div className={`transition-all duration-300  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
+      <motion.div className={`transition-all duration-300 w-full overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
+   
+<MainComponent />
+        {/* Content Here */}
+      </motion.div>
       <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setRightWidth, true)}
       />
-<MainComponent />
-        {/* Content Here */}
-      </motion.div>
-
+</div>
       {/* Right Panel */}
       <div className={`flex flex-col border-l w-1/4  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
         <motion.div
@@ -751,7 +758,8 @@ export default function Dashboard() {
           className="h-1 bg-gray-600 cursor-row-resize" 
           onMouseDown={startResize(setRightTopHeight, false)}
         />
-        <motion.div
+           <div className="h-full overflow-y-auto">
+           <motion.div
           className={` transition-all duration-300 }`}
           style={{ height: `calc(100% - ${rightTopHeight}px)`, overflow: 'auto' }}
         >
@@ -764,6 +772,8 @@ export default function Dashboard() {
           <ActivityPieChart />
 </div>
         </motion.div>
+           </div>
+      
       </div>
     </div>
   );
