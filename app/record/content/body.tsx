@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, Chip, Tabs, Tab } from "@nextui-org/react";
 import FullConnectButton from '@/components/fullConnectButton';
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -30,7 +30,7 @@ export default function Dashboard() {
   const toggleBondingCurve = () => {
     setIncludeBondingCurve(!includeBondingCurve)
   }
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCurrency(event.target.value);
   };
