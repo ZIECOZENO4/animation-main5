@@ -54,7 +54,7 @@ export default function MainComponent() {
   }
 
   return (
-    <div className="bg-black border  border-slate-500 text-gray-300 ">
+    <div className="bg-black border flex-grow  border-slate-500 text-gray-300 ">
       <nav className="flex justify-between items-center mb-1">
         <div className="flex space-x-4">
         

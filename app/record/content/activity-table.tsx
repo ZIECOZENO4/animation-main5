@@ -41,7 +41,7 @@ export default function ActivityComponent() {
     <div className="bg-black text-[#F7F2DA] w-auto border border-slate-500 text-xs">
       <div className="flex justify-between items-center mb-1">
         <div className="flex items-center p-4">
-          <Rocket className="h-4 w-4 mr-2" />
+          <Rocket className="h-4 w-4 mr-2 text-slate-500" />
           <h2 className="text-sm font-bold text-slate-500">ACTIVITY</h2>
         </div>
         <div className="relative px-4">
@@ -58,7 +58,7 @@ export default function ActivityComponent() {
         </div>
       </div>
       <hr className="w-full text-slate-500 border border-slate-500 bg-slate-500 mb-4"/>
-      <table className="w-full text-xs px-4">
+      <table className="w-full text-xs px-4 ml-2">
         <thead>
           <tr className="text-left text-slate-500">
             <th className="py-2 w-1/6">TIME</th>
@@ -81,7 +81,7 @@ export default function ActivityComponent() {
                 <td className="py-2">{activity.time}</td>
                 <td className="py-2">
                   {/* Image of the coin */}
-                  <img src={activity.item} alt={`Coin ${activity.id}`} className="w-8 h-8" />
+                  <img src={activity.item} alt={`Coin ${activity.id}`} className="w-4 h-4" />
                 </td>
                 <td className="py-2">
                   <span className={activity.price < 0.3 ? 'text-slate-700' : activity.price > 0.3 ? 'text-slate-300' : ''}>

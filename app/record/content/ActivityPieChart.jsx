@@ -71,7 +71,7 @@ export default class ActivityPieChart extends PureComponent {
 
   render() {
     return (
-      <div className="w-[80%] h-[400px] bg-black p-1 align-top"> {/* Adjusted width */}
+      <div className="w-full overflow-x-auto h-[400px] bg-black p-1 align-top"> {/* Adjusted width */}
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
