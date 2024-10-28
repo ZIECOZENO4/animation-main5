@@ -292,14 +292,14 @@ export default function Dashboard() {
       </div>
 
       {/* Middle Panel */}
-      <div className="flex h-[80vh]">
+      <div className="flex ">
 
       
       <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setLeftWidth, true)}
       />
-      <motion.div className={`transition-all duration-300 w-[50%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
+      <motion.div className={`transition-all duration-300   overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
    
 <MainComponent />
         {/* Content Here */}

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, List, Grid, LayoutGrid, Settings, ChevronDown } from 'lucide-react'
-
+import { Switch  } from "@nextui-org/react";
 interface NFTItem {
   id: string
   image: string
@@ -53,7 +53,7 @@ export default function MainComponent() {
   }
 
   return (
-    <div className="bg-black border m-0 border-slate-500 text-gray-300 ">
+    <div className="bg-black border  border-slate-500 text-gray-300 ">
       <nav className="flex justify-between items-center mb-1">
         <div className="flex space-x-4">
         
@@ -177,35 +177,30 @@ export default function MainComponent() {
       </AnimatePresence>
 
       <div className="mt-4 flex items-center align-bottom bottom-0 justify-between">
+      <hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mb-2' />
         <motion.button
-          className="bg-yellow-600 text-black px-4 py-2 rounded flex items-center"
+          className="bg-black m-2 border border-slate-500  text-[#F7F2DA] px-4 py-2 rounded-md flex items-center"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          BUY FLOOR 0.2907 ◆
+          BUY TOKEN 0.2907 
         </motion.button>
         <div className="flex items-center space-x-4">
-          <label className="flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={optimizeSweep}
-              onChange={() => setOptimizeSweep(!optimizeSweep)}
-              className="sr-only"
-            />
-            <div className={`w-10 h-5 rounded-full ${optimizeSweep ? 'bg-yellow-600' : 'bg-gray-700'} transition-colors duration-200 ease-in-out`}>
-              <div className={`w-3 h-3 rounded-full bg-white transform transition-transform duration-200 ease-in-out ${optimizeSweep ? 'translate-x-6' : 'translate-x-1'}`} />
-            </div>
-            <span className="ml-2 text-xs">OPTIMIZE SWEEP</span>
-          </label>
+        <div className="flex items-center space-x-2 px-2 py-1">
+          <p className=" text-xs"> PRESALE </p>
+          <Switch defaultSelected color="default" className="text-xs">
+         STANDARD
+        </Switch>
+        </div>
           <Settings className="w-4 h-4" />
-          <div className="flex items-center bg-gray-800 rounded-md">
+          <div className="flex items-center bg-black border-slate-500 text-[#F7F2DA] rounded-md">
             <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
             <input
             aria-label='number'
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(Math.max(0, parseInt(e.target.value) || 0))}
-              className="w-12 bg-transparent text-center"
+              className="w-12 bg-transpaent text-center"
             />
             <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(quantity + 1)}>+</button>
           </div>
