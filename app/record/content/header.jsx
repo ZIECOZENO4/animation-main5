@@ -1,5 +1,5 @@
 'use client'
-
+import Link from "next/link";
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Star, Phone, Camera, Globe, ChevronDown, Copy, Check } from 'lucide-react'
@@ -21,6 +21,7 @@ export default function TokenHeader() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <Link href='/profile'>
       <motion.div
         className="flex items-center space-x-4 bg-opacity-80 p-2  rounded-lg w-auto"
         onHoverStart={() => setIsHovered(true)}
@@ -72,6 +73,8 @@ export default function TokenHeader() {
           </motion.div>
         </div>
       </motion.div>
+      </Link>
+    
       
       <motion.div 
         className="flex space-x-4 p-2 mr-4"
