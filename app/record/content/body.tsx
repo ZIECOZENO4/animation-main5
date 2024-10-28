@@ -207,17 +207,17 @@ export default function Dashboard() {
          
           </div>
           <div className="h-full overflow-y-auto">
-          <div className="bg-black text-[#F7F2DA] border-slate-800 h-full overflow-y-auto">
+          <div className="bg-black text-[#F7F2DA] border border-slate-800 h-full overflow-y-auto">
       <div className="flex justify-center flex-col gap-4 items-center mb-2 p-2">
         <h2 className="text-xl gap-2 font-bold">Holders Distribution</h2>
         <button
           onClick={toggleBondingCurve}
-          className="bg-slate-500 text-xs font-medium p-1 rounded-full hover:bg-slate-600 transition-colors"
+          className="bg-slate-500 text-xs font-medium p-2 rounded-full hover:bg-slate-600 transition-colors"
         >
           {includeBondingCurve ? "Including" : "Excluding"} Bonding Curve
         </button>
       </div>
-      <hr className='w-full text-slate-500 bg-slate-500 mb-2 px-4' />
+      <hr className='w-full text-slate-500 border border-slate-800  bg-slate-800 mb-2 px-4' />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

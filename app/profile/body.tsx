@@ -128,7 +128,7 @@ export default function NFTCollectionManager() {
             </div>
           </div>
           <div>
-            <h3 className="text-slate-500 mb-2">TOKEN COLLECTIONS</h3>
+            <h3 className="text-slate-500 ">TOKEN COLLECTIONS</h3>
             <div className="relative mb-2 mt-4">
               <input
                 type="text"

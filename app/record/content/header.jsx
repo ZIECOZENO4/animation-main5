@@ -16,7 +16,7 @@ export default function TokenHeader() {
 
   return (
     <motion.header 
-      className="text-[#F7F2DA] border border-slate-800 text-sm flex justify-between items-center"
+      className="text-[#F7F2DA] bg-black border border-slate-800 text-sm flex justify-between items-center"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
