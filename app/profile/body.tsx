@@ -57,8 +57,8 @@ export default function NFTCollectionManager() {
     setTimeout(() => setCopied(false), 2000)
   }
   return (
-    <div className="bg-black border items-stretch border-slate-500 text-[#F7F2DA] flex-grow h-full  w-[100vw]">
-      <header className="bg-black border border-slate-500 p-4 flex justify-between items-center">
+    <div className="bg-black border items-stretch border-slate-800 text-[#F7F2DA] flex-grow h-full  w-[100vw]">
+      <header className="bg-black border border-slate-800 p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
         <motion.div
           whileHover={{ scale: 1.1 }}
@@ -67,7 +67,7 @@ export default function NFTCollectionManager() {
           <img
             src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
             alt="Profile avatar"
-            className="w-16 h-16 rounded-full border-2 border-slate-500"
+            className="w-16 h-16 rounded-full border-2 border-slate-800"
           />
         </motion.div>
           <motion.h2
@@ -115,7 +115,7 @@ export default function NFTCollectionManager() {
       </header>
 
       <div className="flex flex-grow h-full ">
-        <aside className="w-64 items-stretch flex flex-col flex-grow h-full bg-black border border-slate-500 p-4">
+        <aside className="w-64 items-stretch flex flex-col flex-grow h-full bg-black border border-slate-800 p-4">
           <div className="mb-6">
             <h3 className="text-slate-500 mb-2">TOKEN STATUS</h3>
             <div className="flex items-center space-x-2 mb-2">
@@ -133,7 +133,7 @@ export default function NFTCollectionManager() {
               <input
                 type="text"
                 placeholder="Search your collections"
-                className="w-full bg-black border border-slate-500 text-gray-300 px-3 py-2 rounded-md pl-8"
+                className="w-full bg-black border border-slate-800 text-gray-300 px-3 py-2 rounded-md pl-8"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -181,7 +181,7 @@ export default function NFTCollectionManager() {
           </div>
         </aside>
 
-        <main className="flex-1 bg-black border border-slate-500 ">
+        <main className="flex-1 bg-black border border-slate-800 ">
           <div className="mb-4">
             <h2 className="text-2xl mb-4 p-4">All YOUR TOKEN COLLECTIONS</h2>
             <div className="flex justify-between space-x-4 mb-1 p-2">
@@ -203,7 +203,7 @@ export default function NFTCollectionManager() {
               <button  aria-label='number' className="text-gray-500 hover:text-gray-300"><Settings size={20} /></button>
             </div>
             </div>
-                      <hr  className="bg-slate-500 border border-slate-500 text-slate-500 mb-4" />
+                      <hr  className="bg-slate-500 border border-slate-800 text-slate-500 mb-4" />
           </div>
 
           <AnimatePresence mode="wait">

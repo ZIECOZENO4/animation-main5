@@ -55,7 +55,7 @@ const MdNavBar = () => {
           transition: { repeat: Infinity, duration: 0.5 }
         }}
       >
-        OMNI PUMP
+        KANNON
         <motion.span
           className="absolute inset-0 text-transparent pointer-events-none"
           style={{
