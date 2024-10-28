@@ -31,7 +31,7 @@ const generateTokenInfo = (id: number): TokenInfo => ({
 const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
   return (
     <motion.div
-      className="bg-black border  rounded-lg shadow-lg p-4 w-full max-w-sm"
+      className="bg-black border align-middle border-slate-500  rounded-lg shadow-lg p-4 w-full max-w-sm"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -57,12 +57,13 @@ const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
       >
         {tokenInfo.name}
       </motion.h2>
-        </div>
-     
-      
       <Chip className="text-gray-500 text-center text-sm mb-4">
         {tokenInfo.subtitle} <span className="text-[#F7F2DA] ">({tokenInfo.timestamp})</span>
       </Chip>
+        </div>
+     
+      
+    
       
       <div className="space-y-2 text-xs">
         <InfoRow label="Address" value={tokenInfo.address} />
@@ -107,7 +108,7 @@ export default function TokenInfoCards() {
   }, [])
 
   return (
-    <div className="min-h-screen overflow-auto bg-black border  p-2">
+    <div className="min-h-screen overflow-auto bg-black border border-slate-500 p-2">
       <div className=" mx-auto">
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4"
