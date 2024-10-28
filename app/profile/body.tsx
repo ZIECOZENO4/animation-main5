@@ -70,7 +70,7 @@ export default function NFTCollectionManager() {
           />
         </motion.div>
           <motion.h2
-              className="text-xl text-[#F7F2DA] "
+              className="text-sm text-[#F7F2DA] "
               style={{ filter: "blur(1px)" }}
               animate={{ filter: isHovered ? "blur(0px)" : "blur(1px)" }}
             >
@@ -214,7 +214,7 @@ export default function NFTCollectionManager() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className='p-2 h-64'
+              className='p-2 h-40'
             >
               {activeTab === 'CREATED' && (
                 <div>
