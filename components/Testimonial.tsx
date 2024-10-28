@@ -141,7 +141,7 @@ export default function ImageContent1() {
             </motion.span>
           </motion.p>
 
-          <div className="border border-slate-500 bg-black   py-4 shadow-lg">
+          <div className="border border-slate-800 bg-black   py-4 shadow-lg">
             <motion.p
               className="leading-10 tracking-tight px-4 py-2 text-left hover:text-gray-500 text-md md:text-xl hover:scale-110 hover:text-xl md:hover:text-xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal "
               whileHover={{
@@ -152,7 +152,7 @@ export default function ImageContent1() {
               @ZENO_WEB
             
             </motion.p>
-            <hr className='bg-slate-500 border-slate-500 w-full mb-4' />
+            <hr className='bg-slate-500 border-slate-800 w-full mb-4' />
             <div className="flex items-center justify-between gap-4 mb-4 px-4">
               <div className="flex items-center gap-3">
                 <img src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif" alt="Avatar" className="rounded-full w-12 h-12" />
@@ -225,7 +225,7 @@ export default function ImageContent1() {
             </motion.span>
           </motion.p>
 
-          <div className="border border-slate-500 bg-black py-4 shadow-lg">
+          <div className="border border-slate-800 bg-black py-4 shadow-lg">
             <motion.p
               className="leading-10 tracking-tight px-4 py-2 text-left hover:text-gray-500 text-md md:text-xl hover:scale-110 hover:text-xl md:hover:text-xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal "
               whileHover={{
@@ -236,7 +236,7 @@ export default function ImageContent1() {
               @ZENO_WEB
            
             </motion.p>
-            <hr className='bg-slate-500 border-slate-500 w-full mb-4' />
+            <hr className='bg-slate-500 border-slate-800 w-full mb-4' />
             <div className="flex items-center justify-between gap-4 mb-4  px-4 ">
               <div className="flex items-center gap-3">
                 <img src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif" alt="Avatar" className="rounded-full w-12 h-12" />
@@ -293,7 +293,7 @@ export default function ImageContent1() {
             </motion.span>
           </motion.p>
 
-          <div className="border border-slate-500 bg-black   py-4 shadow-lg">
+          <div className="border border-slate-800 bg-black   py-4 shadow-lg">
             <motion.p
               className="leading-10 tracking-tight px-4 py-2 text-left hover:text-gray-500 text-md md:text-xl hover:scale-110 hover:text-xl md:hover:text-xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal "
               whileHover={{
@@ -304,7 +304,7 @@ export default function ImageContent1() {
               @ZENO_WEB
             
             </motion.p>
-            <hr className='bg-slate-500 border-slate-500 w-full mb-4' />
+            <hr className='bg-slate-500 border-slate-800 w-full mb-4' />
             <div className="flex items-center justify-between gap-4 mb-4 px-4">
               <div className="flex items-center gap-3">
                 <img src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif" alt="Avatar" className="rounded-full w-12 h-12" />

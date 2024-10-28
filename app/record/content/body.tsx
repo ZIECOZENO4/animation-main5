@@ -116,13 +116,13 @@ export default function Dashboard() {
   return (
     <div className="flex justify-between items-stretch md:overflow-hidden w-[100vw]">
       {/* Left Panel */}
-      <div className={`flex flex-col border-slate-500 transition-all overflow-auto w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
+      <div className={`flex flex-col border-slate-800 transition-all overflow-auto w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
         <motion.div
           className={` transition-all duration-300 `}
      
           style={{ height: leftTopHeight, overflow: 'auto' }}
         >
-          <div className="p-2 bg-black border border-slate-500 text-sm gap-4 text-center align-middle text-slate-500 ">
+          <div className="p-2 bg-black border border-slate-800 text-sm gap-4 text-center align-middle text-slate-500 ">
 <p>Start Transaction</p>
           
           </div>
@@ -155,13 +155,13 @@ export default function Dashboard() {
               <input
                 type="text"
                 placeholder="Enter amount"
-                className="flex-grow bg-black border border-slate-500 p-2 rounded-xl"
+                className="flex-grow bg-black border border-slate-800 p-2 rounded-xl"
               />
                <select
       value={selectedCurrency}
       onChange={handleChange}
       aria-label="Select Currency"
-      className="bg-black text-[#F7F2DA] border border-slate-500 p-2 rounded-xl"
+      className="bg-black text-[#F7F2DA] border border-slate-800 p-2 rounded-xl"
     >
       <option value="USD">USD</option>
       <option value="ETH">ETH</option>
@@ -202,12 +202,12 @@ export default function Dashboard() {
     
         >
           
-          <div className="p-2 bg-black border border-slate-500 text-sm  gap-4 text-center align-middle text-slate-500 ">
+          <div className="p-2 bg-black border border-slate-800 text-sm  gap-4 text-center align-middle text-slate-500 ">
 <p>Token Top Holders</p>
          
           </div>
           <div className="h-full overflow-y-auto">
-          <div className="bg-black text-[#F7F2DA] border-slate-500 h-full overflow-y-auto">
+          <div className="bg-black text-[#F7F2DA] border-slate-800 h-full overflow-y-auto">
       <div className="flex justify-center flex-col gap-4 items-center mb-2 p-2">
         <h2 className="text-xl gap-2 font-bold">Holders Distribution</h2>
         <button
@@ -315,7 +315,7 @@ export default function Dashboard() {
       {/* Resizer */}
     
       {/* Right Panel */}
-      <div className={`flex flex-col border-l w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
+      <div className={`flex flex-col border-l w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-800 transition-all duration-300 `}  style={{ width: rightWidth }}>
         <motion.div
           className={`transition-all duration-300 `}
           style={{ height: rightTopHeight, overflow: 'auto' }}
@@ -334,7 +334,7 @@ export default function Dashboard() {
           style={{ height: `calc(100% - ${rightTopHeight}px)`, overflow: 'auto' }}
         >
         
-          <div className="p-2 bg-black border border-slate-500 text-sm flex flex-row justify-between gap-4 text-center align-middle text-slate-500 ">
+          <div className="p-2 bg-black border border-slate-800 text-sm flex flex-row justify-between gap-4 text-center align-middle text-slate-500 ">
 <p>  Token Activity Distribution</p>
         
           </div>

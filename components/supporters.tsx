@@ -24,7 +24,7 @@ export default function SuppotersComponent() {
     <div className="h-auto flex items-center justify-center p-8">
       <div className="w-full max-w-5xl">
         <motion.div
-          className="bg-black relative overflow-hidden border-2 border-slate-500"
+          className="bg-black relative overflow-hidden border-2 border-slate-800"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -64,7 +64,7 @@ export default function SuppotersComponent() {
               TRUSTED AND BACKED BY
             </motion.h2>
           </motion.div>
-          <hr className='bg-slate-500 border-slate-500 text-border-slate-500 w-full mb-20' />
+          <hr className='bg-slate-500 border-slate-800 text-border-slate-800 w-full mb-20' />
           <div className="grid grid-cols-4 gap-8 sm:grid-cols-8 p-6 my-8">
             {partners.map((partner, index) => (
               <motion.div
@@ -75,7 +75,7 @@ export default function SuppotersComponent() {
                 transition={{ delay: 0.1 * index, duration: 0.5 }}
               >
                 <motion.div
-                  className="w-16 h-16 rounded-full bg-[#F7F2DA] flex items-center justify-center mb-2 overflow-hidden border-2 border-slate-500"
+                  className="w-16 h-16 rounded-full bg-[#F7F2DA] flex items-center justify-center mb-2 overflow-hidden border-2 border-slate-800"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   style={{

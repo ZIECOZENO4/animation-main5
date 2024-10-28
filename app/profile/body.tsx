@@ -115,7 +115,7 @@ export default function NFTCollectionManager() {
       </header>
 
       <div className="flex flex-grow h-full ">
-        <aside className="w-64 items-stretch flex flex-col flex-grow h-full bg-black border border-slate-800 p-4">
+        <aside className="w-64 max-w-64 items-stretch flex flex-col flex-grow h-full bg-black border border-slate-800 p-4">
           <div className="mb-6">
             <h3 className="text-slate-500 mb-2">TOKEN STATUS</h3>
             <div className="flex items-center space-x-2 mb-2">
@@ -181,7 +181,7 @@ export default function NFTCollectionManager() {
           </div>
         </aside>
 
-        <main className="flex-1 bg-black border border-slate-800 ">
+        <main className="flex-1 w-full bg-black border border-slate-800 ">
           <div className="mb-4">
             <h2 className="text-2xl mb-4 p-4">All YOUR TOKEN COLLECTIONS</h2>
             <div className="flex justify-between space-x-4 mb-1 p-2">

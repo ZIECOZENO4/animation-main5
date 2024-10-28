@@ -53,7 +53,7 @@ export default function BottomMore() {
         {/* Toggle button */}
         <motion.button
           onClick={toggleMenu}
-          className="bg-transparent hover:bg-slate-600 hover:bg-opacity-20 border border-slate-500 text-[#F7F2DA] rounded-lg p-2 px-4 flex items-center text-center justify-between w-full"
+          className="bg-transparent hover:bg-slate-600 hover:bg-opacity-20 border border-slate-800 text-[#F7F2DA] rounded-lg p-2 px-4 flex items-center text-center justify-between w-full"
           whileTap={{ scale: 0.95 }}
         >
           <span className="flex text-center mx-2">

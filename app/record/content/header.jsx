@@ -16,7 +16,7 @@ export default function TokenHeader() {
 
   return (
     <motion.header 
-      className="text-[#F7F2DA] border border-slate-500 text-sm flex justify-between items-center"
+      className="text-[#F7F2DA] border border-slate-800 text-sm flex justify-between items-center"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -37,7 +37,7 @@ export default function TokenHeader() {
           <img
             src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
             alt="Profile avatar"
-            className="w-16 h-16 rounded-full border-2 border-slate-500"
+            className="w-16 h-16 rounded-full border-2 border-slate-800"
           />
         </motion.div>
         <div className="flex-grow">

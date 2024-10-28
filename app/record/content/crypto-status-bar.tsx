@@ -24,8 +24,8 @@ export default function BottomStatus() {
   const [activePopup, setActivePopup] = useState<string | null>(null)
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black  border-slate-500/30 text-[#F7F2DA] px-2  text-xs sm:text-sm">
-      <div className="flex items-center justify-between border-t border-b border-slate-500/30">
+    <div className="fixed bottom-0 left-0 right-0 z-10 bg-black  border-slate-800/30 text-[#F7F2DA] px-2  text-xs sm:text-sm">
+      <div className="flex items-center justify-between border-t border-b border-slate-800/30">
         <Section onHover={setActivePopup} id="live">
           <motion.div
             className="flex items-center space-x-1 px-2 py-1"
@@ -106,7 +106,7 @@ export default function BottomStatus() {
           <div className="flex items-center space-x-4 mr-2">
   {[1, 2, 3].map((num, index) => (
     <div key={num} className="flex flex-col items-center">
-      <div className="w-5 h-5 rounded-full border border-slate-500 flex items-center justify-center text-xs">
+      <div className="w-5 h-5 rounded-full border border-slate-800 flex items-center justify-center text-xs">
         {num}
       </div>
       <span className="text-xs">{[50, 100, 200][index]}</span>
@@ -127,7 +127,7 @@ export default function BottomStatus() {
 function Section({ children, onHover, id, className = '' }: { children: React.ReactNode, onHover: (id: string | null) => void, id: string, className?: string }) {
   return (
     <div 
-      className={`border-r border-slate-500/30 last:border-r-0 ${className}`}
+      className={`border-r border-slate-800/30 last:border-r-0 ${className}`}
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
     >
@@ -142,7 +142,7 @@ function Popup({ content, onClose }: { content: PopupContent, onClose: () => voi
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      className="absolute bottom-full left-1/2 text-xs transform -translate-x-1/2 mb-2 bg-black bg-opacity-70 border border-slate-500 rounded p-1 shadow-2xl"
+      className="absolute bottom-full left-1/2 text-xs transform -translate-x-1/2 mb-2 bg-black bg-opacity-70 border border-slate-800 rounded p-1 shadow-2xl"
     >
       <h3 className="text-slate-300 font-bold mb-1">{content.title}</h3>
       <p className=" text-[8px]">{content.description}</p>

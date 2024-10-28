@@ -38,7 +38,7 @@ export default function ActivityComponent() {
   }
 
   return (
-    <div className="bg-black text-[#F7F2DA] w-auto border border-slate-500 text-xs">
+    <div className="bg-black text-[#F7F2DA] w-auto border border-slate-800 text-xs">
       <div className="flex justify-between items-center mb-1">
         <div className="flex items-center p-4">
           <Rocket className="h-4 w-4 mr-2 text-slate-500" />
@@ -47,7 +47,7 @@ export default function ActivityComponent() {
         <div className="relative px-4">
           <select
             aria-label='number'
-            className="appearance-none border border-slate-500 text-xs py-1 px-2 pr-6 rounded leading-tight focus:outline-none focus:border-slate-800"
+            className="appearance-none border border-slate-800 text-xs py-1 px-2 pr-6 rounded leading-tight focus:outline-none focus:border-slate-800"
             value={filter}
             onChange={(e) => handleFilter(e.target.value)}
           >
@@ -57,7 +57,7 @@ export default function ActivityComponent() {
           </select>
         </div>
       </div>
-      <hr className="w-full text-slate-500 border border-slate-500 bg-slate-500 mb-4"/>
+      <hr className="w-full text-slate-500 border border-slate-800 bg-slate-500 mb-4"/>
       <table className="w-full text-xs px-4 ml-2">
         <thead>
           <tr className="text-left text-slate-500">

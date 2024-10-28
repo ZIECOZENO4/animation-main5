@@ -31,7 +31,7 @@ const generateTokenInfo = (id: number): TokenInfo => ({
 const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
   return (
     <motion.div
-      className="bg-black border align-middle border-slate-500  rounded-lg shadow-lg p-4 w-full max-w-sm"
+      className="bg-black border align-middle border-slate-800  rounded-lg shadow-lg p-4 w-full max-w-sm"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -48,7 +48,7 @@ const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
     <img
       src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
       alt="Profile avatar"
-      className="w-16 h-16 rounded-full align-middle border-2 border-slate-500"
+      className="w-16 h-16 rounded-full align-middle border-2 border-slate-800"
     />
   </motion.div>
   

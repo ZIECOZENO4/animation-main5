@@ -70,7 +70,7 @@ const MdNavBar = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          OMNI PUMP
+           KANNON
         </motion.span>
       </motion.p>
           </Link>

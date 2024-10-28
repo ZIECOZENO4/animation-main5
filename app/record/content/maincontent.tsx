@@ -54,7 +54,7 @@ export default function MainComponent() {
   }
 
   return (
-    <div className="bg-black border flex-grow h-full items-stretch border-slate-500 text-gray-300 ">
+    <div className="bg-black border flex-grow h-full items-stretch border-slate-800 text-gray-300 ">
       <nav className="flex justify-between items-center mb-1">
         <div className="flex space-x-4">
         
@@ -75,7 +75,7 @@ export default function MainComponent() {
             <input
               type="text"
               placeholder="TOKEN ID"
-              className="bg-black border border-slate-500 text-[#F7F2DA] p-2 rounded-md pl-8"
+              className="bg-black border border-slate-800 text-[#F7F2DA] p-2 rounded-md pl-8"
             />
             <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
           </div>
@@ -84,7 +84,7 @@ export default function MainComponent() {
           
         </div>
       </nav>
-<hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mb-4' />
+<hr className='border-slate-800 bg-slate-500 text-slate-500 w-full mb-4' />
       <AnimatePresence mode="wait">
         {activeTab === 'GRAPH' && (
           <motion.div
@@ -127,7 +127,7 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className=" bg-black bg-opacity-50 border border-slate-500 flex items-center justify-center"
+            className=" bg-black bg-opacity-50 border border-slate-800 flex items-center justify-center"
           >
            <table className="w-full text-xs">
            <thead>
@@ -191,20 +191,20 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className=" overflow-x-auto bg-black border w-full border-slate-500 flex flex-col gap-2 items-center justify-center"
+            className=" overflow-x-auto bg-black px-4 border w-full  flex flex-col gap-2 items-center justify-center"
           >
-                <Card className="bg-black border border-slate-600 w-full p-4 flex flex-col items-center justify-center h-32">
+                <Card className="bg-black border border-slate-800 w-full p-4 flex flex-col items-center justify-center h-32">
               <svg width="30px" height="30px" className='text-gray-400 my-2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0619 4.4295C12.6213 3.54786 11.3636 3.54786 10.9229 4.4295L3.89008 18.5006C3.49256 19.2959 4.07069 20.2317 4.95957 20.2317H19.0253C19.9142 20.2317 20.4923 19.2959 20.0948 18.5006L13.0619 4.4295ZM9.34196 3.6387C10.434 1.45376 13.5508 1.45377 14.6429 3.63871L21.6758 17.7098C22.6609 19.6809 21.2282 22 19.0253 22H4.95957C2.75669 22 1.32395 19.6809 2.3091 17.7098L9.34196 3.6387Z" fill="#ffffff"></path> <path d="M12 8V13" stroke="#f20202" stroke-width="1.7" stroke-linecap="round"></path> <path d="M12 16L12 16.5" stroke="#f20202" stroke-width="1.7" stroke-linecap="round"></path> </g></svg>
                 <p className="text-gray-400 text-xl">
                   No comments yet Be the first to comment!
                 </p>
               </Card>
-              <div className="text-center text-[#F7F2DA] text-xl mb-2 mt-6 py-2 mx-4 w-full  border border-slate-600">Load more</div>
+              <div className="text-center text-[#F7F2DA] text-xl mb-2 mt-6 py-2  w-full  border border-slate-600">Load more</div>
       
               <button
             type="submit"
        
-          className='flex flex-row w-full mx-4 shake-button'>
+          className='flex flex-row w-full shake-button'>
       <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
       <div className='flex flex-col flex-grow'>
         <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
@@ -224,7 +224,7 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="  bg-black bg-opacity-50 border border-slate-500 flex items-center justify-center"
+            className="  bg-black bg-opacity-50 border border-slate-800 flex items-center justify-center"
           >
                <table className="w-full text-xs">
            <thead>
@@ -282,11 +282,11 @@ export default function MainComponent() {
           </motion.div>
         )}
       </AnimatePresence>
-      <hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mt-2 mb-4' />
+      <hr className='border-slate-800 bg-slate-500 text-slate-500 w-full mt-2 mb-4' />
       <div className=" flex items-center align-bottom bottom-0 justify-between">
   
         <motion.button
-          className="bg-black m-2 border border-slate-500  text-[#F7F2DA] px-4 py-2 rounded-md flex items-center"
+          className="bg-black m-2 border border-slate-800  text-[#F7F2DA] px-4 py-2 rounded-md flex items-center"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -300,7 +300,7 @@ export default function MainComponent() {
         </Switch>
         </div>
           <Settings className="w-4 h-4" />
-          <div className="flex items-center bg-black border border-slate-500 text-[#F7F2DA] rounded-md pr-2">
+          <div className="flex items-center bg-black border border-slate-800 text-[#F7F2DA] rounded-md pr-2">
             <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
             <input
             aria-label='number'
