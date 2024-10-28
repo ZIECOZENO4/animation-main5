@@ -39,28 +39,30 @@ const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
       whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(0, 0, 0, 0.3)" }}
       layout
     >
-        <div className="align-middle text-center">
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 300 }}
-            className=" align-middle text-center"
-        >
-          <img
-            src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
-            alt="Profile avatar"
-            className="w-16 h-16 rounded-full align-middle border-2 border-slate-500"
-          />
-        </motion.div>
-      <motion.h2
-        className="text-xl font-bold text-center text-[#F7F2DA] mb-1 mt-2"
-        whileHover={{ scale: 1.1 }}
-      >
-        {tokenInfo.name}
-      </motion.h2>
-      <Chip className="text-gray-500 text-center text-sm mb-4">
-        {tokenInfo.subtitle} <span className="text-[#F7F2DA] ">({tokenInfo.timestamp})</span>
-      </Chip>
-        </div>
+       <div className="flex flex-col items-center justify-center text-center">
+  <motion.div
+    whileHover={{ scale: 1.1 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    className="align-middle text-center"
+  >
+    <img
+      src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
+      alt="Profile avatar"
+      className="w-16 h-16 rounded-full align-middle border-2 border-slate-500"
+    />
+  </motion.div>
+  
+  <motion.h2
+    className="text-xl font-bold text-[#F7F2DA] mb-1 mt-2"
+    whileHover={{ scale: 1.1 }}
+  >
+    {tokenInfo.name}
+  </motion.h2>
+  
+  <Chip className="text-gray-500 text-center text-sm mb-4">
+    {tokenInfo.subtitle} <span className="text-[#F7F2DA] ">({tokenInfo.timestamp})</span>
+  </Chip>
+</div>
      
       
     
@@ -108,7 +110,7 @@ export default function TokenInfoCards() {
   }, [])
 
   return (
-    <div className="min-h-screen overflow-auto bg-black border border-slate-500 p-2">
+    <div className="min-h-screen overflow-auto bg-black  p-2">
       <div className=" mx-auto">
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4"
