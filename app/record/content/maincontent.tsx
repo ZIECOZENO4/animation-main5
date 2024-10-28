@@ -1,5 +1,5 @@
 'use client'
-
+import BuySellChart from './BuySellChart';
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, List, Grid, LayoutGrid, Settings, ChevronDown } from 'lucide-react'
@@ -85,17 +85,51 @@ export default function MainComponent() {
       </nav>
 <hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mb-4' />
       <AnimatePresence mode="wait">
-        {activeTab === 'ITEMS' && (
+        {activeTab === 'GRAPH' && (
           <motion.div
-            key="items"
+            key="graph"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
-                <thead>
+             
+                  <div className="flex gap-4 mb-4">
+              <div>
+                <div className="text-gray-500">Market cap</div>
+                <div className="text-sm">$24.53</div>
+              </div>
+              <div>
+                <div className="text-gray-500">ETH Reserve</div>
+                <div className="text-sm">0.009520</div>
+              </div>
+              <div>
+                <div className="text-gray-500">Token Reserve</div>
+                <div className="text-sm">1000.000000</div>
+              </div>
+              <div>
+                <div className="text-gray-500">Token Price</div>
+                <div className="text-sm">0.000010 ETH</div>
+              </div>
+            </div>
+            <div className="p-2">
+      <BuySellChart />
+    </div>
+            </div>
+          </motion.div>
+        )}
+        {activeTab === 'TRADES' && (
+          <motion.div
+            key="trades"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="h-64 bg-black bg-opacity-50 border border-slate-500 rounded-lg flex items-center justify-center"
+          >
+           <table className="w-full text-xs">
+           <thead>
                   <tr className="text-left border-b border-gray-800">
                     <th className="py-2">
                       <input
@@ -147,22 +181,9 @@ export default function MainComponent() {
                   ))}
                 </tbody>
               </table>
-            </div>
           </motion.div>
         )}
-        {activeTab === 'GRAPH' && (
-          <motion.div
-            key="graph"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="h-64 bg-black bg-opacity-50 border-slate-500 rounded-lg flex items-center justify-center"
-          >
-            <p>Graph view coming soon...</p>
-          </motion.div>
-        )}
-        {(activeTab === 'BIDS' || activeTab === 'LOANS' || activeTab === 'HOLDERS') && (
+        {(activeTab === 'BIDS' || activeTab === 'SUPPORT' || activeTab === 'HOLDERS') && (
           <motion.div
             key={activeTab.toLowerCase()}
             initial={{ opacity: 0, y: 20 }}
@@ -193,7 +214,7 @@ export default function MainComponent() {
         </Switch>
         </div>
           <Settings className="w-4 h-4" />
-          <div className="flex items-center bg-black border-slate-500 text-[#F7F2DA] rounded-md px-2">
+          <div className="flex items-center bg-black border border-slate-500 text-[#F7F2DA] rounded-md pr-2">
             <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
             <input
             aria-label='number'
