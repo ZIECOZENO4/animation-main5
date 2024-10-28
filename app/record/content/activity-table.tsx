@@ -7,18 +7,18 @@ import { ChevronDown, ChevronRight, Rocket } from 'lucide-react'
 interface Activity {
   id: string
   time: string
-  item: string
+  item: string // This will now hold the image URL
   price: number
   seller: string
   buyer: string
 }
 
 const initialActivities: Activity[] = [
-  { id: '1', time: '11m', item: '🖼️', price: 0.315, seller: '0587E4', buyer: 'BUY' },
-  { id: '2', time: '13m', item: '🎨', price: 0.3087, seller: 'naroya...', buyer: 'BUY' },
-  { id: '3', time: '44m', item: '🖼️', price: 0.28, seller: '336b57', buyer: '0587E4' },
-  { id: '4', time: '1h', item: '🎨', price: 0.3087, seller: 'naroya...', buyer: 'BUY' },
-  { id: '5', time: '2h', item: '🎭', price: 0.294, seller: '5E0F3A', buyer: '792cAd' },
+  { id: '1', time: '11m', item: '/images/eth.png', price: 0.315, seller: '0587E4', buyer: 'BUY' },
+  { id: '2', time: '13m', item: '/images/eth.png', price: 0.3087, seller: 'naroya...', buyer: 'BUY' },
+  { id: '3', time: '44m', item: '/images/eth.png', price: 0.28, seller: '336b57', buyer: '0587E4' },
+  { id: '4', time: '1h', item: '/images/eth.png', price: 0.3087, seller: 'naroya...', buyer: 'BUY' },
+  { id: '5', time: '2h', item: '/images/eth.png', price: 0.294, seller: '5E0F3A', buyer: '792cAd' },
 ]
 
 const timeFilters = ['ALL', '5m', '15m', '30m', '1h', '6h', '1d']
@@ -38,7 +38,7 @@ export default function ActivityComponent() {
   }
 
   return (
-    <div className="bg-black text-[#F7F2DA] w-auto  border border-slate-500 text-xs">
+    <div className="bg-black text-[#F7F2DA] w-auto border border-slate-500 text-xs">
       <div className="flex justify-between items-center mb-1">
         <div className="flex items-center p-4">
           <Rocket className="h-4 w-4 mr-2" />
@@ -47,7 +47,7 @@ export default function ActivityComponent() {
         <div className="relative px-4">
           <select
             aria-label='number'
-            className="appearance-none  border border-slate-500   text-xs py-1 px-2 pr-6 rounded leading-tight focus:outline-none  focus:border-slate-800"
+            className="appearance-none border border-slate-500 text-xs py-1 px-2 pr-6 rounded leading-tight focus:outline-none focus:border-slate-800"
             value={filter}
             onChange={(e) => handleFilter(e.target.value)}
           >
@@ -55,10 +55,9 @@ export default function ActivityComponent() {
               <option key={tf} value={tf}>{tf}</option>
             ))}
           </select>
-        
         </div>
       </div>
-      <hr  className="w-full text-slate-500 border border-slate-500 bg-slate-500 mb-4"/>
+      <hr className="w-full text-slate-500 border border-slate-500 bg-slate-500 mb-4"/>
       <table className="w-full text-xs px-4">
         <thead>
           <tr className="text-left text-slate-500">
@@ -80,7 +79,10 @@ export default function ActivityComponent() {
                 transition={{ duration: 0.3 }}
               >
                 <td className="py-2">{activity.time}</td>
-                <td className="py-2">{activity.item}</td>
+                <td className="py-2">
+                  {/* Image of the coin */}
+                  <img src={activity.item} alt={`Coin ${activity.id}`} className="w-8 h-8" />
+                </td>
                 <td className="py-2">
                   <span className={activity.price < 0.3 ? 'text-slate-700' : activity.price > 0.3 ? 'text-slate-300' : ''}>
                     {activity.price.toFixed(4)}
@@ -90,7 +92,7 @@ export default function ActivityComponent() {
                 <td className="py-2">{activity.seller}</td>
                 <td className="py-2">
                   {activity.buyer === 'BUY' ? (
-                    <span className="bg-slate-800  px-2 py-1 rounded text-xs">
+                    <span className="bg-slate-800 px-2 py-1 rounded text-xs">
                       {activity.buyer}
                     </span>
                   ) : (
