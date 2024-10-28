@@ -1,7 +1,7 @@
 'use client'
-
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Chip } from '@nextui-org/react'
 
 interface TokenInfo {
   id: number
@@ -106,7 +106,6 @@ export default function TokenInfoCards() {
   return (
     <div className="min-h-screen overflow-auto bg-black border  p-2">
       <div className=" mx-auto">
-
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4"
           layout
