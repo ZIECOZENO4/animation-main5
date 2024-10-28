@@ -1,5 +1,5 @@
 'use client'
-import BuySellChart from './BuySellChart';
+import TradingChart from './BuySellChart';
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, List, Grid, LayoutGrid, Settings, ChevronDown } from 'lucide-react'
@@ -93,9 +93,9 @@ export default function MainComponent() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto  align-middle text-center">
              
-                  <div className="flex gap-4 mb-4">
+                  <div className="flex align-middle text-center gap-4 mb-4">
               <div>
                 <div className="text-gray-500">Market cap</div>
                 <div className="text-sm">$24.53</div>
@@ -114,7 +114,7 @@ export default function MainComponent() {
               </div>
             </div>
             <div className="p-2">
-      <BuySellChart />
+            <TradingChart />
     </div>
             </div>
           </motion.div>

@@ -206,6 +206,7 @@ export default function Dashboard() {
 <p>Token Top Holders</p>
          
           </div>
+          <div className="h-full overflow-y-auto">
           <div className="bg-black text-[#F7F2DA] border-slate-500 h-full overflow-y-auto">
       <div className="flex justify-center flex-col gap-4 items-center mb-2 p-2">
         <h2 className="text-xl gap-2 font-bold">Holders Distribution</h2>
@@ -284,6 +285,7 @@ export default function Dashboard() {
           <ChevronRight className="w-4 h-4 ml-1" />
         </button>
       </div>
+    </div>
     </div>
   
         </motion.div>    

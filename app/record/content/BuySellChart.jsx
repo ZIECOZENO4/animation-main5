@@ -1,115 +1,124 @@
 "use client"
 
 import React, { PureComponent } from 'react';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  LabelList,
-  ResponsiveContainer,
-} from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const data = [
   {
-    name: 'B',
+    timestamp: '00:00',
     buy: 4000,
     sell: 2400,
+    holding: 2400,
   },
   {
-    name: 'S',
+    timestamp: '04:00',
     buy: 3000,
     sell: 1398,
+    holding: 2210,
   },
   {
-    name: 'S',
-    buy: 4000,
-    sell: 1598,
+    timestamp: '08:00',
+    buy: 2000,
+    sell: 9800,
+    holding: 2290,
   },
   {
-    name: 'B',
-    buy: 3200,
-    sell: 1798,
+    timestamp: '12:00',
+    buy: 2780,
+    sell: 3908,
+    holding: 2000,
   },
   {
-    name: 'S',
-    buy: 9000,
-    sell: 3998,
+    timestamp: '16:00',
+    buy: 1890,
+    sell: 4800,
+    holding: 2181,
+  },
+  {
+    timestamp: '20:00',
+    buy: 2390,
+    sell: 3800,
+    holding: 2500,
+  },
+  {
+    timestamp: '23:59',
+    buy: 3490,
+    sell: 4300,
+    holding: 2100,
   },
 ];
 
-const renderCustomizedLabel = (props) => {
-  const { x, y, width, height, value } = props;
-  const radius = 10;
-
-  return (
-    <g>
-      <circle cx={x + width / 2} cy={y - radius} r={radius} fill="#ffffff" />
-      <text 
-        x={x + width / 2} 
-        y={y - radius} 
-        fill="#000000" 
-        textAnchor="middle" 
-        dominantBaseline="middle"
-        style={{ fontSize: '12px', fontWeight: 'bold' }}
-      >
-        {value}
-      </text>
-    </g>
-  );
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-white p-4 border border-gray-200 rounded-lg shadow-md">
+        <p className="text-sm font-semibold mb-2">{`Time: ${label}`}</p>
+        {payload.map((entry, index) => (
+          <p
+            key={index}
+            className="text-sm"
+            style={{ color: entry.color }}
+          >
+            {`${entry.name}: ${entry.value.toLocaleString()}`}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
 };
 
-export default class BuySellChart extends PureComponent {
+export default class TradingChart extends PureComponent {
   render() {
     return (
-      <div className="w-full h-[400px]">
+      <div className="w-full h-full overflow-auto align-middle ">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
+          <AreaChart
             data={data}
             margin={{
-              top: 20,
+              top: 10,
               right: 30,
-              left: 20,
-              bottom: 5,
+              left: 0,
+              bottom: 0,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
             <XAxis 
-              dataKey="name" 
-              tick={{ fill: '#000000' }}
-              axisLine={{ stroke: '#000000' }}
+              dataKey="timestamp" 
+              tick={{ fill: '#374151' }}
+              axisLine={{ stroke: '#374151' }}
             />
             <YAxis 
-              tick={{ fill: '#000000' }}
-              axisLine={{ stroke: '#000000' }}
+              tick={{ fill: '#374151' }}
+              axisLine={{ stroke: '#374151' }}
             />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: '#ffffff',
-                border: '1px solid #000000'
-              }}
-            />
+            <Tooltip content={<CustomTooltip />} />
             <Legend />
-            <Bar 
+            <Area 
+              type="monotone" 
               dataKey="buy" 
-              fill="#ffffff" 
-              stroke="#000000"
-              strokeWidth={1}
-              minPointSize={5}
-            >
-              <LabelList dataKey="buy" content={renderCustomizedLabel} />
-            </Bar>
-            <Bar 
+              stackId="1" 
+              stroke="#22c55e" 
+              fill="#22c55e" 
+              name="Buy"
+            />
+            <Area 
+              type="monotone" 
               dataKey="sell" 
+              stackId="1" 
+              stroke="#ef4444" 
+              fill="#ef4444" 
+              name="Sell"
+            />
+            <Area 
+              type="monotone" 
+              dataKey="holding" 
+              stackId="1" 
+              stroke="#64748b" 
               fill="#64748b" 
-              minPointSize={10}
-            >
-              <LabelList dataKey="sell" content={renderCustomizedLabel} />
-            </Bar>
-          </BarChart>
+              name="Holding"
+            />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     );
