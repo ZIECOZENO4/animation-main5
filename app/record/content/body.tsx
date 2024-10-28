@@ -303,7 +303,7 @@ export default function Dashboard() {
           className="w-full h-full overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300"
           initial={false}
           animate={{
-            width: `calc(100vw - ${leftWidth}px - ${rightWidth}px - 2px)`, // Subtract 2px for the resizers
+            width: `calc(100vw - ${leftWidth}px - ${rightWidth}px)`, // Subtract 2px for the resizers
           }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
