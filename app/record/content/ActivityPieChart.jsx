@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
@@ -71,15 +71,15 @@ export default class ActivityPieChart extends PureComponent {
 
   render() {
     return (
-      <div className="w-full h-[400px] bg-black p-1 align-top">
+      <div className="w-[80%] h-[400px] bg-black p-1 align-top"> {/* Adjusted width */}
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
+          <PieChart>
             <Pie
               activeIndex={this.state.activeIndex}
               activeShape={renderActiveShape}
               data={data}
-              cx="50%"
-              cy="50%"
+              cx="40%" // Adjusted to align left
+              cy="40%" // Adjusted to align top
               innerRadius={60}
               outerRadius={80}
               fill="#64748b" // slate-500

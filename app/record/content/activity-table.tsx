@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight, Rocket } from 'lucide-react'
 
 interface Activity {
   id: string
@@ -39,9 +39,9 @@ export default function ActivityComponent() {
 
   return (
     <div className="bg-black text-[#F7F2DA] w-auto  border border-slate-500 text-xs">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-1">
         <div className="flex items-center p-4">
-          <ChevronRight className="h-4 w-4 mr-2" />
+          <Rocket className="h-4 w-4 mr-2" />
           <h2 className="text-sm font-bold text-slate-500">ACTIVITY</h2>
         </div>
         <div className="relative px-4">
@@ -55,11 +55,10 @@ export default function ActivityComponent() {
               <option key={tf} value={tf}>{tf}</option>
             ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2   ">
-            <ChevronDown className="h-3 w-3" />
-          </div>
+        
         </div>
       </div>
+      <hr  className="w-full text-slate-500 border border-slate-500 bg-slate-500 mb-4"/>
       <table className="w-full text-xs px-4">
         <thead>
           <tr className="text-left text-slate-500">
@@ -83,15 +82,15 @@ export default function ActivityComponent() {
                 <td className="py-2">{activity.time}</td>
                 <td className="py-2">{activity.item}</td>
                 <td className="py-2">
-                  <span className={activity.price < 0.3 ? 'text-red-500' : activity.price > 0.3 ? 'text-green-500' : ''}>
+                  <span className={activity.price < 0.3 ? 'text-slate-700' : activity.price > 0.3 ? 'text-slate-300' : ''}>
                     {activity.price.toFixed(4)}
                   </span>
-                  <span className="text-yellow-500 ml-1">◆</span>
+                  <span className="text-slate-500 ml-1">◆</span>
                 </td>
                 <td className="py-2">{activity.seller}</td>
                 <td className="py-2">
                   {activity.buyer === 'BUY' ? (
-                    <span className="bg-green-800 text-green-300 px-2 py-1 rounded text-xs">
+                    <span className="bg-slate-800  px-2 py-1 rounded text-xs">
                       {activity.buyer}
                     </span>
                   ) : (

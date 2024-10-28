@@ -318,70 +318,7 @@ export default function Dashboard() {
           className={`transition-all duration-300 `}
           style={{ height: rightTopHeight, overflow: 'auto' }}
         >
-               <div className="p-2 bg-black border border-slate-500 text-sm flex flex-row justify-between gap-4 text-center align-middle text-slate-500 ">
-<p>All  Transactions</p>
-     
-          </div>
-       
-          <div className="bg-black text-[#F7F2DA]  w-full ">
-      <div className="mb-4 flex justify-end">
-        <div className="relative">
-          <select
-            aria-label='number'
-            className="appearance-none bg-black border border-slate-500 text-[#F7F2DA] py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-slate-500 focus:border-slate-800"
-            value={filter}
-            onChange={(e) => handleFilter(e.target.value as 'ALL' | 'SELL' | 'BUY')}
-          >
-            <option value="ALL">All Transactions</option>
-            <option value="SELL">Sell</option>
-            <option value="BUY">Buy</option>
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
-            <ChevronDown className="h-4 w-4" />
-          </div>
-        </div>
-      </div>
-      <table className="w-full overflow-auto text-xs">
-        <thead>
-          <tr className="text-left border-b border-slate-500">
-            <th className="py-2">Account</th>
-            <th className="py-2">Type</th>
-            <th className="py-2">In</th>
-            <th className="py-2">Out</th>
-            <th className="py-2">Chains</th>
-            <th className="py-2">Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <AnimatePresence>
-            {transactions.map((transaction) => (
-              <motion.tr
-                key={transaction.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="border-b border-gray-800"
-              >
-                <td className="py-3 flex items-center">
-                  <span className="w-6 h-6 mr-2  rounded-full"></span>
-                  {transaction.account}
-                </td>
-                <td>
-                  <Chip className={`px-2 py-1 rounded text-xs ${transaction.type === 'SELL' ? 'bg-slate-800 ' : 'bg-slate-500 '}`}>
-                    {transaction.type}
-                  </Chip>
-                </td>
-                <td>{transaction.in}</td>
-                <td>{transaction.out}</td>
-                <td>{transaction.chains}</td>
-                <td>{transaction.time}</td>
-              </motion.tr>
-            ))}
-          </AnimatePresence>
-        </tbody>
-      </table>
-    </div>
+
     
     <ActivityComponent />
         </motion.div>

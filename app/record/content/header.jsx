@@ -66,7 +66,7 @@ export default function TokenHeader() {
               )}
             </button>
             <Phone className="w-6 h-6 text-gray-500" />
-            <Camera className="w-6 h-6 text-gray5400" />
+            <Camera className="w-6 h-6 text-gray-500" />
             <Globe className="w-6 h-6 text-gray-500" />
             <ChevronDown className="w-6 h-6 text-gray-500" />
           </motion.div>
@@ -109,7 +109,7 @@ function StatItem({ label, value, isUp = null, showCoin = false }) {
         </span>
         {showCoin && (
           <img 
-            src='https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png' 
+            src='/images/eth.png' 
             alt='coin' 
             className='h-4 w-4 align-middle rounded-full items-center ml-1'
           />

@@ -5,8 +5,12 @@ import NFTCollectionManager from './body'
 const ProfilePage = () => {
   return (
     <div>
-        <NFTCollectionManager />
-         <BottomStatus />
+         <main className="flex flex-col h-[calc(100vh-5rem)]">
+      <div className="flex-grow overflow-hidden">
+      <NFTCollectionManager />
+      </div>
+      <BottomStatus />
+    </main>
     </div>
   )
 }
