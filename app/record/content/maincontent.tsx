@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, List, Grid, LayoutGrid, Settings, ChevronDown } from 'lucide-react'
 import { Switch  } from "@nextui-org/react";
+import { Card, Chip, Tabs, Tab } from "@nextui-org/react";
 interface NFTItem {
   id: string
   image: string
@@ -18,15 +19,15 @@ interface NFTItem {
 }
 
 const nftItems: NFTItem[] = [
-  { id: '1', image: '/placeholder.svg?height=50&width=50', name: 'Sappy Seal...', rarity: 9598, buyNow: 0.2907, lastSale: 0.29, topBid: 0.28, owner: 'F4c63F', held: 3, time: '5h ago' },
-  { id: '2', image: '/placeholder.svg?height=50&width=50', name: 'Sappy Seal...', rarity: 7527, buyNow: 0.2909, lastSale: 0.29, topBid: 0.28, owner: 'F4c63F', held: 3, time: '5h ago' },
-  { id: '3', image: '/placeholder.svg?height=50&width=50', name: 'Sappy Seal...', rarity: 9229, buyNow: 0.291, lastSale: 0.29, topBid: 0.28, owner: '08V76d', held: 7, time: '7h ago' },
-  { id: '4', image: '/placeholder.svg?height=50&width=50', name: 'Sappy Seal...', rarity: 8650, buyNow: 0.292, lastSale: 0.28, topBid: 0.28, owner: 'F8V4VE', held: 8, time: '12h ago' },
+  { id: '1', image: 'https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif', name: 'Sappy Seal...', rarity: 9598, buyNow: 0.2907, lastSale: 0.29, topBid: 0.28, owner: 'F4c63F', held: 3, time: '5h ago' },
+  { id: '2', image: 'https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif', name: 'Sappy Seal...', rarity: 7527, buyNow: 0.2909, lastSale: 0.29, topBid: 0.28, owner: 'F4c63F', held: 3, time: '5h ago' },
+  { id: '3', image: 'https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif', name: 'Sappy Seal...', rarity: 9229, buyNow: 0.291, lastSale: 0.29, topBid: 0.28, owner: '08V76d', held: 7, time: '7h ago' },
+  { id: '4', image: 'https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif', name: 'Sappy Seal...', rarity: 8650, buyNow: 0.292, lastSale: 0.28, topBid: 0.28, owner: 'F8V4VE', held: 8, time: '12h ago' },
 ]
 
 type TabType = 'GRAPH' | 'BIDS' | 'TRADES' | 'HOLDERS' | 'SUPPORT';
 
-// Fix the tabs array to remove the empty element
+
 const tabs: TabType[] = ['GRAPH', 'BIDS', 'TRADES', 'HOLDERS', 'SUPPORT'];
 
 export default function MainComponent() {
@@ -95,7 +96,7 @@ export default function MainComponent() {
           >
             <div className="overflow-x-auto  align-middle text-center">
              
-                  <div className="flex align-middle text-center gap-4 mb-4">
+                  <div className="flex align-middle text-center px-4 gap-4 mb-4">
               <div>
                 <div className="text-gray-500">Market cap</div>
                 <div className="text-sm">$24.53</div>
@@ -126,7 +127,7 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="h-64 bg-black bg-opacity-50 border border-slate-500 rounded-lg flex items-center justify-center"
+            className="h-64 bg-black bg-opacity-50 border border-slate-500 flex items-center justify-center"
           >
            <table className="w-full text-xs">
            <thead>
@@ -183,7 +184,40 @@ export default function MainComponent() {
               </table>
           </motion.div>
         )}
-        {(activeTab === 'BIDS' || activeTab === 'SUPPORT' || activeTab === 'HOLDERS') && (
+           { activeTab === 'SUPPORT'  && (
+          <motion.div
+            key={activeTab.toLowerCase()}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="h-64 overflow-x-auto bg-black border border-slate-500 flex items-center justify-center"
+          >
+                <Card className="bg-black border border-slate-600  p-4 flex flex-col items-center justify-center h-32">
+              <svg width="30px" height="30px" className='text-gray-400 my-2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0619 4.4295C12.6213 3.54786 11.3636 3.54786 10.9229 4.4295L3.89008 18.5006C3.49256 19.2959 4.07069 20.2317 4.95957 20.2317H19.0253C19.9142 20.2317 20.4923 19.2959 20.0948 18.5006L13.0619 4.4295ZM9.34196 3.6387C10.434 1.45376 13.5508 1.45377 14.6429 3.63871L21.6758 17.7098C22.6609 19.6809 21.2282 22 19.0253 22H4.95957C2.75669 22 1.32395 19.6809 2.3091 17.7098L9.34196 3.6387Z" fill="#ffffff"></path> <path d="M12 8V13" stroke="#f20202" stroke-width="1.7" stroke-linecap="round"></path> <path d="M12 16L12 16.5" stroke="#f20202" stroke-width="1.7" stroke-linecap="round"></path> </g></svg>
+                <p className="text-gray-400 text-xl">
+                  No comments yet Be the first to comment!
+                </p>
+              </Card>
+              <div className="text-center text-[#F7F2DA] text-xl mb-4 py-2  border border-slate-600">Load more</div>
+      
+              <button
+            type="submit"
+       
+          className='flex flex-row w-full shake-button'>
+      <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
+      <div className='flex flex-col flex-grow'>
+        <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
+          <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
+          + Add Comment
+          </span>
+        </div>
+        <div className="top-[69.7px] left-[1305px] w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
+      </div>
+    </button>
+          </motion.div>
+        )}
+        {(activeTab === 'BIDS' || activeTab === 'HOLDERS') && (
           <motion.div
             key={activeTab.toLowerCase()}
             initial={{ opacity: 0, y: 20 }}

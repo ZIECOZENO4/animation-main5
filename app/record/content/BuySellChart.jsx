@@ -71,7 +71,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 export default class TradingChart extends PureComponent {
   render() {
     return (
-      <div className="w-full h-full overflow-auto align-middle ">
+      <div className="w-full h-64 overflow-auto align-middle ">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
