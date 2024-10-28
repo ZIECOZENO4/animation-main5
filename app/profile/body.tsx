@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Grid, List, LayoutGrid, Settings, Copy } from 'lucide-react'
+import { Search, Grid, List, LayoutGrid, Settings, Copy, Check } from 'lucide-react'
 
-const tabs = ['INVENTORY', 'HISTORY', 'BIDS', 'LENDING']
+const tabs = ['CREATED', 'TOKEN', 'TRADES', 'HELD']
 
 interface Collection {
   name: string
@@ -13,29 +13,31 @@ interface Collection {
 }
 
 const mockCollections: Record<string, Collection[]> = {
-  INVENTORY: [
+  CREATED: [
     { name: 'Collection 1', floor: 0.5, valueListed: 1.2 },
     { name: 'Collection 2', floor: 0.8, valueListed: 2.5 },
   ],
-  HISTORY: [
+  TOKEN: [
     { name: 'Past Collection 1', floor: 0.3, valueListed: 0.9 },
     { name: 'Past Collection 2', floor: 0.6, valueListed: 1.8 },
   ],
-  BIDS: [
+  TRADES: [
     { name: 'Bid Collection 1', floor: 0.7, valueListed: 2.1 },
     { name: 'Bid Collection 2', floor: 1.0, valueListed: 3.0 },
   ],
-  LENDING: [
+  HELD: [
     { name: 'Lend Collection 1', floor: 0.4, valueListed: 1.5 },
     { name: 'Lend Collection 2', floor: 0.9, valueListed: 2.7 },
   ],
 }
 
 export default function NFTCollectionManager() {
-  const [activeTab, setActiveTab] = useState('INVENTORY')
+  const [activeTab, setActiveTab] = useState('CREATED')
   const [showAll, setShowAll] = useState(true)
-  const [collections, setCollections] = useState<Collection[]>(mockCollections.INVENTORY)
+  const [collections, setCollections] = useState<Collection[]>(mockCollections.CREATED)
   const [searchTerm, setSearchTerm] = useState('')
+  const [isHovered, setIsHovered] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     setCollections(mockCollections[activeTab] || [])
@@ -48,57 +50,85 @@ export default function NFTCollectionManager() {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab)
   }
-
+  const handleCopy = () => {
+    navigator.clipboard.writeText("0x5Ca37...a5df3")
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
   return (
-    <div className="bg-gray-900 text-gray-300 min-h-screen font-mono">
-      <header className="bg-gray-800 p-4 flex justify-between items-center">
+    <div className="bg-black border border-slate-500 text-[#F7F2DA] h-[calc(100vh-10rem)]  w-[100vw]">
+      <header className="bg-black border border-slate-500 p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-red-500 rounded-full"></div>
-          <span className="text-yellow-500">0x5Ca37...a5df3</span>
-          <button   aria-label='number' className="text-gray-500 hover:text-gray-300">
-            <Copy size={16} />
-          </button>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <img
+            src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
+            alt="Profile avatar"
+            className="w-10 h-10 rounded-full border-2 border-slate-500"
+          />
+        </motion.div>
+          <motion.h2
+              className="text-xl text-[#F7F2DA] "
+              style={{ filter: "blur(1px)" }}
+              animate={{ filter: isHovered ? "blur(0px)" : "blur(1px)" }}
+            >
+            0x5Ca37...a5df3
+            </motion.h2>
+          <button onClick={handleCopy}>
+              {copied ? (
+                <Check className="w-6 h-6 text-green-400" />
+              ) : (
+                <Copy className="w-6 h-6 text-gray-400" />
+              )}
+            </button>
         </div>
-        <div className="flex space-x-8 text-sm">
-          <div>
-            <span className="text-gray-500">LISTED</span>
-            <span className="ml-2">0/0</span>
-          </div>
-          <div>
-            <span className="text-gray-500">EST VALUE</span>
-            <span className="ml-2">0.00 ◊</span>
-          </div>
-          <div>
-            <span className="text-gray-500">COST</span>
-            <span className="ml-2">0.00 ◊</span>
-          </div>
-          <div>
-            <span className="text-gray-500">UNREALIZED P&L</span>
-            <span className="ml-2 text-green-500">???</span>
-          </div>
-          <div>
-            <span className="text-gray-500">REALIZED P&L</span>
-            <span className="ml-2 text-green-500">???</span>
-          </div>
+        <div className="flex space-x-4 text-sm">
+          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+            <span className="text-gray-500">LEVEL</span>
+            <span className="text-sm">0/100</span>
+          </div> 
+          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+            <span className="text-gray-500">OWNED</span>
+            <span className="text-sm">0/0</span>
+          </div> 
+          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+            <span className="text-gray-500">SOLD</span>
+            <span className="text-sm">0/0</span>
+          </div> 
         </div>
+        <div className="flex gap-4 flex-col align-middle text-center text-sm">
+            <span className="text-gray-500">LIKES</span>
+            <span className="text-sm">0/0</span>
+          </div> 
+          
+          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+            <span className="text-gray-500">FOLLOWERS</span>
+            <span className="text-sm">0/0</span>
+          </div> 
+          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+            <span className="text-gray-500">FOLLOWED</span>
+            <span className="text-sm">0/0</span>
+          </div> 
       </header>
 
       <div className="flex">
-        <aside className="w-64 bg-gray-800 p-4">
+        <aside className="w-64 bg-black border border-slate-500 p-4">
           <div className="mb-6">
-            <h3 className="text-yellow-500 mb-2">STATUS</h3>
+            <h3 className="text-slate-500 mb-2">TOKEN STATUS</h3>
             <div className="flex items-center space-x-2 mb-2">
-              <input type="radio" id="onlyListed" name="status" className="form-radio text-yellow-500" checked={!showAll} onChange={() => setShowAll(false)} />
-              <label htmlFor="onlyListed">ONLY LISTED</label>
+              <input type="radio" id="onlyListed" name="status" className="form-radio text-slate-500" checked={!showAll} onChange={() => setShowAll(false)} />
+              <label htmlFor="onlyListed">STANDARD</label>
             </div>
             <div className="flex items-center space-x-2">
-              <input type="radio" id="showAll" name="status" className="form-radio text-yellow-500" checked={showAll} onChange={() => setShowAll(true)} />
-              <label htmlFor="showAll">SHOW ALL</label>
+              <input type="radio" id="showAll" name="status" className="form-radio text-slate-500" checked={showAll} onChange={() => setShowAll(true)} />
+              <label htmlFor="showAll">PRE SALE</label>
             </div>
           </div>
 
           <div>
-            <h3 className="text-yellow-500 mb-2">COLLECTIONS</h3>
+            <h3 className="text-slate-500 mb-2">TOKEN COLLECTIONS</h3>
             <div className="relative mb-4">
               <input
                 type="text"
@@ -151,14 +181,14 @@ export default function NFTCollectionManager() {
           </div>
         </aside>
 
-        <main className="flex-1 p-4">
+        <main className="flex-1 bg-black border border-slate-500 p-4">
           <div className="mb-4">
-            <h2 className="text-2xl mb-4">All Collections</h2>
-            <div className="flex space-x-4 mb-4">
+            <h2 className="text-2xl mb-4">All YOUR TOKEN COLLECTIONS</h2>
+            <div className="flex justify-between space-x-4 mb-1">
               {tabs.map((tab) => (
                 <motion.button
                   key={tab}
-                  className={`px-4 py-2 rounded ${activeTab === tab ? 'text-yellow-500 border-b-2 border-yellow-500' : 'text-gray-500'}`}
+                  className={`px-4 py-2 rounded ${activeTab === tab ? 'text-[#F7F2DA] border-b-2 border-[#F7F2DA]' : 'text-gray-500'}`}
                   onClick={() => handleTabChange(tab)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -166,13 +196,14 @@ export default function NFTCollectionManager() {
                   {tab}
                 </motion.button>
               ))}
-            </div>
-            <div className="flex justify-end space-x-2">
+              <div className="flex justify-end space-x-2">
               <button  aria-label='number' className="text-gray-500 hover:text-gray-300"><List size={20} /></button>
               <button  aria-label='number' className="text-gray-500 hover:text-gray-300"><Grid size={20} /></button>
               <button  aria-label='number' className="text-gray-500 hover:text-gray-300"><LayoutGrid size={20} /></button>
               <button  aria-label='number' className="text-gray-500 hover:text-gray-300"><Settings size={20} /></button>
             </div>
+            </div>
+                      <hr  className="bg-slate-500 border border-slate-500 text-slate-500 mb-4" />
           </div>
 
           <AnimatePresence mode="wait">
@@ -183,13 +214,13 @@ export default function NFTCollectionManager() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              {activeTab === 'INVENTORY' && (
+              {activeTab === 'CREATED' && (
                 <div>
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="text-gray-500">
                         <th className="text-left">
-                          <input  aria-label='number' type="checkbox" className="form-checkbox text-yellow-500" />
+                          <input  aria-label='number' type="checkbox" className="form-checkbox text-slate-500" />
                           SELECT ALL
                         </th>
                         <th className="text-left">RARITY</th>
@@ -207,33 +238,34 @@ export default function NFTCollectionManager() {
                   </table>
                 </div>
               )}
-              {activeTab === 'HISTORY' && <div>History content here</div>}
-              {activeTab === 'BIDS' && <div>Bids content here</div>}
-              {activeTab === 'LENDING' && <div>Lending content here</div>}
+              {activeTab === 'TOKEN' && <div>TOKEN content here</div>}
+              {activeTab === 'TRADES' && <div>TRADES content here</div>}
+              {activeTab === 'HELD' && <div>HELD content here</div>}
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-8 flex space-x-4">
+          <div className="mt-8 bottom-0 align-bottom  justify-between flex space-x-4">
+          <hr  className="bg-slate-500 border border-slate-500 text-slate-500 mb-2" />
             <motion.button
-              className="bg-yellow-600 text-black px-6 py-2 rounded"
+              className="bg-black border borser-slate-500 text-center   px-4 py-2 rounded-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              LIST 0
+              START STANDARD
             </motion.button>
-            <motion.button
-              className="bg-yellow-600 text-black px-6 py-2 rounded"
+                 <motion.button
+              className="bg-black border borser-slate-500 text-center   px-6 py-2 rounded-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              ACCEPT 0 0.00 ◊
+              START PRESALE
             </motion.button>
-            <motion.button
-              className="bg-yellow-600 text-black px-6 py-2 rounded"
+                   <motion.button
+              className="bg-black border borser-slate-500 text-center   px-6 py-2 rounded-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              BORROW 0 0.00 ◊
+              SUPPORT TOKEN
             </motion.button>
           </div>
         </main>
