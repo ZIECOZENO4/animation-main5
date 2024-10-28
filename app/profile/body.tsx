@@ -66,7 +66,7 @@ export default function NFTCollectionManager() {
           <img
             src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
             alt="Profile avatar"
-            className="w-10 h-10 rounded-full border-2 border-slate-500"
+            className="w-16 h-16 rounded-full border-2 border-slate-500"
           />
         </motion.div>
           <motion.h2
@@ -85,32 +85,33 @@ export default function NFTCollectionManager() {
             </button>
         </div>
         <div className="flex space-x-4 text-sm">
-          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+          <div className="flex gap-2 flex-col align-middle text-center text-sm">
             <span className="text-gray-500">LEVEL</span>
             <span className="text-sm">0/100</span>
           </div> 
-          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+          <div className="flex gap-2 flex-col align-middle text-center text-sm">
             <span className="text-gray-500">OWNED</span>
             <span className="text-sm">0/0</span>
           </div> 
-          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+          <div className="flex gap-2 flex-col align-middle text-center text-sm">
             <span className="text-gray-500">SOLD</span>
             <span className="text-sm">0/0</span>
           </div> 
-        </div>
-        <div className="flex gap-4 flex-col align-middle text-center text-sm">
+          <div className="flex gap-2 flex-col align-middle text-center text-sm">
             <span className="text-gray-500">LIKES</span>
             <span className="text-sm">0/0</span>
           </div> 
           
-          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+          <div className="flex gap-2 flex-col align-middle text-center text-sm">
             <span className="text-gray-500">FOLLOWERS</span>
             <span className="text-sm">0/0</span>
           </div> 
-          <div className="flex gap-4 flex-col align-middle text-center text-sm">
+          <div className="flex gap-2 flex-col align-middle text-center text-sm">
             <span className="text-gray-500">FOLLOWED</span>
             <span className="text-sm">0/0</span>
           </div> 
+        </div>
+        
       </header>
 
       <div className="flex">
@@ -129,11 +130,11 @@ export default function NFTCollectionManager() {
 
           <div>
             <h3 className="text-slate-500 mb-2">TOKEN COLLECTIONS</h3>
-            <div className="relative mb-4">
+            <div className="relative mb-2 mt-4">
               <input
                 type="text"
                 placeholder="Search your collections"
-                className="w-full bg-gray-700 text-gray-300 px-3 py-2 rounded-md pl-8"
+                className="w-full bg-black border border-slate-500 text-gray-300 px-3 py-2 rounded-md pl-8"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -147,7 +148,7 @@ export default function NFTCollectionManager() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <table className="w-full text-sm">
+                <table className="w-full text-xs">
                   <thead>
                     <tr className="text-gray-500">
                       <th className="text-left">COLLECTION</th>
@@ -181,10 +182,10 @@ export default function NFTCollectionManager() {
           </div>
         </aside>
 
-        <main className="flex-1 bg-black border border-slate-500 p-4">
+        <main className="flex-1 bg-black border border-slate-500 ">
           <div className="mb-4">
-            <h2 className="text-2xl mb-4">All YOUR TOKEN COLLECTIONS</h2>
-            <div className="flex justify-between space-x-4 mb-1">
+            <h2 className="text-2xl mb-4 p-4">All YOUR TOKEN COLLECTIONS</h2>
+            <div className="flex justify-between space-x-4 mb-1 p-2">
               {tabs.map((tab) => (
                 <motion.button
                   key={tab}
@@ -213,6 +214,7 @@ export default function NFTCollectionManager() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
+              className='p-2 h-64'
             >
               {activeTab === 'CREATED' && (
                 <div>
