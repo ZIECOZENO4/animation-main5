@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Chip } from '@nextui-org/react'
 
+
 interface TokenInfo {
   id: number
   name: string
@@ -30,7 +31,7 @@ const generateTokenInfo = (id: number): TokenInfo => ({
 const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
   return (
     <motion.div
-      className="bg-black border border-slate-500  rounded-lg shadow-lg p-4 w-full max-w-sm"
+      className="bg-black border  rounded-lg shadow-lg p-4 w-full max-w-sm"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -38,7 +39,8 @@ const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
       whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(0, 0, 0, 0.3)" }}
       layout
     >
-       <motion.div
+        <div className="align-middle text-center">
+        <motion.div
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 300 }}
             className=" align-middle text-center"
@@ -49,13 +51,14 @@ const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
             className="w-16 h-16 rounded-full align-middle border-2 border-slate-500"
           />
         </motion.div>
-      
       <motion.h2
         className="text-xl font-bold text-center text-[#F7F2DA] mb-1 mt-2"
         whileHover={{ scale: 1.1 }}
       >
         {tokenInfo.name}
       </motion.h2>
+        </div>
+     
       
       <Chip className="text-gray-500 text-center text-sm mb-4">
         {tokenInfo.subtitle} <span className="text-[#F7F2DA] ">({tokenInfo.timestamp})</span>

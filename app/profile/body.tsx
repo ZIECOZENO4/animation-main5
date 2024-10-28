@@ -233,7 +233,7 @@ export default function NFTCollectionManager() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="my-4 align-bottom  justify-start  flex space-x-8">
+          <div className="my-2 px-8 align-bottom  justify-start  flex space-x-8">
 
             <motion.button
               className="bg-black border borser-slate-500 text-center   px-4 py-2 rounded-lg"
