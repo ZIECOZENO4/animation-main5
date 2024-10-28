@@ -57,7 +57,7 @@ export default function NFTCollectionManager() {
     setTimeout(() => setCopied(false), 2000)
   }
   return (
-    <div className="bg-black border border-slate-500 text-[#F7F2DA] flex-grow  w-[100vw]">
+    <div className="bg-black border border-slate-500 text-[#F7F2DA] flex-grow h-full  w-[100vw]">
       <header className="bg-black border border-slate-500 p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
         <motion.div
