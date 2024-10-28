@@ -292,23 +292,30 @@ export default function Dashboard() {
       </div>
 
       {/* Middle Panel */}
-      <div className="flex ">
-
-      
-      {/* <div 
+      <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setLeftWidth, true)}
-      /> */}
-      <motion.div className={`transition-all duration-300  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
-   
-<MainComponent />
-        {/* Content Here */}
-      </motion.div>
-      {/* <div 
+      />
+
+      {/* Middle Panel */}
+      <div className="flex-grow overflow-hidden">
+        <motion.div 
+          className="w-full h-full overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300"
+          initial={false}
+          animate={{
+            width: `calc(100vw - ${leftWidth}px - ${rightWidth}px - 2px)`, // Subtract 2px for the resizers
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        >
+          <MainComponent />
+        </motion.div>
+      </div>
+
+      {/* Resizer */}
+      <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setRightWidth, true)}
-      /> */}
-</div>
+      />
       {/* Right Panel */}
       <div className={`flex flex-col border-l w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
         <motion.div
