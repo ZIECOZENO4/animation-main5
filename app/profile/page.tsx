@@ -1,8 +1,13 @@
 import React from 'react'
+import BottomStatus from '../record/content/crypto-status-bar'
+import NFTCollectionManager from './body'
 
 const ProfilePage = () => {
   return (
-    <div>ProfilePage</div>
+    <div>
+        <NFTCollectionManager />
+         <BottomStatus />
+    </div>
   )
 }
 
