@@ -30,37 +30,38 @@ const generateTokenInfo = (id: number): TokenInfo => ({
 const TokenInfoCard: React.FC<{ tokenInfo: TokenInfo }> = ({ tokenInfo }) => {
   return (
     <motion.div
-      className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-lg p-4 w-full max-w-sm"
+      className="bg-black border border-slate-500  rounded-lg shadow-lg p-4 w-full max-w-sm"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(0, 255, 0, 0.3)" }}
+      whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(0, 0, 0, 0.3)" }}
       layout
     >
        <motion.div
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 300 }}
+            className=" align-middle text-center"
         >
           <img
             src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif"
             alt="Profile avatar"
-            className="w-16 h-16 rounded-full border-2 border-slate-500"
+            className="w-16 h-16 rounded-full align-middle border-2 border-slate-500"
           />
         </motion.div>
       
       <motion.h2
-        className="text-xl font-bold text-center text-green-400 mb-1"
+        className="text-xl font-bold text-center text-[#F7F2DA] mb-1 mt-2"
         whileHover={{ scale: 1.1 }}
       >
         {tokenInfo.name}
       </motion.h2>
       
-      <p className="text-gray-400 text-center text-sm mb-4">
-        {tokenInfo.subtitle} <span className="text-gray-500">({tokenInfo.timestamp})</span>
-      </p>
+      <Chip className="text-gray-500 text-center text-sm mb-4">
+        {tokenInfo.subtitle} <span className="text-[#F7F2DA] ">({tokenInfo.timestamp})</span>
+      </Chip>
       
-      <div className="space-y-2">
+      <div className="space-y-2 text-xs">
         <InfoRow label="Address" value={tokenInfo.address} />
         <InfoRow label="Creator" value={tokenInfo.creator} />
         <InfoRow label="Total Supply" value={tokenInfo.totalSupply.toFixed(6)} />
@@ -103,8 +104,8 @@ export default function TokenInfoCards() {
   }, [])
 
   return (
-    <div className="min-h-screen overflow-auto bg-black border border-slate-500 p-2">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen overflow-auto bg-black border  p-2">
+      <div className=" mx-auto">
 
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4"

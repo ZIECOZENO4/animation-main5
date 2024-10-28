@@ -57,7 +57,7 @@ export default function NFTCollectionManager() {
     setTimeout(() => setCopied(false), 2000)
   }
   return (
-    <div className="bg-black border border-slate-500 text-[#F7F2DA] h-[calc(100vh-10rem)]  w-[100vw]">
+    <div className="bg-black border border-slate-500 text-[#F7F2DA] h-[calc(100vh-5rem)] w-[100vw]">
       <header className="bg-black border border-slate-500 p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
         <motion.div
@@ -71,9 +71,8 @@ export default function NFTCollectionManager() {
           />
         </motion.div>
           <motion.h2
-              className="text-sm text-[#F7F2DA] "
-              style={{ filter: "blur(1px)" }}
-              animate={{ filter: isHovered ? "blur(0px)" : "blur(1px)" }}
+              className="text-sm text-gray-500 "
+      
             >
             0x5Ca37...a5df3
             </motion.h2>
@@ -81,7 +80,7 @@ export default function NFTCollectionManager() {
               {copied ? (
                 <Check className="w-6 h-6 text-green-400" />
               ) : (
-                <Copy className="w-6 h-6 text-gray-400" />
+                <Copy className="w-6 h-6 text-gray-500" />
               )}
             </button>
         </div>
@@ -234,8 +233,8 @@ export default function NFTCollectionManager() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-8 bottom-0 align-bottom  justify-between flex space-x-4">
-          <hr  className="bg-slate-500 border border-slate-500 text-slate-500 mb-2" />
+          <div className="my-4 align-bottom  justify-start  flex space-x-8">
+
             <motion.button
               className="bg-black border borser-slate-500 text-center   px-4 py-2 rounded-lg"
               whileHover={{ scale: 1.05 }}
