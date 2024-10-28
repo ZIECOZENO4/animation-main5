@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/FirstAnimation.jsx", "app/record/content/header.jsx", "app/record/content/crypto-status-bar.tsx", "app/record/content/maingraph.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/FirstAnimation.jsx", "app/record/content/header.jsx", "app/record/content/crypto-status-bar.tsx", "app/record/content/BuySellChart.jsx"],
   "exclude": ["node_modules"]
 }
