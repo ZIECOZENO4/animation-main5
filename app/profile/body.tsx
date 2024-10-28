@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Grid, List, LayoutGrid, Settings, Copy, Check } from 'lucide-react'
+import TokenInfoCards from './token-info-cards'
 
 const tabs = ['CREATED', 'TOKEN', 'TRADES', 'HELD']
 
@@ -217,32 +218,19 @@ export default function NFTCollectionManager() {
               className='p-2 h-40'
             >
               {activeTab === 'CREATED' && (
-                <div>
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="text-gray-500">
-                        <th className="text-left">
-                          <input  aria-label='number' type="checkbox" className="form-checkbox text-slate-500" />
-                          SELECT ALL
-                        </th>
-                        <th className="text-left">RARITY</th>
-                        <th className="text-left">LIST PRICE</th>
-                        <th className="text-left">TOP BID</th>
-                        <th className="text-left">COST</th>
-                        <th className="text-left">RECEIVED MAX BORROWRATE</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td colSpan={6} className="text-center py-8">No NFTs found.</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div className='align-middle h-full overflow-auto'>
+                 <TokenInfoCards />
                 </div>
               )}
-              {activeTab === 'TOKEN' && <div>TOKEN content here</div>}
-              {activeTab === 'TRADES' && <div>TRADES content here</div>}
-              {activeTab === 'HELD' && <div>HELD content here</div>}
+              {activeTab === 'TOKEN' &&    <div className='align-middle h-full overflow-auto'>
+                 <TokenInfoCards />
+                </div>}
+              {activeTab === 'TRADES' &&    <div className='align-middle h-full overflow-auto'>
+                 <TokenInfoCards />
+                </div>}
+              {activeTab === 'HELD' &&    <div className='align-middle h-full overflow-auto'>
+                 <TokenInfoCards />
+                </div>}
             </motion.div>
           </AnimatePresence>
 
