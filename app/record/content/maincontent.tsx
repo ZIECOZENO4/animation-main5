@@ -193,7 +193,7 @@ export default function MainComponent() {
         </Switch>
         </div>
           <Settings className="w-4 h-4" />
-          <div className="flex items-center bg-black border-slate-500 text-[#F7F2DA] rounded-md">
+          <div className="flex items-center bg-black border-slate-500 text-[#F7F2DA] rounded-md px-2">
             <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
             <input
             aria-label='number'
