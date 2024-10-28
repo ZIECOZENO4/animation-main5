@@ -127,7 +127,6 @@ export default function NFTCollectionManager() {
               <label htmlFor="showAll">PRE SALE</label>
             </div>
           </div>
-
           <div>
             <h3 className="text-slate-500 mb-2">TOKEN COLLECTIONS</h3>
             <div className="relative mb-2 mt-4">
@@ -232,9 +231,7 @@ export default function NFTCollectionManager() {
                 </div>}
             </motion.div>
           </AnimatePresence>
-
           <div className="my-2 px-8 align-bottom  justify-start  flex space-x-8">
-
             <motion.button
               className="bg-black border borser-slate-500 text-center   px-4 py-2 rounded-lg"
               whileHover={{ scale: 1.05 }}
