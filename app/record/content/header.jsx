@@ -43,14 +43,13 @@ export default function TokenHeader() {
         <div className="flex-grow">
           <div className="flex flex-row align-middle gap-3">
             <motion.h2
-              className="text-xl text-[#F7F2DA] mb-1"
-              style={{ filter: "blur(1px)" }}
-              animate={{ filter: isHovered ? "blur(0px)" : "blur(1px)" }}
+              className="text-xl text-gray-500 mb-1"
+         
             >
               ZENO WEB
             </motion.h2>
       
-            <Star className="w-6 h-6 pb-2 align-middle text-center text-green-500" />
+            <Star className="w-6 h-6 mb-1 align-middle text-center text-gray-500" />
           </div>
 
           <motion.div
@@ -63,13 +62,13 @@ export default function TokenHeader() {
               {copied ? (
                 <Check className="w-6 h-6 text-green-400" />
               ) : (
-                <Copy className="w-6 h-6 text-gray-400" />
+                <Copy className="w-6 h-6 text-gray-500" />
               )}
             </button>
-            <Phone className="w-6 h-6 text-gray-400" />
-            <Camera className="w-6 h-6 text-gray-400" />
-            <Globe className="w-6 h-6 text-gray-400" />
-            <ChevronDown className="w-6 h-6 text-gray-400" />
+            <Phone className="w-6 h-6 text-gray-500" />
+            <Camera className="w-6 h-6 text-gray5400" />
+            <Globe className="w-6 h-6 text-gray-500" />
+            <ChevronDown className="w-6 h-6 text-gray-500" />
           </motion.div>
         </div>
       </motion.div>
@@ -77,7 +76,7 @@ export default function TokenHeader() {
     
       
       <motion.div 
-        className="flex space-x-4 p-2 mr-4"
+        className="flex space-x-8 p-2 pr-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.5 }}
@@ -110,7 +109,7 @@ function StatItem({ label, value, isUp = null, showCoin = false }) {
         </span>
         {showCoin && (
           <img 
-            src='https://s2.coinmarketcap.com/static/img/coins/64x64/1.png' 
+            src='https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png' 
             alt='coin' 
             className='h-4 w-4 align-middle rounded-full items-center ml-1'
           />

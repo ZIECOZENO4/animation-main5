@@ -114,7 +114,7 @@ export default function Dashboard() {
   }, [leftWidth, rightWidth, leftTopHeight, leftBottomHeight, rightTopHeight, rightBottomHeight])
 
   return (
-    <div className="flex justify-between items-start h-[calc(100vh-10rem)] md:overflow-hidden w-[100vw]">
+    <div className="flex justify-between items-start  md:overflow-hidden w-[100vw]">
       {/* Left Panel */}
       <div className={`flex flex-col border-slate-500 transition-all overflow-auto w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
         <motion.div
