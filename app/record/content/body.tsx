@@ -116,7 +116,7 @@ export default function Dashboard() {
   return (
     <div className="flex justify-between items-start h-[calc(100vh-10rem)] md:overflow-hidden w-[100vw]">
       {/* Left Panel */}
-      <div className={`flex flex-col border-slate-500 transition-all overflow-auto w-1/4  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
+      <div className={`flex flex-col border-slate-500 transition-all overflow-auto w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 duration-300 `} style={{ width: leftWidth }}>
         <motion.div
           className={` transition-all duration-300 `}
      
@@ -292,14 +292,14 @@ export default function Dashboard() {
       </div>
 
       {/* Middle Panel */}
-      <div className="flex">
+      <div className="flex h-[80vh]">
 
       
       <div 
         className="w-1 bg-gray-600 cursor-col-resize" 
         onMouseDown={startResize(setLeftWidth, true)}
       />
-      <motion.div className={`transition-all duration-300 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
+      <motion.div className={`transition-all duration-300 w-[50%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 flex-grow overflow-auto`}>
    
 <MainComponent />
         {/* Content Here */}
@@ -310,7 +310,7 @@ export default function Dashboard() {
       />
 </div>
       {/* Right Panel */}
-      <div className={`flex flex-col border-l w-1/4  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
+      <div className={`flex flex-col border-l w-[25%]  overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300 border-slate-500 transition-all duration-300 `}  style={{ width: rightWidth }}>
         <motion.div
           className={`transition-all duration-300 `}
           style={{ height: rightTopHeight, overflow: 'auto' }}

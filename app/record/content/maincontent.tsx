@@ -214,4 +214,4 @@ export default function MainComponent() {
       </div>
     </div>
   )
-}
+} 
