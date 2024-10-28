@@ -298,9 +298,9 @@ export default function Dashboard() {
 
       {/* Middle Panel */}
 {/* Middle Panel */}
-<div className="flex-grow h-full overflow-hidden">
+<div className="flex-grow items-stretch h-full overflow-hidden">
   <motion.div 
-    className="w-full h-full overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300"
+    className="w-full h-full items-stretch overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-300"
     initial={false}
     animate={{
       width: `calc(100vw - ${leftWidth}px - ${rightWidth}px)`, // Subtract 2px for the resizers

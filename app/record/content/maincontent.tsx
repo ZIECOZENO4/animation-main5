@@ -54,7 +54,7 @@ export default function MainComponent() {
   }
 
   return (
-    <div className="bg-black border flex-grow  border-slate-500 text-gray-300 ">
+    <div className="bg-black border flex-grow h-full items-stretch border-slate-500 text-gray-300 ">
       <nav className="flex justify-between items-center mb-1">
         <div className="flex space-x-4">
         
@@ -191,20 +191,20 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className=" overflow-x-auto bg-black border border-slate-500 flex flex-col gap-2 items-center justify-center"
+            className=" overflow-x-auto bg-black border w-full border-slate-500 flex flex-col gap-2 items-center justify-center"
           >
-                <Card className="bg-black border border-slate-600  p-4 flex flex-col items-center justify-center h-32">
+                <Card className="bg-black border border-slate-600 w-full p-4 flex flex-col items-center justify-center h-32">
               <svg width="30px" height="30px" className='text-gray-400 my-2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0619 4.4295C12.6213 3.54786 11.3636 3.54786 10.9229 4.4295L3.89008 18.5006C3.49256 19.2959 4.07069 20.2317 4.95957 20.2317H19.0253C19.9142 20.2317 20.4923 19.2959 20.0948 18.5006L13.0619 4.4295ZM9.34196 3.6387C10.434 1.45376 13.5508 1.45377 14.6429 3.63871L21.6758 17.7098C22.6609 19.6809 21.2282 22 19.0253 22H4.95957C2.75669 22 1.32395 19.6809 2.3091 17.7098L9.34196 3.6387Z" fill="#ffffff"></path> <path d="M12 8V13" stroke="#f20202" stroke-width="1.7" stroke-linecap="round"></path> <path d="M12 16L12 16.5" stroke="#f20202" stroke-width="1.7" stroke-linecap="round"></path> </g></svg>
                 <p className="text-gray-400 text-xl">
                   No comments yet Be the first to comment!
                 </p>
               </Card>
-              <div className="text-center text-[#F7F2DA] text-xl mb-4 py-2  border border-slate-600">Load more</div>
+              <div className="text-center text-[#F7F2DA] text-xl mb-2 mt-6 py-2 mx-4 w-full  border border-slate-600">Load more</div>
       
               <button
             type="submit"
        
-          className='flex flex-row w-full shake-button'>
+          className='flex flex-row w-full mx-4 shake-button'>
       <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
       <div className='flex flex-col flex-grow'>
         <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
@@ -224,9 +224,61 @@ export default function MainComponent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className=" bg-gray-800 rounded-lg flex items-center justify-center"
+            className="  bg-black bg-opacity-50 border border-slate-500 flex items-center justify-center"
           >
-            <p>{activeTab} view coming soon...</p>
+               <table className="w-full text-xs">
+           <thead>
+                  <tr className="text-left border-b border-gray-800">
+                    <th className="py-2">
+                      <input
+                      aria-label='number'
+                        type="checkbox"
+                        checked={selectedItems.length === nftItems.length}
+                        onChange={handleSelectAll}
+                        className="rounded bg-gray-700 border-gray-600"
+                      />
+                    </th>
+                    <th className="py-2">29 LISTED</th>
+                    <th className="py-2">RARITY</th>
+                    <th className="py-2">BUY NOW</th>
+                    <th className="py-2">LAST SALE</th>
+                    <th className="py-2">TOP BID</th>
+                    <th className="py-2">OWNER</th>
+                    <th className="py-2">#HELD</th>
+                    <th className="py-2"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {nftItems.map(item => (
+                    <motion.tr
+                      key={item.id}
+                      className="border-b border-gray-800"
+                      whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
+                    >
+                      <td className="py-2">
+                        <input
+                        aria-label='number'
+                          type="checkbox"
+                          checked={selectedItems.includes(item.id)}
+                          onChange={() => handleItemSelect(item.id)}
+                          className="rounded bg-gray-700 border-gray-600"
+                        />
+                      </td>
+                      <td className="py-2 flex items-center">
+                        <img src={item.image} alt={item.name} className="w-8 h-8 mr-2 rounded" />
+                        {item.name}
+                      </td>
+                      <td className="py-2">{item.rarity}</td>
+                      <td className="py-2 text-yellow-500">{item.buyNow} ◆</td>
+                      <td className="py-2">{item.lastSale} ◆</td>
+                      <td className="py-2">{item.topBid} ◆</td>
+                      <td className="py-2">{item.owner}</td>
+                      <td className="py-2">{item.held}</td>
+                      <td className="py-2">{item.time}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
           </motion.div>
         )}
       </AnimatePresence>
