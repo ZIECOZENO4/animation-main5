@@ -175,9 +175,9 @@ export default function MainComponent() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <div className="mt-4 flex items-center align-bottom bottom-0 justify-between">
-      <hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mb-2' />
+      <hr className='border-slate-500 bg-slate-500 text-slate-500 w-full mt-2 mb-4' />
+      <div className=" flex items-center align-bottom bottom-0 justify-between">
+  
         <motion.button
           className="bg-black m-2 border border-slate-500  text-[#F7F2DA] px-4 py-2 rounded-md flex items-center"
           whileHover={{ scale: 1.05 }}
