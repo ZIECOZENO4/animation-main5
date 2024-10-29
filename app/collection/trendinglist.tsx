@@ -55,7 +55,7 @@ export default function TrendingComponent() {
       <div className="max-w-full mx-auto">
         <motion.div
           layout
-          className="bg-black overflow-hidden"
+          className="bg-black overflow-auto  md:overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
