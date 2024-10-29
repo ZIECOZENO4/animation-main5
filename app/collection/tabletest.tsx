@@ -171,7 +171,7 @@ const MainTable = () => {
 
             {/* Buy Button with centered text */}
             <motion.div 
-              className="w-[59px] h-[36.22px] border-[0.63px] border-[#000000]"
+              className="w-[59px] h-[36.22px] shake-button border-[0.63px] border-[#000000]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.1 * index + 0.8 }}
