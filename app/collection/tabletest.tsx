@@ -90,6 +90,19 @@ const MainTable = () => {
         >
           Attention (Total)
         </motion.p>
+        <motion.p
+          className="text-[#F7F2DA] workbench-test w-[100px] text-center"
+          style={{
+            fontSize: "10px",
+            fontWeight: 200,
+            lineHeight: "10px",
+          }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+        Buy
+        </motion.p>
       </motion.div>
 
       {/* Body - Repeated 30 times */}
@@ -158,6 +171,16 @@ const MainTable = () => {
               transition={{ delay: 0.1 * index + 0.6 }}
             >
               {(4.2 + index * 0.1).toFixed(1)}%
+            </motion.p>
+       
+
+            <motion.p 
+              className="flex-1 text-center text-[16px] text-[#9CBD8F] font-normal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 * index + 0.6 }}
+            >
+              {(32.6 + index * 0.1).toFixed(1)}%
             </motion.p>
 
             <motion.p 
