@@ -1,12 +1,13 @@
 import { HeroSection } from '@/components/Hero'
 import React from 'react'
-import TokenDetailsTable from './second tablelist'
+import MainTable from './tabletest'
+
 
 const CollectionPage = () => {
   return (
     <div className='align-middle flex flex-col'>
     <HeroSection />
-    <TokenDetailsTable />
+    <MainTable />
   </div>
   )
 }
