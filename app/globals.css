@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --font-workbench: 'Workbench', system-ui;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #27272a;
+  border-radius: 8px;
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #3f3f46;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a var(--background);
+}
 
 @keyframes wave-animation {
   0%, 100% { transform: scale(1); }
@@ -51,10 +83,6 @@
   :root {
     --font-workbench: 'Workbench', system-ui;
   }
-}
-
-:root {
-  --font-workbench: 'Workbench', system-ui;
 }
 
 

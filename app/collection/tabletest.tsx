@@ -12,7 +12,7 @@ const MainTable = () => {
   }));
 
   return (
-    <div className="flex flex-col w-full mb-10 px-6">
+    <div className="flex flex-col w-full mt-4 mb-10 px-6">
       {/* Header */}
       <motion.div 
         className="w-full h-[36px] px-[18px] pr-[31px] pt-[9px] pb-[12px] bg-[#0A0909] flex items-center justify-between"
