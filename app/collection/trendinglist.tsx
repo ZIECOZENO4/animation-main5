@@ -51,7 +51,7 @@ export default function TrendingComponent() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-gray-300 p-4">
+    <div className="min-h-screen bg-black text-[#F7F2DA] ">
       <div className="max-w-full mx-auto">
         <motion.div
           layout

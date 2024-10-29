@@ -43,7 +43,7 @@ export default function PointsComponent() {
   const pointKeys: PointKey[] = ['bidPoints', 'traitBidPoints', 'listingPoints', 'lendingPoints']
 
   return (
-    <div className="min-h-screen bg-black text-[#F7F2DA] p-4">
+    <div className="min-h-screen bg-black text-[#F7F2DA] ">
       <div className="w-full mx-auto">
         <motion.div
           layout
