@@ -60,7 +60,7 @@ export default function TokenHeader() {
           >
                   <button onClick={handleCopy}>
               {copied ? (
-                <Check className="w-6 h-6 text-green-400" />
+                <Check className="w-6 h-6 text-gray-100" />
               ) : (
                 <Copy className="w-6 h-6 text-gray-500" />
               )}
@@ -104,7 +104,7 @@ function StatItem({ label, value, isUp = null, showCoin = false }) {
     >
       <span className="text-gray-400">{label}</span>
       <div className="flex items-center">
-        <span className={isUp === null ? '' : (isUp ? 'text-green-400' : 'text-red-400')}>
+        <span className={isUp === null ? '' : (isUp ? 'text-slate-300' : 'text-slate-600')}>
           {value} {isUp !== null && (isUp ? '↑' : '↓')}
         </span>
         {showCoin && (
