@@ -115,8 +115,8 @@ export default function TrendingComponent() {
                           )}
                         </span>
                       </td>
-                      <td className="px-4 py-2 flex gap-2">
-                        <motion.div whileHover={{ scale: 1.05 }}>
+                      <td className="px-4 py-2 ">
+                        <motion.div whileHover={{ scale: 1.05 }} className='flex gap-2'>
                           {collection.floorPrice}  <img src='/images/eth.png' alt="coin" className="w-3 h-4" />
                         </motion.div>
                       </td>

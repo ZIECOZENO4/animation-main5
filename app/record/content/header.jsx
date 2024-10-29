@@ -111,7 +111,7 @@ function StatItem({ label, value, isUp = null, showCoin = false }) {
           <img 
             src='/images/eth.png' 
             alt='coin' 
-            className='h-4 w-4 align-middle rounded-full items-center ml-1'
+            className='h-4 w-3 align-middle rounded-full items-center ml-1'
           />
         )}
       </div>

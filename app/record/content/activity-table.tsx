@@ -81,7 +81,7 @@ export default function ActivityComponent() {
                 <td className="py-2">{activity.time}</td>
                 <td className="py-2">
                   {/* Image of the coin */}
-                  <img src={activity.item} alt={`Coin ${activity.id}`} className="w-4 h-4" />
+                  <img src={activity.item} alt={`Coin ${activity.id}`} className="w-3 h-4" />
                 </td>
                 <td className="py-2">
                   <span className={activity.price < 0.3 ? 'text-slate-700' : activity.price > 0.3 ? 'text-slate-300' : ''}>
