@@ -87,7 +87,7 @@ const CollectionsTab: React.FC<CollectionsTabProps> = ({ hoveredRow, setHoveredR
   <table className="w-full text-sm text-[#F7F2DA]">
     <thead>
       <tr className="text-gray-400 border-b border-gray-800">
-        <th className="px-4 py-2 text-left font-medium">FLOOR PRICE</th>
+        <th className="px-4 py-2 text-left font-medium">TOKEN NAME</th>
         <th className="px-4 py-2 text-left font-medium">FLOOR PRICE</th>
         <th className="px-4 py-2 text-left font-medium">TOP BID</th>
         <th className="px-4 py-2 text-left font-medium">1D CHANGE</th>
