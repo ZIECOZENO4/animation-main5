@@ -9,9 +9,9 @@ const MainTable = () => {
 <motion.p
                 className="text-[#F7F2DA] workbench-test "
                 style={{
-                  width: "60px",
+                  
                   height: "10px",
-                  left: "137px",
+                
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
@@ -27,9 +27,9 @@ const MainTable = () => {
               <motion.p
                 className="text-[#F7F2DA] workbench-test "
                 style={{
-                  width: "60px",
+                  
                   height: "10px",
-                  left: "137px",
+                
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
@@ -45,9 +45,9 @@ const MainTable = () => {
               <motion.p
                 className="text-[#F7F2DA] workbench-test "
                 style={{
-                  width: "60px",
+                  
                   height: "10px",
-                  left: "137px",
+                
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
@@ -63,9 +63,9 @@ const MainTable = () => {
               <motion.p
                 className="text-[#F7F2DA] workbench-test "
                 style={{
-                  width: "60px",
+                  
                   height: "10px",
-                  left: "137px",
+                
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
@@ -81,9 +81,9 @@ const MainTable = () => {
               <motion.p
                 className="text-[#F7F2DA] workbench-test "
                 style={{
-                  width: "60px",
+                  
                   height: "10px",
-                  left: "137px",
+                
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
@@ -98,16 +98,16 @@ const MainTable = () => {
               </motion.p>
         </div>
         <div className="w-full h-[72px] pr-[31px] pt-[9px] pb-[12px] mx-4 my-2 bg-[#0A0909] flex-row flex justify-between">
-<div className="w-[167px] h-[52px] top-[9px] left-[18px] flex-row flex justify-between">
-<div className="w-[58px] h-[52px] top-[9px] left-[18px] bg-[#5D5C5C]" />
+<div className="w-auto gap-4 aglin-middle h-[52px] top-[9px] px-4 flex-row flex justify-between">
+<div className="w-[58px] h-[52px] top-[9px]  bg-[#5D5C5C]" />
 <div className=" text-[#F7F2DA]">
-<p className=" text-[20px] font-normal leading-[20px] text-left top-[18px] left-[85px]">[$BEAT]</p>
+<p className=" text-[20px] font-normal leading-[20px] text-left ">[$BEAT]</p>
 <motion.p
-                className="text-[#F7F2DA] leading-[10px] workbench-test top-[42px] left-[85px]"
+                className="text-[#F7F2DA] leading-[10px] workbench-test "
                 style={{
-                  width: "60px",
+                  
                   height: "10px",
-                  left: "137px",
+                
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
@@ -129,7 +129,7 @@ const MainTable = () => {
 <div className="flex">
 <div className=" w-[2.84px] h-[36.22px]  bg-[#787878] border-t-[0.63px] border-black" />
 <div className="text-center w-[56px] h-[33px]  bg-[#787878]">
-<p className=" text-[20px] text-[#F7F2DA] font-normal leading-[20px] ">BUY</p>
+<p className=" text-[20px] text-[#F7F2DA] text-center font-normal leading-[20px] ">BUY</p>
 </div>
 </div>
 <div className=" w-[59px] h-[2px]  bg-[#787878] border-t-[0.63px] border-[#000000]" />
