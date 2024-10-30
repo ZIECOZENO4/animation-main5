@@ -77,9 +77,9 @@ const CubicButton = () => {
             >
               <div className="flex">
                 <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
-                <div className="flex items-center justify-center w-[56px] h-[33px] bg-[#787878]">
+                <div className="flex items-center justify-center w-[110.08px] text-center h-[33px] bg-[#787878]">
                   <motion.p 
-                    className="text-[20px] text-[#F7F2DA] font-normal"
+                    className="text-[20px] text-[#F7F2DA] text-center font-normal"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
         
