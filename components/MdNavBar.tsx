@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react'
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import CubicButton from './CubicButton';
 import { NotificationIcon } from "./NotificationIcon";
 import NotificationAlert from "./Notification";
@@ -62,7 +62,6 @@ const styles = {
 
 const MdNavBar = () => {
   const [activeItem, setActiveItem] = useState<ActiveItem>(null);
-    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const currentPath = usePathname();
   
