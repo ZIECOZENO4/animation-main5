@@ -64,7 +64,7 @@ const CubicButton = () => {
                   </motion.p>
                 </div>
               </div>
-              <div className="w-[110px]  h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
+              <div className="w-[110.08px]  h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
             </motion.div>
                 )
               }
