@@ -47,32 +47,38 @@ const MdNavBar = () => {
   return (
     <div className='flex-row justify-between text-[#F7F2DA] h-20 flex md:gap-[80px] w-full p-[20px] md:px-[30px] px-[20px] sticky top-0 z-50 fixed'>
    <Link href="/" className="flex flex-row ">
- 
    <motion.p
-        className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
-        whileHover={{
-          y: [-2, 2, -2],
-          transition: { repeat: Infinity, duration: 0.5 }
-        }}
-      >
-        KANNON
-        <motion.span
-          className="absolute inset-0 text-transparent pointer-events-none"
-          style={{
-            textShadow: `
-              0 0 20px rgba(247, 242, 218, 0.7),
-              0 0 40px rgba(247, 242, 218, 0.5),
-              0 0 60px rgba(247, 242, 218, 0.3)
-            `,
-            WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-           KANNON
-        </motion.span>
-      </motion.p>
+  className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
+  whileHover={{
+    y: [-2, 2, -2],
+    transition: { repeat: Infinity, duration: 0.5 }
+  }}
+>
+  KANNON
+  <motion.span
+    className="absolute inset-0 text-transparent pointer-events-none"
+    style={{
+      textShadow: `
+        0 0 20px rgba(247, 242, 218, 0.7),
+        0 0 40px rgba(247, 242, 218, 0.5),
+        0 0 60px rgba(247, 242, 218, 0.3)
+      `,
+      WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
+    }}
+    initial={{ opacity: 0 }}
+    animate={{ 
+      opacity: [0, 1, 1, 0] 
+    }}
+    transition={{ 
+      repeat: Infinity,
+      duration: 5,
+      times: [0, 0.1, 0.9, 1], // Controls when each opacity value occurs
+      ease: "easeInOut"
+    }}
+  >
+    KANNON
+  </motion.span>
+</motion.p>
           </Link>
 
       <div className={styles.headerWrapper}>

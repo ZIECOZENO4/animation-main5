@@ -165,7 +165,7 @@ const MainTable = () => {
             </motion.p>
 
             <motion.p 
-              className="flex-1 text-center text-[16px] text-[#BD8F8F] font-normal"
+              className="flex-1 text-center text-[16px] pl-[2rem] text-[#BD8F8F] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.6 }}
@@ -175,7 +175,7 @@ const MainTable = () => {
        
 
             <motion.p 
-              className="flex-1 text-center text-[16px] text-[#9CBD8F] font-normal"
+              className="flex-1 text-center text-[16px] pl-[5rem] text-[#9CBD8F] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.6 }}
@@ -184,7 +184,7 @@ const MainTable = () => {
             </motion.p>
 
             <motion.p 
-              className="flex-1 text-center text-[16px] text-[#DFDBC5] font-normal"
+              className="flex-1 text-center text-[16px] pl-1 text-[#DFDBC5] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.7 }}

@@ -4,6 +4,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { ChevronDownIcon } from "lucide-react"
 import Image from "next/image"
 import { useBalance } from 'wagmi'
+import { motion } from "framer-motion";
+
 
 const CubicButton = () => {
   return (
@@ -41,20 +43,53 @@ const CubicButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <div 
-                    className='flex flex-row mx-4 shake-button cursor-pointer'
-                    onClick={openConnectModal}
+              //     <motion.div 
+              //       className='border-[0.63px] border-[#000000] mx-4 shake-button cursor-pointer'
+              //    
+              //       initial={{ scale: 0 }}
+              //       animate={{ scale: 1 }}
+                
+              //       whileHover={{ scale: 1.05 }}
+              //     >
+              //            <div className="flex">
+              //            <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
+              //   <div className="flex items-center justify-center w-[2.84px] h-[36.22px] bg-[#787878]">
+              //     <motion.p 
+              //       className="text-[20px] text-[#F7F2DA] font-normal"
+              //       initial={{ opacity: 0 }}
+              //       animate={{ opacity: 1 }}
+            
+              //     >
+              //         CONNECT
+              //     </motion.p>
+              //   </div>
+              // </div>
+              // <div className="w-w-[] h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
+              //            </div>
+                  
+              //     </motion.div>
+              <motion.div 
+              className="w-[110.08px] h-[36.22px] shake-button border-[0.63px] border-[#000000]"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              onClick={openConnectModal}
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex">
+                <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
+                <div className="flex items-center justify-center w-[56px] h-[33px] bg-[#787878]">
+                  <motion.p 
+                    className="text-[20px] text-[#F7F2DA] font-normal"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+        
                   >
-                    <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
-                    <div className='flex flex-col'>
-                      <div className="w-[110.25px] h-[33.39px] bg-[#787878] items-center shadow-md flex justify-center">
-                        <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
-                          CONNECT
-                        </span>
-                      </div>
-                      <div className="w-[110.08px] h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
-                    </div>
-                  </div>
+                CONNECT
+                  </motion.p>
+                </div>
+              </div>
+              <div className="w-[110.08px] pr-1 h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
+            </motion.div>
                 )
               }
 
