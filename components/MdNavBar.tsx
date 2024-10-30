@@ -73,7 +73,6 @@ const MdNavBar = () => {
     ];
   
     const toggleNotification = () => {
-      setIsOpen(!isOpen);
       setIsNotificationOpen(!isNotificationOpen);
     };
   return (
@@ -166,7 +165,7 @@ const MdNavBar = () => {
     >
       <div
         onClick={toggleNotification}
-        className=" bg-[#1e293b] mx-2 bg-opacity-60 hover:bg-[#1e293b]/80 rounded-full p-2 cursor-pointer"
+        className="relative bg-[#1e293b] mx-2 bg-opacity-60 hover:bg-[#1e293b]/80 rounded-full p-2 cursor-pointer"
         role="button"
         tabIndex={0}
         aria-label="Toggle notifications"
@@ -176,31 +175,28 @@ const MdNavBar = () => {
           }
         }}
       >
-        <div className=" w-[11px] h-[12px] scale-[2]">
+        <div className="relative w-[11px] h-[12px] scale-[2]">
           {/* Top row */}
-          <div className=" top-0 left-[4px] w-[3px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-0 left-[4px] w-[3px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
           
           {/* Upper sides */}
-          <div className=" top-[1px] left-[3px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
-          <div className=" top-[1px] left-[7px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[1px] left-[3px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[1px] left-[7px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
           
           {/* Middle sides */}
-          <div className=" top-[2px] left-[2px] w-[1px] h-[5px] bg-slate-500 hover:bg-[#F7F2DA]" />
-          <div className=" top-[2px] left-[8px] w-[1px] h-[5px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[2px] left-[2px] w-[1px] h-[5px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[2px] left-[8px] w-[1px] h-[5px] bg-slate-500 hover:bg-[#F7F2DA]" />
           
-          <div className=" top-[7px] left-[1px] w-[1px] h-[2px] bg-slate-500 hover:bg-[#F7F2DA]" />
-          <div className=" top-[7px] left-[9px] w-[1px] h-[2px] bg-slate-500 hover:bg-[#F7F2DA]" />
-          <div className=" top-[9px] left-[2px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
-          <div className=" top-[9px] left-[8px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
-          <div className=" top-[10px] left-[3px] w-[5px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[7px] left-[1px] w-[1px] h-[2px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[7px] left-[9px] w-[1px] h-[2px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[9px] left-[2px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[9px] left-[8px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[10px] left-[3px] w-[5px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
           
 
-          <div className=" top-[11px] left-[5px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[11px] left-[5px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
         </div>
 
-        {isOpen && (
-          <span className=" top-2 right-2 w-1.5 h-1.5 bg-slate-700 rounded-full" />
-        )}
       </div>
     </motion.div>
         </div>
