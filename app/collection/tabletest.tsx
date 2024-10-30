@@ -118,7 +118,7 @@ const MainTable = () => {
           >
             {/* Token Info with fixed width */}
             <motion.div 
-              className="flex items-center gap-4 px-4 w-[250px]"
+              className="flex items-center gap-4 px-4 w-[275px]"
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 * index + 0.2 }}
