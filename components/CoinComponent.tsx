@@ -803,7 +803,7 @@ const Card = () => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: 0.1}}
-    whileHover={{ scale: 1.01 }}
+    whileHover={{ scale: 1.07 }} // Increased from 1.01 to 1.05
   >
     <div
       className="bg-[#0A0909] rounded-lg overflow-hidden"
