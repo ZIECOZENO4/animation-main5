@@ -11,7 +11,7 @@ const MainTable = () => {
   }));
 
   return (
-    <div className="flex flex-col w-full mt-4 mb-10 px-6">
+    <div className="flex flex-col w-full mt-4 mb-10 px-6 space-y-4"> {/* Added space-y-4 for gap */}
       {/* Header */}
       <motion.div 
         className="w-full h-[36px] bg-[#0A0909] grid grid-cols-[275px_1fr_1fr_1fr_1fr_100px] gap-4 items-center px-4"
