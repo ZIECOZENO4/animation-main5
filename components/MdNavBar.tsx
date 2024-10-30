@@ -1,14 +1,47 @@
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import CubicButton from './CubicButton';
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { Badge, Button } from "@nextui-org/react";
 import { NotificationIcon } from "./NotificationIcon";
 import NotificationAlert from "./Notification";
 import FullConnectButton from './fullConnectButton';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@nextui-org/react";
+
+const MdNavBar = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Show navbar if scrolling up or at top of page
+    const isScrollingUp = latest < lastScrollY || latest < 50;
+    setIsVisible(isScrollingUp);
+    setLastScrollY(latest);
+  });
+
+  const navVariants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20
+      }
+    },
+    hidden: {
+      y: -100,
+      opacity: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20
+      }
+    }
+  };
+
 
 type ActiveItem = string | null;
 
@@ -30,6 +63,7 @@ const styles = {
 const MdNavBar = () => {
   const [activeItem, setActiveItem] = useState<ActiveItem>(null);
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const currentPath = usePathname();
   
     const navItems: NavItem[] = [
@@ -45,7 +79,11 @@ const MdNavBar = () => {
       setIsNotificationOpen(!isNotificationOpen);
     };
   return (
-    <div className='flex-row justify-between text-[#F7F2DA] h-20 flex md:gap-[80px] w-full p-[20px] md:px-[30px] px-[20px] sticky top-0 z-50 fixed'>
+    <motion.div 
+    variants={navVariants}
+    initial="visible"
+    animate={isVisible ? "visible" : "hidden"}
+    className='flex-row justify-between text-[#F7F2DA] h-20 flex md:gap-[80px] w-full p-[20px] md:px-[30px] px-[20px] sticky top-0 z-50 fixed'>
    <Link href="/" className="flex flex-row ">
    <motion.p
   className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center sm:leading-none hover:text-gray-500 text-inherit text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
@@ -60,7 +98,7 @@ const MdNavBar = () => {
     style={{
       textShadow: `
         0 0 20px rgba(247, 242, 218, 0.7),
-        0 0 40px rgba(247, 242, 218, 0.5),
+        0 0 40px rgba(247, 242, 218, 0.5), 
         0 0 60px rgba(247, 242, 218, 0.3)
       `,
       WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
@@ -256,7 +294,7 @@ const MdNavBar = () => {
           </>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 

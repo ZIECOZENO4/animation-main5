@@ -800,9 +800,10 @@ export default function ComponentCoin() {
 const Card = () => (
   <motion.div
     className="w-full  md:w-[350px] px-2 mb-4"
-    initial={{ opacity: 0, scale: 0.9 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5 }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 0.1}}
+    whileHover={{ scale: 1.01 }}
   >
     <div
       className="bg-[#0A0909] rounded-lg overflow-hidden"
