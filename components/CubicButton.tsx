@@ -93,8 +93,8 @@ const CubicButton = () => {
                             <Image
                               src={chain.iconUrl}
                               alt={chain.name || "Network"}
-                              width={30}
-                              height={30}
+                              width={25}
+                              height={25}
                               className="rounded-full"
                             />
                           )}
@@ -146,11 +146,12 @@ const CubicButton = () => {
                           <span className="text-[#F7F2DA] text-sm  font-normal">
                           {balanceData?.formatted?.slice(0, 5)} {balanceData?.symbol}
                         </span>
-                        </div>
                         <span className="text-[#F7F2DA] text-xs pl-2 pr-1 font-normal">
                             {account.displayName}
                           </span>
                         <ChevronDownIcon />
+                        </div>
+                 
                   </motion.p>
                 </div>
               </div>

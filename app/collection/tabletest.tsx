@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import "./WorkbenchFontTest.css";
 
 const MainTable = () => {
-
   const items = Array.from({ length: 30 }, (_, index) => ({
     id: index,
     name: `[$BEAT ${index + 1}]`,
@@ -15,13 +14,13 @@ const MainTable = () => {
     <div className="flex flex-col w-full mt-4 mb-10 px-6">
       {/* Header */}
       <motion.div 
-        className="w-full h-[36px] px-[18px] pr-[31px] pt-[9px] pb-[12px] bg-[#0A0909] flex items-center justify-between"
+        className="w-full h-[36px] bg-[#0A0909] grid grid-cols-[275px_1fr_1fr_1fr_1fr_100px] gap-4 items-center px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <motion.p
-          className="text-[#F7F2DA] workbench-test w-[250px]"
+          className="text-[#F7F2DA] workbench-test"
           style={{
             fontSize: "10px",
             fontWeight: 200,
@@ -36,7 +35,7 @@ const MainTable = () => {
         </motion.p>
         
         <motion.p
-          className="text-[#F7F2DA] workbench-test flex-1 text-center"
+          className="text-[#F7F2DA] workbench-test text-center"
           style={{
             fontSize: "10px",
             fontWeight: 200,
@@ -50,7 +49,7 @@ const MainTable = () => {
         </motion.p>
 
         <motion.p
-          className="text-[#F7F2DA] workbench-test flex-1 text-center"
+          className="text-[#F7F2DA] workbench-test text-center"
           style={{
             fontSize: "10px",
             fontWeight: 200,
@@ -64,7 +63,7 @@ const MainTable = () => {
         </motion.p>
 
         <motion.p
-          className="text-[#F7F2DA] workbench-test flex-1 text-center"
+          className="text-[#F7F2DA] workbench-test text-center"
           style={{
             fontSize: "10px",
             fontWeight: 200,
@@ -78,7 +77,7 @@ const MainTable = () => {
         </motion.p>
 
         <motion.p
-          className="text-[#F7F2DA] workbench-test w-[100px] text-center"
+          className="text-[#F7F2DA] workbench-test text-center"
           style={{
             fontSize: "10px",
             fontWeight: 200,
@@ -90,8 +89,9 @@ const MainTable = () => {
         >
           Attention (Total)
         </motion.p>
+
         <motion.p
-          className="text-[#F7F2DA] workbench-test w-[100px] text-center"
+          className="text-[#F7F2DA] workbench-test text-center"
           style={{
             fontSize: "10px",
             fontWeight: 200,
@@ -101,7 +101,7 @@ const MainTable = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-        Buy
+          Buy
         </motion.p>
       </motion.div>
 
@@ -110,15 +110,15 @@ const MainTable = () => {
         {items.map((item, index) => (
           <motion.div 
             key={item.id}
-            className="w-full h-[72px] pr-[31px] bg-[#0A0909] flex items-center justify-between mt-2"
+            className="w-full h-[72px] bg-[#0A0909] grid grid-cols-[275px_1fr_1fr_1fr_1fr_100px] gap-4 items-center px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 * index }}
             whileHover={{ scale: 1.01 }}
           >
-            {/* Token Info with fixed width */}
+            {/* Token Info */}
             <motion.div 
-              className="flex items-center gap-4 px-4 w-[275px]"
+              className="flex items-center gap-4"
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 * index + 0.2 }}
@@ -154,9 +154,9 @@ const MainTable = () => {
               </div>
             </motion.div>
 
-            {/* Stats with flex-1 to distribute space */}
+            {/* Stats aligned with headers */}
             <motion.p 
-              className="flex-1 text-center text-[16px] pl-[3rem] text-[#DFDBC5] font-normal"
+              className="text-center text-[16px] text-[#DFDBC5] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.5 }}
@@ -165,17 +165,16 @@ const MainTable = () => {
             </motion.p>
 
             <motion.p 
-              className="flex-1 text-center text-[16px] pl-[2rem] text-[#BD8F8F] font-normal"
+              className="text-center text-[16px] text-[#BD8F8F] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.6 }}
             >
               {(4.2 + index * 0.1).toFixed(1)}%
             </motion.p>
-       
 
             <motion.p 
-              className="flex-1 text-center text-[16px] pl-[5rem] text-[#9CBD8F] font-normal"
+              className="text-center text-[16px] text-[#9CBD8F] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.6 }}
@@ -184,7 +183,7 @@ const MainTable = () => {
             </motion.p>
 
             <motion.p 
-              className="flex-1 text-center text-[16px] pl-[1rem] text-[#DFDBC5] font-normal"
+              className="text-center text-[16px] text-[#DFDBC5] font-normal"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.7 }}
@@ -192,9 +191,9 @@ const MainTable = () => {
               {3269 + index * 100}
             </motion.p>
 
-            {/* Buy Button with centered text */}
+            {/* Buy Button */}
             <motion.div 
-              className="w-[59px] h-[36.22px] shake-button border-[0.63px] border-[#000000]"
+              className="w-[59px] h-[36.22px] shake-button border-[0.63px] border-[#000000] justify-self-center"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.1 * index + 0.8 }}
