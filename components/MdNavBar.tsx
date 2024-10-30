@@ -33,6 +33,7 @@ const MdNavBar = () => {
     const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { scrollY } = useScroll();
+  const [isOpen, setIsOpen] = useState(false)
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     // Show navbar if scrolling up or at top of page
@@ -72,6 +73,7 @@ const MdNavBar = () => {
     ];
   
     const toggleNotification = () => {
+      setIsOpen(!isOpen);
       setIsNotificationOpen(!isNotificationOpen);
     };
   return (
@@ -158,26 +160,51 @@ const MdNavBar = () => {
               <CubicButton />
             </div>
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-opacity-60 text-[#F7F2DA] p-2 md:px-3 md:py-2 rounded-md text-sm font-medium cursor-pointer"
-            >
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="inline-block"
+    >
+      <div
+        onClick={toggleNotification}
+        className="relative bg-[#1e293b] bg-opacity-60 hover:bg-[#1e293b]/80 rounded-full p-2 cursor-pointer"
+        role="button"
+        tabIndex={0}
+        aria-label="Toggle notifications"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            toggleNotification()
+          }
+        }}
+      >
+        <div className="relative w-[11px] h-[12px] scale-[2]">
+          {/* Top row */}
+          <div className="absolute top-0 left-[4px] w-[3px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          
+          {/* Upper sides */}
+          <div className="absolute top-[1px] left-[3px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[1px] left-[7px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          
+          {/* Middle sides */}
+          <div className="absolute top-[2px] left-[2px] w-[1px] h-[5px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[2px] left-[8px] w-[1px] h-[5px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          
+          {/* Bottom curve */}
+          <div className="absolute top-[7px] left-[1px] w-[1px] h-[2px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[7px] left-[9px] w-[1px] h-[2px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[9px] left-[2px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[9px] left-[8px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          <div className="absolute top-[10px] left-[3px] w-[5px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+          
+          {/* Bell handle */}
+          <div className="absolute top-[11px] left-[5px] w-[1px] h-[1px] bg-slate-500 hover:bg-[#F7F2DA]" />
+        </div>
 
-                <Button
-                  radius="full"
-                  isIconOnly
-                  aria-label="Notifications and Sidebar"
-                  variant="light"
-                  onClick={toggleNotification}
-                >
-                 <NotificationIcon
-  size={24}
-  fill='#94a3b8'
-  background="#1e293b"
-/>
-                </Button>
-
-            </motion.div>
+        {/* Optional notification dot */}
+        {isOpen && (
+          <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-slate-700 rounded-full" />
+        )}
+      </div>
+    </motion.div>
         </div>
       <AnimatePresence>
         {isNotificationOpen && (
