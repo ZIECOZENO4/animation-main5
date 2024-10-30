@@ -160,7 +160,7 @@ const MainTable = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 * index + 0.5 }}
-            >
+            >  
               top {50 - index}
             </motion.p>
 
