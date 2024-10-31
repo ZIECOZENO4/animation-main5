@@ -20,10 +20,9 @@ export default function TestComponent() {
   )
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-800">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="relative w-64">
         <button
-          aria-label='number'
           onClick={toggleDropdown}
           className="w-full px-4 py-2 text-left bg-white border-2 border-black focus:outline-none pixelated"
         >
@@ -33,7 +32,6 @@ export default function TestComponent() {
           <div className="absolute w-full mt-1 bg-white border-2 border-black pixelated">
             {styles.map((style) => (
               <button
-              aria-label='number'
                 key={style}
                 onClick={() => handleSelect(style)}
                 className="w-full px-4 py-2 text-left hover:bg-gray-200 focus:outline-none"
