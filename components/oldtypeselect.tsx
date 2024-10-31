@@ -17,7 +17,7 @@ export default function TestComponent() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black">
+    <div className="flex items-center gap-4 justify-center ">
       <div className="relative w-64">
         <motion.button
           onClick={toggleDropdown}

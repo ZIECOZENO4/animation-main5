@@ -14,7 +14,7 @@ import {
   ModalBody,
   ModalFooter
 } from "@nextui-org/react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaFilter } from "react-icons/fa";
 import { SiEthereum, SiBinance, SiPolygon } from "react-icons/si";
 import CardDemo from "./CardDemo";
@@ -246,13 +246,21 @@ export default function ComponentCoin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredCoins, setFilteredCoins] = useState(coins);
   const [selectedChain, setSelectedChain] = useState("all");
-  const [selectedMarketCap, setSelectedMarketCap] = useState("all");
   const [minMarketCap, setMinMarketCap] = useState("");
   const [maxMarketCap, setMaxMarketCap] = useState("");
   const [liked, setLiked] = React.useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const [isChainOpen, setIsChainOpen] = useState(false)
+  const [isMarketCapOpen, setIsMarketCapOpen] = useState(false)
+  const [isPriceOpen, setIsPriceOpen] = useState(false)
 
+  // Selected values
+  const [selectedMarketCap, setSelectedMarketCap] = useState('All Market Cap')
+  const [minPrice, setMinPrice] = useState('')
+  const [maxPrice, setMaxPrice] = useState('')
+
+  
   useEffect(() => {
     applyFilters();
   }, [selectedChain, selectedMarketCap, minMarketCap, maxMarketCap]);
@@ -299,6 +307,13 @@ export default function ComponentCoin() {
     setMaxMarketCap("");
   };
 
+  const marketCapOptions = [
+    { key: 'all', name: 'All Market Cap' },
+    { key: 'low', name: 'Low Cap (< $1B)' },
+    { key: 'mid', name: 'Mid Cap ($1B - $10B)' },
+    { key: 'high', name: 'High Cap (> $10B)' },
+  ]
+
   return (
     <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
       <motion.div className="flex flex-row justify-between align-middle gap-4">
@@ -338,87 +353,207 @@ export default function ComponentCoin() {
         
 
         {/* Desktop view */}
-        <div className="hidden md:flex gap-4">
-          <Select
-            label="All Chains"
-            variant="bordered"
-            className="max-w-xs"
-            value={selectedChain}
-            onChange={(e) => setSelectedChain(e.target.value)}
-          >
-            {chainData.map((chain) => (
-              <SelectItem
-                key={chain.key}
-                value={chain.key}
-                className="bg-black max-w-2xl text-start"
-              >
-                {chain.name}
-              </SelectItem>
-            ))}
-          </Select>
-          <Select
-            label="Market Cap"
-            value={selectedMarketCap}
-            variant="bordered"
-            className="w-[40rem]"
-            onChange={(e) => setSelectedMarketCap(e.target.value)}
-          >
-            <SelectItem key="all" value="all" className="bg-black max-w-2xl">
-              All Market Cap
-            </SelectItem>
-            <SelectItem key="low" value="low" className="bg-black max-w-2xl">
-              Low Cap (&lt; $1B)
-            </SelectItem>
-            <SelectItem key="mid" value="mid" className="bg-black max-w-2xl">
-              Mid Cap ($1B - $10B)
-            </SelectItem>
-            <SelectItem key="high" value="high" className="bg-black max-w-2xl">
-              High Cap (&gt; $10B)
-            </SelectItem>
-          </Select>
-          <Select
-            label="Price"
-            variant="bordered"
-            className="max-w-xs"
-            value={selectedChain}
-            onChange={(e) => setSelectedChain(e.target.value)}
-          >
-            <SelectItem key="button" className="bg-black">
+        <div className="hidden md:flex items-center gap-4">
+      {/* Chain Dropdown */}
+      <div className="relative w-48">
+        <motion.button
+          onClick={() => setIsChainOpen(!isChainOpen)}
+          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
+          focus:outline-none relative transition-all duration-200"
+          style={{
+            boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+          }}
+          whileHover={{
+            boxShadow: '2px 2px 0 0 rgba(26, 26, 26, 0.95), 4px 4px 0 0 rgba(26, 26, 26, 0.85)',
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{
+            boxShadow: '1px 1px 0 0 rgba(26, 26, 26, 1)',
+            transform: 'translate(2px, 2px)',
+          }}
+        >
+          <span className="text-[#F7F2DA] tracking-wide">{selectedChain}</span>
+        </motion.button>
+
+        <AnimatePresence>
+          {isChainOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute w-full mt-2 bg-[#0A0909] border-2 border-[#1a1a1a] 
+              overflow-hidden z-50"
+              style={{
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+              }}
+            >
+              {chainData.map((chain, index) => (
+                <motion.button
+                  key={chain.key}
+                  onClick={() => {
+                    setSelectedChain(chain.name)
+                    setIsChainOpen(false)
+                  }}
+                  className="w-full px-4 py-2 text-left text-[#F7F2DA] transition-colors
+                  duration-200 hover:bg-[#1a1a1a] focus:outline-none border-b border-[#1a1a1a]
+                  last:border-b-0 tracking-wide"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{
+                    x: 4,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <span className="inline-block w-6">
+                    {selectedChain === chain.name ? '>' : ''}
+                  </span>
+                  {chain.name}
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Market Cap Dropdown */}
+      <div className="relative w-[40rem]">
+        <motion.button
+          onClick={() => setIsMarketCapOpen(!isMarketCapOpen)}
+          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
+          focus:outline-none relative transition-all duration-200"
+          style={{
+            boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+          }}
+          whileHover={{
+            boxShadow: '2px 2px 0 0 rgba(26, 26, 26, 0.95), 4px 4px 0 0 rgba(26, 26, 26, 0.85)',
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{
+            boxShadow: '1px 1px 0 0 rgba(26, 26, 26, 1)',
+            transform: 'translate(2px, 2px)',
+          }}
+        >
+          <span className="text-[#F7F2DA] tracking-wide">{selectedMarketCap}</span>
+        </motion.button>
+
+        <AnimatePresence>
+          {isMarketCapOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute w-full mt-2 bg-[#0A0909] border-2 border-[#1a1a1a] 
+              overflow-hidden z-50"
+              style={{
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+              }}
+            >
+              {marketCapOptions.map((option, index) => (
+                <motion.button
+                  key={option.key}
+                  onClick={() => {
+                    setSelectedMarketCap(option.name)
+                    setIsMarketCapOpen(false)
+                  }}
+                  className="w-full px-4 py-2 text-left text-[#F7F2DA] transition-colors
+                  duration-200 hover:bg-[#1a1a1a] focus:outline-none border-b border-[#1a1a1a]
+                  last:border-b-0 tracking-wide"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{
+                    x: 4,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <span className="inline-block w-6">
+                    {selectedMarketCap === option.name ? '>' : ''}
+                  </span>
+                  {option.name}
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Price Filter Dropdown */}
+      <div className="relative w-48">
+        <motion.button
+          onClick={() => setIsPriceOpen(!isPriceOpen)}
+          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
+          focus:outline-none relative transition-all duration-200"
+          style={{
+            boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+          }}
+          whileHover={{
+            boxShadow: '2px 2px 0 0 rgba(26, 26, 26, 0.95), 4px 4px 0 0 rgba(26, 26, 26, 0.85)',
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{
+            boxShadow: '1px 1px 0 0 rgba(26, 26, 26, 1)',
+            transform: 'translate(2px, 2px)',
+          }}
+        >
+          <span className="text-[#F7F2DA] tracking-wide">Price Filter</span>
+        </motion.button>
+
+        <AnimatePresence>
+          {isPriceOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute w-64 mt-2 bg-[#0A0909] border-2 border-[#1a1a1a] 
+              overflow-hidden z-50 p-4"
+              style={{
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+              }}
+            >
               <div className="space-y-4">
                 <div className="flex space-x-2">
-                  <Input
+                  <input
                     type="number"
                     placeholder="Min"
-                    value={minMarketCap}
-                    onChange={(e) => setMinMarketCap(e.target.value)}
-                    className="flex-1 bg-input text-foreground"
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(e.target.value)}
+                    className="flex-1 px-2 py-1 bg-[#1a1a1a] text-[#F7F2DA] border border-[#1a1a1a] focus:outline-none"
                   />
-                  <Input
+                  <input
                     type="number"
                     placeholder="Max"
-                    value={maxMarketCap}
-                    onChange={(e) => setMaxMarketCap(e.target.value)}
-                    className="flex-1 bg-input text-foreground"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className="flex-1 px-2 py-1 bg-[#1a1a1a] text-[#F7F2DA] border border-[#1a1a1a] focus:outline-none"
                   />
                 </div>
                 <div className="flex space-x-2">
-                  <Button
-                    variant="shadow"
-                    className="flex-1 bg-black text-slate-500"
+                  <button
+                    onClick={() => {
+                      setMinPrice('')
+                      setMaxPrice('')
+                    }}
+                    className="flex-1 px-4 py-2 bg-[#1a1a1a] text-[#F7F2DA] hover:bg-[#2a2a2a] transition-colors"
                   >
                     Reset
-                  </Button>
-                  <Button
-                    variant="bordered"
-                    className="flex-1 bg-transparent text-slate-500"
+                  </button>
+                  <button
+                    onClick={() => setIsPriceOpen(false)}
+                    className="flex-1 px-4 py-2 bg-transparent border border-[#1a1a1a] text-[#F7F2DA] hover:bg-[#1a1a1a] transition-colors"
                   >
-                    Apply filter
-                  </Button>
+                    Apply
+                  </button>
                 </div>
               </div>
-            </SelectItem>
-          </Select>
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
       </motion.div>
       <div className="w-full">
         <CardDemo />
