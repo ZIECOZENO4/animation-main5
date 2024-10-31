@@ -335,6 +335,8 @@ export default function ComponentCoin() {
           </Button>
         </div>
 
+        
+
         {/* Desktop view */}
         <div className="hidden md:flex gap-4">
           <Select
