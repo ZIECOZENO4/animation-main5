@@ -6,7 +6,7 @@ const TransactionComponent = () => {
   return (
     <div className='w-full p-2 flex flex-col '>
       <h1 className='text-xl md:text-3xl text-center py-2 md:py-4'>Transaction History</h1>
-      <Card className="bg-black p-4 flex   border border-slate-600 flex-row items-center justify-center h-48">
+      <Card className="bg-black p-4 flex   border border-slate-800 flex-row items-center justify-center h-48">
       <div className="text-gray-400 text-2xl flex flex-row gap-4">
       <svg width="30px" height="30px" className='text-gray-400 my-2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

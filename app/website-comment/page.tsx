@@ -121,7 +121,7 @@ export default function Component() {
           {renderChatList()}
         </div>
         <div className="md:w-2/3 lg:w-3/4 mt-8 md:mt-10">
-          <Card className="bg-black border border-slate-600 p-6 rounded-lg shadow-lg">
+          <Card className="bg-black border border-slate-800 p-6 rounded-lg shadow-lg">
             <h1 className="text-2xl font-bold text-center mb-6 md:mb-10">What Do You Think?</h1>
             <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
               <Input

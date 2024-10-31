@@ -10,7 +10,7 @@ const ChartComponent = () => {
   return (
     <div className='w-full p-2 flex flex-col gap-4 '>
             <h1 className='text-xl md:text-3xl text-center py-2 md:py-4'>Coin Chart</h1>
-       <Card className=" border border-slate-600  bg-black mb-4 p-4">
+       <Card className=" border border-slate-800  bg-black mb-4 p-4">
     <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
           <Link href='/' passHref>
@@ -56,7 +56,7 @@ const ChartComponent = () => {
           </div>
         </div>
         </Card>
-        <Card className=" border border-slate-600  bg-black p-4">
+        <Card className=" border border-slate-800  bg-black p-4">
            
            <div className="grid grid-cols-4 gap-4 mb-4">
              <div>

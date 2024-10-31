@@ -199,7 +199,7 @@ export default function MainComponent() {
                   No comments yet Be the first to comment!
                 </p>
               </Card>
-              <div className="text-center text-[#F7F2DA] text-xl mb-2 mt-6 py-2  w-full  border border-slate-600">Load more</div>
+              <div className="text-center text-[#F7F2DA] text-xl mb-2 mt-6 py-2  w-full  border border-slate-800">Load more</div>
       
               <button
             type="submit"

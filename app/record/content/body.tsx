@@ -127,7 +127,7 @@ export default function Dashboard() {
           
           </div>
           <div className="h-full overflow-y-auto">
-          <Card className="bg-black border rounded-none border-slate-600  p-2">
+          <Card className="bg-black border rounded-none border-slate-800  p-2">
   
             <div className="flex text-xs justify-center flex-col gap-4 py-2">
               <span>Total Supply:10001</span>

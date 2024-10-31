@@ -17,7 +17,7 @@ const TradeComponent = () => {
   return (
     <div className='w-full p-2 flex flex-col gap-4'>
       <h1 className='text-xl md:text-3xl text-center py-2 md:py-4'>Trade Transaction</h1>
-      <Card className="bg-black border border-slate-600 mt-2 p-4">
+      <Card className="bg-black border border-slate-800 mt-2 p-4">
         <div className="flex text-xs justify-between py-2">
           <span>Total Supply:10001</span>
           <span className="text-xs text-gray-400">1 $1 is 0.000010 ETH ($0.023)</span>
@@ -88,7 +88,7 @@ const TradeComponent = () => {
       <hr />
       {activeTab === "comments" ? (
         <>
-          <Card className="bg-black border border-slate-600 p-4 flex flex-col items-center justify-center h-52">
+          <Card className="bg-black border border-slate-800 p-4 flex flex-col items-center justify-center h-52">
             <svg width="30px" height="30px" className='text-gray-400 my-2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -102,13 +102,13 @@ const TradeComponent = () => {
               No comments yet Be the first to comment!
             </p>
           </Card>
-          <div className="text-center text-green-500 mb-4 py-2 border border-slate-600">Load more</div>
+          <div className="text-center text-green-500 mb-4 py-2 border border-slate-800">Load more</div>
           <Button className="w-full bg-green-500 hover:bg-green-600">
             + Add Comment
           </Button>
         </>
       ) : (
-        <Card className="bg-black p-4 flex border border-slate-600 flex-col items-center justify-center h-56">
+        <Card className="bg-black p-4 flex border border-slate-800 flex-col items-center justify-center h-56">
           <svg width="30px" height="30px" className='text-gray-400 my-2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

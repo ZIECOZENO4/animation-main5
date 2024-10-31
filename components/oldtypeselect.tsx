@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function TestComponent() {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,60 +16,86 @@ export default function TestComponent() {
     setIsOpen(false)
   }
 
-  const PixelatedText = ({ text }: { text: string }) => (
-    <div className="pixel-text">{text}</div>
-  )
-
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-black">
       <div className="relative w-64">
-        <button
+        <motion.button
           onClick={toggleDropdown}
-          className="w-full px-4 py-2 text-left bg-white border-2 border-black focus:outline-none pixelated"
+          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-slate-800 
+          focus:outline-none relative transition-all duration-200"
+          style={{
+            boxShadow: '4px 4px 0 0 rgba(100, 116, 139, 0.2), 8px 8px 0 0 rgba(100, 116, 139, 0.1)'
+          }}
+          whileHover={{
+            boxShadow: '2px 2px 0 0 rgba(100, 116, 139, 0.3), 4px 4px 0 0 rgba(100, 116, 139, 0.2)',
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{
+            boxShadow: '1px 1px 0 0 rgba(100, 116, 139, 0.4)',
+            transform: 'translate(2px, 2px)',
+          }}
         >
-          <PixelatedText text={`Style: ${selectedStyle}`} />
-        </button>
-        {isOpen && (
-          <div className="absolute w-full mt-1 bg-white border-2 border-black pixelated">
-            {styles.map((style) => (
-              <button
-                key={style}
-                onClick={() => handleSelect(style)}
-                className="w-full px-4 py-2 text-left hover:bg-gray-200 focus:outline-none"
-              >
-                <PixelatedText text={`${style === selectedStyle ? '> ' : ''}${style}`} />
-              </button>
-            ))}
-          </div>
-        )}
+          <span className="font-mono text-[#F7F2DA] tracking-wide">
+            Style: {selectedStyle}
+          </span>
+        </motion.button>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute w-full mt-2 bg-[#0A0909] border-2 border-slate-800 
+              overflow-hidden z-50"
+              style={{
+                boxShadow: '4px 4px 0 0 rgba(100, 116, 139, 0.2), 8px 8px 0 0 rgba(100, 116, 139, 0.1)'
+              }}
+            >
+              {styles.map((style, index) => (
+                <motion.button
+                  key={style}
+                  onClick={() => handleSelect(style)}
+                  className="w-full px-4 py-2 text-left text-[#F7F2DA] transition-colors
+                  duration-200 hover:bg-slate-800 focus:outline-none border-b border-slate-800
+                  last:border-b-0 font-mono tracking-wide"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{
+                    x: 4,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <span className="inline-block w-6">
+                    {selectedStyle === style ? '>' : ''}
+                  </span>
+                  {style}
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <style jsx>{`
-        .pixelated {
+
+      <style jsx global>{`
+        @font-face {
+          font-family: 'PixelFont';
+          src: url('/path-to-your-pixel-font.ttf') format('truetype');
+        }
+
+        .pixel-border {
+          border-image-slice: 2;
+          border-image-width: 2;
+          border-image-outset: 0;
+          border-image-source: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYmBgYPgPxAwwBgFGBiQBgAADAA/0APFlTbXoAAAAAElFTkSuQmCC");
           image-rendering: pixelated;
-          box-shadow: 
-            2px 2px 0 1px #000,
-            4px 4px 0 1px #000,
-            6px 6px 0 1px #000,
-            8px 8px 0 1px #000;
         }
-        .pixel-text {
-          font-family: monospace;
-          font-size: 16px;
-          line-height: 1;
-          letter-spacing: 2px;
-          white-space: nowrap;
-        }
-        .pixel-text::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: 
-            linear-gradient(90deg, #000 25%, transparent 25%) 0 0 / 4px 4px,
-            linear-gradient(0deg, #000 25%, transparent 25%) 0 0 / 4px 4px;
-          pointer-events: none;
+
+        .pixel-shadow {
+          filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.25))
+                 drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.15));
         }
       `}</style>
     </div>
