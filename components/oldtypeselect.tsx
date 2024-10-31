@@ -21,21 +21,21 @@ export default function TestComponent() {
       <div className="relative w-64">
         <motion.button
           onClick={toggleDropdown}
-          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-slate-800 
+          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
           focus:outline-none relative transition-all duration-200"
           style={{
-            boxShadow: '4px 4px 0 0 rgba(100, 116, 139, 0.2), 8px 8px 0 0 rgba(100, 116, 139, 0.1)'
+            boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
           }}
           whileHover={{
-            boxShadow: '2px 2px 0 0 rgba(100, 116, 139, 0.3), 4px 4px 0 0 rgba(100, 116, 139, 0.2)',
+            boxShadow: '2px 2px 0 0 rgba(26, 26, 26, 0.95), 4px 4px 0 0 rgba(26, 26, 26, 0.85)',
             transition: { duration: 0.2 }
           }}
           whileTap={{
-            boxShadow: '1px 1px 0 0 rgba(100, 116, 139, 0.4)',
+            boxShadow: '1px 1px 0 0 rgba(26, 26, 26, 1)',
             transform: 'translate(2px, 2px)',
           }}
         >
-          <span className=" text-[#F7F2DA] tracking-wide">
+          <span className="text-[#F7F2DA] tracking-wide">
             Style: {selectedStyle}
           </span>
         </motion.button>
@@ -47,10 +47,10 @@ export default function TestComponent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute w-full mt-2 bg-[#0A0909] border-2 border-slate-800 
+              className="absolute w-full mt-2 bg-[#0A0909] border-2 border-[#1a1a1a] 
               overflow-hidden z-50"
               style={{
-                boxShadow: '4px 4px 0 0 rgba(100, 116, 139, 0.2), 8px 8px 0 0 rgba(100, 116, 139, 0.1)'
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
               }}
             >
               {styles.map((style, index) => (
@@ -58,8 +58,8 @@ export default function TestComponent() {
                   key={style}
                   onClick={() => handleSelect(style)}
                   className="w-full px-4 py-2 text-left text-[#F7F2DA] transition-colors
-                  duration-200 hover:bg-slate-800 focus:outline-none border-b border-slate-800
-                  last:border-b-0  tracking-wide"
+                  duration-200 hover:bg-[#1a1a1a] focus:outline-none border-b border-[#1a1a1a]
+                  last:border-b-0 tracking-wide"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -80,11 +80,6 @@ export default function TestComponent() {
       </div>
 
       <style jsx global>{`
-        @font-face {
-          font-family: 'PixelFont';
-          src: url('/path-to-your-pixel-font.ttf') format('truetype');
-        }
-
         .pixel-border {
           border-image-slice: 2;
           border-image-width: 2;
@@ -94,8 +89,8 @@ export default function TestComponent() {
         }
 
         .pixel-shadow {
-          filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.25))
-                 drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.15));
+          filter: drop-shadow(2px 2px 0 rgba(26, 26, 26, 0.95))
+                 drop-shadow(4px 4px 0 rgba(26, 26, 26, 0.85));
         }
       `}</style>
     </div>
