@@ -75,6 +75,7 @@ const MdNavBar = () => {
       setIsNotificationOpen(!isNotificationOpen);
     };
   return (
+  <div className="div">
     <motion.div 
     variants={navVariants}
     initial="visible"
@@ -170,13 +171,15 @@ const MdNavBar = () => {
                   variant="light"
                   onClick={toggleNotification}
                 >
-                 <img  alt='notification ' src='/images/notification.png' className='h-24 w-24 rounded-full mx-2'
+                 <img  alt='notification ' src='/images/notification.png' className='h-ful w-full object-contain  rounded-full mx-2'
 />
                 </Button>
 
             </motion.div>
         </div>
-      <AnimatePresence>
+  
+    </motion.div>
+    <AnimatePresence>
         {isNotificationOpen && (
           <>
             <motion.div
@@ -287,7 +290,8 @@ const MdNavBar = () => {
           </>
         )}
       </AnimatePresence>
-    </motion.div>
+  </div>
+
   );
 };
 
