@@ -3,7 +3,10 @@ import React from 'react'
 
 const TestPage = () => {
   return (
-    <div><TestComponent /></div>
+    <div>
+        <TestComponent />
+        
+        </div>
   )
 }
 
