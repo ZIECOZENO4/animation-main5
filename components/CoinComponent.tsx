@@ -235,77 +235,77 @@ export default function ComponentCoin() {
 
       {/* Price Filter Dropdown */}
       <div className="relative w-[20rem]">
-        <motion.button
-          onClick={() => setIsPriceOpen(!isPriceOpen)}
-          className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
-          focus:outline-none relative transition-all duration-200"
-          style={{
-            boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
-          }}
-          whileHover={{
-            boxShadow: '2px 2px 0 0 rgba(26, 26, 26, 0.95), 4px 4px 0 0 rgba(26, 26, 26, 0.85)',
-            transition: { duration: 0.2 }
-          }}
-          whileTap={{
-            boxShadow: '1px 1px 0 0 rgba(26, 26, 26, 1)',
-            transform: 'translate(2px, 2px)',
-          }}
-        >
-          <span className="text-[#F7F2DA] tracking-wide">Price Filter</span>
-        </motion.button>
+  <motion.button
+    onClick={() => setIsPriceOpen(!isPriceOpen)}
+    className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
+    focus:outline-none relative transition-all duration-200"
+    style={{
+      boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+    }}
+    whileHover={{
+      boxShadow: '2px 2px 0 0 rgba(26, 26, 26, 0.95), 4px 4px 0 0 rgba(26, 26, 26, 0.85)',
+      transition: { duration: 0.2 }
+    }}
+    whileTap={{
+      boxShadow: '1px 1px 0 0 rgba(26, 26, 26, 1)',
+      transform: 'translate(2px, 2px)',
+    }}
+  >
+    <span className="text-[#F7F2DA] tracking-wide">Price Filter</span>
+  </motion.button>
 
-        <AnimatePresence>
-          {isPriceOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute w-64 mt-2 bg-[#0A0909] border-2 border-[#1a1a1a] 
-              overflow-hidden z-50 p-4"
-              style={{
-                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+  <AnimatePresence>
+    {isPriceOpen && (
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2 }}
+        className="absolute w-full mt-2 bg-[#0A0909] border-2 border-[#1a1a1a] 
+        overflow-hidden z-50 p-4"
+        style={{
+          boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)'
+        }}
+      >
+        <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            <input
+              type="number"
+              placeholder="Min"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+              className="w-full px-4 py-2 bg-[#1a1a1a] text-[#F7F2DA] border border-[#1a1a1a] focus:outline-none"
+            />
+            <input
+              type="number"
+              placeholder="Max"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              className="w-full px-4 py-2 bg-[#1a1a1a] text-[#F7F2DA] border border-[#1a1a1a] focus:outline-none"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              onClick={() => {
+                setMinPrice('')
+                setMaxPrice('')
               }}
+              className="w-full px-4 py-2 bg-[#1a1a1a] text-[#F7F2DA] hover:bg-[#2a2a2a] transition-colors"
             >
-              <div className="space-y-4">
-                <div className="flex space-x-2">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={minPrice}
-                    onChange={(e) => setMinPrice(e.target.value)}
-                    className="flex-1 px-2 py-1 bg-[#1a1a1a] text-[#F7F2DA] border border-[#1a1a1a] focus:outline-none"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                    className="flex-1 px-2 py-1 bg-[#1a1a1a] text-[#F7F2DA] border border-[#1a1a1a] focus:outline-none"
-                  />
-                </div>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => {
-                      setMinPrice('')
-                      setMaxPrice('')
-                    }}
-                    className="flex-1 px-4 py-2 bg-[#1a1a1a] text-[#F7F2DA] hover:bg-[#2a2a2a] transition-colors"
-                  >
-                    Reset
-                  </button>
-                  <button
-                    onClick={() => setIsPriceOpen(false)}
-                    className="flex-1 px-4 py-2 bg-transparent border border-[#1a1a1a] text-[#F7F2DA] hover:bg-[#1a1a1a] transition-colors"
-                  >
-                    Apply
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              Reset
+            </button>
+            <button
+              onClick={() => setIsPriceOpen(false)}
+              className="w-full px-4 py-2 bg-transparent border border-[#1a1a1a] text-[#F7F2DA] hover:bg-[#1a1a1a] transition-colors"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
     </div>
       </motion.div>
       <div className="w-full">
