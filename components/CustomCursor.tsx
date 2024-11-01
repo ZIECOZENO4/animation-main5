@@ -1,16 +1,21 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isPointer, setIsPointer] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
+  
+  // Add refs for smooth interpolation
+  const cursorRef = useRef({ x: 0, y: 0 })
+  const smoothRef = useRef({ x: 0, y: 0 })
+  const rafRef = useRef<number>()
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      setPosition({ x: e.clientX - 10, y: e.clientY - 10 })
+      cursorRef.current = { x: e.clientX, y: e.clientY }
     }
 
     const handlePointerEvent = (e: MouseEvent) => {
@@ -27,50 +32,85 @@ const CustomCursor = () => {
     const handleMouseDown = () => setIsClicking(true)
     const handleMouseUp = () => setIsClicking(false)
 
-    window.addEventListener('mousemove', moveCursor)
-    window.addEventListener('mousemove', handlePointerEvent)
-    window.addEventListener('mousedown', handleMouseDown)
-    window.addEventListener('mouseup', handleMouseUp)
+    // Smooth animation function
+    const smoothAnimation = () => {
+      const lerp = (start: number, end: number, factor: number) => {
+        return start + (end - start) * factor
+      }
+
+      smoothRef.current = {
+        x: lerp(smoothRef.current.x, cursorRef.current.x, 0.15),
+        y: lerp(smoothRef.current.y, cursorRef.current.y, 0.15)
+      }
+
+      setPosition(smoothRef.current)
+      rafRef.current = requestAnimationFrame(smoothAnimation)
+    }
+
+    // Start the animation
+    smoothAnimation()
+
+    document.addEventListener('mousemove', moveCursor)
+    document.addEventListener('mousemove', handlePointerEvent)
+    document.addEventListener('mousedown', handleMouseDown)
+    document.addEventListener('mouseup', handleMouseUp)
 
     return () => {
-      window.removeEventListener('mousemove', moveCursor)
-      window.removeEventListener('mousemove', handlePointerEvent)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
+      document.removeEventListener('mousemove', moveCursor)
+      document.removeEventListener('mousemove', handlePointerEvent)
+      document.removeEventListener('mousedown', handleMouseDown)
+      document.removeEventListener('mouseup', handleMouseUp)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [])
 
   return (
     <>
       <motion.div
-        className={`custom-cursor ${isPointer ? 'hovering' : ''} ${isClicking ? 'clicking' : ''}`}
-        animate={{
-          x: position.x,
-          y: position.y,
-          scale: isClicking ? 0.8 : isPointer ? 1.2 : 1,
-        }}
-        transition={{
-          duration: 0.1,
-          ease: "linear"
+        className="custom-cursor"
+        style={{
+          transform: `translate(${position.x}px, ${position.y}px) scale(${
+            isClicking ? 0.8 : isPointer ? 1.5 : 1
+          })`
         }}
       />
       <style jsx global>{`
+        * {
+          cursor: none !important;
+        }
+
         .custom-cursor {
           pointer-events: none;
           position: fixed;
           width: 20px;
           height: 20px;
           z-index: 9999;
-          background: url('/cursor.png') no-repeat center center; /* Place your cursor image in public folder */
-          background-size: contain;
+          mix-blend-mode: difference;
+          transform-origin: center;
+          will-change: transform;
         }
 
-        /* Hide default cursor */
-        * {
-          cursor: none !important;
+        .custom-cursor::before,
+        .custom-cursor::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #F7F2DA;
+          transition: all 0.2s ease;
         }
 
-        /* Mobile devices */
+        .custom-cursor::before {
+          width: 2px;
+          height: 20px;
+        }
+
+        .custom-cursor::after {
+          width: 20px;
+          height: 2px;
+        }
+
         @media (max-width: 768px) {
           .custom-cursor {
             display: none;
