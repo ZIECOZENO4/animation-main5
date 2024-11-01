@@ -1,16 +1,21 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isPointer, setIsPointer] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
+  
+  // Add refs for smooth interpolation
+  const cursorRef = useRef({ x: 0, y: 0 })
+  const smoothRef = useRef({ x: 0, y: 0 })
+  const rafRef = useRef<number>()
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY })
+      cursorRef.current = { x: e.clientX, y: e.clientY }
     }
 
     const handlePointerEvent = (e: MouseEvent) => {
@@ -27,6 +32,24 @@ const CustomCursor = () => {
     const handleMouseDown = () => setIsClicking(true)
     const handleMouseUp = () => setIsClicking(false)
 
+    // Smooth animation function
+    const smoothAnimation = () => {
+      const lerp = (start: number, end: number, factor: number) => {
+        return start + (end - start) * factor
+      }
+
+      smoothRef.current = {
+        x: lerp(smoothRef.current.x, cursorRef.current.x, 0.15),
+        y: lerp(smoothRef.current.y, cursorRef.current.y, 0.15)
+      }
+
+      setPosition(smoothRef.current)
+      rafRef.current = requestAnimationFrame(smoothAnimation)
+    }
+
+    // Start the animation
+    smoothAnimation()
+
     document.addEventListener('mousemove', moveCursor)
     document.addEventListener('mousemove', handlePointerEvent)
     document.addEventListener('mousedown', handleMouseDown)
@@ -37,6 +60,7 @@ const CustomCursor = () => {
       document.removeEventListener('mousemove', handlePointerEvent)
       document.removeEventListener('mousedown', handleMouseDown)
       document.removeEventListener('mouseup', handleMouseUp)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
   }, [])
 
@@ -44,17 +68,10 @@ const CustomCursor = () => {
     <>
       <motion.div
         className="custom-cursor"
-        animate={{
-          x: position.x,
-          y: position.y,
-          scale: isClicking ? 0.8 : isPointer ? 1.5 : 1,
-          opacity: 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5,
+        style={{
+          transform: `translate(${position.x}px, ${position.y}px) scale(${
+            isClicking ? 0.8 : isPointer ? 1.5 : 1
+          })`
         }}
       />
       <style jsx global>{`
@@ -70,6 +87,7 @@ const CustomCursor = () => {
           z-index: 9999;
           mix-blend-mode: difference;
           transform-origin: center;
+          will-change: transform;
         }
 
         .custom-cursor::before,
