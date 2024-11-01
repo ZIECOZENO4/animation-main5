@@ -45,7 +45,7 @@ export default function TestContent() {
             animate={{ x: 0, opacity: 1 }}
             className="lg:col-span-2"
           >
-            <div className="border border-gray-800 bg-black/50 backdrop-blur-sm p-6 rounded-lg h-[600px]">
+            <div className="border-[1px] border-dashed border-gray-800 bg-black/50 backdrop-blur-sm p-6 rounded-lg h-[600px] [border-style:dashed_dashed_dashed_dashed] [border-image:linear-gradient(to_right,transparent_50%,rgb(31,41,55)_50%)_100%_1] [border-image-slice:1]">
               <div className="grid grid-cols-8 gap-2 h-full">
                 {Array.from({ length: 64 }).map((_, i) => (
                   <motion.div
@@ -71,7 +71,7 @@ export default function TestContent() {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.02 }}
-                className="border border-gray-800 bg-black/50 backdrop-blur-sm p-4 rounded-lg"
+                className="border-[1px] border-dashed border-gray-800 bg-black/50 backdrop-blur-sm p-4 rounded-lg [border-style:dashed_dashed_dashed_dashed] [border-image:linear-gradient(to_right,transparent_50%,rgb(31,41,55)_50%)_100%_1] [border-image-slice:1]"
               >
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-sm opacity-50">NOMAD</span>
@@ -96,7 +96,7 @@ export default function TestContent() {
             {/* BEAT Section */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="border border-gray-800 bg-black/50 backdrop-blur-sm p-4 rounded-lg"
+              className="border-[1px] border-dashed border-gray-800 bg-black/50 backdrop-blur-sm p-4 rounded-lg [border-style:dashed_dashed_dashed_dashed] [border-image:linear-gradient(to_right,transparent_50%,rgb(31,41,55)_50%)_100%_1] [border-image-slice:1]"
             >
               <div className="flex justify-between items-center mb-4">
                 <span className="text-sm opacity-50">BEAT</span>
@@ -120,6 +120,7 @@ export default function TestContent() {
         </div>
       </div>
 
+     
     </div>
   )
 }
