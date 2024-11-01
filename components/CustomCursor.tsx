@@ -67,12 +67,10 @@ const CustomCursor = () => {
         className="custom-cursor"
         style={{
           transform: `translate(${position.x}px, ${position.y}px) scale(${
-            isClicking ? 0.8 : isPointer ? 1.5 : 1
+            isClicking ? 0.95 : isPointer ? 1.1 : 1
           })`
         }}
-      >
-        <div className="cursor-shape" />
-      </motion.div>
+      />
       <style jsx global>{`
         * {
           cursor: none !important;
@@ -81,49 +79,59 @@ const CustomCursor = () => {
         .custom-cursor {
           pointer-events: none;
           position: fixed;
-          width: 44px;
-          height: 64px;
+          width: 20px;
+          height: 20px;
           z-index: 9999;
-          transform-origin: top left;
+          transform-origin: 0 0;
           will-change: transform;
-        }
-
-        .cursor-shape {
-          width: 100%;
-          height: 100%;
-          display: grid;
-          grid-template-columns: repeat(11, 4px);
-          grid-template-rows: repeat(16, 4px);
-          background-color: black;
           clip-path: polygon(
-            0% 0%, 9.09% 0%, 9.09% 6.25%, 18.18% 6.25%, 18.18% 12.5%, 
-            27.27% 12.5%, 27.27% 18.75%, 36.36% 18.75%, 36.36% 25%, 
-            45.45% 25%, 45.45% 31.25%, 54.54% 31.25%, 54.54% 37.5%, 
-            63.63% 37.5%, 63.63% 43.75%, 72.72% 43.75%, 72.72% 50%, 
-            81.81% 50%, 81.81% 56.25%, 54.54% 56.25%, 54.54% 62.5%, 
-            27.27% 62.5%, 27.27% 68.75%, 18.18% 68.75%, 18.18% 75%, 
-            9.09% 75%, 9.09% 81.25%, 0% 81.25%
+            0 0,
+            0 15px,
+            5px 12px,
+            8px 19px,
+            11px 18px,
+            8px 11px,
+            15px 11px
           );
+          background: #111827;
+          filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
         }
 
-        .cursor-shape::after {
+        .custom-cursor::after {
           content: '';
           position: absolute;
-          top: -2px;
-          left: -2px;
-          right: -2px;
-          bottom: -2px;
-          background-color: transparent;
-          border: 2px solid #F7F2DA;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
           clip-path: polygon(
-            0% 0%, 9.09% 0%, 9.09% 6.25%, 18.18% 6.25%, 18.18% 12.5%, 
-            27.27% 12.5%, 27.27% 18.75%, 36.36% 18.75%, 36.36% 25%, 
-            45.45% 25%, 45.45% 31.25%, 54.54% 31.25%, 54.54% 37.5%, 
-            63.63% 37.5%, 63.63% 43.75%, 72.72% 43.75%, 72.72% 50%, 
-            81.81% 50%, 81.81% 56.25%, 54.54% 56.25%, 54.54% 62.5%, 
-            27.27% 62.5%, 27.27% 68.75%, 18.18% 68.75%, 18.18% 75%, 
-            9.09% 75%, 9.09% 81.25%, 0% 81.25%
+            0 0,
+            0 15px,
+            5px 12px,
+            8px 19px,
+            11px 18px,
+            8px 11px,
+            15px 11px
           );
+          border: 1px solid #ffffff;
+          transform: translate(-1px, -1px);
+        }
+
+        .custom-cursor::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          clip-path: polygon(
+            0 0,
+            0 15px,
+            5px 12px,
+            8px 19px,
+            11px 18px,
+            8px 11px,
+            15px 11px
+          );
+          background: #111827;
+          z-index: -1;
         }
 
         @media (max-width: 768px) {
