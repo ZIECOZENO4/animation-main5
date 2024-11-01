@@ -14,8 +14,8 @@ const CustomCursor = () => {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      // Offset adjusted for this specific cursor image
-      cursorRef.current = { x: e.clientX - 2, y: e.clientY - 2 }
+      // Adjust offset to match the tip of the cursor
+      cursorRef.current = { x: e.clientX - 3, y: e.clientY - 3 }
     }
 
     const handlePointerEvent = (e: MouseEvent) => {
@@ -38,8 +38,8 @@ const CustomCursor = () => {
       }
 
       smoothRef.current = {
-        x: lerp(smoothRef.current.x, cursorRef.current.x, 0.15),
-        y: lerp(smoothRef.current.y, cursorRef.current.y, 0.15)
+        x: lerp(smoothRef.current.x, cursorRef.current.x, 0.2),
+        y: lerp(smoothRef.current.y, cursorRef.current.y, 0.2)
       }
 
       setPosition(smoothRef.current)
@@ -65,7 +65,7 @@ const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className="custom-cursor"
+        className={`custom-cursor ${isPointer ? 'hovering' : ''} ${isClicking ? 'clicking' : ''}`}
         animate={{
           scale: isClicking ? 0.8 : isPointer ? 1.2 : 1,
           opacity: 1,
@@ -88,10 +88,10 @@ const CustomCursor = () => {
         .custom-cursor {
           pointer-events: none;
           position: fixed;
-          width: 16px;
-          height: 16px;
+          width: 20px;
+          height: 20px;
           z-index: 9999;
-          background-image: url('/cursor.png');
+          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGKSURBVFiF7ZY9SwNBEIYfRUQQFEQQKxvBwkpQsFSwsLGwEKz8AYKVjY2NjYVgYWNhYWMhCFZWFoKFhYWIIAiCIIggCIIgJD4WO8m5l+Ry2YvgwcHdzn7MvDOzs7tGRNgkthqNfxsMbF5Y6RzYOAEVvKp+rKQ+L6zUAkR0LSKfInK1tHoRWQu2RsA4+5J1AHSAAbAH7AJvwEFoZxPzToEH4BrYD/EngAMPwAVwCrwAF8AecAe0gAugD7SBM6CXOgNt59xEBMwsM7MjM+uYWcfMOmbWNrOumbXMrGVmTTPbNrMdM9s1s10za5pZw8zqZlYzs5qZ1cxsK8yfm9nQzIZmNjCzDzMbmNm7mQ3M7M3MXs3sxcyew/izmT2Z2aOZPYT4vZndmdmtmd0EXz3n3KQFwBXQiLb3ETgM/jHQi3J6wGhVFhwDp2bWMLOGmR0BYzPri8hARN7NbGRm30DOzL7MLDezLxHJi0heRHIikhORvIjkzOxbRHIikheR/B/twX/9Hf8AqgCqAKoAqgCqAKoAthrAD9LonKqB5r71AAAAAElFTkSuQmCC');
           background-size: contain;
           background-repeat: no-repeat;
           image-rendering: pixelated;
