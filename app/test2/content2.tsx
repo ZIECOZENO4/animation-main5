@@ -1,74 +1,63 @@
 "use client"
 import React from 'react';
 
-interface DividedSectionProps {
-  sections: {
-    content: React.ReactNode;
-  }[];
+interface LayeredBorderDivProps {
+  children: React.ReactNode;
 }
 
-const DividedSection: React.FC<DividedSectionProps> = ({ sections }) => {
+const LayeredBorderDiv: React.FC<LayeredBorderDivProps> = ({ children }) => {
   return (
-    <div className="flex flex-row items-stretch relative">
-      {sections.map((section, index) => (
-        <React.Fragment key={index}>
-          <div className="flex-1 p-4">
-            {section.content}
-          </div>
-          {index < sections.length - 1 && (
-            <div className="w-[2px] my-4 relative">
-              <style jsx>{`
-                div {
-                  background-image: repeating-linear-gradient(
-                    to bottom,
-                    black 0,
-                    black 8px,
-                    transparent 8px,
-                    transparent 16px
-                  );
-                  background-repeat: repeat-y;
-                }
-              `}</style>
-            </div>
-          )}
-        </React.Fragment>
-      ))}
+    <div className="relative p-8">
+      <div className="relative border-custom">
+        {children}
+      </div>
+      <style jsx>{`
+        .border-custom {
+          position: relative;
+          padding: 20px;
+        }
+        
+        .border-custom::before {
+          content: '';
+          position: absolute;
+          inset: -4px; /* Total border width */
+          border: 1px solid #8B4513; /* First brown layer */
+          z-index: 1;
+        }
+
+        .border-custom::after {
+          content: '';
+          position: absolute;
+          inset: -3px; /* Offset for second layer */
+          border: 1px solid black; /* Black layer */
+          z-index: 2;
+        }
+
+        .border-custom {
+          border: 0.5px solid #8B4513; /* Third brown layer */
+        }
+
+        .border-custom > * {
+          position: relative;
+          border: 0.5px solid black; /* Fourth black layer */
+          padding: 16px;
+          z-index: 3;
+        }
+      `}</style>
     </div>
   );
 };
 
-// Example usage:
+// Example usage
 const ExamplePage: React.FC = () => {
-  const sectionContent = [
-    {
-      content: (
-        <div>
-          <h2 className="text-xl font-bold">Section 1</h2>
-          <p>Content for first section</p>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div>
-          <h2 className="text-xl font-bold">Section 2</h2>
-          <p>Content for second section</p>
-        </div>
-      )
-    },
-    {
-      content: (
-        <div>
-          <h2 className="text-xl font-bold">Section 3</h2>
-          <p>Content for third section</p>
-        </div>
-      )
-    }
-  ];
-
   return (
-    <div className="container mx-auto">
-      <DividedSection sections={sectionContent} />
+    <div className="container mx-auto p-4">
+      <LayeredBorderDiv>
+        <div>
+          <h2 className="text-xl font-bold">Content Title</h2>
+          <p>This is the content inside the layered border div.</p>
+        </div>
+      </LayeredBorderDiv>
     </div>
   );
 };
