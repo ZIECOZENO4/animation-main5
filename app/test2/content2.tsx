@@ -1,47 +1,75 @@
-"use client"
 import React from 'react';
 
-interface LayeredBorderDivProps {
+interface BorderPatternComponentProps {
   children: React.ReactNode;
 }
 
-const LayeredBorderDiv: React.FC<LayeredBorderDivProps> = ({ children }) => {
+const BorderPatternComponent: React.FC<BorderPatternComponentProps> = ({ children }) => {
   return (
-    <div className="relative p-8">
-      <div className="relative border-custom">
-        {children}
+    <div className="relative">
+      {/* Main content container */}
+      <div className="relative p-8">
+        {/* Multiple border layers */}
+        <div className="border-pattern">
+          {children}
+        </div>
       </div>
+
       <style jsx>{`
-        .border-custom {
+        .border-pattern {
           position: relative;
           padding: 20px;
+          border: 1px solid black;
         }
-        
-        .border-custom::before {
+
+        .border-pattern::before {
           content: '';
           position: absolute;
-          inset: -4px; /* Total border width */
-          border: 1px solid #8B4513; /* First brown layer */
-          z-index: 1;
+          top: -15px;
+          bottom: -15px;
+          left: -30px;
+          width: 2px;
+          background-image: repeating-linear-gradient(
+            to bottom,
+            black 0,
+            black 2px,
+            transparent 2px,
+            transparent 4px,
+            black 4px,
+            black 14px,
+            transparent 14px,
+            transparent 16px
+          );
         }
 
-        .border-custom::after {
+        .border-pattern::after {
           content: '';
           position: absolute;
-          inset: -3px; /* Offset for second layer */
-          border: 1px solid black; /* Black layer */
-          z-index: 2;
+          top: -15px;
+          bottom: -15px;
+          right: -30px;
+          width: 2px;
+          background-image: repeating-linear-gradient(
+            to bottom,
+            black 0,
+            black 2px,
+            transparent 2px,
+            transparent 4px,
+            black 4px,
+            black 14px,
+            transparent 14px,
+            transparent 16px
+          );
         }
 
-        .border-custom {
-          border: 0.5px solid #8B4513; /* Third brown layer */
-        }
-
-        .border-custom > * {
-          position: relative;
-          border: 0.5px solid black; /* Fourth black layer */
-          padding: 16px;
-          z-index: 3;
+        /* Multiple rectangular borders */
+        .border-pattern {
+          box-shadow:
+            0 0 0 1px black,
+            0 0 0 3px white,
+            0 0 0 4px black,
+            0 0 0 6px white,
+            0 0 0 7px black;
         }
       `}</style>
     </div>
@@ -51,13 +79,13 @@ const LayeredBorderDiv: React.FC<LayeredBorderDivProps> = ({ children }) => {
 // Example usage
 const ExamplePage: React.FC = () => {
   return (
-    <div className="container mx-auto p-4">
-      <LayeredBorderDiv>
-        <div>
-          <h2 className="text-xl font-bold">Content Title</h2>
-          <p>This is the content inside the layered border div.</p>
+    <div className="container mx-auto p-16">
+      <BorderPatternComponent>
+        <div className="min-h-[200px]">
+          <h2 className="text-xl font-bold">Content Title2</h2>
+          <p>This content is wrapped with the custom border pattern.</p>
         </div>
-      </LayeredBorderDiv>
+      </BorderPatternComponent>
     </div>
   );
 };
