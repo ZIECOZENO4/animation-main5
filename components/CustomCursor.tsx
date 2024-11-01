@@ -65,12 +65,32 @@ const CustomCursor = () => {
     <>
       <motion.div
         className="custom-cursor"
-        style={{
-          transform: `translate(${position.x}px, ${position.y}px) scale(${
-            isClicking ? 0.95 : isPointer ? 1.1 : 1
-          })`
+        animate={{
+          scale: isClicking ? 0.8 : isPointer ? 1.2 : 1,
+          opacity: 1,
         }}
-      />
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 25,
+          mass: 0.5
+        }}
+        style={{
+          transform: `translate(${position.x}px, ${position.y}px)`
+        }}
+      >
+        <motion.div 
+          className="cursor-inner"
+          animate={{
+            rotate: isPointer ? 5 : 0,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 200,
+            damping: 10
+          }}
+        />
+      </motion.div>
       <style jsx global>{`
         * {
           cursor: none !important;
@@ -79,59 +99,29 @@ const CustomCursor = () => {
         .custom-cursor {
           pointer-events: none;
           position: fixed;
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
           z-index: 9999;
           transform-origin: 0 0;
           will-change: transform;
-          clip-path: polygon(
-            0 0,
-            0 15px,
-            5px 12px,
-            8px 19px,
-            11px 18px,
-            8px 11px,
-            15px 11px
-          );
-          background: #111827;
-          filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
+          transition: all 0.1s ease-out;
         }
 
-        .custom-cursor::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          clip-path: polygon(
-            0 0,
-            0 15px,
-            5px 12px,
-            8px 19px,
-            11px 18px,
-            8px 11px,
-            15px 11px
-          );
-          border: 1px solid #ffffff;
-          transform: translate(-1px, -1px);
+        .cursor-inner {
+          width: 100%;
+          height: 100%;
+          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGKSURBVFiF7ZY9SwNBEIYfRUQQFEQQKxvBwkpQsFSwsLGwEKz8AYKVjY2NjYVgYWNhYWMhCFZWFoKFhYWIIAiCIIggCIIgJD4WO8m5l+Ry2YvgwcHdzn7MvDOzs7tGRNgkthqNfxsMbF5Y6RzYOAEVvKp+rKQ+L6zUAkR0LSKfInK1tHoRWQu2RsA4+5J1AHSAAbAH7AJvwEFoZxPzToEH4BrYD/EngAMPwAVwCrwAF8AecAe0gAugD7SBM6CXOgNt59xEBMwsM7MjM+uYWcfMOmbWNrOumbXMrGVmTTPbNrMdM9s1s10za5pZw8zqZlYzs5qZ1cxsK8yfm9nQzIZmNjCzDzMbmNm7mQ3M7M3MXs3sxcyew/izmT2Z2aOZPYT4vZndmdmtmd0EXz3n3KQFwBXQiLb3ETgM/jHQi3J6wGhVFhwDp2bWMLOGmR0BYzPri8hARN7NbGRm30DOzL7MLDezLxHJi0heRHIikhORvIjkzOxbRHIikheR/B/twX/9Hf8AqgCqAKoAqgCqAKoAthrAD9LonKqB5r71AAAAAElFTkSuQmCC');
+          background-size: contain;
+          background-repeat: no-repeat;
+          filter: invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
-        .custom-cursor::before {
-          content: '';
-          position: absolute;
-          inset: -1px;
-          clip-path: polygon(
-            0 0,
-            0 15px,
-            5px 12px,
-            8px 19px,
-            11px 18px,
-            8px 11px,
-            15px 11px
-          );
-          background: #111827;
-          z-index: -1;
+        .custom-cursor.clicking .cursor-inner {
+          transform: scale(0.9);
+        }
+
+        .custom-cursor.hovering .cursor-inner {
+          transform: scale(1.2);
         }
 
         @media (max-width: 768px) {
@@ -141,6 +131,18 @@ const CustomCursor = () => {
           * {
             cursor: auto !important;
           }
+        }
+
+        /* Add hover effect for clickable elements */
+        a:hover ~ .custom-cursor,
+        button:hover ~ .custom-cursor {
+          transform: scale(1.2);
+        }
+
+        /* Add click effect */
+        a:active ~ .custom-cursor,
+        button:active ~ .custom-cursor {
+          transform: scale(0.9);
         }
       `}</style>
     </>
