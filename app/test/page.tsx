@@ -1,14 +1,12 @@
-
-import React from 'react'
-import TestContent from './content'
+import React from "react";
+import TestContent from "./content";
 
 const TestPage = () => {
   return (
     <div>
-        <TestContent />
-        
-        </div>
-  )
-}
+      <TestContent />
+    </div>
+  );
+};
 
-export default TestPage
+export default TestPage;
