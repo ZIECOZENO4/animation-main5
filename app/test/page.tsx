@@ -1,10 +1,11 @@
-import TestComponent from '@/components/oldtypeselect'
+
 import React from 'react'
+import TestContent from './content'
 
 const TestPage = () => {
   return (
     <div>
-        <TestComponent />
+        <TestContent />
         
         </div>
   )
