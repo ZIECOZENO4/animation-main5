@@ -5,122 +5,137 @@ import React from 'react'
 
 export default function TestContent() {
   return (
-    <div className="min-h-screen bg-black text-white font-mono">
-      {/* Grid Background */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px',
-          }}
-        />
-      </div>
+    <div className="min-h-screen  overflow-hidden">
 
-      <div className="relative z-10 p-4">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex justify-between items-center mb-6"
-        >
-          <div className="text-xl">SYSTEM</div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 bg-gray-800 rounded"
-          >
-            CONNECT
-          </motion.button>
-        </motion.div>
+      <div className="relative z-10 p-6">
+
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Panel */}
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            className="lg:col-span-2"
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <div className=" flex flex-col align-middle gap-4">
+    <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-3"
           >
-            <div className="border-[1px] border-dashed border-gray-800 bg-black/50 backdrop-blur-sm p-6 rounded-lg h-[600px] [border-style:dashed_dashed_dashed_dashed] [border-image:linear-gradient(to_right,transparent_50%,rgb(31,41,55)_50%)_100%_1] [border-image-slice:1]">
-              <div className="grid grid-cols-8 gap-2 h-full">
-                {Array.from({ length: 64 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: i * 0.01 }}
-                    className="aspect-square border border-gray-800 rounded-sm hover:border-gray-600 transition-colors"
-                  />
-                ))}
+            <div className="relative mb-6" style={{ height: 'calc(70vh - 100px)' }}>
+              <div className="absolute inset-0 border border-gray-800 opacity-50" />
+              <div className="absolute inset-0 border border-dashed border-gray-800 opacity-30" 
+                   style={{ borderSpacing: '4px' }} />
+              <div className="relative bg-gray-900/50 p-6 h-full">
+                <span className="text-sm text-gray-500">TOP COMPONENT (70%)</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Panel */}
+          {/* Left Panel - Bottom (30%) */}
           <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            className="space-y-6"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:col-span-3"
           >
-            {/* NOMAD Sections */}
-            {[1, 2].map((i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.02 }}
-                className="border-[1px] border-dashed border-gray-800 bg-black/50 backdrop-blur-sm p-4 rounded-lg [border-style:dashed_dashed_dashed_dashed] [border-image:linear-gradient(to_right,transparent_50%,rgb(31,41,55)_50%)_100%_1] [border-image-slice:1]"
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm opacity-50">NOMAD</span>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-6 h-6 rounded-full border border-gray-800"
-                  />
-                </div>
-                <div className="space-y-2">
-                  {Array.from({ length: 3 }).map((_, j) => (
+            <div className="relative" style={{ height: 'calc(30vh - 50px)' }}>
+              <div className="absolute inset-0 border border-gray-800 opacity-50" />
+              <div className="absolute inset-0 border border-dashed border-gray-800 opacity-30" 
+                   style={{ borderSpacing: '4px' }} />
+              <div className="relative bg-gray-900/50 p-6 h-full">
+                <span className="text-sm text-gray-500">BOTTOM COMPONENT (30%)</span>
+              </div>
+            </div>
+          </motion.div>
+    </div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-1 lg:row-span-2"
+          >
+            <div className="relative" style={{ height: 'calc(100vh - 150px)' }}>
+              <div className="absolute inset-0 border border-gray-800 opacity-50" />
+              <div className="absolute inset-0 border border-dashed border-gray-800 opacity-30" 
+                   style={{ borderSpacing: '4px' }} />
+              <div className="relative bg-gray-900/50 p-4 h-full flex flex-col">
+                <span className="text-sm text-gray-500 mb-4">RIGHT PANEL</span>
+                <div className="flex-grow flex flex-col justify-between">
+                  {/* Content aligned with the top div */}
+                  <div className="mb-4">
+                    <span className="text-xs text-gray-500">ALIGNED WITH TOP</span>
                     <motion.div
-                      key={j}
-                      whileHover={{ x: 5 }}
-                      className="h-2 bg-gray-800 rounded"
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                      whileHover={{ scale: 1.02 }}
+                      className="mt-2 space-y-2"
+                    >
+                      {Array.from({ length: 3 }).map((_, j) => (
+                        <motion.div
+                          key={j}
+                          whileHover={{ x: 5 }}
+                          className="h-1 bg-gray-800/50 rounded-sm"
+                        />
+                      ))}
+                    </motion.div>
+                  </div>
+                  
+                  {/* Content aligned with the bottom div */}
+                  <div>
+                    <span className="text-xs text-gray-500">ALIGNED WITH BOTTOM</span>
+                    {/* NOMAD Sections */}
+                    {[1, 2].map((i) => (
+                      <motion.div
+                        key={`nomad-${i}`}
+                        whileHover={{ scale: 1.02 }}
+                        className="mb-4"
+                      >
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">NOMAD</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                        <div className="mt-2 space-y-2">
+                          {Array.from({ length: 3 }).map((_, j) => (
+                            <motion.div
+                              key={j}
+                              whileHover={{ x: 5 }}
+                              className="h-1 bg-gray-800/50 rounded-sm"
+                            />
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
 
-            {/* BEAT Section */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="border-[1px] border-dashed border-gray-800 bg-black/50 backdrop-blur-sm p-4 rounded-lg [border-style:dashed_dashed_dashed_dashed] [border-image:linear-gradient(to_right,transparent_50%,rgb(31,41,55)_50%)_100%_1] [border-image-slice:1]"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-sm opacity-50">BEAT</span>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-6 h-6 rounded-full border border-gray-800"
-                />
+                    {/* BEAT Section */}
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      className="mb-4"
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-500">BEAT</span>
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-4 h-4 border border-gray-800 cursor-pointer"
+                        />
+                      </div>
+                      <div className="mt-2 space-y-2">
+                        {Array.from({ length: 3 }).map((_, j) => (
+                          <motion.div
+                            key={j}
+                            whileHover={{ x: 5 }}
+                            className="h-1 bg-gray-800/50 rounded-sm"
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ x: 5 }}
-                    className="h-2 bg-gray-800 rounded"
-                  />
-                ))}
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
-
-     
     </div>
   )
 }
