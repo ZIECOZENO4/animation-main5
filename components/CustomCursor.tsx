@@ -10,7 +10,7 @@ const CustomCursor = () => {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      setPosition({ x: e.clientX - 10, y: e.clientY - 10 }) // Adjust offset for cursor center
+      setPosition({ x: e.clientX - 10, y: e.clientY - 10 })
     }
 
     const handlePointerEvent = (e: MouseEvent) => {
@@ -55,30 +55,22 @@ const CustomCursor = () => {
         }}
       />
       <style jsx global>{`
-        * {
-          cursor: none !important;
-        }
-
         .custom-cursor {
           pointer-events: none;
           position: fixed;
           width: 20px;
           height: 20px;
           z-index: 9999;
-          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGKSURBVFiF7ZY9SwNBEIYfRUQQFEQQKxvBwkpQsFSwsLGwEKz8AYKVjY2NjYVgYWNhYWMhCFZWFoKFhYWIIAiCIIggCIIgJD4WO8m5l+Ry2YvgwcHdzn7MvDOzs7tGRNgkthqNfxsMbF5Y6RzYOAEVvKp+rKQ+L6zUAkR0LSKfInK1tHoRWQu2RsA4+5J1AHSAAbAH7AJvwEFoZxPzToEH4BrYD/EngAMPwAVwCrwAF8AecAe0gAugD7SBM6CXOgNt59xEBMwsM7MjM+uYWcfMOmbWNrOumbXMrGVmTTPbNrMdM9s1s10za5pZw8zqZlYzs5qZ1cxsK8yfm9nQzIZmNjCzDzMbmNm7mQ3M7M3MXs3sxcyew/izmT2Z2aOZPYT4vZndmdmtmd0EXz3n3KQFwBXQiLb3ETgM/jHQi3J6wGhVFhwDp2bWMLOGmR0BYzPri8hARN7NbGRm30DOzL7MLDezLxHJi0heRHIikhORvIjkRSQnIjkzOxCRnIjkReR/twf/9Xf8A6gCqAKoAqgCqAKoAthrAD9LonKqB5r71AAAAAElFTkSuQmCC');
+          background: url('/cursor.png') no-repeat center center; /* Place your cursor image in public folder */
           background-size: contain;
-          background-repeat: no-repeat;
-          image-rendering: pixelated;
         }
 
-        .custom-cursor.clicking {
-          transform: scale(0.8);
+        /* Hide default cursor */
+        * {
+          cursor: none !important;
         }
 
-        .custom-cursor.hovering {
-          transform: scale(1.2);
-        }
-
+        /* Mobile devices */
         @media (max-width: 768px) {
           .custom-cursor {
             display: none;
