@@ -8,7 +8,6 @@ const CustomCursor = () => {
   const [isPointer, setIsPointer] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
   
-  // Add refs for smooth interpolation
   const cursorRef = useRef({ x: 0, y: 0 })
   const smoothRef = useRef({ x: 0, y: 0 })
   const rafRef = useRef<number>()
@@ -32,7 +31,6 @@ const CustomCursor = () => {
     const handleMouseDown = () => setIsClicking(true)
     const handleMouseUp = () => setIsClicking(false)
 
-    // Smooth animation function
     const smoothAnimation = () => {
       const lerp = (start: number, end: number, factor: number) => {
         return start + (end - start) * factor
@@ -47,7 +45,6 @@ const CustomCursor = () => {
       rafRef.current = requestAnimationFrame(smoothAnimation)
     }
 
-    // Start the animation
     smoothAnimation()
 
     document.addEventListener('mousemove', moveCursor)
@@ -73,7 +70,9 @@ const CustomCursor = () => {
             isClicking ? 0.8 : isPointer ? 1.5 : 1
           })`
         }}
-      />
+      >
+        <div className="cursor-shape" />
+      </motion.div>
       <style jsx global>{`
         * {
           cursor: none !important;
@@ -82,33 +81,49 @@ const CustomCursor = () => {
         .custom-cursor {
           pointer-events: none;
           position: fixed;
-          width: 20px;
-          height: 20px;
+          width: 44px;
+          height: 64px;
           z-index: 9999;
-          mix-blend-mode: difference;
-          transform-origin: center;
+          transform-origin: top left;
           will-change: transform;
         }
 
-        .custom-cursor::before,
-        .custom-cursor::after {
+        .cursor-shape {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-template-columns: repeat(11, 4px);
+          grid-template-rows: repeat(16, 4px);
+          background-color: black;
+          clip-path: polygon(
+            0% 0%, 9.09% 0%, 9.09% 6.25%, 18.18% 6.25%, 18.18% 12.5%, 
+            27.27% 12.5%, 27.27% 18.75%, 36.36% 18.75%, 36.36% 25%, 
+            45.45% 25%, 45.45% 31.25%, 54.54% 31.25%, 54.54% 37.5%, 
+            63.63% 37.5%, 63.63% 43.75%, 72.72% 43.75%, 72.72% 50%, 
+            81.81% 50%, 81.81% 56.25%, 54.54% 56.25%, 54.54% 62.5%, 
+            27.27% 62.5%, 27.27% 68.75%, 18.18% 68.75%, 18.18% 75%, 
+            9.09% 75%, 9.09% 81.25%, 0% 81.25%
+          );
+        }
+
+        .cursor-shape::after {
           content: '';
           position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background-color: #F7F2DA;
-          transition: all 0.2s ease;
-        }
-
-        .custom-cursor::before {
-          width: 2px;
-          height: 20px;
-        }
-
-        .custom-cursor::after {
-          width: 20px;
-          height: 2px;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background-color: transparent;
+          border: 2px solid #F7F2DA;
+          clip-path: polygon(
+            0% 0%, 9.09% 0%, 9.09% 6.25%, 18.18% 6.25%, 18.18% 12.5%, 
+            27.27% 12.5%, 27.27% 18.75%, 36.36% 18.75%, 36.36% 25%, 
+            45.45% 25%, 45.45% 31.25%, 54.54% 31.25%, 54.54% 37.5%, 
+            63.63% 37.5%, 63.63% 43.75%, 72.72% 43.75%, 72.72% 50%, 
+            81.81% 50%, 81.81% 56.25%, 54.54% 56.25%, 54.54% 62.5%, 
+            27.27% 62.5%, 27.27% 68.75%, 18.18% 68.75%, 18.18% 75%, 
+            9.09% 75%, 9.09% 81.25%, 0% 81.25%
+          );
         }
 
         @media (max-width: 768px) {
