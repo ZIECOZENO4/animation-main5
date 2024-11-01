@@ -14,7 +14,8 @@ const CustomCursor = () => {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      cursorRef.current = { x: e.clientX, y: e.clientY }
+      // Offset adjusted for this specific cursor image
+      cursorRef.current = { x: e.clientX - 2, y: e.clientY - 2 }
     }
 
     const handlePointerEvent = (e: MouseEvent) => {
@@ -76,7 +77,7 @@ const CustomCursor = () => {
           mass: 0.5
         }}
         style={{
-          transform: `translate(${position.x}px, ${position.y}px)`
+          transform: `translate3d(${position.x}px, ${position.y}px, 0)`
         }}
       />
       <style jsx global>{`
@@ -90,12 +91,22 @@ const CustomCursor = () => {
           width: 16px;
           height: 16px;
           z-index: 9999;
-          transform-origin: 0 0;
-          will-change: transform;
           background-image: url('/cursor.png');
           background-size: contain;
           background-repeat: no-repeat;
           image-rendering: pixelated;
+          transform-origin: 0 0;
+          will-change: transform;
+        }
+
+        .custom-cursor.clicking {
+          transform: scale(0.8);
+          transition: transform 0.1s ease-out;
+        }
+
+        .custom-cursor.hovering {
+          transform: scale(1.2);
+          transition: transform 0.1s ease-out;
         }
 
         @media (max-width: 768px) {
