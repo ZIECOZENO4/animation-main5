@@ -20,8 +20,8 @@ export default function TestContent() {
     visible: { opacity: 1, y: 0 }
   }
 
-  const BorderComponent = ({ children }: { children: React.ReactNode }) => (
-    <div className="relative h-full">
+  const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode, className?: string }) => (
+    <div className={`relative ${className}`} >
       <div className="relative bg-gray-900/50 p-6 h-full">
         {children}
       </div>
@@ -88,25 +88,6 @@ export default function TestContent() {
     </div>
   )
 
-  const BoxComponent = ({ title }: { title: string }) => (
-    <motion.div
-      variants={itemVariants}
-      whileHover={{ scale: 1.02 }}
-      className="mb-4"
-    >
-      <BorderComponent>
-        <div className="flex justify-between items-center p-2">
-          <span className="text-xs text-gray-500">{title}</span>
-          <motion.div
-            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-            whileTap={{ scale: 0.9 }}
-            className="w-4 h-4 border border-gray-800 cursor-pointer"
-          />
-        </div>
-      </BorderComponent>
-    </motion.div>
-  )
-
   return (
     <motion.div 
       className="overflow-hidden"
@@ -162,23 +143,125 @@ export default function TestContent() {
             className="h-full"
           >
             <BorderComponent>
-              <div className="flex flex-col h-full">
+              <div className="flex flex-col h-full gap-4">
                 {/* Top Section */}
-                <div className="mb-8">
-                  <BoxComponent title="NOMAD" />
-                  <BoxComponent title="BEAT" />
+                <div className="space-y-4">
+                  {/* First Row */}
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">NOMAD</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <div className="w-[20%] h-[51px]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">BEAT</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                      </BorderComponent>
+                    </div>
+                  </div>
+                  {/* Second Row - Full Width */}
+                  <div className="w-full h-[51px]">
+                    <BorderComponent>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-500">BEAT</span>
+                        <motion.div
+                          whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-4 h-4 border border-gray-800 cursor-pointer"
+                        />
+                      </div>
+                    </BorderComponent>
+                  </div>
                 </div>
 
-                {/* Middle Section */}
+                {/* Middle Empty Section with Border */}
                 <div className="flex-grow">
-                  {/* Add any middle content here */}
+                  <BorderComponent className="h-full" />
                 </div>
 
                 {/* Bottom Section */}
-                <div>
-                  <BoxComponent title="NOMAD" />
-                  <BoxComponent title="NOMAD" />
-                  <BoxComponent title="BEAT" />
+                <div className="space-y-4">
+                  {/* First Row */}
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">NOMAD</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <div className="w-[20%] h-[51px]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">BEAT</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                      </BorderComponent>
+                    </div>
+                  </div>
+                  {/* Second Row */}
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">NOMAD</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <div className="w-[20%] h-[51px]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-500">BEAT</span>
+                          <motion.div
+                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                            whileTap={{ scale: 0.9 }}
+                            className="w-4 h-4 border border-gray-800 cursor-pointer"
+                          />
+                        </div>
+                      </BorderComponent>
+                    </div>
+                  </div>
+                  {/* Third Row - Full Width */}
+                  <div className="w-full h-[51px]">
+                    <BorderComponent>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-500">BEAT</span>
+                        <motion.div
+                          whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-4 h-4 border border-gray-800 cursor-pointer"
+                        />
+                      </div>
+                    </BorderComponent>
+                  </div>
                 </div>
               </div>
             </BorderComponent>
