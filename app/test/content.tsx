@@ -21,7 +21,7 @@ export default function TestContent() {
   }
 
   const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode, className?: string }) => (
-    <div className={`relative ${className}`} >
+    <div className="relative h-full">
       <div className="relative bg-gray-900/50 p-6 h-full">
         {children}
       </div>
@@ -88,6 +88,25 @@ export default function TestContent() {
     </div>
   )
 
+  const BoxComponent = ({ title }: { title: string }) => (
+    <motion.div
+      variants={itemVariants}
+      whileHover={{ scale: 1.02 }}
+      className="mb-4"
+    >
+      <BorderComponent>
+        <div className="flex justify-between items-center p-2">
+          <span className="text-xs text-gray-500">{title}</span>
+          <motion.div
+            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+            whileTap={{ scale: 0.9 }}
+            className="w-4 h-4 border border-gray-800 cursor-pointer"
+          />
+        </div>
+      </BorderComponent>
+    </motion.div>
+  )
+
   return (
     <motion.div 
       className="overflow-hidden"
@@ -135,8 +154,8 @@ export default function TestContent() {
             </motion.div>
           </div>
 
-          {/* Right Column */}
-          <motion.div
+             {/* Right Column */}
+             <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -190,7 +209,7 @@ export default function TestContent() {
 
                 {/* Middle Empty Section with Border */}
                 <div className="flex-grow">
-                  <BorderComponent className="h-full" />
+                  <BorderComponent />
                 </div>
 
                 {/* Bottom Section */}
