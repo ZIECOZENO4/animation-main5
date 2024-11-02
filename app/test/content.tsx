@@ -195,8 +195,10 @@ export default function TestContent() {
                 </div>
 
                 {/* Middle Empty Section with Border */}
-                <div className="w-full h-1">
-                  <BorderComponent />
+                <div className="w-full">
+                <BorderComponent>
+                   <hr />
+                    </BorderComponent>
                 </div>
 
 
