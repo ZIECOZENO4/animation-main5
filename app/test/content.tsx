@@ -27,65 +27,84 @@ export default function TestContent() {
       </div>
       {/* Top border */}
       <div 
-        className="absolute -top-[4px] -right-[4px] -left-[4px]"
+        className="absolute -top-[2px] -right-[2px] -left-[2px]"
         style={{
-          height: '4px',
+          height: '2px',
           backgroundImage: `
             repeating-linear-gradient(to right, 
-              #555555 0, #555555 4px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 16px, transparent 24px
+              #555555 0, #555555 2px, 
+              transparent 2px, transparent 4px,
+              #555555 4px, #555555 8px, 
+              transparent 8px, transparent 12px
             )
           `,
         }}
       />
       {/* Bottom border */}
       <div 
-        className="absolute -bottom-[4px] -right-[4px] -left-[4px]"
+        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
         style={{
-          height: '4px',
+          height: '2px',
           backgroundImage: `
             repeating-linear-gradient(to right, 
-              #555555 0, #555555 4px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 16px, transparent 24px
+              #555555 0, #555555 2px, 
+              transparent 2px, transparent 4px,
+              #555555 4px, #555555 8px, 
+              transparent 8px, transparent 12px
             )
           `,
         }}
       />
       {/* Left border */}
       <div 
-        className="absolute -left-[4px] -top-[4px] -bottom-[4px]"
+        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
         style={{
-          width: '4px',
+          width: '2px',
           backgroundImage: `
             repeating-linear-gradient(to bottom, 
-              #555555 0, #555555 4px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 16px, transparent 24px
+              #555555 0, #555555 2px, 
+              transparent 2px, transparent 4px,
+              #555555 4px, #555555 8px, 
+              transparent 8px, transparent 12px
             )
           `,
         }}
       />
       {/* Right border */}
       <div 
-        className="absolute -right-[4px] -top-[4px] -bottom-[4px]"
+        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
         style={{
-          width: '4px',
+          width: '2px',
           backgroundImage: `
             repeating-linear-gradient(to bottom, 
-              #555555 0, #555555 4px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 16px, transparent 24px
+              #555555 0, #555555 2px, 
+              transparent 2px, transparent 4px,
+              #555555 4px, #555555 8px, 
+              transparent 8px, transparent 12px
             )
           `,
         }}
       />
     </div>
+  )
+
+  const BoxComponent = ({ title }: { title: string }) => (
+    <motion.div
+      variants={itemVariants}
+      whileHover={{ scale: 1.02 }}
+      className="mb-4"
+    >
+      <BorderComponent>
+        <div className="flex justify-between items-center p-2">
+          <span className="text-xs text-gray-500">{title}</span>
+          <motion.div
+            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
+            whileTap={{ scale: 0.9 }}
+            className="w-4 h-4 border border-gray-800 cursor-pointer"
+          />
+        </div>
+      </BorderComponent>
+    </motion.div>
   )
 
   return (
@@ -144,95 +163,22 @@ export default function TestContent() {
           >
             <BorderComponent>
               <div className="flex flex-col h-full">
-                <motion.span 
-                  className="text-sm text-gray-500 mb-4"
-                  whileHover={{ color: "#ffffff" }}
-                >
-                  RIGHT PANEL
-                </motion.span>
-                
-                <div className="flex-grow flex flex-col justify-between">
-                  <motion.div 
-                    className="mb-4"
-                    variants={itemVariants}
-                  >
-                    <span className="text-xs text-gray-500">ALIGNED WITH TOP</span>
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      className="mt-2 space-y-2"
-                    >
-                      {Array.from({ length: 3 }).map((_, j) => (
-                        <motion.div
-                          key={j}
-                          whileHover={{ x: 5, backgroundColor: "rgba(255,255,255,0.1)" }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                          className="h-1 bg-gray-800/50 rounded-sm"
-                        />
-                      ))}
-                    </motion.div>
-                  </motion.div>
-                  
-                  <div>
-                    <motion.span 
-                      className="text-xs text-gray-500"
-                      variants={itemVariants}
-                    >
-                      ALIGNED WITH BOTTOM
-                    </motion.span>
-                    
-                    {[1, 2].map((i) => (
-                      <motion.div
-                        key={`nomad-${i}`}
-                        variants={itemVariants}
-                        whileHover={{ scale: 1.02 }}
-                        className="mb-4"
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-gray-500">NOMAD</span>
-                          <motion.div
-                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-4 h-4 border border-gray-800 cursor-pointer"
-                          />
-                        </div>
-                        <div className="mt-2 space-y-2">
-                          {Array.from({ length: 3 }).map((_, j) => (
-                            <motion.div
-                              key={j}
-                              whileHover={{ x: 5, backgroundColor: "rgba(255,255,255,0.1)" }}
-                              transition={{ type: "spring", stiffness: 300 }}
-                              className="h-1 bg-gray-800/50 rounded-sm"
-                            />
-                          ))}
-                        </div>
-                      </motion.div>
-                    ))}
+                {/* Top Section */}
+                <div className="mb-8">
+                  <BoxComponent title="NOMAD" />
+                  <BoxComponent title="BEAT" />
+                </div>
 
-                    <motion.div
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.02 }}
-                      className="mb-4"
-                    >
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">BEAT</span>
-                        <motion.div
-                          whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                          whileTap={{ scale: 0.9 }}
-                          className="w-4 h-4 border border-gray-800 cursor-pointer"
-                        />
-                      </div>
-                      <div className="mt-2 space-y-2">
-                        {Array.from({ length: 3 }).map((_, j) => (
-                          <motion.div
-                            key={j}
-                            whileHover={{ x: 5, backgroundColor: "rgba(255,255,255,0.1)" }}
-                            transition={{ type: "spring", stiffness: 300 }}
-                            className="h-1 bg-gray-800/50 rounded-sm"
-                          />
-                        ))}
-                      </div>
-                    </motion.div>
-                  </div>
+                {/* Middle Section */}
+                <div className="flex-grow">
+                  {/* Add any middle content here */}
+                </div>
+
+                {/* Bottom Section */}
+                <div>
+                  <BoxComponent title="NOMAD" />
+                  <BoxComponent title="NOMAD" />
+                  <BoxComponent title="BEAT" />
                 </div>
               </div>
             </BorderComponent>
