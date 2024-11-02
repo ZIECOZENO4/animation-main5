@@ -20,6 +20,74 @@ export default function TestContent() {
     visible: { opacity: 1, y: 0 }
   }
 
+  const BorderComponent = ({ children }: { children: React.ReactNode }) => (
+    <div className="relative">
+      <div className="relative bg-gray-900/50 p-6 h-full">
+        {children}
+      </div>
+      {/* Top border */}
+      <div 
+        className="absolute -top-[4px] -right-[4px] -left-[4px]"
+        style={{
+          height: '4px',
+          backgroundImage: `
+            repeating-linear-gradient(to right, 
+              #555555 0, #555555 4px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
+              transparent 16px, transparent 24px
+            )
+          `,
+        }}
+      />
+      {/* Bottom border */}
+      <div 
+        className="absolute -bottom-[4px] -right-[4px] -left-[4px]"
+        style={{
+          height: '4px',
+          backgroundImage: `
+            repeating-linear-gradient(to right, 
+              #555555 0, #555555 4px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
+              transparent 16px, transparent 24px
+            )
+          `,
+        }}
+      />
+      {/* Left border */}
+      <div 
+        className="absolute -left-[4px] -top-[4px] -bottom-[4px]"
+        style={{
+          width: '4px',
+          backgroundImage: `
+            repeating-linear-gradient(to bottom, 
+              #555555 0, #555555 4px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
+              transparent 16px, transparent 24px
+            )
+          `,
+        }}
+      />
+      {/* Right border */}
+      <div 
+        className="absolute -right-[4px] -top-[4px] -bottom-[4px]"
+        style={{
+          width: '4px',
+          backgroundImage: `
+            repeating-linear-gradient(to bottom, 
+              #555555 0, #555555 4px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
+              transparent 16px, transparent 24px
+            )
+          `,
+        }}
+      />
+    </div>
+  )
+
   return (
     <motion.div 
       className="overflow-hidden"
@@ -39,17 +107,14 @@ export default function TestContent() {
               whileHover={{ scale: 1.01 }}
               className="relative flex-[0.7]"
             >
-              <div className="absolute inset-0 border border-gray-800 opacity-50" />
-              <div className="absolute inset-0 border border-dashed border-gray-800 opacity-30" 
-                   style={{ borderSpacing: '4px' }} />
-              <div className="relative bg-gray-900/50 p-6 h-full">
+              <BorderComponent>
                 <motion.span 
                   className="text-sm text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
                   TOP COMPONENT (70%)
                 </motion.span>
-              </div>
+              </BorderComponent>
             </motion.div>
 
             <motion.div
@@ -59,17 +124,14 @@ export default function TestContent() {
               whileHover={{ scale: 1.01 }}
               className="relative flex-[0.3]"
             >
-              <div className="absolute inset-0 border border-gray-800 opacity-50" />
-              <div className="absolute inset-0 border border-dashed border-gray-800 opacity-30" 
-                   style={{ borderSpacing: '4px' }} />
-              <div className="relative bg-gray-900/50 p-6 h-full">
+              <BorderComponent>
                 <motion.span 
                   className="text-sm text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
                   BOTTOM COMPONENT (30%)
                 </motion.span>
-              </div>
+              </BorderComponent>
             </motion.div>
           </div>
 
@@ -80,11 +142,8 @@ export default function TestContent() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="h-full"
           >
-            <div className="relative h-full">
-              <div className="absolute inset-0 border border-gray-800 opacity-50" />
-              <div className="absolute inset-0 border border-dashed border-gray-800 opacity-30" 
-                   style={{ borderSpacing: '4px' }} />
-              <div className="relative bg-gray-900/50 p-4 h-full flex flex-col">
+            <BorderComponent>
+              <div className="relative bg-gray-900/50 h-full flex flex-col">
                 <motion.span 
                   className="text-sm text-gray-500 mb-4"
                   whileHover={{ color: "#ffffff" }}
@@ -176,7 +235,7 @@ export default function TestContent() {
                   </div>
                 </div>
               </div>
-            </div>
+            </BorderComponent>
           </motion.div>
         </div>
       </div>
