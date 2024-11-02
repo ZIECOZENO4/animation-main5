@@ -22,7 +22,7 @@ export default function TestContent() {
 
   const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode, className?: string }) => (
     <div className="relative h-full">
-      <div className="relative bg-gray-900/50 p-6 h-full">
+      <div className="relative  p-6 h-full">
         {children}
       </div>
       {/* Top border */}
@@ -33,8 +33,8 @@ export default function TestContent() {
           backgroundImage: `
             repeating-linear-gradient(to right, 
               #555555 0, #555555 2px, 
-              transparent 2px, transparent 4px,
-              #555555 4px, #555555 8px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
               transparent 8px, transparent 12px
             )
           `,
@@ -63,8 +63,8 @@ export default function TestContent() {
           backgroundImage: `
             repeating-linear-gradient(to bottom, 
               #555555 0, #555555 2px, 
-              transparent 2px, transparent 4px,
-              #555555 4px, #555555 8px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
               transparent 8px, transparent 12px
             )
           `,
@@ -78,8 +78,8 @@ export default function TestContent() {
           backgroundImage: `
             repeating-linear-gradient(to bottom, 
               #555555 0, #555555 2px, 
-              transparent 2px, transparent 4px,
-              #555555 4px, #555555 8px, 
+              transparent 4px, transparent 8px,
+              #555555 8px, #555555 16px, 
               transparent 8px, transparent 12px
             )
           `,
@@ -124,7 +124,7 @@ export default function TestContent() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               whileHover={{ scale: 1.01 }}
-              className="relative h-[65%]"
+              className="relative h-[65%] bg-[#1D1D1D]/45"
             >
               <BorderComponent>
                 <motion.span 
@@ -141,7 +141,7 @@ export default function TestContent() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
               whileHover={{ scale: 1.01 }}
-              className="relative h-[35%]"
+              className="relative h-[35%] bg-[#000000]"
             >
               <BorderComponent>
                 <motion.span 
@@ -159,7 +159,7 @@ export default function TestContent() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full"
+            className="h-full bg-[#000000]"
           >
             <BorderComponent>
               <div className="flex flex-col h-full gap-4">
@@ -195,10 +195,8 @@ export default function TestContent() {
                 </div>
 
                 {/* Middle Empty Section with Border */}
-                <div className="w-full">
-                <BorderComponent>
-                   <hr />
-                    </BorderComponent>
+                <div className="flex-grow">
+                <BorderComponent />
                 </div>
 
 
