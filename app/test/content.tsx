@@ -131,7 +131,7 @@ export default function TestContent() {
                   className="text-sm text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-                  TOP COMPONENT (65%)
+
                 </motion.span>
               </BorderComponent>
             </motion.div>
@@ -148,7 +148,7 @@ export default function TestContent() {
                   className="text-sm text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-                  BOTTOM COMPONENT (35%)
+
                 </motion.span>
               </BorderComponent>
             </motion.div>
@@ -195,7 +195,7 @@ export default function TestContent() {
                 </div>
 
                 {/* Middle Empty Section with Border */}
-                <div className="flex-grow h-1">
+                <div className="w-full h-1">
                   <BorderComponent />
                 </div>
 
