@@ -215,10 +215,8 @@ export default function TestContent() {
                 </div>
 
                 {/* Middle Empty Section with Border */}
-                <div className="w-full">
-                <BorderComponent>
-                   <hr />
-                    </BorderComponent>
+                <div className="flex-grow">
+                <BorderComponent />
                 </div>
 
 
