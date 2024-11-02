@@ -218,26 +218,16 @@ export default function TestContent() {
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px]">
                       <BorderComponent>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between align-middle items-center">
+                        <span className="text-xs text-gray-500"></span>
                           <span className="text-xs text-gray-500">NOMAD</span>
-                          <motion.div
-                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-4 h-4 border border-gray-800 cursor-pointer"
-                          />
+                         
                         </div>
                       </BorderComponent>
                     </div>
                     <div className="w-[20%] h-[51px]">
                       <BorderComponent>
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-gray-500">BEAT</span>
-                          <motion.div
-                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-4 h-4 border border-gray-800 cursor-pointer"
-                          />
-                        </div>
+                        
                       </BorderComponent>
                     </div>
                   </div>
@@ -246,39 +236,23 @@ export default function TestContent() {
                     <div className="w-[80%] h-[51px]">
                       <BorderComponent>
                         <div className="flex justify-between items-center">
+                    
+                          <span className="text-xs text-gray-500"></span>
                           <span className="text-xs text-gray-500">NOMAD</span>
-                          <motion.div
-                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-4 h-4 border border-gray-800 cursor-pointer"
-                          />
                         </div>
                       </BorderComponent>
                     </div>
                     <div className="w-[20%] h-[51px]">
                       <BorderComponent>
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-gray-500">BEAT</span>
-                          <motion.div
-                            whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-4 h-4 border border-gray-800 cursor-pointer"
-                          />
-                        </div>
+                     
                       </BorderComponent>
                     </div>
                   </div>
                   {/* Third Row - Full Width */}
                   <div className="w-full h-[51px]">
                     <BorderComponent>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">BEAT</span>
-                        <motion.div
-                          whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-                          whileTap={{ scale: 0.9 }}
-                          className="w-4 h-4 border border-gray-800 cursor-pointer"
-                        />
-                      </div>
+                    <span className="text-xs text-gray-500"></span>
+                          <span className="text-xs text-gray-500">BEAT</span>
                     </BorderComponent>
                   </div>
                 </div>
