@@ -31,13 +31,18 @@ export default function TestContent() {
         style={{
           height: '2px',
           backgroundImage: `
-            repeating-linear-gradient(to right, 
-              #555555 0, #555555 2px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 8px, transparent 12px
-            )
-          `,
+          repeating-linear-gradient(
+            to right,
+            #555555 0,
+            #555555 4px,
+            transparent 4px,
+            transparent 8px,
+            #555555 8px,
+            #555555 16px,
+            transparent 16px,
+            transparent 24px
+          )
+        `,
         }}
       />
       {/* Bottom border */}
@@ -46,13 +51,18 @@ export default function TestContent() {
         style={{
           height: '2px',
           backgroundImage: `
-            repeating-linear-gradient(to right, 
-              #555555 0, #555555 2px, 
-              transparent 2px, transparent 4px,
-              #555555 4px, #555555 8px, 
-              transparent 8px, transparent 12px
-            )
-          `,
+          repeating-linear-gradient(
+            to right,
+            #555555 0,
+            #555555 4px,
+            transparent 4px,
+            transparent 8px,
+            #555555 8px,
+            #555555 16px,
+            transparent 16px,
+            transparent 24px
+          )
+        `,
         }}
       />
       {/* Left border */}
@@ -61,13 +71,18 @@ export default function TestContent() {
         style={{
           width: '2px',
           backgroundImage: `
-            repeating-linear-gradient(to bottom, 
-              #555555 0, #555555 2px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 8px, transparent 12px
-            )
-          `,
+          repeating-linear-gradient(
+            to bottom,
+            #555555 0,
+            #555555 4px,
+            transparent 4px,
+            transparent 8px,
+            #555555 8px,
+            #555555 16px,
+            transparent 16px,
+            transparent 24px
+          )
+        `,
         }}
       />
       {/* Right border */}
@@ -76,13 +91,18 @@ export default function TestContent() {
         style={{
           width: '2px',
           backgroundImage: `
-            repeating-linear-gradient(to bottom, 
-              #555555 0, #555555 2px, 
-              transparent 4px, transparent 8px,
-              #555555 8px, #555555 16px, 
-              transparent 8px, transparent 12px
-            )
-          `,
+          repeating-linear-gradient(
+            to bottom,
+            #555555 0,
+            #555555 4px,
+            transparent 4px,
+            transparent 8px,
+            #555555 8px,
+            #555555 16px,
+            transparent 16px,
+            transparent 24px
+          )
+        `,
         }}
       />
     </div>
@@ -195,8 +215,10 @@ export default function TestContent() {
                 </div>
 
                 {/* Middle Empty Section with Border */}
-                <div className="flex-grow">
-                <BorderComponent />
+                <div className="w-full">
+                <BorderComponent>
+                   <hr />
+                    </BorderComponent>
                 </div>
 
 
