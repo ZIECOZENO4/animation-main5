@@ -1,20 +1,20 @@
 export default function ExamplePage() {
   return (
-    <div className="w-full min-h-[200px] p-[4px] bg-black relative">
+    <div className="w-[30vw] min-h-[200px] p-[4px] bg-black relative">
       <div 
         className="w-full h-full bg-black"
         style={{
           backgroundImage: `
             repeating-linear-gradient(to right, 
-              #8B4513 0, #8B4513 4px, 
+              #555555 0, #555555 4px, 
               transparent 4px, transparent 8px,
-              #8B4513 8px, #8B4513 16px, 
+              #555555 8px, #555555 16px, 
               transparent 16px, transparent 24px
             ),
             repeating-linear-gradient(to bottom, 
-              #8B4513 0, #8B4513 4px, 
+              #555555 0, #555555 4px, 
               transparent 4px, transparent 8px,
-              #8B4513 8px, #8B4513 16px, 
+              #555555 8px, #555555 16px, 
               transparent 16px, transparent 24px
             )
           `,
@@ -34,9 +34,9 @@ export default function ExamplePage() {
             height: '4px',
             backgroundImage: `
               repeating-linear-gradient(to right, 
-                #8B4513 0, #8B4513 4px, 
+                #555555 0, #555555 4px, 
                 transparent 4px, transparent 8px,
-                #8B4513 8px, #8B4513 16px, 
+                #555555 8px, #555555 16px, 
                 transparent 16px, transparent 24px
               )
             `,
@@ -48,9 +48,9 @@ export default function ExamplePage() {
             height: '4px',
             backgroundImage: `
               repeating-linear-gradient(to right, 
-                #8B4513 0, #8B4513 4px, 
+                #555555 0, #555555 4px, 
                 transparent 4px, transparent 8px,
-                #8B4513 8px, #8B4513 16px, 
+                #555555 8px, #555555 16px, 
                 transparent 16px, transparent 24px
               )
             `,
