@@ -28,6 +28,7 @@ export default function ExamplePage() {
           backgroundClip: 'content-box, content-box'
         }}
       >
+        {/* Bottom border */}
         <div 
           className="absolute -bottom-[4px] -right-[4px] -left-[4px]"
           style={{
@@ -42,12 +43,43 @@ export default function ExamplePage() {
             `,
           }}
         />
+        {/* Top border */}
         <div 
           className="absolute -top-[4px] -right-[4px] -left-[4px]"
           style={{
             height: '4px',
             backgroundImage: `
               repeating-linear-gradient(to right, 
+                #555555 0, #555555 4px, 
+                transparent 4px, transparent 8px,
+                #555555 8px, #555555 16px, 
+                transparent 16px, transparent 24px
+              )
+            `,
+          }}
+        />
+        {/* Left border */}
+        <div 
+          className="absolute -left-[4px] -top-[4px] -bottom-[4px]"
+          style={{
+            width: '4px',
+            backgroundImage: `
+              repeating-linear-gradient(to bottom, 
+                #555555 0, #555555 4px, 
+                transparent 4px, transparent 8px,
+                #555555 8px, #555555 16px, 
+                transparent 16px, transparent 24px
+              )
+            `,
+          }}
+        />
+        {/* Right border */}
+        <div 
+          className="absolute -right-[4px] -top-[4px] -bottom-[4px]"
+          style={{
+            width: '4px',
+            backgroundImage: `
+              repeating-linear-gradient(to bottom, 
                 #555555 0, #555555 4px, 
                 transparent 4px, transparent 8px,
                 #555555 8px, #555555 16px, 
