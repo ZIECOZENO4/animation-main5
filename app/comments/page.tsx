@@ -26,7 +26,7 @@ export default function Component() {
     <ScrollShadow className="h-screen text-[#F7F2DA]">
       <div className="space-y-4 p-4">
         <h2 className="text-2xl font-bold mb-4">All Comments</h2>
-        <hr />
+        <hr className='bg-slate-800 border-slate-800 text-slate-800 ' />
         {chatData.map((chat) => (
           <Button
             key={chat.id}
