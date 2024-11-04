@@ -20,6 +20,62 @@ export default function TestContent() {
     visible: { opacity: 1, y: 0 }
   }
 
+  const MiddleBorderComponent = ({ children }: { children?: React.ReactNode }) => (
+    <div className="relative h-full">
+      <div className="relative p-6 h-full">
+        {children}
+      </div>
+      
+      {/* Top border - Solid Black */}
+      <div 
+        className="absolute -top-[2px] -right-[2px] -left-[2px]" 
+        style={{ 
+          height: '2px',
+          backgroundColor: '#000000'
+        }} 
+      />
+      
+      {/* Bottom border - Custom Pattern */}
+      <div 
+        className="absolute -bottom-[2px] -right-[2px] -left-[2px]" 
+        style={{ 
+          height: '2px',
+          backgroundImage: `
+            repeating-linear-gradient(
+              to right,
+              #555555 0,
+              #555555 4px,
+              transparent 4px,
+              transparent 8px,
+              #555555 8px,
+              #555555 16px,
+              transparent 16px,
+              transparent 24px
+            )
+          `
+        }} 
+      />
+      
+      {/* Left border - Solid Black */}
+      <div 
+        className="absolute -left-[2px] -top-[2px] -bottom-[2px]" 
+        style={{ 
+          width: '2px',
+          backgroundColor: '#000000'
+        }} 
+      />
+      
+      {/* Right border - Solid Black */}
+      <div 
+        className="absolute -right-[2px] -top-[2px] -bottom-[2px]" 
+        style={{ 
+          width: '2px',
+          backgroundColor: '#000000'
+        }} 
+      />
+    </div>
+  )
+
   const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode, className?: string }) => (
     <div className="relative h-full">
       <div className="relative  p-6 h-full">
@@ -186,15 +242,17 @@ export default function TestContent() {
       {/* Top Section */}
       <div className="space-y-4">
         {/* First Row */}
+
         <div className="flex gap-4">
-          <div className="w-[80%] h-[51px]">
+          <div className="w-[80%] h-[51px] bg-[#5555554D]">
             <BorderComponent>
               <div className="flex justify-end items-center h-full">
-                <span className="text-xs text-gray-500">NOMAD</span>
-              </div>
+                <span className="text-[20px] text-[#F7F2DA80]">NOMAD</span>
+              </div> 
+
             </BorderComponent>
           </div>
-          <div className="w-[20%] h-[51px]">
+          <div className="w-[20%] h-[51px] bg-[#5555554D]">
             <BorderComponent>
               <div className="flex items-center justify-center h-full">
               </div>
@@ -202,10 +260,11 @@ export default function TestContent() {
           </div>
         </div>
         {/* Second Row - Full Width */}
-        <div className="w-full h-[51px]">
+        <div className="w-full h-[51px] bg-[#5555554D]">
           <BorderComponent>
             <div className="flex justify-end items-center h-full">
-              <span className="text-xs text-gray-500">BEAT</span>
+         
+              <span className="text-[20px] text-[#F7F2DA80]">BEAT</span>
             </div>
           </BorderComponent>
         </div>
@@ -213,21 +272,22 @@ export default function TestContent() {
 
       {/* Middle Empty Section with Border */}
       <div className="flex-grow">
-        <BorderComponent />
-      </div>
+  <MiddleBorderComponent />
+</div>
 
       {/* Bottom Section */}
       <div className="space-y-4">
         {/* First Row */}
         <div className="flex gap-4">
-          <div className="w-[80%] h-[51px]">
+          <div className="w-[80%] h-[51px] bg-[#5555554D]">
             <BorderComponent>
-              <div className="flex justify-end items-center h-full">
-                <span className="text-xs text-gray-500">NOMAD</span>
+              <div className="flex justify-center items-center h-full">
+      
+                <span className="text-[20px] text-[#F7F2DA80]">NOMAD</span>
               </div>
             </BorderComponent>
           </div>
-          <div className="w-[20%] h-[51px]">
+          <div className="w-[20%] h-[51px] bg-[#5555554D]">
             <BorderComponent>
               <div className="flex items-center justify-center h-full">
               </div>
@@ -235,15 +295,16 @@ export default function TestContent() {
           </div>
         </div>
         {/* Second Row */}
-        <div className="flex gap-4">
-          <div className="w-[80%] h-[51px]">
+        <div className="flex gap-4 ">
+          <div className="w-[80%] h-[51px] bg-[#5555554D]">
             <BorderComponent>
-              <div className="flex justify-end items-center h-full">
-                <span className="text-xs text-gray-500">NOMAD</span>
-              </div>
+            <div className="flex justify-center items-center h-full">
+      
+      <span className="text-[20px] text-[#F7F2DA80]">NOMAD</span>
+    </div>
             </BorderComponent>
           </div>
-          <div className="w-[20%] h-[51px]">
+          <div className="w-[20%] h-[51px] bg-[#5555554D]">
             <BorderComponent>
               <div className="flex items-center justify-center h-full">
               </div>
@@ -251,10 +312,10 @@ export default function TestContent() {
           </div>
         </div>
         {/* Third Row - Full Width */}
-        <div className="w-full h-[51px]">
+        <div className="w-full h-[51px] bg-[#5555554D]">
           <BorderComponent>
             <div className="flex justify-end items-center h-full">
-              <span className="text-xs text-gray-500">BEAT</span>
+            <span className="text-[20px] text-[#F7F2DA80]">BEAT</span>
             </div>
           </BorderComponent>
         </div>
