@@ -12,7 +12,10 @@ const generateDots = (count: number) => {
 }
 
 const generateBars = (count: number) => {
-  return Array.from({ length: count }, () => Math.random() * 100)
+  return Array.from({ length: count }, () => ({
+    height: Math.random() * 100,
+    color: Math.random() > 0.8 ? '#ff6b00' : '#cccccc'
+  }))
 }
 
 export default function SalesChart() {
@@ -63,12 +66,15 @@ export default function SalesChart() {
     ctx.fillText('0.700', 10, 130)
     ctx.fillText('0.675', 10, 180)
 
-    // Draw dots
+    // Draw dots with black center and colored borders
     dots.forEach((dot, index) => {
       ctx.beginPath()
-      ctx.arc(dot.x, dot.y, index === hoveredDot ? 4 : 3, 0, Math.PI * 2)
-      ctx.fillStyle = dot.color
+      ctx.arc(dot.x, dot.y, index === hoveredDot ? 6 : 5, 0, Math.PI * 2)
+      ctx.fillStyle = '#000000' // Black center
       ctx.fill()
+      ctx.strokeStyle = dot.color // Border color matches original dot color
+      ctx.lineWidth = index === hoveredDot ? 3 : 2
+      ctx.stroke()
     })
 
     // Stepped Line connecting specific dots (like in the first image)
@@ -87,28 +93,34 @@ export default function SalesChart() {
       ctx.stroke()
     })
 
-    
    // Bar Chart at the bottom (like in the second image)
-   const barWidth = canvas.width / bars.length;
-   bars.forEach((barHeight, index) => {
-     const xPos = index * barWidth;
+   const barWidth = Math.max(canvas.width / bars.length - 2, 3); // Each bar is at least 3px wide
+   bars.forEach((barData, index) => {
+     const { height: barHeight, color } = barData;
+     const xPos = index * (barWidth + 2);
      const yPos = canvas.height - barHeight - 20; // Position bars above bottom margin
 
-     // Draw each bar with animation-like effect
-     ctx.fillStyle = '#ff6b00';
-     ctx.fillRect(xPos, yPos, barWidth - 2, barHeight);
+     // Draw each bar with black fill and colored borders matching some of the dots
+     ctx.fillStyle = '#000000';
+     ctx.fillRect(xPos, yPos, barWidth - 1, barHeight);
+
+     if (color === '#ff6b00') {
+       // Add a border to some bars to match dot colors
+       ctx.strokeStyle = color;
+       ctx.lineWidth = 2;
+       ctx.strokeRect(xPos, yPos, barWidth -1 , barHeight);
+     }
 
      // Optional: Add small labels below each bar (e.g., time labels like "1 PM", "3 AM")
      if (index % 6 === 0) {
-       // Display time every few bars for readability
        const timeLabel = `${(index % 12 || 12)} ${index < 12 ? 'AM' : 'PM'}`;
        ctx.fillStyle = '#999999';
        ctx.font = '10px monospace';
-       ctx.fillText(timeLabel, xPos + barWidth / 4, canvas.height - 5);
+       ctx.fillText(timeLabel, xPos + barWidth /4 , canvas.height -5);
      }
 
-     // Draw a horizontal axis line above bars
      if (index === bars.length -1){
+         // Draw a horizontal axis line above bars
          ctx.beginPath();
          ctx.moveTo(0 ,canvas.height -20);
          ctx.lineTo(canvas.width ,canvas.height -20);
@@ -116,20 +128,39 @@ export default function SalesChart() {
      }
    });
 
- }, [dots, hoveredDot])
+   // Draw dotted white lines from mouse position to all edges of the screen if hovering over component
+   if (hoveredDot !== null && canvasRef.current) {
+     const rect = canvasRef.current.getBoundingClientRect();
+     const mouseX = connectedDots[hoveredDot].x;
+     const mouseY = connectedDots[hoveredDot].y;
+
+     // Dotted line style
+     ctx.setLineDash([5,5]);
+     ctx.strokeStyle= "#ffffff";
+     
+     // Vertical line from top to bottom through the hovered dot's x position
+     ctx.beginPath();
+     ctx.moveTo(mouseX ,0);
+     ctx.lineTo(mouseX ,canvas.height);
+     ctx.stroke();
+
+     // Horizontal line from left to right through hovered dot's y position
+     ctx.beginPath();
+     ctx.moveTo(0 ,mouseY);
+     ctx.lineTo(canvas.width ,mouseY);
+     ctx.stroke();
+
+   }
+
+ }, [dots ,hoveredDot])
 
  return (
    <div className="w-full max-w-4xl bg-black p-4 relative">
      
-     {/* Left and Right Borders */}
-     <div className="absolute top-0 left-0 h-full w-[4px] bg-[#ff6b00]" />
-     <div className="absolute top-0 right-0 h-full w-[4px] bg-[#ff6b00]" />
-
-     {/* Header */}
      <div className="flex justify-between items-center mb-4">
        <motion.div 
-         initial={{ opacity: 0 }}
-         animate={{ opacity: 1 }}
+         initial={{ opacity:0 }}
+         animate={{ opacity:1 }}
          className="text-[#999999] text-sm"
        >
          SALES
@@ -138,8 +169,8 @@ export default function SalesChart() {
          {['1D', '1W', '1M'].map((period) => (
            <motion.button
              key={period}
-             whileHover={{ scale: 1.05 }}
-             whileTap={{ scale: 0.95 }}
+             whileHover={{ scale:1.05 }}
+             whileTap={{ scale:0.95 }}
              className="px-2 py-1 rounded text-sm bg-[#333333] text-[#999999] hover:bg-[#444444]"
            >
              {period}
@@ -152,29 +183,29 @@ export default function SalesChart() {
      <div className="relative">
        <canvas
          ref={canvasRef}
-         className="w-full h-[300px] cursor-crosshair"
-         style={{ imageRendering: 'pixelated' }}
+         className="w-screen h-slate cursor-crosshair"
+         style={{ imageRendering:'pixelated' }}
        />
        
        {/* Hoverable Dots */}
        <div className="absolute inset-0">
-         {dots.map((dot, index) => (
+         {dots.map((dot ,index) => (
            <motion.div
              key={index}
              className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
-             style={{ left: dot.x, top: dot.y }}
+             style={{ left:dot.x ,top:dot.y }}
              onHoverStart={() => setHoveredDot(index)}
              onHoverEnd={() => setHoveredDot(null)}
-             whileHover={{ scale: 1.5 }}
+             whileHover={{ scale:1.5 }}
            >
              {hoveredDot === index && (
                <motion.div
-                 initial={{ opacity: 0, y: -10 }}
-                 animate={{ opacity: 1, y: -20 }}
-                 exit={{ opacity: 0 }}
+                 initial={{ opacity:0 ,y:-10 }}
+                 animate={{ opacity:1 ,y:-20 }}
+                 exit={{ opacity:0 }}
                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[#333333] text-[#999999] text-xs rounded whitespace-nowrap"
                >
-                 Value: {(0.750 - (dot.y / 300) * 0.075).toFixed(3)}
+                 Value:{(0.750 -(dot.y /300)*0.075).toFixed(3)}
                </motion.div>
              )}
            </motion.div>
