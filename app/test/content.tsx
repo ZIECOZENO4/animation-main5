@@ -93,8 +93,8 @@ export default function TestContent() {
             #555555 4px,
             transparent 8px,
             transparent 16px,
-            #555555 8px,
             #555555 16px,
+            #555555 32px,
             transparent 32px,
             transparent 48px
           )
@@ -113,8 +113,8 @@ export default function TestContent() {
             #555555 4px,
             transparent 8px,
             transparent 16px,
-            #555555 8px,
             #555555 16px,
+            #555555 32px,
             transparent 32px,
             transparent 48px
           )
@@ -133,8 +133,8 @@ export default function TestContent() {
             #555555 4px,
             transparent 8px,
             transparent 16px,
-            #555555 8px,
             #555555 16px,
+            #555555 32px,
             transparent 32px,
             transparent 48px
           )
@@ -153,8 +153,8 @@ export default function TestContent() {
             #555555 4px,
             transparent 8px,
             transparent 16px,
-            #555555 8px,
             #555555 16px,
+            #555555 32px,
             transparent 32px,
             transparent48px
           )
