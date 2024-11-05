@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 const generateDots = (count: number) => {
   return Array.from({ length: count }, (_, i) => ({
-    x: Math.random() * window.innerWidth,
+    x: Math.random() * 800,
     y: 50 + Math.random() * 200,
     color: Math.random() > 0.8 ? '#ff6b00' : '#cccccc'
   }))
@@ -21,6 +21,16 @@ export default function SalesChart() {
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
+  const connectedDots = [
+    dots[0],
+    dots[7],
+    dots[15],
+    dots[23],
+    dots[31],
+    dots[39],
+    dots[47]
+  ]
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -28,34 +38,56 @@ export default function SalesChart() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas size to full window size
-    canvas.width = window.innerWidth * window.devicePixelRatio
-    canvas.height = window.innerHeight * window.devicePixelRatio
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
-    // Background using dot colors
+    // Background and grid
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // Draw dots in black
+    ctx.strokeStyle = '#333333'
+    ctx.lineWidth = 0.5
+    for (let i = 0; i < canvas.height; i += 25) {
+      ctx.beginPath()
+      ctx.moveTo(0, i)
+      ctx.lineTo(canvas.width, i)
+      ctx.stroke()
+    }
+
+    // Labels on the left side
+    ctx.fillStyle = '#999999'
+    ctx.font = '12px monospace'
+    ctx.fillText('0.750', 10, 30)
+    ctx.fillText('0.725', 10, 80)
+    ctx.fillText('0.700', 10, 130)
+    ctx.fillText('0.675', 10, 180)
+
+    // Draw dots
     dots.forEach((dot, index) => {
       ctx.beginPath()
       ctx.arc(dot.x, dot.y, index === hoveredDot ? 4 : 3, 0, Math.PI * 2)
-      ctx.fillStyle = 'black' // Change dot color to black
+      ctx.fillStyle = dot.color
       ctx.fill()
     })
 
-    // Draw a single continuous line connecting all dots from left to right
+    // Stepped Line connecting specific dots (like in the first image)
     ctx.strokeStyle = '#ff6b00'
     ctx.lineWidth = 2
 
-    ctx.beginPath()
-    ctx.moveTo(dots[0].x, dots[0].y) // Start at the first dot
-    dots.forEach(dot => {
-      ctx.lineTo(dot.x, dot.y) // Connect each dot in order
+    connectedDots.forEach((dot, index) => {
+      if (index === 0) {
+        ctx.moveTo(dot.x, dot.y)
+      } else {
+        // Create a step-like effect by drawing horizontal and vertical lines
+        const prevDot = connectedDots[index - 1]
+        ctx.lineTo(dot.x, prevDot.y) // Horizontal line
+        ctx.lineTo(dot.x, dot.y)     // Vertical line
+      }
+      ctx.stroke()
     })
-    ctx.stroke()
 
+    
    // Bar Chart at the bottom (like in the second image)
    const barWidth = canvas.width / bars.length;
    bars.forEach((barHeight, index) => {
@@ -87,7 +119,7 @@ export default function SalesChart() {
  }, [dots, hoveredDot])
 
  return (
-   <div className="w-full h-screen bg-black p-4 relative">
+   <div className="w-full max-w-4xl bg-black p-4 relative">
      
      <div className="flex justify-between items-center mb-4">
        <motion.div 
@@ -115,7 +147,7 @@ export default function SalesChart() {
      <div className="relative">
        <canvas
          ref={canvasRef}
-         className="w-full h-full cursor-crosshair"
+         className="w-screen h-slate cursor-crosshair"
          style={{ imageRendering: 'pixelated' }}
        />
        
