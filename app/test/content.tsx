@@ -100,7 +100,7 @@ export default function TestContent() {
   }}
 />
       {/* Bottom border */}
-      <div className="absolute -top-[2px] -right-[2px] -left-[2px]"
+      <div className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
   style={{
     height: '2px',
     backgroundImage: `
@@ -138,7 +138,7 @@ export default function TestContent() {
   }}
 />
       {/* Right border */}
-      <div className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+      <div className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
   style={{
     width: '2px',
     backgroundImage: `
