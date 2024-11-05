@@ -45,12 +45,12 @@ export default function TestContent() {
               to right,
               #555555 0,
               #555555 4px,
+              transparent 4px,
               transparent 8px,
-              transparent 16px,
               #555555 8px,
               #555555 16px,
-              transparent 32px,
-              transparent 48px
+              transparent 16px,
+              transparent 24px
             )
           `
         }} 
@@ -91,12 +91,12 @@ export default function TestContent() {
             to right,
             #555555 0,
             #555555 4px,
+            transparent 4px,
             transparent 8px,
-            transparent 16px,
+            #555555 8px,
             #555555 16px,
-            #555555 32px,
-            transparent 32px,
-            transparent 48px
+            transparent 16px,
+            transparent 24px
           )
         `,
         }}
@@ -111,12 +111,12 @@ export default function TestContent() {
             to right,
             #555555 0,
             #555555 4px,
+            transparent 4px,
             transparent 8px,
-            transparent 16px,
+            #555555 8px,
             #555555 16px,
-            #555555 32px,
-            transparent 32px,
-            transparent 48px
+            transparent 16px,
+            transparent 24px
           )
         `,
         }}
@@ -131,12 +131,12 @@ export default function TestContent() {
             to bottom,
             #555555 0,
             #555555 4px,
+            transparent 4px,
             transparent 8px,
-            transparent 16px,
+            #555555 8px,
             #555555 16px,
-            #555555 32px,
-            transparent 32px,
-            transparent 48px
+            transparent 16px,
+            transparent 24px
           )
         `,
         }}
@@ -151,12 +151,12 @@ export default function TestContent() {
             to bottom,
             #555555 0,
             #555555 4px,
+            transparent 4px,
             transparent 8px,
-            transparent 16px,
+            #555555 8px,
             #555555 16px,
-            #555555 32px,
-            transparent 32px,
-            transparent48px
+            transparent 16px,
+            transparent 24px
           )
         `,
         }}
