@@ -36,25 +36,24 @@ export default function TestContent() {
       />
       
       {/* Bottom border - Custom Pattern */}
-      <div 
-        className="absolute -bottom-[2px] -right-[2px] -left-[2px]" 
-        style={{ 
-          height: '2px',
-          backgroundImage: `
-            repeating-linear-gradient(
-              to right,
-              #555555 0,
-              #555555 4px,
-              transparent 4px,
-              transparent 8px,
-              #555555 8px,
-              #555555 16px,
-              transparent 16px,
-              transparent 24px
-            )
-          `
-        }} 
-      />
+      <div className="absolute -bottom-[2px] -right-[2px] -left-[2px]" 
+  style={{ 
+    height: '2px', 
+    backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+  }} 
+/>
       
       {/* Left border - Solid Black */}
       <div 
@@ -82,85 +81,81 @@ export default function TestContent() {
         {children}
       </div>
       {/* Top border */}
-      <div 
-        className="absolute -top-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: '2px',
-          backgroundImage: `
-          repeating-linear-gradient(
-            to right,
-            #555555 0,
-            #555555 4px,
-            transparent 4px,
-            transparent 8px,
-            #555555 8px,
-            #555555 16px,
-            transparent 16px,
-            transparent 24px
-          )
-        `,
-        }}
-      />
+      <div className="absolute -top-[2px] -right-[2px] -left-[2px]"
+  style={{
+    height: '2px',
+    backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+  }}
+/>
       {/* Bottom border */}
-      <div 
-        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: '2px',
-          backgroundImage: `
-          repeating-linear-gradient(
-            to right,
-            #555555 0,
-            #555555 4px,
-            transparent 4px,
-            transparent 8px,
-            #555555 8px,
-            #555555 16px,
-            transparent 16px,
-            transparent 24px
-          )
-        `,
-        }}
-      />
+      <div className="absolute -top-[2px] -right-[2px] -left-[2px]"
+  style={{
+    height: '2px',
+    backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+  }}
+/>
       {/* Left border */}
-      <div 
-        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: '2px',
-          backgroundImage: `
-          repeating-linear-gradient(
-            to bottom,
-            #555555 0,
-            #555555 4px,
-            transparent 4px,
-            transparent 8px,
-            #555555 8px,
-            #555555 16px,
-            transparent 16px,
-            transparent 24px
-          )
-        `,
-        }}
-      />
+      <div className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+  style={{
+    width: '2px',
+    backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+  }}
+/>
       {/* Right border */}
-      <div 
-        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: '2px',
-          backgroundImage: `
-          repeating-linear-gradient(
-            to bottom,
-            #555555 0,
-            #555555 4px,
-            transparent 4px,
-            transparent 8px,
-            #555555 8px,
-            #555555 16px,
-            transparent 16px,
-            transparent 24px
-          )
-        `,
-        }}
-      />
+      <div className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+  style={{
+    width: '2px',
+    backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+  }}
+/>
     </div>
   )
 
