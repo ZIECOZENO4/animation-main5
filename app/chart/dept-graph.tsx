@@ -10,19 +10,19 @@ export default function DeptComponent() {
   const [isHovering, setIsHovering] = useState(false)
 
   const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-    const width = canvas.width / window.devicePixelRatio
+    const width = (canvas.width / window.devicePixelRatio) / 4 // Divided by 4
     const height = canvas.height / window.devicePixelRatio
 
     // Background
     ctx.fillStyle = '#000000'
-    ctx.fillRect(0, 0, width, height)
+    ctx.fillRect(0, 0, width * 4, height) // Maintain full width background
 
     // Grid lines
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.25
 
-    // Vertical grid lines
-    for (let i = 2.5; i < width; i += 2.5) {
+    // Vertical grid lines - adjusted spacing
+    for (let i = 0.625; i < width; i += 0.625) { // Reduced from 2.5 to 0.625
       ctx.beginPath()
       ctx.moveTo(i, 0)
       ctx.lineTo(i, height - 15)
@@ -32,28 +32,28 @@ export default function DeptComponent() {
     // Horizontal grid lines
     for (let i = 15; i < height - 15; i += 15) {
       ctx.beginPath()
-      ctx.moveTo(2, i)
+      ctx.moveTo(0.5, i) // Adjusted from 2
       ctx.lineTo(width, i)
       ctx.stroke()
     }
 
-    // Y-axis labels
+    // Y-axis labels - adjusted positioning
     ctx.fillStyle = '#666666'
     ctx.font = '10px monospace'
     const yLabels = ['105', '80', '55', '30', '0']
     yLabels.forEach((label, i) => {
-      ctx.fillText(label, 0.5, 20 + i * 30)
+      ctx.fillText(label, 0.125, 20 + i * 30) // Adjusted from 0.5
     })
 
-    // X-axis labels
+    // X-axis labels - adjusted spacing
     const xLabels = ['0.72', '0.78', '0.89', '0.95']
     xLabels.forEach((label, i) => {
-      const x = 2.5 + (i * (width - 5) / (xLabels.length - 1))
-      ctx.fillText(label, x - 7.5, height - 5)
+      const x = 0.625 + (i * (width - 1.25) / (xLabels.length - 1)) // Adjusted from 2.5 and 5
+      ctx.fillText(label, x - 1.875, height - 5) // Adjusted from 7.5
     })
 
-    // Generate stepped depth data points
-    const steps = 20 // Number of steps
+    // Generate stepped depth data points with reduced width
+    const steps = 20
     const pointsPerStep = 10
     const depthData = []
     
@@ -61,9 +61,9 @@ export default function DeptComponent() {
       const stepProgress = i / (steps - 1)
       const baseY = height - 15 - (Math.pow(stepProgress, 2) * (height - 30))
       
-      // Add horizontal line
+      // Add horizontal line with reduced width
       for (let j = 0; j < pointsPerStep; j++) {
-        const x = 2.5 + ((i * pointsPerStep + j) * (width - 5) / (steps * pointsPerStep - 1))
+        const x = 0.625 + ((i * pointsPerStep + j) * (width - 1.25) / (steps * pointsPerStep - 1))
         depthData.push({ x, y: baseY })
       }
       
@@ -71,14 +71,14 @@ export default function DeptComponent() {
       if (i < steps - 1) {
         const nextStepProgress = (i + 1) / (steps - 1)
         const nextY = height - 15 - (Math.pow(nextStepProgress, 2) * (height - 30))
-        const x = 2.5 + ((i + 1) * pointsPerStep * (width - 5) / (steps * pointsPerStep - 1))
+        const x = 0.625 + ((i + 1) * pointsPerStep * (width - 1.25) / (steps * pointsPerStep - 1))
         depthData.push({ x, y: nextY })
       }
     }
 
-    // Draw depth line with slate-500 color
+    // Draw depth line
     ctx.strokeStyle = '#64748b'
-    ctx.lineWidth = 2
+    ctx.lineWidth = 0.5 // Reduced from 2
     ctx.beginPath()
     depthData.forEach((point, i) => {
       if (i === 0) {
@@ -89,11 +89,11 @@ export default function DeptComponent() {
     })
     ctx.stroke()
 
-    // Fill area under the line with semi-transparent slate-500
+    // Fill area under the line
     ctx.lineTo(depthData[depthData.length - 1].x, height)
     ctx.lineTo(depthData[0].x, height)
     ctx.closePath()
-    ctx.fillStyle = 'rgba(100, 116, 139, 0.2)' // slate-500 with transparency
+    ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
     ctx.fill()
 
     // Draw crosshair if hovering
@@ -109,7 +109,7 @@ export default function DeptComponent() {
       
       // Horizontal line
       ctx.beginPath()
-      ctx.moveTo(2, mousePos.y)
+      ctx.moveTo(0.5, mousePos.y)
       ctx.lineTo(width, mousePos.y)
       ctx.stroke()
       
@@ -118,7 +118,7 @@ export default function DeptComponent() {
       // Show value
       const value = Math.round(105 - ((mousePos.y) / (height - 15)) * 105)
       ctx.fillStyle = '#ffffff'
-      ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+      ctx.fillText(`Value: ${value}`, mousePos.x + 2.5, mousePos.y - 2.5) // Adjusted from 10
     }
   }
 
@@ -142,7 +142,7 @@ export default function DeptComponent() {
     if (!canvas) return
 
     const rect = canvas.getBoundingClientRect()
-    const x = (e.clientX - rect.left)
+    const x = (e.clientX - rect.left) / 4 // Divided by 4
     const y = (e.clientY - rect.top)
     
     setMousePos({ x, y })
@@ -158,7 +158,7 @@ export default function DeptComponent() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-[200px] max-w-3xl mx-auto bg-black p-2 relative"
+      className="w-full h-[200px] max-w-[768px] mx-auto bg-black p-2 relative" // Reduced max-width
     >
       <motion.div 
         initial={{ y: -10, opacity: 0 }}
