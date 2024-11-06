@@ -59,7 +59,7 @@ export default function DeptComponent() {
 const steps = 80 // Increased from 20
 const pointsPerStep = 3 // Reduced points per step for better performance
 const depthData = []
-djfbds
+
 for (let i = 0; i < steps; i++) {
     const stepProgress = i / (steps - 1)
     const baseY = height - 15 - (Math.pow(stepProgress, 2) * (height - 30))
