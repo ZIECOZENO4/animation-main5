@@ -49,6 +49,7 @@ export default function SalesChart() {
     const [dots] = useState(() => generateDots(70))
     const [bars] = useState(() => generateBars(24))
     const [hoveredDot, setHoveredDot] = useState<number | null>(null)
+    const [hoveredBar, setHoveredBar] = useState<number | null>(null) 
     const [isVisible, setIsVisible] = useState(false)
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
     const [isHovering, setIsHovering] = useState(false)
@@ -257,120 +258,135 @@ export default function SalesChart() {
     }
 
   
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full h-[60vh] container mx-auto bg-black p-4 relative"
-    >
+    return (
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="flex justify-between items-center mb-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full h-[60vh] container mx-auto bg-black p-4 relative"
       >
         <motion.div 
-          initial={{ x: -20 }}
-          animate={{ x: 0 }}
-          className="text-[#999999] text-sm font-mono flex items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex justify-between items-center mb-4"
         >
-          <motion.svg 
-            whileHover={{ rotate: 180 }}
-            transition={{ duration: 0.3 }}
-            className="w-4 h-4" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
+          <motion.div 
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
+            className="text-[#999999] text-sm font-mono flex items-center gap-2"
           >
-            <path d="M8 20V4L20 4V20" stroke="#999999" strokeWidth="2"/>
-          </motion.svg>
-          <motion.span
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            SALES
-          </motion.span>
-        </motion.div>
-        <motion.div 
-          initial={{ x: 20 }}
-          animate={{ x: 0 }}
-          className="flex gap-2"
-        >
-          {['1D', '1W', '1M'].map((period) => (
-            <motion.button
-              key={period}
-              whileHover={{ scale: 1.05, backgroundColor: '#64748b' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400 }}
-              className={`px-2 py-1 rounded text-sm ${
-                period === '1D' ? 'bg-slate-500' : 'bg-[#333333]'
-              } text-[#999999] hover:bg-slate-600`}
+            <motion.svg 
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.3 }}
+              className="w-4 h-4" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
             >
-              {period}
-            </motion.button>
-          ))}
+              <path d="M8 20V4L20 4V20" stroke="#999999" strokeWidth="2"/>
+            </motion.svg>
+            <motion.span
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              SALES
+            </motion.span>
+          </motion.div>
+          <motion.div 
+            initial={{ x: 20 }}
+            animate={{ x: 0 }}
+            className="flex gap-2"
+          >
+            {['1D', '1W', '1M'].map((period) => (
+              <motion.button
+                key={period}
+                whileHover={{ scale: 1.05, backgroundColor: '#64748b' }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                className={`px-2 py-1 rounded text-sm ${
+                  period === '1D' ? 'bg-slate-500' : 'bg-[#333333]'
+                } text-[#999999] hover:bg-slate-600`}
+              >
+                {period}
+              </motion.button>
+            ))}
+          </motion.div>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ scale: 0.95 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.3 }}
+          className="relative w-full h-full"
+        >
+          <canvas
+            ref={canvasRef}
+            className="w-full h-full cursor-crosshair"
+            style={{ imageRendering: 'pixelated' }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          />
+          
+          <AnimatePresence>
+            <div className="absolute inset-0 pointer-events-none">
+              {dots.map((dot, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: index * 0.01 }}
+                  className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
+                  style={{ left: dot.x + 41, top: dot.y }}
+                  onHoverStart={() => setHoveredDot(index)}
+                  onHoverEnd={() => setHoveredDot(null)}
+                  whileHover={{ scale: 1.5 }}
+                >
+                  {hoveredDot === index && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: -20 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-800 text-slate-200 text-xs rounded whitespace-nowrap shadow-lg z-10"
+                    >
+                      Value: {dot.y.toFixed(2)}
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </AnimatePresence>
+  
+          {isHovering && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute top-0 left-0 pointer-events-none"
+              style={{
+                height: 'calc(100% - 100px)',
+                width: '2px',
+                backgroundColor: '#666666',
+                transform: `translateX(${mousePos.x}px)`,
+              }}
+            />
+          )}
+  
+          {hoveredBar !== null && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="absolute bg-slate-800 text-slate-200 px-2 py-1 rounded text-xs"
+              style={{
+                left: mousePos.x + 10,
+                top: mousePos.y - 20,
+              }}
+            >
+              {bars[hoveredBar]?.value?.toFixed(1) || ''}
+            </motion.div>
+          )}
         </motion.div>
       </motion.div>
-      
-      <motion.div 
-        initial={{ scale: 0.95 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.3 }}
-        className="relative w-full h-full"
-      >
-        <canvas
-          ref={canvasRef}
-          className="w-full h-full cursor-crosshair"
-          style={{ imageRendering: 'pixelated' }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        />
-        
-        <AnimatePresence>
-          <div className="absolute inset-0 pointer-events-none">
-            {dots.map((dot, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.01 }}
-                className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
-                style={{ left: dot.x + 41, top: dot.y }}
-                onHoverStart={() => setHoveredDot(index)}
-                onHoverEnd={() => setHoveredDot(null)}
-                whileHover={{ scale: 1.5 }}
-              >
-                {hoveredDot === index && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: -20 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-800 text-slate-200 text-xs rounded whitespace-nowrap shadow-lg z-10"
-                  >
-                    {/* Value: {getValueFromY(dot.y)} */}
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </AnimatePresence>
-
-        {isHovering && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute top-0 left-0 pointer-events-none"
-            style={{
-              height: 'calc(100% - 100px)',
-              width: '2px',
-              backgroundColor: '#666666',
-              transform: `translateX(${mousePos.x}px)`,
-            }}
-          />
-        )}
-      </motion.div>
-    </motion.div>
-  )
-}
+    )
+  }
