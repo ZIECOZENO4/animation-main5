@@ -3,6 +3,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+interface Point {
+  x: number;
+  y: number;
+  value?: number;
+}
+
 export default function DeptComponent() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -10,19 +16,11 @@ export default function DeptComponent() {
   const [isHovering, setIsHovering] = useState(false)
   const progressRef = useRef(0)
 
-  const generateSteps = (width: number, height: number) => {
-    // Reduced number of steps with increased width
-    const steps = 100 // Reduced from 200
-    const stepWidth = width / steps
-    const data = []
-    
-    for (let i = 0; i < steps; i++) {
-      const x = stepWidth * i
-      const progress = i / steps
-      const y = height - 30 - (Math.pow(progress, 2) * (height - 60))
-      data.push({ x, y })
-    }
-    return data
+  const generateBars = (count: number) => {
+    return Array.from({ length: count }, () => ({
+      height: Math.random() * 30 + 15,
+      value: Math.random() * (105 - 0) + 0
+    }))
   }
 
   const drawChart = (
@@ -41,19 +39,19 @@ export default function DeptComponent() {
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.5
 
-    // Vertical grid lines with increased spacing
-    for (let i = 5; i < width; i += 5) {
+    // Vertical grid lines
+    for (let i = 40; i < width - 40; i += 40) {
       ctx.beginPath()
-      ctx.moveTo(i, 0)
-      ctx.lineTo(i, height - 30)
+      ctx.moveTo(i, 20)
+      ctx.lineTo(i, height - 40)
       ctx.stroke()
     }
 
-    // Horizontal grid lines with increased spacing
-    for (let i = 30; i < height - 30; i += 30) {
+    // Horizontal grid lines
+    for (let i = 20; i < height - 40; i += 20) {
       ctx.beginPath()
-      ctx.moveTo(0, i)
-      ctx.lineTo(width, i)
+      ctx.moveTo(40, i)
+      ctx.lineTo(width - 40, i)
       ctx.stroke()
     }
 
@@ -62,55 +60,73 @@ export default function DeptComponent() {
     ctx.font = '12px monospace'
     const yLabels = ['105', '80', '55', '30', '0']
     yLabels.forEach((label, i) => {
-      ctx.fillText(label, 5, 40 + i * 40)
+      ctx.fillText(label, 10, 30 + i * ((height - 60) / 4))
     })
 
-    // Generate and draw steps
-    const depthData = generateSteps(width, height)
-    const currentPoints = depthData.slice(0, Math.floor(depthData.length * progress))
+    // Generate and draw bars
+    const bars = generateBars(24)
+    const barWidth = 12
+    const availableWidth = width - 80
+    const barSpacing = (availableWidth / bars.length) - barWidth
 
-    // Draw main line
-    ctx.strokeStyle = '#64748b' // slate-500
-    ctx.lineWidth = 4 // Increased width
-    ctx.beginPath()
-    currentPoints.forEach((point, i) => {
-      if (i === 0) {
-        ctx.moveTo(point.x, point.y)
-      } else {
-        // Create wider steps
-        ctx.lineTo(point.x, currentPoints[i - 1].y)
-        ctx.lineTo(point.x, point.y)
+    bars.forEach((bar, i) => {
+      if (i < Math.floor(bars.length * progress)) {
+        const xPos = 40 + (i * (barWidth + barSpacing))
+        const yPos = height - 40 - bar.height
+
+        // Draw bar with rounded top
+        ctx.beginPath()
+        ctx.moveTo(xPos, height - 40)
+        ctx.lineTo(xPos, yPos + barWidth/2)
+        ctx.arc(xPos + barWidth/2, yPos + barWidth/2, barWidth/2, Math.PI, 0)
+        ctx.lineTo(xPos + barWidth, height - 40)
+        
+        // Bar border
+        ctx.strokeStyle = '#64748b'
+        ctx.lineWidth = 1
+        ctx.stroke()
+        
+        // Bar fill
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+        ctx.fill()
       }
     })
-    ctx.stroke()
 
-    // Fill area under the line
-    ctx.lineTo(currentPoints[currentPoints.length - 1].x, height)
-    ctx.lineTo(currentPoints[0].x, height)
-    ctx.closePath()
-    ctx.fillStyle = 'rgba(100, 116, 139, 0.1)' // Semi-transparent slate-500
-    ctx.fill()
-
-    // Draw crosshair if hovering
-    if (isHovering) {
+    // Draw crosshair
+    if (isHovering && mousePos.x >= 40 && mousePos.x <= width - 40) {
       ctx.strokeStyle = '#666666'
       ctx.lineWidth = 1
       ctx.setLineDash([5, 5])
 
-      // Vertical dotted line
+      // Vertical line
       ctx.beginPath()
-      ctx.moveTo(mousePos.x, 0)
-      ctx.lineTo(mousePos.x, height)
+      ctx.moveTo(mousePos.x, 20)
+      ctx.lineTo(mousePos.x, height - 40)
       ctx.stroke()
 
-      // Horizontal dotted line
-      ctx.beginPath()
-      ctx.moveTo(0, mousePos.y)
-      ctx.lineTo(width, mousePos.y)
-      ctx.stroke()
+      // Horizontal line
+      if (mousePos.y >= 20 && mousePos.y <= height - 40) {
+        ctx.beginPath()
+        ctx.moveTo(40, mousePos.y)
+        ctx.lineTo(width - 40, mousePos.y)
+        ctx.stroke()
+      }
 
       ctx.setLineDash([])
+
+      // Draw value
+      const value = Math.round(105 - ((mousePos.y - 20) / (height - 60)) * 105)
+      ctx.fillStyle = '#666666'
+      ctx.fillText(value.toString(), 10, mousePos.y + 4)
     }
+
+    // Time labels
+    const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+    timeLabels.forEach((label, i) => {
+      const xPos = 40 + (availableWidth * (i / (timeLabels.length - 1)))
+      ctx.fillStyle = '#666666'
+      ctx.fillText(label, xPos - 15, height - 20)
+    })
   }
 
   useEffect(() => {
@@ -124,9 +140,8 @@ export default function DeptComponent() {
     canvas.height = canvas.offsetHeight * window.devicePixelRatio
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
-    // Animate drawing
     let startTime = Date.now()
-    const duration = 1000 // 1 second animation
+    const duration = 1000
 
     const animate = () => {
       const progress = Math.min((Date.now() - startTime) / duration, 1)
@@ -141,6 +156,16 @@ export default function DeptComponent() {
     }
 
     animate()
+
+    const handleResize = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+      drawChart(ctx, canvas, progressRef.current)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
