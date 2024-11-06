@@ -6,30 +6,32 @@ import { motion } from 'framer-motion'
 const generateDots = (count: number) => {
   return Array.from({ length: count }, (_, i) => ({
     x: (i / (count - 1)) * 800,
-    y: Math.random() * (280 - 200) + 200, // Adjusted to cluster around 0.71-0.73 range
+    // Adjust Y values to spread between 0.69 and 0.72
+    y: 250 - (Math.random() * 30), // 250 is 0.69 level, subtract up to 30 to reach 0.72
     color: '#cccccc'
   }))
 }
 
 const generateBars = (count: number) => {
-  // Create more consistent bar heights matching the image
   return Array.from({ length: count }, () => Math.random() * 30 + 15)
 }
 
 export default function SalesChart() {
-  const [dots] = useState(() => generateDots(30)) // Reduced number of dots
+  const [dots] = useState(() => generateDots(30))
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Updated line points to stay mostly at 0.71 with variations
+  // Updated line points to match the pattern
   const linePoints = [
-    { x: 0, y: 230 },    // Start at 0.71
-    { x: 150, y: 230 },  // Continue at 0.71
-    { x: 300, y: 225 },  // Slight variation
-    { x: 450, y: 225 },  // Maintain level
-    { x: 600, y: 225 },  // Continue
-    { x: 800, y: 227 }   // End slightly higher
+    { x: 0, y: 250 },     // Start at 0.69
+    { x: 100, y: 250 },   // Continue at 0.69
+    { x: 200, y: 235 },   // Rise to 0.71
+    { x: 300, y: 235 },   // Stay at 0.71
+    { x: 400, y: 230 },   // Rise to 0.72
+    { x: 500, y: 230 },   // Stay at 0.72
+    { x: 600, y: 230 },   // Continue at 0.72
+    { x: 800, y: 230 }    // End at 0.72
   ]
 
   useEffect(() => {
@@ -47,12 +49,20 @@ export default function SalesChart() {
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+    // Vertical border line for labels
+    ctx.strokeStyle = '#333333'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    ctx.moveTo(40, 30)
+    ctx.lineTo(40, canvas.height - 30)
+    ctx.stroke()
+
     // Grid lines
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.5
     for (let i = 50; i < canvas.height - 50; i += 30) {
       ctx.beginPath()
-      ctx.moveTo(0, i)
+      ctx.moveTo(41, i) // Start after vertical border
       ctx.lineTo(canvas.width, i)
       ctx.stroke()
     }
@@ -68,7 +78,7 @@ export default function SalesChart() {
     // Draw dots
     dots.forEach((dot, index) => {
       ctx.beginPath()
-      ctx.arc(dot.x, dot.y, 2, 0, Math.PI * 2)
+      ctx.arc(dot.x + 41, dot.y, 2, 0, Math.PI * 2) // Offset dots by vertical border
       ctx.fillStyle = '#cccccc'
       ctx.fill()
     })
@@ -79,32 +89,32 @@ export default function SalesChart() {
     ctx.beginPath()
     linePoints.forEach((point, index) => {
       if (index === 0) {
-        ctx.moveTo(point.x, point.y)
+        ctx.moveTo(point.x + 41, point.y) // Offset line by vertical border
       } else {
-        ctx.lineTo(point.x, point.y)
+        ctx.lineTo(point.x + 41, point.y)
       }
     })
     ctx.stroke()
 
-    // Bar Chart - stretched across full width
-    const totalWidth = canvas.width - 40 // Leave small margin
+    // Bar Chart
+    const totalWidth = canvas.width - 80 // Account for margins and vertical border
     const barWidth = 4
     const barSpacing = (totalWidth / bars.length) - barWidth
     
     bars.forEach((height, index) => {
-      const xPos = 20 + (index * (barWidth + barSpacing))
+      const xPos = 60 + (index * (barWidth + barSpacing)) // Start after vertical border
       const yPos = canvas.height - height - 20
 
       ctx.fillStyle = '#ff6b00'
       ctx.fillRect(xPos, yPos, barWidth, height)
     })
 
-    // Time labels with better spacing
+    // Time labels
     const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
     timeLabels.forEach((label, i) => {
       ctx.fillStyle = '#666666'
       ctx.font = '12px monospace'
-      const xPos = 20 + (totalWidth * (i / (timeLabels.length - 1)))
+      const xPos = 60 + (totalWidth * (i / (timeLabels.length - 1)))
       ctx.fillText(label, xPos - 20, canvas.height - 5)
     })
 
@@ -151,7 +161,7 @@ export default function SalesChart() {
             <motion.div
               key={index}
               className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
-              style={{ left: dot.x, top: dot.y }}
+              style={{ left: dot.x + 41, top: dot.y }}
               onHoverStart={() => setHoveredDot(index)}
               onHoverEnd={() => setHoveredDot(null)}
               whileHover={{ scale: 1.5 }}
