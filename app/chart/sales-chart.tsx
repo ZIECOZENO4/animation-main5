@@ -4,15 +4,11 @@ import React, { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const generateDots = (count: number) => {
-  return Array.from({ length: count }, (_, i) => {
-    // Convert the price range 0.69-0.72 to pixel values (bottom to top)
-    // 0.69 = 250px, 0.72 = 220px
-    const minY = 250 // represents 0.69
-    const maxY = 220 // represents 0.72
-    const y = Math.random() * (maxY - minY) + minY
-    
+  return Array.from({ length: count }, () => {
+    const x = Math.random() * 800
+    const y = Math.random() * (250 - 220) + 220 // Random y between 0.69-0.72 levels
     return {
-      x: (i / (count - 1)) * 800,
+      x: x,
       y: y,
       color: '#cccccc'
     }
@@ -24,22 +20,22 @@ const generateBars = (count: number) => {
 }
 
 export default function SalesChart() {
-  const [dots] = useState(() => generateDots(40)) // Increased number of dots
+  const [dots] = useState(() => generateDots(25)) // Reduced number of dots to match image
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Line points following the pattern in the image
+  // Updated line points to match the image pattern
   const linePoints = [
     { x: 0, y: 250 },     // Start at 0.69
     { x: 100, y: 250 },   // Stay at 0.69
-    { x: 150, y: 220 },   // Jump to 0.72
-    { x: 300, y: 220 },   // Stay at 0.72
-    { x: 350, y: 235 },   // Drop to 0.71
-    { x: 450, y: 235 },   // Stay at 0.71
-    { x: 500, y: 220 },   // Jump to 0.72
-    { x: 650, y: 220 },   // Stay at 0.72
-    { x: 700, y: 235 },   // Drop to 0.71
+    { x: 100, y: 220 },   // Vertical to 0.72
+    { x: 200, y: 220 },   // Stay at 0.72
+    { x: 200, y: 235 },   // Vertical to 0.71
+    { x: 400, y: 235 },   // Stay at 0.71
+    { x: 400, y: 220 },   // Vertical to 0.72
+    { x: 600, y: 220 },   // Stay at 0.72
+    { x: 600, y: 235 },   // Vertical to 0.71
     { x: 800, y: 235 }    // End at 0.71
   ]
 
@@ -92,7 +88,7 @@ export default function SalesChart() {
       ctx.fill()
     })
 
-    // Draw main line
+    // Draw main line with sharp corners
     ctx.strokeStyle = '#ff6b00'
     ctx.lineWidth = 2
     ctx.beginPath()
@@ -105,32 +101,31 @@ export default function SalesChart() {
     })
     ctx.stroke()
 
-    // Bar Chart
-    const totalWidth = canvas.width - 80
-    const barWidth = 4
+    // Bar Chart with wider bars
+    const totalWidth = canvas.width - 60 // Increased available width
+    const barWidth = 8 // Increased bar width
     const barSpacing = (totalWidth / bars.length) - barWidth
     
     bars.forEach((height, index) => {
-      const xPos = 60 + (index * (barWidth + barSpacing))
+      const xPos = 50 + (index * (barWidth + barSpacing))
       const yPos = canvas.height - height - 20
 
       ctx.fillStyle = '#ff6b00'
       ctx.fillRect(xPos, yPos, barWidth, height)
     })
 
-    // Time labels
+    // Time labels with adjusted spacing
     const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
     timeLabels.forEach((label, i) => {
       ctx.fillStyle = '#666666'
       ctx.font = '12px monospace'
-      const xPos = 60 + (totalWidth * (i / (timeLabels.length - 1)))
+      const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
       ctx.fillText(label, xPos - 20, canvas.height - 5)
     })
 
   }, [dots, hoveredDot, bars])
 
   const getValueFromY = (y: number) => {
-    // Convert Y pixel value back to price value
     return (0.72 - ((y - 220) / (250 - 220)) * 0.03).toFixed(3)
   }
 
