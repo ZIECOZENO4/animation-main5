@@ -10,6 +10,9 @@ const ChartPage = () => {
      </div> 
      <div className='w-[40%]'>
         <DeptComponent />
+
+
+        
         </div>
          </div>
   )
