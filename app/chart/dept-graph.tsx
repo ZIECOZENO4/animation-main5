@@ -53,41 +53,48 @@ export default function DeptComponent() {
     })
 
     // Generate stepped depth data points
-    const steps = 20
-    const pointsPerStep = 10
-    const depthData = []
+// Inside the drawChart function, modify the steps generation:
+
+// Generate stepped depth data points with increased steps
+const steps = 80 // Increased from 20
+const pointsPerStep = 3 // Reduced points per step for better performance
+const depthData = []
+djfbds
+for (let i = 0; i < steps; i++) {
+    const stepProgress = i / (steps - 1)
+    const baseY = height - 15 - (Math.pow(stepProgress, 2) * (height - 30))
     
-    for (let i = 0; i < steps; i++) {
-      const stepProgress = i / (steps - 1)
-      const baseY = height - 15 - (Math.pow(stepProgress, 2) * (height - 30))
-      
-      // Add horizontal line
-      for (let j = 0; j < pointsPerStep; j++) {
+    // Add horizontal line with reduced width
+    for (let j = 0; j < pointsPerStep; j++) {
         const x = 2.5 + ((i * pointsPerStep + j) * (width - 5) / (steps * pointsPerStep - 1))
         depthData.push({ x, y: baseY })
-      }
-      
-      // Add vertical line if not last step
-      if (i < steps - 1) {
+    }
+    
+    // Add vertical line if not last step
+    if (i < steps - 1) {
         const nextStepProgress = (i + 1) / (steps - 1)
         const nextY = height - 15 - (Math.pow(nextStepProgress, 2) * (height - 30))
         const x = 2.5 + ((i + 1) * pointsPerStep * (width - 5) / (steps * pointsPerStep - 1))
-        depthData.push({ x, y: nextY })
-      }
+        // Add two points to create sharp corners
+        depthData.push(
+            { x, y: baseY }, // First point at current height
+            { x, y: nextY }  // Second point at next height
+        )
     }
+}
 
-    // Draw depth line
-    ctx.strokeStyle = '#64748b'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    depthData.forEach((point, i) => {
-      if (i === 0) {
+// Draw depth line with thinner width for smaller steps
+ctx.strokeStyle = '#64748b'
+ctx.lineWidth = 1 // Reduced from 2
+ctx.beginPath()
+depthData.forEach((point, i) => {
+    if (i === 0) {
         ctx.moveTo(point.x, point.y)
-      } else {
+    } else {
         ctx.lineTo(point.x, point.y)
-      }
-    })
-    ctx.stroke()
+    }
+})
+ctx.stroke()
 
     // Fill area under the line
     ctx.lineTo(depthData[depthData.length - 1].x, height)
