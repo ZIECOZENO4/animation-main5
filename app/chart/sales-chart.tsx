@@ -3,10 +3,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+type HoveredDot = {
+    index: number;
+    x: number;
+    y: number;
+  } | null;
+  
 const generateDots = (count: number) => {
   return Array.from({ length: count }, () => {
     const x = Math.random() * 800
-    // Position dots around the line height (50-80 range)
     const y = Math.random() * (80 - 50) + 50
     return {
       x: x,
@@ -25,33 +30,27 @@ export default function SalesChart() {
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationRef = useRef<number>()
+  const progressRef = useRef(0)
 
-  // Line points following the exact pattern from the image
   const linePoints = [
-    { x: 0, y: 70 },      // Start at bottom
-    { x: 100, y: 70 },    // Horizontal line
-    { x: 100, y: 50 },    // Sharp vertical up
-    { x: 200, y: 50 },    // Horizontal at top
-    { x: 200, y: 60 },    // Sharp vertical down
-    { x: 400, y: 60 },    // Long horizontal middle
-    { x: 400, y: 50 },    // Sharp vertical up
-    { x: 600, y: 50 },    // Horizontal at top
-    { x: 600, y: 60 },    // Sharp vertical down
-    { x: 800, y: 60 }     // End horizontal
+    { x: 0, y: 70 },
+    { x: 100, y: 70 },
+    { x: 100, y: 50 },
+    { x: 200, y: 50 },
+    { x: 200, y: 60 },
+    { x: 400, y: 60 },
+    { x: 400, y: 50 },
+    { x: 600, y: 50 },
+    { x: 600, y: 60 },
+    { x: 800, y: 60 }
   ]
 
-  useEffect(() => {
-    setIsVisible(true)
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    canvas.width = canvas.offsetWidth * window.devicePixelRatio
-    canvas.height = canvas.offsetHeight * window.devicePixelRatio
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+  const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     // Background
     ctx.fillStyle = '#000000'
@@ -65,22 +64,22 @@ export default function SalesChart() {
     ctx.lineTo(40, canvas.height - 100)
     ctx.stroke()
 
-    // Grid lines
+    // Grid lines with doubled spacing
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.5
-    for (let i = 30; i < canvas.height - 100; i += 20) {
+    for (let i = 30; i < canvas.height - 100; i += 40) { // Doubled from 20 to 40
       ctx.beginPath()
       ctx.moveTo(41, i)
       ctx.lineTo(canvas.width, i)
       ctx.stroke()
     }
 
-    // Y-axis labels
+    // Y-axis labels with doubled spacing
     ctx.fillStyle = '#666666'
     ctx.font = '12px monospace'
     const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
     yLabels.forEach((label, i) => {
-      ctx.fillText(label, 10, 30 + i * 20)
+      ctx.fillText(label, 10, 30 + i * 40) // Doubled from 20 to 40
     })
 
     // Draw dots
@@ -91,11 +90,16 @@ export default function SalesChart() {
       ctx.fill()
     })
 
-    // Draw main line
+    // Draw animated main line
     ctx.strokeStyle = '#64748b'
     ctx.lineWidth = 2
     ctx.beginPath()
-    linePoints.forEach((point, index) => {
+    
+    const currentPoints = linePoints.filter((_, index) => 
+      index <= Math.floor(linePoints.length * progress)
+    )
+    
+    currentPoints.forEach((point, index) => {
       if (index === 0) {
         ctx.moveTo(point.x + 41, point.y)
       } else {
@@ -104,18 +108,40 @@ export default function SalesChart() {
     })
     ctx.stroke()
 
-    // Bar Chart
+    // Bar Chart with curved tops and transparency
     const totalWidth = canvas.width - 60
-    const barWidth = 8
-    const barSpacing = (totalWidth / bars.length) - barWidth
+    const barWidth = 12 // Increased width
+    const barSpacing = (totalWidth / bars.length) - barWidth * 1.5 // Increased spacing
     
     bars.forEach((height, index) => {
       const xPos = 50 + (index * (barWidth + barSpacing))
       const yPos = canvas.height - height - 100
 
-      ctx.fillStyle = '#64748b'
-      ctx.fillRect(xPos, yPos, barWidth, height)
+      // Draw bar border
+      ctx.strokeStyle = '#64748b'
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.moveTo(xPos, canvas.height - 100)
+      ctx.lineTo(xPos, yPos + 5)
+      ctx.arc(xPos + barWidth/2, yPos + 5, barWidth/2, Math.PI, 0)
+      ctx.lineTo(xPos + barWidth, canvas.height - 100)
+      ctx.stroke()
+
+      // Fill bar with transparency
+      ctx.fillStyle = 'rgba(100, 116, 139, 0.2)' // slate-500 with transparency
+      ctx.fill()
     })
+
+    // Draw hover crosshair and dotted line
+    if (isHovering) {
+      ctx.strokeStyle = '#666666'
+      ctx.setLineDash([5, 5])
+      ctx.beginPath()
+      ctx.moveTo(mousePos.x, 20)
+      ctx.lineTo(mousePos.x, canvas.height - 100)
+      ctx.stroke()
+      ctx.setLineDash([])
+    }
 
     // Time labels
     const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
@@ -125,13 +151,70 @@ export default function SalesChart() {
       const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
       ctx.fillText(label, xPos - 20, canvas.height - 80)
     })
-
-  }, [dots, hoveredDot, bars])
-
-  const getValueFromY = (y: number) => {
-    return (0.73 - ((y - 50) / (80 - 50)) * 0.04).toFixed(3)
   }
 
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+
+    // Animate the line drawing
+    let startTime = Date.now()
+    const duration = 1000 // 1 second animation
+
+    const animate = () => {
+      const progress = Math.min((Date.now() - startTime) / duration, 1)
+      progressRef.current = progress
+      drawChart(ctx, canvas, progress)
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(animate)
+      }
+    }
+
+    animate()
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [dots, hoveredDot, bars])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const x = (e.clientX - rect.left) * window.devicePixelRatio
+    const y = (e.clientY - rect.top) * window.devicePixelRatio
+    
+    setMousePos({ x, y })
+    setIsHovering(true)
+
+    const ctx = canvas.getContext('2d')
+    if (ctx) {
+      drawChart(ctx, canvas, progressRef.current)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovering(false)
+    const canvas = canvasRef.current
+    if (canvas) {
+      const ctx = canvas.getContext('2d')
+      if (ctx) {
+        drawChart(ctx, canvas, progressRef.current)
+      }
+    }
+  }
+  
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -198,10 +281,12 @@ export default function SalesChart() {
           ref={canvasRef}
           className="w-full h-full cursor-crosshair"
           style={{ imageRendering: 'pixelated' }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         />
         
         <AnimatePresence>
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 pointer-events-none">
             {dots.map((dot, index) => (
               <motion.div
                 key={index}
@@ -219,15 +304,30 @@ export default function SalesChart() {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: -20 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-800 text-slate-200 text-xs rounded whitespace-nowrap shadow-lg"
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-800 text-slate-200 text-xs rounded whitespace-nowrap shadow-lg z-10"
                   >
-                    Value: {getValueFromY(dot.y)}
+                    {/* Value: {getValueFromY(dot.y)} */}
                   </motion.div>
                 )}
               </motion.div>
             ))}
           </div>
         </AnimatePresence>
+
+        {isHovering && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute top-0 left-0 pointer-events-none"
+            style={{
+              height: 'calc(100% - 100px)',
+              width: '2px',
+              backgroundColor: '#666666',
+              transform: `translateX(${mousePos.x}px)`,
+            }}
+          />
+        )}
       </motion.div>
     </motion.div>
   )
