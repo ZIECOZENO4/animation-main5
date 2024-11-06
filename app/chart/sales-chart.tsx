@@ -299,7 +299,7 @@ export default function SalesChart() {
           <motion.div 
             initial={{ x: -20 }}
             animate={{ x: 0 }}
-            className="text-[#999999] text-sm font-mono flex items-center gap-2"
+            className="text-[#999999] text-sm  flex items-center gap-2"
           >
             <motion.svg 
               whileHover={{ rotate: 180 }}
