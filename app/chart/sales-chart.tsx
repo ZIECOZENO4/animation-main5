@@ -9,80 +9,53 @@ type HoveredDot = {
     y: number;
 } | null;
 
-type Dot = {
-    x: number;
-    y: number;
-    targetX: number;
-    targetY: number;
-    color: string;
-}
-
-type Bar = {
-    height: number;
-    value: number;
-}
-
-const generateDots = (count: number): Dot[] => {
+// Modified to scatter dots across the entire height
+const generateDots = (count: number) => {
     return Array.from({ length: count }, () => {
         const x = Math.random() * 800
-        const y = Math.random() * (80 - 50) + 50
+        const y = Math.random() * (200 - 20) + 20 // Increased range for more scatter
         return {
-            x,
-            y,
-            targetX: Math.random() * 800,
-            targetY: Math.random() * (80 - 50) + 50,
+            x: x,
+            y: y,
             color: '#cccccc'
         }
     })
 }
 
-const generateBars = (count: number): Bar[] => {
+// Modified to generate bars with more spacing
+const generateBars = (count: number) => {
     return Array.from({ length: count }, () => ({
         height: Math.random() * 30 + 15,
         value: Math.random() * (105 - 0) + 0
     }))
 }
 
+// Generate random line points
+const generateLinePoints = () => {
+    const yValues = [69, 71, 72] // Possible y-values
+    const randomY = yValues[Math.floor(Math.random() * yValues.length)]
+    
+    return [
+        { x: 0, y: randomY },
+        { x: 100, y: randomY },
+        { x: 200, y: randomY + Math.random() * 2 - 1 },
+        { x: 400, y: randomY + Math.random() * 2 - 1 },
+        { x: 600, y: randomY + Math.random() * 2 - 1 },
+        { x: 800, y: randomY }
+    ]
+}
+
 export default function SalesChart() {
-    const [dots, setDots] = useState<Dot[]>(() => generateDots(70))
-    const [bars] = useState<Bar[]>(() => generateBars(24))
+    const [dots] = useState(() => generateDots(70))
+    const [bars] = useState(() => generateBars(24))
     const [hoveredDot, setHoveredDot] = useState<number | null>(null)
-    const [hoveredBar, setHoveredBar] = useState<number | null>(null)
+    const [isVisible, setIsVisible] = useState(false)
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
     const [isHovering, setIsHovering] = useState(false)
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const animationRef = useRef<number>()
     const progressRef = useRef(0)
-
-    const linePoints = [
-        { x: 0, y: 70 },
-        { x: 100, y: 70 },
-        { x: 100, y: 50 },
-        { x: 200, y: 50 },
-        { x: 200, y: 60 },
-        { x: 400, y: 60 },
-        { x: 400, y: 50 },
-        { x: 600, y: 50 },
-        { x: 600, y: 60 },
-        { x: 800, y: 60 }
-    ]
-
-    // Update dots position every 10 seconds
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setDots(prevDots => 
-                prevDots.map(dot => ({
-                    ...dot,
-                    x: dot.x + (dot.targetX - dot.x) * 0.1,
-                    y: dot.y + (dot.targetY - dot.y) * 0.1,
-                    targetX: Math.random() * 800,
-                    targetY: Math.random() * (80 - 50) + 50
-                }))
-            )
-        }, 10000)
-
-        return () => clearInterval(intervalId)
-    }, [])
+    const [linePoints] = useState(() => generateLinePoints())
 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -105,7 +78,7 @@ export default function SalesChart() {
         for (let i = 30; i < canvas.height - 100; i += 40) {
             ctx.beginPath()
             ctx.moveTo(41, i)
-            ctx.lineTo(canvas.width, i)
+            ctx.lineTo(canvas.width - 20, i)
             ctx.stroke()
         }
 
@@ -117,7 +90,7 @@ export default function SalesChart() {
             ctx.fillText(label, 10, 30 + i * 40)
         })
 
-        // Draw dots with animation
+        // Draw scattered dots
         dots.forEach((dot, index) => {
             ctx.beginPath()
             ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 3 : 1.5, 0, Math.PI * 2)
@@ -143,19 +116,18 @@ export default function SalesChart() {
         })
         ctx.stroke()
 
-        // Bar Chart with doubled width
-        const totalWidth = canvas.width - 60
-        const barWidth = 24 // Doubled from 12
-        const barSpacing = (totalWidth / bars.length) - barWidth * 1.5
+        // Bar Chart with increased spacing
+        const totalWidth = canvas.width - 80
+        const barWidth = 24 // Wider bars
+        const barSpacing = (totalWidth / bars.length) - barWidth
         
         bars.forEach((bar, index) => {
             const xPos = 50 + (index * (barWidth + barSpacing))
             const yPos = canvas.height - bar.height - 100
-            const isBarHovered = hoveredBar === index
 
-            // Draw bar border with hover effect
-            ctx.strokeStyle = isBarHovered ? '#8096b5' : '#64748b'
-            ctx.lineWidth = isBarHovered ? 2 : 1
+            // Draw bar border
+            ctx.strokeStyle = '#64748b'
+            ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(xPos, canvas.height - 100)
             ctx.lineTo(xPos, yPos + 5)
@@ -163,21 +135,14 @@ export default function SalesChart() {
             ctx.lineTo(xPos + barWidth, canvas.height - 100)
             ctx.stroke()
 
-            // Fill bar with hover effect
-            ctx.fillStyle = isBarHovered 
-                ? 'rgba(100, 116, 139, 0.4)'
-                : 'rgba(100, 116, 139, 0.2)'
+            // Fill bar with transparency
+            ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
             ctx.fill()
 
             // Show value on hover
-            if (isBarHovered) {
+            if (mousePos.x >= xPos && mousePos.x <= xPos + barWidth && isHovering) {
                 ctx.fillStyle = '#ffffff'
-                ctx.font = '12px monospace'
-                ctx.fillText(
-                    bar.value.toFixed(1),
-                    xPos - 10,
-                    yPos - 10
-                )
+                ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
             }
         })
 
@@ -195,12 +160,12 @@ export default function SalesChart() {
             // Horizontal line
             ctx.beginPath()
             ctx.moveTo(40, mousePos.y)
-            ctx.lineTo(canvas.width - 40, mousePos.y)
+            ctx.lineTo(canvas.width - 20, mousePos.y)
             ctx.stroke()
             
             ctx.setLineDash([])
 
-            // Show coordinates
+            // Show value
             const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
             ctx.fillStyle = '#ffffff'
             ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
@@ -215,6 +180,7 @@ export default function SalesChart() {
             ctx.fillText(label, xPos - 20, canvas.height - 80)
         })
     }
+
 
     useEffect(() => {
         const canvas = canvasRef.current
