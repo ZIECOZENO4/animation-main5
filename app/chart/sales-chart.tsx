@@ -32,17 +32,28 @@ const generateBars = (count: number) => {
 
 // Generate random line points
 const generateLinePoints = () => {
-    const yValues = [69, 71, 72] // Possible y-values
-    const randomY = yValues[Math.floor(Math.random() * yValues.length)]
-    
-    return [
-        { x: 0, y: randomY },
-        { x: 100, y: randomY },
-        { x: 200, y: randomY + Math.random() * 2 - 1 },
-        { x: 400, y: randomY + Math.random() * 2 - 1 },
-        { x: 600, y: randomY + Math.random() * 2 - 1 },
-        { x: 800, y: randomY }
-    ]
+  // Random starting positions (top, middle, bottom)
+  const basePositions = [
+      { min: 30, max: 40 },  // Top
+      { min: 50, max: 60 },  // Middle
+      { min: 70, max: 80 }   // Bottom
+  ]
+  
+  const selectedPosition = basePositions[Math.floor(Math.random() * basePositions.length)]
+  const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
+
+  return [
+      { x: 0, y: baseY },
+      { x: 100, y: baseY },
+      { x: 100, y: baseY - 15 }, // Movement up
+      { x: 200, y: baseY - 15 },
+      { x: 200, y: baseY + 10 }, // Movement down
+      { x: 400, y: baseY + 10 },
+      { x: 400, y: baseY - 10 }, // Movement up
+      { x: 600, y: baseY - 10 },
+      { x: 600, y: baseY }, // Return to base
+      { x: 800, y: baseY }
+  ]
 }
 
 export default function SalesChart() {
@@ -57,6 +68,20 @@ export default function SalesChart() {
     const animationRef = useRef<number>()
     const progressRef = useRef(0)
     const [linePoints] = useState(() => generateLinePoints())
+
+     useEffect(() => {
+        const intervalId = setInterval(() => {
+            setDots(prevDots => 
+                prevDots.map(dot => ({
+                    ...dot,
+                    x: Math.random() * 800,
+                    y: Math.random() * (200 - 20) + 20
+                }))
+            )
+        }, 10000)
+
+        return () => clearInterval(intervalId)
+    }, [])
 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
