@@ -18,7 +18,7 @@ export default function DeptComponent() {
 
   const generateBars = (count: number) => {
     return Array.from({ length: count }, () => ({
-      height: Math.random() * 30 + 15,
+      height: Math.random() * 60 + 30, // Doubled height
       value: Math.random() * (105 - 0) + 0
     }))
   }
@@ -65,9 +65,9 @@ export default function DeptComponent() {
 
     // Generate and draw bars
     const bars = generateBars(24)
-    const barWidth = 12
+    const barWidth = 24 // Doubled width
     const availableWidth = width - 80
-    const barSpacing = (availableWidth / bars.length) - barWidth
+    const barSpacing = (availableWidth / bars.length) - barWidth * 1.5 // Increased spacing
 
     bars.forEach((bar, i) => {
       if (i < Math.floor(bars.length * progress)) {
@@ -93,16 +93,18 @@ export default function DeptComponent() {
     })
 
     // Draw crosshair
-    if (isHovering && mousePos.x >= 40 && mousePos.x <= width - 40) {
+    if (isHovering) {
       ctx.strokeStyle = '#666666'
       ctx.lineWidth = 1
       ctx.setLineDash([5, 5])
 
       // Vertical line
-      ctx.beginPath()
-      ctx.moveTo(mousePos.x, 20)
-      ctx.lineTo(mousePos.x, height - 40)
-      ctx.stroke()
+      if (mousePos.x >= 40 && mousePos.x <= width - 40) {
+        ctx.beginPath()
+        ctx.moveTo(mousePos.x, 20)
+        ctx.lineTo(mousePos.x, height - 40)
+        ctx.stroke()
+      }
 
       // Horizontal line
       if (mousePos.y >= 20 && mousePos.y <= height - 40) {
@@ -227,7 +229,7 @@ export default function DeptComponent() {
           animate={{ x: 0, opacity: 1 }}
           whileHover={{ scale: 1.1 }}
           transition={{ delay: 0.7, duration: 0.3 }}
-          className="text-slate-500 text-sm font-mono"
+          className="text-slate-500 text-sm "
         >
           DEPTH
         </motion.span>
