@@ -6,33 +6,30 @@ import { motion } from 'framer-motion'
 const generateDots = (count: number) => {
   return Array.from({ length: count }, (_, i) => ({
     x: (i / (count - 1)) * 800,
-    y: 300 - (Math.random() * 50 + 280),
+    y: Math.random() * (280 - 200) + 200, // Adjusted to cluster around 0.71-0.73 range
     color: '#cccccc'
   }))
 }
 
 const generateBars = (count: number) => {
-  return Array.from({ length: count }, () => Math.random() * 40 + 20) // Adjusted bar heights
+  // Create more consistent bar heights matching the image
+  return Array.from({ length: count }, () => Math.random() * 30 + 15)
 }
 
 export default function SalesChart() {
-  const [dots] = useState(() => generateDots(50))
+  const [dots] = useState(() => generateDots(30)) // Reduced number of dots
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Define the line points to match the specific pattern
+  // Updated line points to stay mostly at 0.71 with variations
   const linePoints = [
-    { x: 0, y: 230 },      // Start at 0.71
-    { x: 200, y: 230 },    // Straight line at 0.71
-    { x: 220, y: 240 },    // Drop to 0.70
-    { x: 300, y: 240 },    // Small line at 0.70
-    { x: 320, y: 250 },    // Drop to 0.69
-    { x: 400, y: 250 },    // Tiny line at 0.69
-    { x: 420, y: 240 },    // Rise to 0.70
-    { x: 500, y: 240 },    // Small line at 0.70
-    { x: 520, y: 230 },    // Rise to 0.71
-    { x: 800, y: 230 }     // Complete width at 0.71
+    { x: 0, y: 230 },    // Start at 0.71
+    { x: 150, y: 230 },  // Continue at 0.71
+    { x: 300, y: 225 },  // Slight variation
+    { x: 450, y: 225 },  // Maintain level
+    { x: 600, y: 225 },  // Continue
+    { x: 800, y: 227 }   // End slightly higher
   ]
 
   useEffect(() => {
@@ -68,7 +65,15 @@ export default function SalesChart() {
       ctx.fillText(label, 10, 50 + i * 30)
     })
 
-    // Draw the main line
+    // Draw dots
+    dots.forEach((dot, index) => {
+      ctx.beginPath()
+      ctx.arc(dot.x, dot.y, 2, 0, Math.PI * 2)
+      ctx.fillStyle = '#cccccc'
+      ctx.fill()
+    })
+
+    // Draw main line
     ctx.strokeStyle = '#ff6b00'
     ctx.lineWidth = 2
     ctx.beginPath()
@@ -81,36 +86,41 @@ export default function SalesChart() {
     })
     ctx.stroke()
 
-    // Bar Chart with wider spacing
-    const barWidth = 6
-    const barSpacing = 15
+    // Bar Chart - stretched across full width
+    const totalWidth = canvas.width - 40 // Leave small margin
+    const barWidth = 4
+    const barSpacing = (totalWidth / bars.length) - barWidth
+    
     bars.forEach((height, index) => {
-      const xPos = 50 + (index * (barWidth + barSpacing))
+      const xPos = 20 + (index * (barWidth + barSpacing))
       const yPos = canvas.height - height - 20
 
       ctx.fillStyle = '#ff6b00'
       ctx.fillRect(xPos, yPos, barWidth, height)
     })
 
-    // Time labels
+    // Time labels with better spacing
     const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
     timeLabels.forEach((label, i) => {
       ctx.fillStyle = '#666666'
       ctx.font = '12px monospace'
-      const xPos = canvas.width * (i + 1) / 5
+      const xPos = 20 + (totalWidth * (i / (timeLabels.length - 1)))
       ctx.fillText(label, xPos - 20, canvas.height - 5)
     })
 
   }, [dots, hoveredDot, bars])
 
   return (
-    <div className="w-full h-[60vh] max-w-full bg-black p-4 relative">
+    <div className="w-full h-[60vh] max-w-4xl mx-auto bg-black p-4 relative">
       <div className="flex justify-between items-center mb-4">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-[#999999] text-sm font-mono"
+          className="text-[#999999] text-sm font-mono flex items-center gap-2"
         >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 20V4L20 4V20" stroke="#999999" strokeWidth="2"/>
+          </svg>
           SALES
         </motion.div>
         <div className="flex gap-2">
