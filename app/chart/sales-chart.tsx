@@ -1,12 +1,13 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const generateDots = (count: number) => {
   return Array.from({ length: count }, () => {
     const x = Math.random() * 800
-    const y = Math.random() * (250 - 220) + 220 // Random y between 0.69-0.72 levels
+    // Adjusted Y range to be higher up (180-210 instead of 220-250)
+    const y = Math.random() * (210 - 180) + 180
     return {
       x: x,
       y: y,
@@ -20,26 +21,24 @@ const generateBars = (count: number) => {
 }
 
 export default function SalesChart() {
-  const [dots] = useState(() => generateDots(25)) // Reduced number of dots to match image
+  const [dots] = useState(() => generateDots(70)) // Increased to 70 dots
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Updated line points to match the image pattern
+  // Adjusted line points to be higher up
   const linePoints = [
-    { x: 0, y: 250 },     // Start at 0.69
-    { x: 100, y: 250 },   // Stay at 0.69
-    { x: 100, y: 220 },   // Vertical to 0.72
-    { x: 200, y: 220 },   // Stay at 0.72
-    { x: 200, y: 235 },   // Vertical to 0.71
-    { x: 400, y: 235 },   // Stay at 0.71
-    { x: 400, y: 220 },   // Vertical to 0.72
-    { x: 600, y: 220 },   // Stay at 0.72
-    { x: 600, y: 235 },   // Vertical to 0.71
-    { x: 800, y: 235 }    // End at 0.71
+    { x: 0, y: 210 },     // Start higher
+    { x: 150, y: 210 },   // Stay at same level
+    { x: 150, y: 180 },   // Vertical movement higher
+    { x: 300, y: 180 },   // Stay at higher level
+    { x: 300, y: 195 },   // Middle level
+    { x: 800, y: 195 }    // End at middle level
   ]
 
   useEffect(() => {
+    setIsVisible(true)
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -83,13 +82,13 @@ export default function SalesChart() {
     // Draw dots
     dots.forEach((dot, index) => {
       ctx.beginPath()
-      ctx.arc(dot.x + 41, dot.y, 2, 0, Math.PI * 2)
+      ctx.arc(dot.x + 41, dot.y, 1.5, 0, Math.PI * 2) // Reduced dot size slightly
       ctx.fillStyle = '#cccccc'
       ctx.fill()
     })
 
-    // Draw main line with sharp corners
-    ctx.strokeStyle = '#ff6b00'
+    // Draw main line with slate-500 color
+    ctx.strokeStyle = '#64748b'
     ctx.lineWidth = 2
     ctx.beginPath()
     linePoints.forEach((point, index) => {
@@ -101,20 +100,20 @@ export default function SalesChart() {
     })
     ctx.stroke()
 
-    // Bar Chart with wider bars
-    const totalWidth = canvas.width - 60 // Increased available width
-    const barWidth = 8 // Increased bar width
+    // Bar Chart
+    const totalWidth = canvas.width - 60
+    const barWidth = 8
     const barSpacing = (totalWidth / bars.length) - barWidth
     
     bars.forEach((height, index) => {
       const xPos = 50 + (index * (barWidth + barSpacing))
       const yPos = canvas.height - height - 20
 
-      ctx.fillStyle = '#ff6b00'
+      ctx.fillStyle = '#64748b'
       ctx.fillRect(xPos, yPos, barWidth, height)
     })
 
-    // Time labels with adjusted spacing
+    // Time labels
     const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
     timeLabels.forEach((label, i) => {
       ctx.fillStyle = '#666666'
@@ -126,69 +125,107 @@ export default function SalesChart() {
   }, [dots, hoveredDot, bars])
 
   const getValueFromY = (y: number) => {
-    return (0.72 - ((y - 220) / (250 - 220)) * 0.03).toFixed(3)
+    // Adjusted calculation for new Y range
+    return (0.74 - ((y - 180) / (210 - 180)) * 0.03).toFixed(3)
   }
 
   return (
-    <div className="w-full h-[60vh] max-w-4xl mx-auto bg-black p-4 relative">
-      <div className="flex justify-between items-center mb-4">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full h-[60vh] container mx-auto bg-black p-4 relative"
+    >
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="flex justify-between items-center mb-4"
+      >
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ x: -20 }}
+          animate={{ x: 0 }}
           className="text-[#999999] text-sm font-mono flex items-center gap-2"
         >
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <motion.svg 
+            whileHover={{ rotate: 180 }}
+            transition={{ duration: 0.3 }}
+            className="w-4 h-4" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path d="M8 20V4L20 4V20" stroke="#999999" strokeWidth="2"/>
-          </svg>
-          SALES
+          </motion.svg>
+          <motion.span
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            SALES
+          </motion.span>
         </motion.div>
-        <div className="flex gap-2">
+        <motion.div 
+          initial={{ x: 20 }}
+          animate={{ x: 0 }}
+          className="flex gap-2"
+        >
           {['1D', '1W', '1M'].map((period) => (
             <motion.button
               key={period}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, backgroundColor: '#64748b' }}
               whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400 }}
               className={`px-2 py-1 rounded text-sm ${
-                period === '1D' ? 'bg-[#ff6b00]' : 'bg-[#333333]'
-              } text-[#999999] hover:bg-[#444444]`}
+                period === '1D' ? 'bg-slate-500' : 'bg-[#333333]'
+              } text-[#999999] hover:bg-slate-600`}
             >
               {period}
             </motion.button>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       
-      <div className="relative w-full h-full">
+      <motion.div 
+        initial={{ scale: 0.95 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3 }}
+        className="relative w-full h-full"
+      >
         <canvas
           ref={canvasRef}
           className="w-full h-full cursor-crosshair"
           style={{ imageRendering: 'pixelated' }}
         />
         
-        <div className="absolute inset-0">
-          {dots.map((dot, index) => (
-            <motion.div
-              key={index}
-              className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
-              style={{ left: dot.x + 41, top: dot.y }}
-              onHoverStart={() => setHoveredDot(index)}
-              onHoverEnd={() => setHoveredDot(null)}
-              whileHover={{ scale: 1.5 }}
-            >
-              {hoveredDot === index && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: -20 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-[#333333] text-[#999999] text-xs rounded whitespace-nowrap"
-                >
-                  Value: {getValueFromY(dot.y)}
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>
+        <AnimatePresence>
+          <div className="absolute inset-0">
+            {dots.map((dot, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.01 }} // Reduced delay for more dots
+                className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
+                style={{ left: dot.x + 41, top: dot.y }}
+                onHoverStart={() => setHoveredDot(index)}
+                onHoverEnd={() => setHoveredDot(null)}
+                whileHover={{ scale: 1.5 }}
+              >
+                {hoveredDot === index && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: -20 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-slate-800 text-slate-200 text-xs rounded whitespace-nowrap shadow-lg"
+                  >
+                    Value: {getValueFromY(dot.y)}
+                  </motion.div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </AnimatePresence>
+      </motion.div>
+    </motion.div>
   )
 }
