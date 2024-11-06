@@ -9,8 +9,42 @@ export default function DeptComponent() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
 
+  const generateSteppedData = (width: number, height: number) => {
+    const steps = 40 // Number of potential steps
+    const data = []
+    let currentY = height - 20 // Start from bottom
+    let currentX = 2.5
+
+    while (currentX < width) {
+      // Add current point
+      data.push({ x: currentX, y: currentY })
+
+      // Randomly decide whether to go up, stay, or make a small down movement
+      const rand = Math.random()
+      const stepSize = Math.random() * 8 + 2 // Random step size between 2 and 10
+      
+      if (rand < 0.7) { // 70% chance to go up (overall ascending trend)
+        currentY = Math.max(30, currentY - stepSize)
+      } else if (rand < 0.9) { // 20% chance to stay
+        currentY = currentY
+      } else { // 10% chance to go down slightly
+        currentY = Math.min(height - 20, currentY + stepSize / 2)
+      }
+
+      // Add point at new height (creates vertical line)
+      data.push({ x: currentX, y: currentY })
+
+      // Move right
+      currentX += (width - 5) / steps
+      // Add horizontal line point
+      data.push({ x: currentX, y: currentY })
+    }
+
+    return data
+  }
+
   const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
-    const width = canvas.width / window.devicePixelRatio // Remove division by 4
+    const width = canvas.width / window.devicePixelRatio
     const height = canvas.height / window.devicePixelRatio
 
     // Background
@@ -21,7 +55,7 @@ export default function DeptComponent() {
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.25
 
-    // Vertical grid lines - maintain original spacing but increase count
+    // Vertical grid lines
     for (let i = 2.5; i < width; i += 2.5) {
       ctx.beginPath()
       ctx.moveTo(i, 0)
@@ -40,61 +74,33 @@ export default function DeptComponent() {
     // Y-axis labels
     ctx.fillStyle = '#666666'
     ctx.font = '10px monospace'
-    const yLabels = ['105', '80', '55', '30', '0']
+    const yLabels = ['111', '84', '56', '29', '1']
     yLabels.forEach((label, i) => {
       ctx.fillText(label, 0.5, 20 + i * 30)
     })
 
-    // X-axis labels - spread across full width
+    // X-axis labels
     const xLabels = ['0.72', '0.78', '0.89', '0.95']
     xLabels.forEach((label, i) => {
       const x = 2.5 + (i * (width - 5) / (xLabels.length - 1))
       ctx.fillText(label, x - 7.5, height - 5)
     })
 
-    // Generate stepped depth data points
-// Inside the drawChart function, modify the steps generation:
+    // Generate and draw stepped data
+    const depthData = generateSteppedData(width, height)
 
-// Generate stepped depth data points with increased steps
-const steps = 80 // Increased from 20
-const pointsPerStep = 3 // Reduced points per step for better performance
-const depthData = []
-
-for (let i = 0; i < steps; i++) {
-    const stepProgress = i / (steps - 1)
-    const baseY = height - 15 - (Math.pow(stepProgress, 2) * (height - 30))
-    
-    // Add horizontal line with reduced width
-    for (let j = 0; j < pointsPerStep; j++) {
-        const x = 2.5 + ((i * pointsPerStep + j) * (width - 5) / (steps * pointsPerStep - 1))
-        depthData.push({ x, y: baseY })
-    }
-    
-    // Add vertical line if not last step
-    if (i < steps - 1) {
-        const nextStepProgress = (i + 1) / (steps - 1)
-        const nextY = height - 15 - (Math.pow(nextStepProgress, 2) * (height - 30))
-        const x = 2.5 + ((i + 1) * pointsPerStep * (width - 5) / (steps * pointsPerStep - 1))
-        // Add two points to create sharp corners
-        depthData.push(
-            { x, y: baseY }, // First point at current height
-            { x, y: nextY }  // Second point at next height
-        )
-    }
-}
-
-// Draw depth line with thinner width for smaller steps
-ctx.strokeStyle = '#64748b'
-ctx.lineWidth = 1 // Reduced from 2
-ctx.beginPath()
-depthData.forEach((point, i) => {
-    if (i === 0) {
+    // Draw stepped line
+    ctx.strokeStyle = '#64748b'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    depthData.forEach((point, i) => {
+      if (i === 0) {
         ctx.moveTo(point.x, point.y)
-    } else {
+      } else {
         ctx.lineTo(point.x, point.y)
-    }
-})
-ctx.stroke()
+      }
+    })
+    ctx.stroke()
 
     // Fill area under the line
     ctx.lineTo(depthData[depthData.length - 1].x, height)
@@ -123,7 +129,7 @@ ctx.stroke()
       ctx.setLineDash([])
 
       // Show value
-      const value = Math.round(105 - ((mousePos.y) / (height - 15)) * 105)
+      const value = Math.round(111 - ((mousePos.y) / (height - 15)) * 111)
       ctx.fillStyle = '#ffffff'
       ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
     }
@@ -149,7 +155,7 @@ ctx.stroke()
     if (!canvas) return
 
     const rect = canvas.getBoundingClientRect()
-    const x = (e.clientX - rect.left) // Remove division by 4
+    const x = (e.clientX - rect.left)
     const y = (e.clientY - rect.top)
     
     setMousePos({ x, y })
@@ -165,7 +171,7 @@ ctx.stroke()
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-[200px] max-w-3xl mx-auto bg-black p-2 relative" // Restored original max-width
+      className="w-full h-[200px] max-w-3xl mx-auto bg-black p-2 relative"
     >
       <motion.div 
         initial={{ y: -10, opacity: 0 }}
