@@ -4,225 +4,291 @@ import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 type HoveredDot = {
-  index: number
-  x: number 
-  y: number
-} | null
-  
-const generateDots = (count: number) => {
-  return Array.from({ length: count }, () => ({
-    x: Math.random() * 800,
-    y: Math.random() * (80 - 50) + 50,
-    color: '#cccccc'
-  }))
+    index: number;
+    x: number;
+    y: number;
+} | null;
+
+type Dot = {
+    x: number;
+    y: number;
+    targetX: number;
+    targetY: number;
+    color: string;
 }
 
-const generateBars = (count: number) => {
-  return Array.from({ length: count }, () => ({
-    height: Math.random() * 30 + 15,
-    value: Math.random() * (105 - 0) + 0
-  }))
+type Bar = {
+    height: number;
+    value: number;
+}
+
+const generateDots = (count: number): Dot[] => {
+    return Array.from({ length: count }, () => {
+        const x = Math.random() * 800
+        const y = Math.random() * (80 - 50) + 50
+        return {
+            x,
+            y,
+            targetX: Math.random() * 800,
+            targetY: Math.random() * (80 - 50) + 50,
+            color: '#cccccc'
+        }
+    })
+}
+
+const generateBars = (count: number): Bar[] => {
+    return Array.from({ length: count }, () => ({
+        height: Math.random() * 30 + 15,
+        value: Math.random() * (105 - 0) + 0
+    }))
 }
 
 export default function SalesChart() {
-  const [dots] = useState(() => generateDots(70))
-  const [bars] = useState(() => generateBars(24))
-  const [hoveredDot, setHoveredDot] = useState<number | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const animationRef = useRef<number>()
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [isHovering, setIsHovering] = useState(false)
-  const progressRef = useRef(0)
+    const [dots, setDots] = useState<Dot[]>(() => generateDots(70))
+    const [bars] = useState<Bar[]>(() => generateBars(24))
+    const [hoveredDot, setHoveredDot] = useState<number | null>(null)
+    const [hoveredBar, setHoveredBar] = useState<number | null>(null)
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+    const [isHovering, setIsHovering] = useState(false)
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const animationRef = useRef<number>()
+    const progressRef = useRef(0)
 
+    const linePoints = [
+        { x: 0, y: 70 },
+        { x: 100, y: 70 },
+        { x: 100, y: 50 },
+        { x: 200, y: 50 },
+        { x: 200, y: 60 },
+        { x: 400, y: 60 },
+        { x: 400, y: 50 },
+        { x: 600, y: 50 },
+        { x: 600, y: 60 },
+        { x: 800, y: 60 }
+    ]
 
+    // Update dots position every 10 seconds
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setDots(prevDots => 
+                prevDots.map(dot => ({
+                    ...dot,
+                    x: dot.x + (dot.targetX - dot.x) * 0.1,
+                    y: dot.y + (dot.targetY - dot.y) * 0.1,
+                    targetX: Math.random() * 800,
+                    targetY: Math.random() * (80 - 50) + 50
+                }))
+            )
+        }, 10000)
 
-  const drawChart = (
-    ctx: CanvasRenderingContext2D, 
-    canvas: HTMLCanvasElement,
-    progress: number = 1
-  ) => {
-    const width = canvas.width / window.devicePixelRatio
-    const height = canvas.height / window.devicePixelRatio
+        return () => clearInterval(intervalId)
+    }, [])
 
-    // Clear and set background
-    ctx.fillStyle = '#000000'
-    ctx.fillRect(0, 0, width, height)
+    const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    // Grid lines
-    ctx.strokeStyle = '#333333'
-    ctx.lineWidth = 0.5
+        // Background
+        ctx.fillStyle = '#000000'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // Vertical grid lines
-    for (let i = 40; i < width - 40; i += 40) {
-      ctx.beginPath()
-      ctx.moveTo(i, 20)
-      ctx.lineTo(i, height - 40)
-      ctx.stroke()
-    }
-
-    // Horizontal grid lines
-    for (let i = 20; i < height - 40; i += 20) {
-      ctx.beginPath()
-      ctx.moveTo(40, i)
-      ctx.lineTo(width - 40, i)
-      ctx.stroke()
-    }
-
-    // Labels
-    ctx.fillStyle = '#666666'
-    ctx.font = '12px monospace'
-    const yLabels = ['105', '80', '55', '30', '0']
-    yLabels.forEach((label, i) => {
-      ctx.fillText(label, 10, 30 + i * ((height - 60) / 4))
-    })
-
-    // Generate and draw bars
-    const bars = generateBars(24)
-    const barWidth = 12
-    const availableWidth = width - 80
-    const barSpacing = (availableWidth / bars.length) - barWidth
-
-    bars.forEach((bar, i) => {
-      if (i < Math.floor(bars.length * progress)) {
-        const xPos = 40 + (i * (barWidth + barSpacing))
-        const yPos = height - 40 - bar.height
-
-        // Draw bar with rounded top
-        ctx.beginPath()
-        ctx.moveTo(xPos, height - 40)
-        ctx.lineTo(xPos, yPos + barWidth/2)
-        ctx.arc(xPos + barWidth/2, yPos + barWidth/2, barWidth/2, Math.PI, 0)
-        ctx.lineTo(xPos + barWidth, height - 40)
-        
-        // Bar border
-        ctx.strokeStyle = '#64748b'
+        // Vertical border line
+        ctx.strokeStyle = '#333333'
         ctx.lineWidth = 1
-        ctx.stroke()
-        
-        // Bar fill
-        ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-        ctx.fill()
-      }
-    })
-
-    // Draw crosshair
-    if (isHovering && mousePos.x >= 40 && mousePos.x <= width - 40) {
-      ctx.strokeStyle = '#666666'
-      ctx.lineWidth = 1
-      ctx.setLineDash([5, 5])
-
-      // Vertical line
-      ctx.beginPath()
-      ctx.moveTo(mousePos.x, 20)
-      ctx.lineTo(mousePos.x, height - 40)
-      ctx.stroke()
-
-      // Horizontal line
-      if (mousePos.y >= 20 && mousePos.y <= height - 40) {
         ctx.beginPath()
-        ctx.moveTo(40, mousePos.y)
-        ctx.lineTo(width - 40, mousePos.y)
+        ctx.moveTo(40, 20)
+        ctx.lineTo(40, canvas.height - 100)
         ctx.stroke()
-      }
 
-      ctx.setLineDash([])
+        // Grid lines
+        ctx.strokeStyle = '#333333'
+        ctx.lineWidth = 0.5
+        for (let i = 30; i < canvas.height - 100; i += 40) {
+            ctx.beginPath()
+            ctx.moveTo(41, i)
+            ctx.lineTo(canvas.width, i)
+            ctx.stroke()
+        }
 
-      // Draw value
-      const value = Math.round(105 - ((mousePos.y - 20) / (height - 60)) * 105)
-      ctx.fillStyle = '#666666'
-      ctx.fillText(value.toString(), 10, mousePos.y + 4)
+        // Y-axis labels
+        ctx.fillStyle = '#666666'
+        ctx.font = '12px monospace'
+        const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
+        yLabels.forEach((label, i) => {
+            ctx.fillText(label, 10, 30 + i * 40)
+        })
+
+        // Draw dots with animation
+        dots.forEach((dot, index) => {
+            ctx.beginPath()
+            ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 3 : 1.5, 0, Math.PI * 2)
+            ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
+            ctx.fill()
+        })
+
+        // Draw animated main line
+        ctx.strokeStyle = '#64748b'
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        
+        const currentPoints = linePoints.filter((_, index) => 
+            index <= Math.floor(linePoints.length * progress)
+        )
+        
+        currentPoints.forEach((point, index) => {
+            if (index === 0) {
+                ctx.moveTo(point.x + 41, point.y)
+            } else {
+                ctx.lineTo(point.x + 41, point.y)
+            }
+        })
+        ctx.stroke()
+
+        // Bar Chart with doubled width
+        const totalWidth = canvas.width - 60
+        const barWidth = 24 // Doubled from 12
+        const barSpacing = (totalWidth / bars.length) - barWidth * 1.5
+        
+        bars.forEach((bar, index) => {
+            const xPos = 50 + (index * (barWidth + barSpacing))
+            const yPos = canvas.height - bar.height - 100
+            const isBarHovered = hoveredBar === index
+
+            // Draw bar border with hover effect
+            ctx.strokeStyle = isBarHovered ? '#8096b5' : '#64748b'
+            ctx.lineWidth = isBarHovered ? 2 : 1
+            ctx.beginPath()
+            ctx.moveTo(xPos, canvas.height - 100)
+            ctx.lineTo(xPos, yPos + 5)
+            ctx.arc(xPos + barWidth/2, yPos + 5, barWidth/2, Math.PI, 0)
+            ctx.lineTo(xPos + barWidth, canvas.height - 100)
+            ctx.stroke()
+
+            // Fill bar with hover effect
+            ctx.fillStyle = isBarHovered 
+                ? 'rgba(100, 116, 139, 0.4)'
+                : 'rgba(100, 116, 139, 0.2)'
+            ctx.fill()
+
+            // Show value on hover
+            if (isBarHovered) {
+                ctx.fillStyle = '#ffffff'
+                ctx.font = '12px monospace'
+                ctx.fillText(
+                    bar.value.toFixed(1),
+                    xPos - 10,
+                    yPos - 10
+                )
+            }
+        })
+
+        // Enhanced hover crosshair
+        if (isHovering) {
+            ctx.strokeStyle = '#666666'
+            ctx.setLineDash([5, 5])
+            
+            // Vertical line
+            ctx.beginPath()
+            ctx.moveTo(mousePos.x, 20)
+            ctx.lineTo(mousePos.x, canvas.height - 100)
+            ctx.stroke()
+            
+            // Horizontal line
+            ctx.beginPath()
+            ctx.moveTo(40, mousePos.y)
+            ctx.lineTo(canvas.width - 40, mousePos.y)
+            ctx.stroke()
+            
+            ctx.setLineDash([])
+
+            // Show coordinates
+            const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
+            ctx.fillStyle = '#ffffff'
+            ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+        }
+
+        // Time labels
+        const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+        timeLabels.forEach((label, i) => {
+            ctx.fillStyle = '#666666'
+            ctx.font = '12px monospace'
+            const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
+            ctx.fillText(label, xPos - 20, canvas.height - 80)
+        })
     }
 
-    // Time labels
-    const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
-    timeLabels.forEach((label, i) => {
-      const xPos = 40 + (availableWidth * (i / (timeLabels.length - 1)))
-      ctx.fillStyle = '#666666'
-      ctx.fillText(label, xPos - 15, height - 20)
-    })
-  }
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+        canvas.width = canvas.offsetWidth * window.devicePixelRatio
+        canvas.height = canvas.offsetHeight * window.devicePixelRatio
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
-    canvas.width = canvas.offsetWidth * window.devicePixelRatio
-    canvas.height = canvas.offsetHeight * window.devicePixelRatio
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+        let startTime = Date.now()
+        const duration = 1000
 
-    let startTime = Date.now()
-    const duration = 1000
+        const animate = () => {
+            const progress = Math.min((Date.now() - startTime) / duration, 1)
+            progressRef.current = progress
+            drawChart(ctx, canvas, progress)
 
-    const animate = () => {
-      const progress = Math.min((Date.now() - startTime) / duration, 1)
-      progressRef.current = progress
-      drawChart(ctx, canvas, progress)
+            if (progress < 1) {
+                animationRef.current = requestAnimationFrame(animate)
+            }
+        }
 
-      if (progress < 1) {
-        requestAnimationFrame(animate)
-      } else {
-        setIsLoaded(true)
-      }
+        animate()
+
+        return () => {
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current)
+            }
+        }
+    }, [dots, hoveredDot, hoveredBar, bars])
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+
+        const rect = canvas.getBoundingClientRect()
+        const x = (e.clientX - rect.left) * window.devicePixelRatio
+        const y = (e.clientY - rect.top) * window.devicePixelRatio
+        
+        setMousePos({ x, y })
+        setIsHovering(true)
+
+        // Check for bar hover
+        const totalWidth = canvas.width - 60
+        const barWidth = 24
+        const barSpacing = (totalWidth / bars.length) - barWidth * 1.5
+        
+        const barIndex = bars.findIndex((_, index) => {
+            const xPos = 50 + (index * (barWidth + barSpacing))
+            return x >= xPos && x <= xPos + barWidth
+        })
+        
+        setHoveredBar(barIndex)
+
+        const ctx = canvas.getContext('2d')
+        if (ctx) {
+            drawChart(ctx, canvas, progressRef.current)
+        }
     }
 
-    animate()
-
-    const handleResize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
-      drawChart(ctx, canvas, progressRef.current)
+    const handleMouseLeave = () => {
+        setIsHovering(false)
+        setHoveredBar(null)
+        const canvas = canvasRef.current
+        if (canvas) {
+            const ctx = canvas.getContext('2d')
+            if (ctx) {
+                drawChart(ctx, canvas, progressRef.current)
+            }
+        }
     }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const rect = canvas.getBoundingClientRect()
-    const x = (e.clientX - rect.left) * window.devicePixelRatio
-    const y = (e.clientY - rect.top) * window.devicePixelRatio
-    
-    setMousePos({ x, y })
-    setIsHovering(true)
-
-    const ctx = canvas.getContext('2d')
-    if (ctx) {
-      drawChart(ctx, canvas, progressRef.current)
-    }
-  }
-
-  const handleMouseLeave = () => {
-    setIsHovering(false)
-    const canvas = canvasRef.current
-    if (canvas) {
-      const ctx = canvas.getContext('2d')
-      if (ctx) {
-        drawChart(ctx, canvas, progressRef.current)
-      }
-    }
-  }
-
-  const linePoints = [
-    { x: 0, y: 70 },
-    { x: 100, y: 70 },
-    { x: 100, y: 50 },
-    { x: 200, y: 50 },
-    { x: 200, y: 60 },
-    { x: 400, y: 60 },
-    { x: 400, y: 50 },
-    { x: 600, y: 50 },
-    { x: 600, y: 60 },
-    { x: 800, y: 60 }
-  ]
 
   
   return (
@@ -241,7 +307,7 @@ export default function SalesChart() {
         <motion.div 
           initial={{ x: -20 }}
           animate={{ x: 0 }}
-          className="text-[#999999] text-sm  flex items-center gap-2"
+          className="text-[#999999] text-sm font-mono flex items-center gap-2"
         >
           <motion.svg 
             whileHover={{ rotate: 180 }}
