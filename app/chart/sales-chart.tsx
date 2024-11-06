@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 const generateDots = (count: number) => {
   return Array.from({ length: count }, () => {
     const x = Math.random() * 800
-    // Adjusted Y range to be higher up (180-210 instead of 220-250)
-    const y = Math.random() * (210 - 180) + 180
+    // Position dots around the line height (50-80 range)
+    const y = Math.random() * (80 - 50) + 50
     return {
       x: x,
       y: y,
@@ -21,20 +21,24 @@ const generateBars = (count: number) => {
 }
 
 export default function SalesChart() {
-  const [dots] = useState(() => generateDots(70)) // Increased to 70 dots
+  const [dots] = useState(() => generateDots(70))
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Adjusted line points to be higher up
+  // Line points following the exact pattern from the image
   const linePoints = [
-    { x: 0, y: 210 },     // Start higher
-    { x: 150, y: 210 },   // Stay at same level
-    { x: 150, y: 180 },   // Vertical movement higher
-    { x: 300, y: 180 },   // Stay at higher level
-    { x: 300, y: 195 },   // Middle level
-    { x: 800, y: 195 }    // End at middle level
+    { x: 0, y: 70 },      // Start at bottom
+    { x: 100, y: 70 },    // Horizontal line
+    { x: 100, y: 50 },    // Sharp vertical up
+    { x: 200, y: 50 },    // Horizontal at top
+    { x: 200, y: 60 },    // Sharp vertical down
+    { x: 400, y: 60 },    // Long horizontal middle
+    { x: 400, y: 50 },    // Sharp vertical up
+    { x: 600, y: 50 },    // Horizontal at top
+    { x: 600, y: 60 },    // Sharp vertical down
+    { x: 800, y: 60 }     // End horizontal
   ]
 
   useEffect(() => {
@@ -57,14 +61,14 @@ export default function SalesChart() {
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 1
     ctx.beginPath()
-    ctx.moveTo(40, 30)
-    ctx.lineTo(40, canvas.height - 30)
+    ctx.moveTo(40, 20)
+    ctx.lineTo(40, canvas.height - 100)
     ctx.stroke()
 
     // Grid lines
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.5
-    for (let i = 50; i < canvas.height - 50; i += 30) {
+    for (let i = 30; i < canvas.height - 100; i += 20) {
       ctx.beginPath()
       ctx.moveTo(41, i)
       ctx.lineTo(canvas.width, i)
@@ -74,20 +78,20 @@ export default function SalesChart() {
     // Y-axis labels
     ctx.fillStyle = '#666666'
     ctx.font = '12px monospace'
-    const yLabels = ['0.74', '0.73', '0.72', '0.71', '0.70', '0.69']
+    const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
     yLabels.forEach((label, i) => {
-      ctx.fillText(label, 10, 50 + i * 30)
+      ctx.fillText(label, 10, 30 + i * 20)
     })
 
     // Draw dots
     dots.forEach((dot, index) => {
       ctx.beginPath()
-      ctx.arc(dot.x + 41, dot.y, 1.5, 0, Math.PI * 2) // Reduced dot size slightly
+      ctx.arc(dot.x + 41, dot.y, 1.5, 0, Math.PI * 2)
       ctx.fillStyle = '#cccccc'
       ctx.fill()
     })
 
-    // Draw main line with slate-500 color
+    // Draw main line
     ctx.strokeStyle = '#64748b'
     ctx.lineWidth = 2
     ctx.beginPath()
@@ -107,7 +111,7 @@ export default function SalesChart() {
     
     bars.forEach((height, index) => {
       const xPos = 50 + (index * (barWidth + barSpacing))
-      const yPos = canvas.height - height - 20
+      const yPos = canvas.height - height - 100
 
       ctx.fillStyle = '#64748b'
       ctx.fillRect(xPos, yPos, barWidth, height)
@@ -119,14 +123,13 @@ export default function SalesChart() {
       ctx.fillStyle = '#666666'
       ctx.font = '12px monospace'
       const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-      ctx.fillText(label, xPos - 20, canvas.height - 5)
+      ctx.fillText(label, xPos - 20, canvas.height - 80)
     })
 
   }, [dots, hoveredDot, bars])
 
   const getValueFromY = (y: number) => {
-    // Adjusted calculation for new Y range
-    return (0.74 - ((y - 180) / (210 - 180)) * 0.03).toFixed(3)
+    return (0.73 - ((y - 50) / (80 - 50)) * 0.04).toFixed(3)
   }
 
   return (
@@ -204,7 +207,7 @@ export default function SalesChart() {
                 key={index}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.01 }} // Reduced delay for more dots
+                transition={{ delay: index * 0.01 }}
                 className="absolute w-6 h-6 -ml-3 -mt-3 rounded-full cursor-pointer"
                 style={{ left: dot.x + 41, top: dot.y }}
                 onHoverStart={() => setHoveredDot(index)}
