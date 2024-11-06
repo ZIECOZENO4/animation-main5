@@ -171,7 +171,7 @@ export default function DeptComponent() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-[200px] max-w-3xl mx-auto bg-black p-2 relative"
+      className="w-full h-[200px] max-w-3xl mx-auto bg-black py-2 px-6 relative"
     >
       <motion.div 
         initial={{ y: -10, opacity: 0 }}
@@ -183,7 +183,7 @@ export default function DeptComponent() {
           initial={{ rotate: -90 }}
           animate={{ rotate: 0 }}
           transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
-          className="w-3 h-3"
+          className="w-6 h-3"
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
