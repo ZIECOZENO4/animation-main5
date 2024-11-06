@@ -4,25 +4,24 @@ import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 type HoveredDot = {
-    index: number;
-    x: number;
-    y: number;
-  } | null;
+  index: number
+  x: number 
+  y: number
+} | null
   
 const generateDots = (count: number) => {
-  return Array.from({ length: count }, () => {
-    const x = Math.random() * 800
-    const y = Math.random() * (80 - 50) + 50
-    return {
-      x: x,
-      y: y,
-      color: '#cccccc'
-    }
-  })
+  return Array.from({ length: count }, () => ({
+    x: Math.random() * 800,
+    y: Math.random() * (80 - 50) + 50,
+    color: '#cccccc'
+  }))
 }
 
 const generateBars = (count: number) => {
-  return Array.from({ length: count }, () => Math.random() * 30 + 15)
+  return Array.from({ length: count }, () => ({
+    height: Math.random() * 30 + 15,
+    value: Math.random() * (105 - 0) + 0
+  }))
 }
 
 export default function SalesChart() {
@@ -37,12 +36,7 @@ export default function SalesChart() {
   const [isHovering, setIsHovering] = useState(false)
   const progressRef = useRef(0)
 
-  const generateBars = (count: number) => {
-    return Array.from({ length: count }, () => ({
-      height: Math.random() * 30 + 15,
-      value: Math.random() * (105 - 0) + 0
-    }))
-  }
+
 
   const drawChart = (
     ctx: CanvasRenderingContext2D, 
