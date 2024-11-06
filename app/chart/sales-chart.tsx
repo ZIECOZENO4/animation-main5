@@ -57,17 +57,17 @@ const generateLinePoints = () => {
 }
 
 export default function SalesChart() {
-    const [dots] = useState(() => generateDots(70))
-    const [bars] = useState(() => generateBars(24))
-    const [hoveredDot, setHoveredDot] = useState<number | null>(null)
-    const [hoveredBar, setHoveredBar] = useState<number | null>(null) 
-    const [isVisible, setIsVisible] = useState(false)
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-    const [isHovering, setIsHovering] = useState(false)
-    const canvasRef = useRef<HTMLCanvasElement>(null)
-    const animationRef = useRef<number>()
-    const progressRef = useRef(0)
-    const [linePoints] = useState(() => generateLinePoints())
+  const [linePoints] = useState(() => generateLinePoints())
+  const [dots, setDots] = useState(() => generateDots(70))
+  const [bars] = useState(() => generateBars(24))
+  const [hoveredDot, setHoveredDot] = useState<number | null>(null)
+  const [hoveredBar, setHoveredBar] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isHovering, setIsHovering] = useState(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationRef = useRef<number>()
+  const progressRef = useRef(0)
 
      useEffect(() => {
         const intervalId = setInterval(() => {
