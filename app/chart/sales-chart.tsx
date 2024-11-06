@@ -6,15 +6,13 @@ import { motion } from 'framer-motion'
 const generateDots = (count: number) => {
   return Array.from({ length: count }, (_, i) => ({
     x: (i / (count - 1)) * 800,
-    y: Math.random() * (300 - 100) + 100, // Adjusted to stay within 0.69-0.74 range
+    y: 300 - (Math.random() * 50 + 280),
     color: '#cccccc'
   }))
 }
 
 const generateBars = (count: number) => {
-  const heights = [60, 40, 30, 45, 35, 50, 40, 30, 45, 35, 40, 45, 
-                  50, 35, 40, 45, 35, 40, 45, 50, 35, 40, 45, 35]
-  return heights.map(h => h * 0.8) // Scale down the heights slightly
+  return Array.from({ length: count }, () => Math.random() * 40 + 20) // Adjusted bar heights
 }
 
 export default function SalesChart() {
@@ -23,13 +21,18 @@ export default function SalesChart() {
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Define the main line points to match the pattern
-  const mainLinePoints = [
-    { x: 0, y: 240 },    // Start at ~0.70
-    { x: 200, y: 220 },  // Rise to ~0.72
-    { x: 400, y: 220 },  // Maintain at 0.72
-    { x: 600, y: 220 },  // Continue at 0.72
-    { x: 800, y: 220 }   // End at ~0.72
+  // Define the line points to match the specific pattern
+  const linePoints = [
+    { x: 0, y: 230 },      // Start at 0.71
+    { x: 200, y: 230 },    // Straight line at 0.71
+    { x: 220, y: 240 },    // Drop to 0.70
+    { x: 300, y: 240 },    // Small line at 0.70
+    { x: 320, y: 250 },    // Drop to 0.69
+    { x: 400, y: 250 },    // Tiny line at 0.69
+    { x: 420, y: 240 },    // Rise to 0.70
+    { x: 500, y: 240 },    // Small line at 0.70
+    { x: 520, y: 230 },    // Rise to 0.71
+    { x: 800, y: 230 }     // Complete width at 0.71
   ]
 
   useEffect(() => {
@@ -65,19 +68,11 @@ export default function SalesChart() {
       ctx.fillText(label, 10, 50 + i * 30)
     })
 
-    // Draw dots
-    dots.forEach((dot, index) => {
-      ctx.beginPath()
-      ctx.arc(dot.x, dot.y, index === hoveredDot ? 4 : 2, 0, Math.PI * 2)
-      ctx.fillStyle = '#cccccc'
-      ctx.fill()
-    })
-
-    // Draw main line
+    // Draw the main line
     ctx.strokeStyle = '#ff6b00'
     ctx.lineWidth = 2
     ctx.beginPath()
-    mainLinePoints.forEach((point, index) => {
+    linePoints.forEach((point, index) => {
       if (index === 0) {
         ctx.moveTo(point.x, point.y)
       } else {
@@ -86,9 +81,9 @@ export default function SalesChart() {
     })
     ctx.stroke()
 
-    // Bar Chart
-    const barWidth = 3
-    const barSpacing = 6
+    // Bar Chart with wider spacing
+    const barWidth = 6
+    const barSpacing = 15
     bars.forEach((height, index) => {
       const xPos = 50 + (index * (barWidth + barSpacing))
       const yPos = canvas.height - height - 20
@@ -106,10 +101,10 @@ export default function SalesChart() {
       ctx.fillText(label, xPos - 20, canvas.height - 5)
     })
 
-  }, [dots, hoveredDot, bars, mainLinePoints])
+  }, [dots, hoveredDot, bars])
 
   return (
-    <div className="w-full h-[80vh] max-w-4xl bg-black p-4 relative">
+    <div className="w-full h-[60vh] max-w-full bg-black p-4 relative">
       <div className="flex justify-between items-center mb-4">
         <motion.div 
           initial={{ opacity: 0 }}
