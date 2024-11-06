@@ -30,126 +30,123 @@ export default function SalesChart() {
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const animationRef = useRef<number>()
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
   const progressRef = useRef(0)
 
-  const linePoints = [
-    { x: 0, y: 70 },
-    { x: 100, y: 70 },
-    { x: 100, y: 50 },
-    { x: 200, y: 50 },
-    { x: 200, y: 60 },
-    { x: 400, y: 60 },
-    { x: 400, y: 50 },
-    { x: 600, y: 50 },
-    { x: 600, y: 60 },
-    { x: 800, y: 60 }
-  ]
+  const generateBars = (count: number) => {
+    return Array.from({ length: count }, () => ({
+      height: Math.random() * 30 + 15,
+      value: Math.random() * (105 - 0) + 0
+    }))
+  }
 
-  const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+  const drawChart = (
+    ctx: CanvasRenderingContext2D, 
+    canvas: HTMLCanvasElement,
+    progress: number = 1
+  ) => {
+    const width = canvas.width / window.devicePixelRatio
+    const height = canvas.height / window.devicePixelRatio
 
-    // Background
+    // Clear and set background
     ctx.fillStyle = '#000000'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.fillRect(0, 0, width, height)
 
-    // Vertical border line
-    ctx.strokeStyle = '#333333'
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.moveTo(40, 20)
-    ctx.lineTo(40, canvas.height - 100)
-    ctx.stroke()
-
-    // Grid lines with doubled spacing
+    // Grid lines
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.5
-    for (let i = 30; i < canvas.height - 100; i += 40) { // Doubled from 20 to 40
+
+    // Vertical grid lines
+    for (let i = 40; i < width - 40; i += 40) {
       ctx.beginPath()
-      ctx.moveTo(41, i)
-      ctx.lineTo(canvas.width, i)
+      ctx.moveTo(i, 20)
+      ctx.lineTo(i, height - 40)
       ctx.stroke()
     }
 
-    // Y-axis labels with doubled spacing
+    // Horizontal grid lines
+    for (let i = 20; i < height - 40; i += 20) {
+      ctx.beginPath()
+      ctx.moveTo(40, i)
+      ctx.lineTo(width - 40, i)
+      ctx.stroke()
+    }
+
+    // Labels
     ctx.fillStyle = '#666666'
     ctx.font = '12px monospace'
-    const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
+    const yLabels = ['105', '80', '55', '30', '0']
     yLabels.forEach((label, i) => {
-      ctx.fillText(label, 10, 30 + i * 40) // Doubled from 20 to 40
+      ctx.fillText(label, 10, 30 + i * ((height - 60) / 4))
     })
 
-    // Draw dots
-    dots.forEach((dot, index) => {
-      ctx.beginPath()
-      ctx.arc(dot.x + 41, dot.y, 1.5, 0, Math.PI * 2)
-      ctx.fillStyle = '#cccccc'
-      ctx.fill()
-    })
+    // Generate and draw bars
+    const bars = generateBars(24)
+    const barWidth = 12
+    const availableWidth = width - 80
+    const barSpacing = (availableWidth / bars.length) - barWidth
 
-    // Draw animated main line
-    ctx.strokeStyle = '#64748b'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    
-    const currentPoints = linePoints.filter((_, index) => 
-      index <= Math.floor(linePoints.length * progress)
-    )
-    
-    currentPoints.forEach((point, index) => {
-      if (index === 0) {
-        ctx.moveTo(point.x + 41, point.y)
-      } else {
-        ctx.lineTo(point.x + 41, point.y)
+    bars.forEach((bar, i) => {
+      if (i < Math.floor(bars.length * progress)) {
+        const xPos = 40 + (i * (barWidth + barSpacing))
+        const yPos = height - 40 - bar.height
+
+        // Draw bar with rounded top
+        ctx.beginPath()
+        ctx.moveTo(xPos, height - 40)
+        ctx.lineTo(xPos, yPos + barWidth/2)
+        ctx.arc(xPos + barWidth/2, yPos + barWidth/2, barWidth/2, Math.PI, 0)
+        ctx.lineTo(xPos + barWidth, height - 40)
+        
+        // Bar border
+        ctx.strokeStyle = '#64748b'
+        ctx.lineWidth = 1
+        ctx.stroke()
+        
+        // Bar fill
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+        ctx.fill()
       }
     })
-    ctx.stroke()
 
-    // Bar Chart with curved tops and transparency
-    const totalWidth = canvas.width - 60
-    const barWidth = 12 // Increased width
-    const barSpacing = (totalWidth / bars.length) - barWidth * 1.5 // Increased spacing
-    
-    bars.forEach((height, index) => {
-      const xPos = 50 + (index * (barWidth + barSpacing))
-      const yPos = canvas.height - height - 100
-
-      // Draw bar border
-      ctx.strokeStyle = '#64748b'
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.moveTo(xPos, canvas.height - 100)
-      ctx.lineTo(xPos, yPos + 5)
-      ctx.arc(xPos + barWidth/2, yPos + 5, barWidth/2, Math.PI, 0)
-      ctx.lineTo(xPos + barWidth, canvas.height - 100)
-      ctx.stroke()
-
-      // Fill bar with transparency
-      ctx.fillStyle = 'rgba(100, 116, 139, 0.2)' // slate-500 with transparency
-      ctx.fill()
-    })
-
-    // Draw hover crosshair and dotted line
-    if (isHovering) {
+    // Draw crosshair
+    if (isHovering && mousePos.x >= 40 && mousePos.x <= width - 40) {
       ctx.strokeStyle = '#666666'
+      ctx.lineWidth = 1
       ctx.setLineDash([5, 5])
+
+      // Vertical line
       ctx.beginPath()
       ctx.moveTo(mousePos.x, 20)
-      ctx.lineTo(mousePos.x, canvas.height - 100)
+      ctx.lineTo(mousePos.x, height - 40)
       ctx.stroke()
+
+      // Horizontal line
+      if (mousePos.y >= 20 && mousePos.y <= height - 40) {
+        ctx.beginPath()
+        ctx.moveTo(40, mousePos.y)
+        ctx.lineTo(width - 40, mousePos.y)
+        ctx.stroke()
+      }
+
       ctx.setLineDash([])
+
+      // Draw value
+      const value = Math.round(105 - ((mousePos.y - 20) / (height - 60)) * 105)
+      ctx.fillStyle = '#666666'
+      ctx.fillText(value.toString(), 10, mousePos.y + 4)
     }
 
     // Time labels
     const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
     timeLabels.forEach((label, i) => {
+      const xPos = 40 + (availableWidth * (i / (timeLabels.length - 1)))
       ctx.fillStyle = '#666666'
-      ctx.font = '12px monospace'
-      const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-      ctx.fillText(label, xPos - 20, canvas.height - 80)
+      ctx.fillText(label, xPos - 15, height - 20)
     })
   }
 
@@ -164,9 +161,8 @@ export default function SalesChart() {
     canvas.height = canvas.offsetHeight * window.devicePixelRatio
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
-    // Animate the line drawing
     let startTime = Date.now()
-    const duration = 1000 // 1 second animation
+    const duration = 1000
 
     const animate = () => {
       const progress = Math.min((Date.now() - startTime) / duration, 1)
@@ -174,18 +170,24 @@ export default function SalesChart() {
       drawChart(ctx, canvas, progress)
 
       if (progress < 1) {
-        animationRef.current = requestAnimationFrame(animate)
+        requestAnimationFrame(animate)
+      } else {
+        setIsLoaded(true)
       }
     }
 
     animate()
 
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+    const handleResize = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+      drawChart(ctx, canvas, progressRef.current)
     }
-  }, [dots, hoveredDot, bars])
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -214,6 +216,20 @@ export default function SalesChart() {
       }
     }
   }
+
+  const linePoints = [
+    { x: 0, y: 70 },
+    { x: 100, y: 70 },
+    { x: 100, y: 50 },
+    { x: 200, y: 50 },
+    { x: 200, y: 60 },
+    { x: 400, y: 60 },
+    { x: 400, y: 50 },
+    { x: 600, y: 50 },
+    { x: 600, y: 60 },
+    { x: 800, y: 60 }
+  ]
+
   
   return (
     <motion.div 
@@ -231,7 +247,7 @@ export default function SalesChart() {
         <motion.div 
           initial={{ x: -20 }}
           animate={{ x: 0 }}
-          className="text-[#999999] text-sm font-mono flex items-center gap-2"
+          className="text-[#999999] text-sm  flex items-center gap-2"
         >
           <motion.svg 
             whileHover={{ rotate: 180 }}
