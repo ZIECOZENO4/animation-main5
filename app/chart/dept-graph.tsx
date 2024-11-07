@@ -3,6 +3,12 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// Define types for data points
+interface DataPoint {
+  x: number;
+  y: number;
+}
+
 export default function DeptComponent() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -11,9 +17,9 @@ export default function DeptComponent() {
   const [isHovering, setIsHovering] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
-  const generateSteppedData = (width: number, height: number) => {
-    const steps = Math.floor(width / 10) // Adjust steps based on width
-    const data = []
+  const generateSteppedData = (width: number, height: number): DataPoint[] => {
+    const steps = Math.floor(width / 10)
+    const data: DataPoint[] = []
     let currentY = height - 20
     let currentX = 2.5
 
@@ -21,7 +27,7 @@ export default function DeptComponent() {
       data.push({ x: currentX, y: currentY })
 
       const rand = Math.random()
-      const stepSize = (height / 20) * (Math.random() * 0.8 + 0.2) // Scale step size with height
+      const stepSize = (height / 20) * (Math.random() * 0.8 + 0.2)
       
       if (rand < 0.7) {
         currentY = Math.max(height * 0.1, currentY - stepSize)
@@ -47,7 +53,7 @@ export default function DeptComponent() {
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, width, height)
 
-    // Calculate grid spacing based on dimensions
+    // Calculate grid spacing
     const verticalGridSpacing = width / 40
     const horizontalGridSpacing = height / 15
 
@@ -71,7 +77,7 @@ export default function DeptComponent() {
       ctx.stroke()
     }
 
-    // Scale font size based on dimensions
+    // Font size calculation
     const fontSize = Math.max(10, Math.min(width, height) / 50)
     ctx.font = `${fontSize}px monospace`
 
@@ -90,28 +96,36 @@ export default function DeptComponent() {
       ctx.fillText(label, x - fontSize/2, height - 5)
     })
 
-    // Generate and draw stepped data
+    // Generate and draw data
     const depthData = generateSteppedData(width, height)
 
-    // Draw stepped line
-    ctx.strokeStyle = '#64748b'
-    ctx.lineWidth = Math.max(1, width / 500)
-    ctx.beginPath()
-    depthData.forEach((point, i) => {
-      if (i === 0) {
-        ctx.moveTo(point.x, point.y)
-      } else {
-        ctx.lineTo(point.x, point.y)
-      }
-    })
-    ctx.stroke()
+    if (depthData.length > 0) {
+      // Draw stepped line
+      ctx.strokeStyle = '#64748b'
+      ctx.lineWidth = Math.max(1, width / 500)
+      ctx.beginPath()
+      
+      depthData.forEach((point, i) => {
+        if (i === 0) {
+          ctx.moveTo(point.x, point.y)
+        } else {
+          ctx.lineTo(point.x, point.y)
+        }
+      })
+      ctx.stroke()
 
-    // Fill area under the line
-    ctx.lineTo(depthData[depthData.length - 1].x, height)
-    ctx.lineTo(depthData[0].x, height)
-    ctx.closePath()
-    ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-    ctx.fill()
+      // Fill area under the line
+      const lastPoint = depthData[depthData.length - 1]
+      const firstPoint = depthData[0]
+      
+      if (lastPoint && firstPoint) {
+        ctx.lineTo(lastPoint.x, height)
+        ctx.lineTo(firstPoint.x, height)
+        ctx.closePath()
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+        ctx.fill()
+      }
+    }
 
     // Draw crosshair
     if (isHovering) {
@@ -139,7 +153,8 @@ export default function DeptComponent() {
   // Resize observer
   useEffect(() => {
     const resizeObserver = new ResizeObserver(entries => {
-      for (const entry of entries) {
+      const entry = entries[0]
+      if (entry) {
         const { width, height } = entry.contentRect
         setDimensions({ width, height })
       }
@@ -160,7 +175,7 @@ export default function DeptComponent() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas size to match container
+    // Set canvas size
     canvas.width = dimensions.width * window.devicePixelRatio
     canvas.height = dimensions.height * window.devicePixelRatio
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
@@ -203,7 +218,7 @@ export default function DeptComponent() {
           initial={{ rotate: -90 }}
           animate={{ rotate: 0 }}
           transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
-          className="w-6 h-3"
+          className="w-8 h-6"
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +230,7 @@ export default function DeptComponent() {
           initial={{ x: -5, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.3 }}
-          className="text-[#999999] text-xs"
+          className="text-[#999999] text-xl"
         >
           DEPTH
         </motion.span>
