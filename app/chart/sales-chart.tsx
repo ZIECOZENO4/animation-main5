@@ -18,18 +18,16 @@ type HoverInfo = {
 // Modified to scatter dots across the entire height
 // Define a helper function to get canvas dimensions
 const getCanvasDimensions = () => {
-  const defaultWidth = window.innerWidth - 60
-  const defaultHeight = window.innerHeight - 140
+  const defaultWidth = window.innerWidth - 80
+  const defaultHeight = window.innerHeight - 160
   return { width: defaultWidth, height: defaultHeight }
 }
 
 // Modified generateDots function
 const generateDots = (count: number) => {
-  const { width, height } = getCanvasDimensions()
-  
   return Array.from({ length: 100 }, () => {
-    const x = Math.random() * (width - 60) // Full width minus padding
-    const y = Math.random() * (height - 120) + 20 // Full height with padding
+    const x = Math.random() * (window.innerWidth - 100) // Full width minus padding
+    const y = Math.random() * (window.innerHeight - 240) + 20 // Full height with padding
     return {
       x: x,
       y: y,
@@ -39,6 +37,7 @@ const generateDots = (count: number) => {
     }
   })
 }
+
 
 // Modified to generate bars with more spacing
 const generateBars = (count: number) => {
@@ -358,7 +357,7 @@ export default function SalesChart() {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           />
-          
+
           <AnimatePresence>
             <div className="absolute inset-0 pointer-events-none">
               {dots.map((dot, index) => (
