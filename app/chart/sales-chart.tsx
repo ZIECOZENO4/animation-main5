@@ -315,16 +315,13 @@ export default function SalesChart() {
             animate={{ x: 0 }}
             className="text-[#999999] text-sm  flex items-center gap-2"
           >
-            <motion.svg 
+            <motion.div 
               whileHover={{ rotate: 180 }}
               transition={{ duration: 0.3 }}
-              className="w-4 h-4" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
+              className="w-8 h-8" 
             >
-              <path d="M8 20V4L20 4V20" stroke="#999999" strokeWidth="2"/>
-            </motion.svg>
+              <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V3M9.5 8.5H9.51M19.5 7.5H19.51M14.5 12.5H14.51M8.5 15.5H8.51M18.5 15.5H18.51" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </motion.div>
             <motion.span
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400 }}
