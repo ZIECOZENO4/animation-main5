@@ -157,39 +157,71 @@ export default function EnhanceTradingView() {
         )}
       </AnimatePresence>
 
-      {/* Zoomed Out View */}
-      <AnimatePresence>
+       {/* Modified Zoomed Out View */}
+       <AnimatePresence>
         {isZoomedOut && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="fixed inset-0 bg-black  border border-gray-800 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-black border border-gray-800 flex items-center justify-center"
           >
-            <motion.h1
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-6xl font-bold mb-8"
-            >
-              Zoomed Out View
-            </motion.h1>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl mb-8"
-            >
-              Press ESC to return
-            </motion.p>
+            {/* Close Button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+                delay: 0.2
+              }}
               onClick={() => setIsZoomedOut(false)}
-              className="px-6 py-3 bg-blue-500 rounded-full text-lg font-semibold"
+              className="absolute top-4 right-4 p-2 border-2 border-gray-600 rounded-full hover:border-gray-400 transition-colors"
             >
-              Return to Trading View
+              <X className="w-6 h-6" />
             </motion.button>
+
+            {/* Zoomed Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ delay: 0.3 }}
+              className="w-full max-w-7xl mx-auto p-8"
+            >
+              {view === "trading" ? (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="w-full h-[80vh]"
+                >
+                  <SalesChart />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="w-full h-[80vh]"
+                >
+                  <DeptComponent />
+                </motion.div>
+              )}
+            </motion.div>
+
+            {/* Optional Keyboard Hint */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.4 }}
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-500 text-sm"
+            >
+              Press ESC to exit fullscreen
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
