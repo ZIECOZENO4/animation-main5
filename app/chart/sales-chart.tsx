@@ -16,12 +16,6 @@ type HoverInfo = {
   value: number;
 } | null;
 // Modified to scatter dots across the entire height
-// Define a helper function to get canvas dimensions
-const getCanvasDimensions = () => {
-  const defaultWidth = window.innerWidth - 80
-  const defaultHeight = window.innerHeight - 160
-  return { width: defaultWidth, height: defaultHeight }
-}
 
 // Modified generateDots function
 const generateDots = (count: number) => {
