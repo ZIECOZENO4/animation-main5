@@ -309,7 +309,7 @@ export default function SalesChart() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full h-[60vh] container mx-auto bg-black p-4 relative"
+        className="w-full h-[400px} container mx-auto bg-black p-4 relative"
       >
         <motion.div 
           initial={{ opacity: 0 }}
