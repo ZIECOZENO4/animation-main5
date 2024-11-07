@@ -94,40 +94,50 @@ export default function SalesChart() {
     }, [])
 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-        // Background
-        ctx.fillStyle = '#000000'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-        // Vertical border line
-        ctx.strokeStyle = '#333333'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.moveTo(40, 20)
-        ctx.lineTo(40, canvas.height - 100)
-        ctx.stroke()
-
-        // Grid lines
-        ctx.strokeStyle = '#333333'
-        ctx.lineWidth = 0.5
-        for (let i = 30; i < canvas.height - 100; i += 40) {
-            ctx.beginPath()
-            ctx.moveTo(41, i)
-            ctx.lineTo(canvas.width - 20, i)
-            ctx.stroke()
-        }
-
-        // Y-axis labels
-        ctx.fillStyle = '#666666'
-        ctx.font = '12px monospace'
-        const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
-        yLabels.forEach((label, i) => {
-            ctx.fillText(label, 10, 30 + i * 40)
-        })
-
-        // Draw scattered dots
-        dots.forEach((dot, index) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+  
+      // Background
+      ctx.fillStyle = '#000000'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+  
+      // Vertical border line
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.moveTo(40, 20)
+      ctx.lineTo(40, canvas.height - 100)
+      ctx.stroke()
+  
+      // Calculate grid lines and labels dynamically
+      const startY = 20
+      const endY = canvas.height - 100
+      const gridSpacing = 40
+      const numberOfLines = Math.floor((endY - startY) / gridSpacing) + 1
+      const maxValue = 0.73
+      const minValue = 0.69
+      const valueStep = (maxValue - minValue) / (numberOfLines - 1)
+  
+      // Draw grid lines and labels
+      for (let i = 0; i < numberOfLines; i++) {
+          const yPos = startY + (i * gridSpacing)
+          const value = maxValue - (i * valueStep)
+  
+          // Draw grid line
+          ctx.strokeStyle = '#333333'
+          ctx.lineWidth = 0.5
+          ctx.beginPath()
+          ctx.moveTo(41, yPos)
+          ctx.lineTo(canvas.width - 20, yPos)
+          ctx.stroke()
+  
+          // Draw y-axis label
+          ctx.fillStyle = '#666666'
+          ctx.font = '12px monospace'
+          ctx.fillText(value.toFixed(3), 10, yPos + 4)
+      }
+  
+      // Draw scattered dots
+      dots.forEach((dot, index) => {
           ctx.beginPath()
           ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
           
@@ -140,93 +150,98 @@ export default function SalesChart() {
           ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
           ctx.fill()
       })
-
-        // Draw animated main line
-        ctx.strokeStyle = '#64748b'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-        
-        const currentPoints = linePoints.filter((_, index) => 
-            index <= Math.floor(linePoints.length * progress)
-        )
-        
-        currentPoints.forEach((point, index) => {
-            if (index === 0) {
-                ctx.moveTo(point.x + 41, point.y)
-            } else {
-                ctx.lineTo(point.x + 41, point.y)
-            }
-        })
-        ctx.stroke()
-
-        // Bar Chart with increased spacing
-        const totalWidth = canvas.width - 80
-        const barWidth = 48  // Doubled from 24 to 48
-        const barSpacing = 8  // Fixed 8px spacing (px-2 equivalent)
-        const availableSpace = totalWidth - (bars.length * barSpacing)
-        const adjustedBarWidth = availableSpace / bars.length
-
-        bars.forEach((bar, index) => {
-            const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-            const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
-
-            // Draw rectangular bar without rounded corners
-            ctx.beginPath()
-            ctx.rect(
-                xPos,
-                canvas.height - 100,
-                adjustedBarWidth,  // Use adjusted width to fill space
-                -(bar.isSmall ? bar.height * 0.6 : bar.height)
-            )
-            ctx.strokeStyle = '#64748b'
-            ctx.lineWidth = 1
-            ctx.stroke()
-            ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-            ctx.fill()
-
-            // Show value on hover
-            if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
-                ctx.fillStyle = '#ffffff'
-                ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
-            }
-        })
-
-
-
-        // Enhanced hover crosshair
-        if (isHovering) {
-            ctx.strokeStyle = '#666666'
-            ctx.setLineDash([5, 5])
-            
-            // Vertical line
-            ctx.beginPath()
-            ctx.moveTo(mousePos.x, 20)
-            ctx.lineTo(mousePos.x, canvas.height - 100)
-            ctx.stroke()
-            
-            // Horizontal line
-            ctx.beginPath()
-            ctx.moveTo(40, mousePos.y)
-            ctx.lineTo(canvas.width - 20, mousePos.y)
-            ctx.stroke()
-            
-            ctx.setLineDash([])
-
-            // Show value
-            const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
-            ctx.fillStyle = '#ffffff'
-            ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
-        }
-
-        // Time labels
-        const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
-        timeLabels.forEach((label, i) => {
-            ctx.fillStyle = '#666666'
-            ctx.font = '12px monospace'
-            const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-            ctx.fillText(label, xPos - 20, canvas.height - 80)
-        })
-    }
+  
+      // Draw animated main line
+      ctx.strokeStyle = '#64748b'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      
+      const currentPoints = linePoints.filter((_, index) => 
+          index <= Math.floor(linePoints.length * progress)
+      )
+      
+      currentPoints.forEach((point, index) => {
+          if (index === 0) {
+              ctx.moveTo(point.x + 41, point.y)
+          } else {
+              ctx.lineTo(point.x + 41, point.y)
+          }
+      })
+      ctx.stroke()
+  
+      // Bar Chart with increased spacing
+      const totalWidth = canvas.width - 80
+      const barSpacing = 8
+      const availableSpace = totalWidth - (bars.length * barSpacing)
+      const adjustedBarWidth = availableSpace / bars.length
+  
+      bars.forEach((bar, index) => {
+          const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
+          const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
+  
+          // Draw bar with bottom border
+          ctx.beginPath()
+          ctx.rect(
+              xPos,
+              canvas.height - 100,
+              adjustedBarWidth,
+              -(bar.isSmall ? bar.height * 0.6 : bar.height)
+          )
+          ctx.strokeStyle = '#64748b'
+          ctx.lineWidth = 1
+          ctx.stroke()
+          ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+          ctx.fill()
+  
+          // Draw bottom border for bar
+          ctx.beginPath()
+          ctx.moveTo(xPos, canvas.height - 100)
+          ctx.lineTo(xPos + adjustedBarWidth, canvas.height - 100)
+          ctx.strokeStyle = '#64748b'
+          ctx.lineWidth = 2
+          ctx.stroke()
+  
+          // Show value on hover
+          if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
+              ctx.fillStyle = '#ffffff'
+              ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
+          }
+      })
+  
+      // Enhanced hover crosshair
+      if (isHovering) {
+          ctx.strokeStyle = '#666666'
+          ctx.setLineDash([5, 5])
+          
+          // Vertical line
+          ctx.beginPath()
+          ctx.moveTo(mousePos.x, 20)
+          ctx.lineTo(mousePos.x, canvas.height - 100)
+          ctx.stroke()
+          
+          // Horizontal line
+          ctx.beginPath()
+          ctx.moveTo(40, mousePos.y)
+          ctx.lineTo(canvas.width - 20, mousePos.y)
+          ctx.stroke()
+          
+          ctx.setLineDash([])
+  
+          // Show hover value
+          const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
+          ctx.fillStyle = '#ffffff'
+          ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+      }
+  
+      // Time labels
+      const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+      timeLabels.forEach((label, i) => {
+          ctx.fillStyle = '#666666'
+          ctx.font = '12px monospace'
+          const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
+          ctx.fillText(label, xPos - 20, canvas.height - 80)
+      })
+  }
 
 
     useEffect(() => {
