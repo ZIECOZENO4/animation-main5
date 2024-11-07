@@ -157,17 +157,16 @@ export default function EnhanceTradingView() {
         )}
       </AnimatePresence>
 
-       {/* Modified Zoomed Out View */}
-       <AnimatePresence>
+      {/* Zoomed Out View */}
+      <AnimatePresence>
         {isZoomedOut && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="fixed inset-0 bg-black border border-gray-800 flex items-center justify-center"
+            className="fixed inset-0 bg-black  border border-gray-800 flex flex-col items-center justify-center"
           >
-            {/* Close Button */}
-            <motion.button
+           <motion.button
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
@@ -178,25 +177,23 @@ export default function EnhanceTradingView() {
                 delay: 0.2
               }}
               onClick={() => setIsZoomedOut(false)}
-              className="absolute top-4 right-4 p-2 border-2 border-gray-600 rounded-full hover:border-gray-400 transition-colors"
+              className="absolute top-4 right-1/2 left-1/2 align-middle items-center justify-center p-2 border-2 border-gray-600 rounded-full hover:border-gray-400 transition-colors"
             >
               <X className="w-6 h-6" />
             </motion.button>
-
-            {/* Zoomed Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ delay: 0.3 }}
-              className="w-full max-w-7xl mx-auto p-8"
+              className="w-full  mx-auto p-8"
             >
               {view === "trading" ? (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="w-full h-[80vh]"
+                  className="w-full h-full"
                 >
                   <SalesChart />
                 </motion.div>
@@ -205,7 +202,7 @@ export default function EnhanceTradingView() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="w-full h-[80vh]"
+                  className="w-full h-full"
                 >
                   <DeptComponent />
                 </motion.div>
@@ -218,11 +215,12 @@ export default function EnhanceTradingView() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ delay: 0.4 }}
-              className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-500 text-sm"
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 text-gray-500 text-sm"
             >
               Press ESC to exit fullscreen
             </motion.div>
           </motion.div>
+        
         )}
       </AnimatePresence>
     </div>

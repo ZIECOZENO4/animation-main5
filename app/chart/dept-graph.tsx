@@ -3,30 +3,45 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-interface DataPoint {
-  x: number;
-  y: number;
-}
-
-interface Bar {
-  height: number;
-  value: number;
-  isSmall: boolean;
-}
-
 export default function DeptComponent() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
-  const [bars] = useState<Bar[]>(() => 
-    Array.from({ length: 24 }, () => ({
-      height: Math.random() * 30 + 15,
-      value: Math.random() * (105 - 0) + 0,
-      isSmall: Math.random() > 0.5
-    }))
-  )
-  const [hoveredBar, setHoveredBar] = useState<number | null>(null)
+
+  const generateSteppedData = (width: number, height: number) => {
+    const steps = 40 // Number of potential steps
+    const data = []
+    let currentY = height - 20 // Start from bottom
+    let currentX = 2.5
+
+    while (currentX < width) {
+      // Add current point
+      data.push({ x: currentX, y: currentY })
+
+      // Randomly decide whether to go up, stay, or make a small down movement
+      const rand = Math.random()
+      const stepSize = Math.random() * 8 + 2 // Random step size between 2 and 10
+      
+      if (rand < 0.7) { // 70% chance to go up (overall ascending trend)
+        currentY = Math.max(30, currentY - stepSize)
+      } else if (rand < 0.9) { // 20% chance to stay
+        currentY = currentY
+      } else { // 10% chance to go down slightly
+        currentY = Math.min(height - 20, currentY + stepSize / 2)
+      }
+
+      // Add point at new height (creates vertical line)
+      data.push({ x: currentX, y: currentY })
+
+      // Move right
+      currentX += (width - 5) / steps
+      // Add horizontal line point
+      data.push({ x: currentX, y: currentY })
+    }
+
+    return data
+  }
 
   const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => {
     const width = canvas.width / window.devicePixelRatio
@@ -38,85 +53,83 @@ export default function DeptComponent() {
 
     // Grid lines
     ctx.strokeStyle = '#333333'
-    ctx.lineWidth = 0.5
-    
+    ctx.lineWidth = 0.25
+
     // Vertical grid lines
-    for (let i = 40; i < width; i += 40) {
+    for (let i = 2.5; i < width; i += 2.5) {
       ctx.beginPath()
-      ctx.moveTo(i, 20)
-      ctx.lineTo(i, height - 40)
+      ctx.moveTo(i, 0)
+      ctx.lineTo(i, height - 15)
       ctx.stroke()
     }
 
     // Horizontal grid lines
-    for (let i = 20; i < height - 40; i += 40) {
+    for (let i = 15; i < height - 15; i += 15) {
       ctx.beginPath()
-      ctx.moveTo(40, i)
-      ctx.lineTo(width - 20, i)
+      ctx.moveTo(2, i)
+      ctx.lineTo(width, i)
       ctx.stroke()
     }
 
-    // Bar Chart
-    const totalWidth = width - 80
-    const barWidth = 48 // Doubled width
-    const barSpacing = 8 // Fixed 8px spacing
-    const availableSpace = totalWidth - (bars.length * barSpacing)
-    const adjustedBarWidth = availableSpace / bars.length
+    // Y-axis labels
+    ctx.fillStyle = '#666666'
+    ctx.font = '10px monospace'
+    const yLabels = ['111', '84', '56', '29', '1']
+    yLabels.forEach((label, i) => {
+      ctx.fillText(label, 0.5, 20 + i * 30)
+    })
 
-    bars.forEach((bar, index) => {
-      const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-      const yPos = height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 40
+    // X-axis labels
+    const xLabels = ['0.72', '0.78', '0.89', '0.95']
+    xLabels.forEach((label, i) => {
+      const x = 2.5 + (i * (width - 5) / (xLabels.length - 1))
+      ctx.fillText(label, x - 7.5, height - 5)
+    })
 
-      // Draw bar
-      ctx.beginPath()
-      ctx.rect(
-        xPos,
-        height - 40,
-        adjustedBarWidth,
-        -(bar.isSmall ? bar.height * 0.6 : bar.height)
-      )
-      ctx.strokeStyle = '#64748b'
-      ctx.lineWidth = 1
-      ctx.stroke()
-      ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-      ctx.fill()
+    // Generate and draw stepped data
+    const depthData = generateSteppedData(width, height)
 
-      // Show value on hover
-      if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
-        ctx.fillStyle = '#ffffff'
-        ctx.font = '12px monospace'
-        ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
+    // Draw stepped line
+    ctx.strokeStyle = '#64748b'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    depthData.forEach((point, i) => {
+      if (i === 0) {
+        ctx.moveTo(point.x, point.y)
+      } else {
+        ctx.lineTo(point.x, point.y)
       }
     })
+    ctx.stroke()
 
-    // Time labels
-    const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
-    ctx.fillStyle = '#666666'
-    ctx.font = '12px monospace'
-    timeLabels.forEach((label, i) => {
-      const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-      ctx.fillText(label, xPos - 20, height - 20)
-    })
+    // Fill area under the line
+    ctx.lineTo(depthData[depthData.length - 1].x, height)
+    ctx.lineTo(depthData[0].x, height)
+    ctx.closePath()
+    ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+    ctx.fill()
 
-    // Draw crosshair
+    // Draw crosshair if hovering
     if (isHovering) {
       ctx.strokeStyle = '#666666'
       ctx.setLineDash([5, 5])
       
+      // Vertical line
       ctx.beginPath()
-      ctx.moveTo(mousePos.x, 20)
-      ctx.lineTo(mousePos.x, height - 40)
+      ctx.moveTo(mousePos.x, 0)
+      ctx.lineTo(mousePos.x, height - 15)
       ctx.stroke()
       
+      // Horizontal line
       ctx.beginPath()
-      ctx.moveTo(40, mousePos.y)
-      ctx.lineTo(width - 20, mousePos.y)
+      ctx.moveTo(2, mousePos.y)
+      ctx.lineTo(width, mousePos.y)
       ctx.stroke()
       
       ctx.setLineDash([])
 
-      // Show hover value
-      const value = Math.round(111 - ((mousePos.y - 20) / (height - 60)) * 111)
+      // Show value
+      const value = Math.round(111 - ((mousePos.y) / (height - 15)) * 111)
       ctx.fillStyle = '#ffffff'
       ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
     }
@@ -135,91 +148,64 @@ export default function DeptComponent() {
 
     drawChart(ctx, canvas)
     setIsLoaded(true)
-  }, [isHovering, mousePos, bars])
+  }, [isHovering, mousePos])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
     if (!canvas) return
 
     const rect = canvas.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const x = (e.clientX - rect.left)
+    const y = (e.clientY - rect.top)
     
     setMousePos({ x, y })
     setIsHovering(true)
-
-    // Bar hover detection
-    const totalWidth = canvas.width / window.devicePixelRatio - 80
-    const barSpacing = 8
-    const availableSpace = totalWidth - (bars.length * barSpacing)
-    const adjustedBarWidth = availableSpace / bars.length
-    
-    const barIndex = bars.findIndex((_, index) => {
-      const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-      return x >= xPos && x <= xPos + adjustedBarWidth
-    })
-    
-    setHoveredBar(barIndex)
   }
 
   const handleMouseLeave = () => {
     setIsHovering(false)
-    setHoveredBar(null)
   }
 
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-full bg-black relative"
+      className="w-full h-full flex-grow flex  mx-auto bg-black py-2 px-6 relative"
     >
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="flex items-center gap-2 p-4"
+        initial={{ y: -10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.3 }}
+        className="flex items-center gap-1 mb-2"
       >
-        <motion.div 
-          whileHover={{ rotate: 180 }}
-          transition={{ duration: 0.3 }}
-          className="w-6 h-6"
+        <motion.svg 
+          initial={{ rotate: -90 }}
+          animate={{ rotate: 0 }}
+          transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+          className="w-6 h-3"
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-full"
-          >
-            <path 
-              d="M3 3v18h18" 
-              stroke="#999999" 
-              strokeWidth="2" 
-              strokeLinecap="round"
-            />
-            <path 
-              d="M7 17l4-4 4 4 4-4" 
-              stroke="#999999" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            />
-          </svg>
-        </motion.div>
+          <path d="M3 3v18h18" stroke="#999999" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M7 17l4-4 4 4 4-4" stroke="#999999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </motion.svg>
         <motion.span 
-          className="text-[#999999] text-sm"
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 400 }}
+          initial={{ x: -5, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.7, duration: 0.3 }}
+          className="text-[#999999] text-xs"
         >
           DEPTH
         </motion.span>
       </motion.div>
-
+      
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-[calc(100%-4rem)]"
+        className="relative w-full h-[calc(100%-1.5rem)]"
       >
         <canvas
           ref={canvasRef}
