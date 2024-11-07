@@ -16,17 +16,27 @@ type HoverInfo = {
   value: number;
 } | null;
 // Modified to scatter dots across the entire height
+// Define a helper function to get canvas dimensions
+const getCanvasDimensions = () => {
+  const defaultWidth = window.innerWidth - 60
+  const defaultHeight = window.innerHeight - 140
+  return { width: defaultWidth, height: defaultHeight }
+}
+
+// Modified generateDots function
 const generateDots = (count: number) => {
-  return Array.from({ length: count }, () => {
-      const x = Math.random() * 800
-      const y = Math.random() * (200 - 20) + 20
-      return {
-          x: x,
-          y: y,
-          color: '#000000',
-          borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
-          hasBorder: Math.random() > 0.3
-      }
+  const { width, height } = getCanvasDimensions()
+  
+  return Array.from({ length: 100 }, () => {
+    const x = Math.random() * (width - 60) // Full width minus padding
+    const y = Math.random() * (height - 120) + 20 // Full height with padding
+    return {
+      x: x,
+      y: y,
+      color: '#000000',
+      borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
+      hasBorder: Math.random() > 0.3
+    }
   })
 }
 
@@ -67,7 +77,7 @@ const generateLinePoints = () => {
 
 export default function SalesChart() {
   const [linePoints] = useState(() => generateLinePoints())
-  const [dots, setDots] = useState(() => generateDots(70))
+  const [dots, setDots] = useState(() => generateDots(100)) 
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const [hoveredBar, setHoveredBar] = useState<number | null>(null)
@@ -100,6 +110,13 @@ export default function SalesChart() {
       ctx.fillStyle = '#000000'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
   
+      ctx.beginPath()
+      ctx.moveTo(40, canvas.height - 100)
+      ctx.lineTo(canvas.width - 20, canvas.height - 100)
+      ctx.strokeStyle = '#64748b'
+      ctx.lineWidth = 2
+      ctx.stroke()
+
       // Vertical border line
       ctx.strokeStyle = '#333333'
       ctx.lineWidth = 1
@@ -138,17 +155,17 @@ export default function SalesChart() {
   
       // Draw scattered dots
       dots.forEach((dot, index) => {
-          ctx.beginPath()
-          ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
-          
-          if (dot.hasBorder) {
-              ctx.strokeStyle = dot.borderColor
-              ctx.lineWidth = 2
-              ctx.stroke()
-          }
-          
-          ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
-          ctx.fill()
+        ctx.beginPath()
+        ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
+        
+        if (dot.hasBorder) {
+          ctx.strokeStyle = dot.borderColor
+          ctx.lineWidth = 2
+          ctx.stroke()
+        }
+        
+        ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
+        ctx.fill()
       })
   
       // Draw animated main line
@@ -157,15 +174,15 @@ export default function SalesChart() {
       ctx.beginPath()
       
       const currentPoints = linePoints.filter((_, index) => 
-          index <= Math.floor(linePoints.length * progress)
+        index <= Math.floor(linePoints.length * progress)
       )
       
       currentPoints.forEach((point, index) => {
-          if (index === 0) {
-              ctx.moveTo(point.x + 41, point.y)
-          } else {
-              ctx.lineTo(point.x + 41, point.y)
-          }
+        if (index === 0) {
+          ctx.moveTo(point.x + 41, point.y)
+        } else {
+          ctx.lineTo(point.x + 41, point.y)
+        }
       })
       ctx.stroke()
   
