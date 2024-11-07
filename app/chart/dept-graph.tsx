@@ -5,38 +5,34 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function DeptComponent() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
   const generateSteppedData = (width: number, height: number) => {
-    const steps = 40 // Number of potential steps
+    const steps = Math.floor(width / 10) // Adjust steps based on width
     const data = []
-    let currentY = height - 20 // Start from bottom
+    let currentY = height - 20
     let currentX = 2.5
 
     while (currentX < width) {
-      // Add current point
       data.push({ x: currentX, y: currentY })
 
-      // Randomly decide whether to go up, stay, or make a small down movement
       const rand = Math.random()
-      const stepSize = Math.random() * 8 + 2 // Random step size between 2 and 10
+      const stepSize = (height / 20) * (Math.random() * 0.8 + 0.2) // Scale step size with height
       
-      if (rand < 0.7) { // 70% chance to go up (overall ascending trend)
-        currentY = Math.max(30, currentY - stepSize)
-      } else if (rand < 0.9) { // 20% chance to stay
+      if (rand < 0.7) {
+        currentY = Math.max(height * 0.1, currentY - stepSize)
+      } else if (rand < 0.9) {
         currentY = currentY
-      } else { // 10% chance to go down slightly
+      } else {
         currentY = Math.min(height - 20, currentY + stepSize / 2)
       }
 
-      // Add point at new height (creates vertical line)
       data.push({ x: currentX, y: currentY })
-
-      // Move right
       currentX += (width - 5) / steps
-      // Add horizontal line point
       data.push({ x: currentX, y: currentY })
     }
 
@@ -47,43 +43,51 @@ export default function DeptComponent() {
     const width = canvas.width / window.devicePixelRatio
     const height = canvas.height / window.devicePixelRatio
 
-    // Background
+    // Clear and set background
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, width, height)
+
+    // Calculate grid spacing based on dimensions
+    const verticalGridSpacing = width / 40
+    const horizontalGridSpacing = height / 15
 
     // Grid lines
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.25
 
     // Vertical grid lines
-    for (let i = 2.5; i < width; i += 2.5) {
+    for (let i = 2.5; i < width; i += verticalGridSpacing) {
       ctx.beginPath()
       ctx.moveTo(i, 0)
-      ctx.lineTo(i, height - 15)
+      ctx.lineTo(i, height - horizontalGridSpacing)
       ctx.stroke()
     }
 
     // Horizontal grid lines
-    for (let i = 15; i < height - 15; i += 15) {
+    for (let i = horizontalGridSpacing; i < height - horizontalGridSpacing; i += horizontalGridSpacing) {
       ctx.beginPath()
       ctx.moveTo(2, i)
       ctx.lineTo(width, i)
       ctx.stroke()
     }
 
+    // Scale font size based on dimensions
+    const fontSize = Math.max(10, Math.min(width, height) / 50)
+    ctx.font = `${fontSize}px monospace`
+
     // Y-axis labels
     ctx.fillStyle = '#666666'
-    ctx.font = '10px monospace'
     const yLabels = ['111', '84', '56', '29', '1']
     yLabels.forEach((label, i) => {
-      ctx.fillText(label, 0.5, 20 + i * 30)
+      const yPos = fontSize + (i * (height - 2 * fontSize) / (yLabels.length - 1))
+      ctx.fillText(label, 0.5, yPos)
     })
 
     // X-axis labels
     const xLabels = ['0.72', '0.78', '0.89', '0.95']
     xLabels.forEach((label, i) => {
       const x = 2.5 + (i * (width - 5) / (xLabels.length - 1))
-      ctx.fillText(label, x - 7.5, height - 5)
+      ctx.fillText(label, x - fontSize/2, height - 5)
     })
 
     // Generate and draw stepped data
@@ -91,7 +95,7 @@ export default function DeptComponent() {
 
     // Draw stepped line
     ctx.strokeStyle = '#64748b'
-    ctx.lineWidth = 1
+    ctx.lineWidth = Math.max(1, width / 500)
     ctx.beginPath()
     depthData.forEach((point, i) => {
       if (i === 0) {
@@ -109,18 +113,16 @@ export default function DeptComponent() {
     ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
     ctx.fill()
 
-    // Draw crosshair if hovering
+    // Draw crosshair
     if (isHovering) {
       ctx.strokeStyle = '#666666'
       ctx.setLineDash([5, 5])
       
-      // Vertical line
       ctx.beginPath()
       ctx.moveTo(mousePos.x, 0)
-      ctx.lineTo(mousePos.x, height - 15)
+      ctx.lineTo(mousePos.x, height - horizontalGridSpacing)
       ctx.stroke()
       
-      // Horizontal line
       ctx.beginPath()
       ctx.moveTo(2, mousePos.y)
       ctx.lineTo(width, mousePos.y)
@@ -128,13 +130,29 @@ export default function DeptComponent() {
       
       ctx.setLineDash([])
 
-      // Show value
-      const value = Math.round(111 - ((mousePos.y) / (height - 15)) * 111)
+      const value = Math.round(111 - ((mousePos.y) / (height - horizontalGridSpacing)) * 111)
       ctx.fillStyle = '#ffffff'
-      ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+      ctx.fillText(`Value: ${value}`, mousePos.x + fontSize, mousePos.y - fontSize)
     }
   }
 
+  // Resize observer
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect
+        setDimensions({ width, height })
+      }
+    })
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current)
+    }
+
+    return () => resizeObserver.disconnect()
+  }, [])
+
+  // Canvas drawing effect
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -142,21 +160,22 @@ export default function DeptComponent() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    canvas.width = canvas.offsetWidth * window.devicePixelRatio
-    canvas.height = canvas.offsetHeight * window.devicePixelRatio
+    // Set canvas size to match container
+    canvas.width = dimensions.width * window.devicePixelRatio
+    canvas.height = dimensions.height * window.devicePixelRatio
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
     drawChart(ctx, canvas)
     setIsLoaded(true)
-  }, [isHovering, mousePos])
+  }, [dimensions, isHovering, mousePos])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
     if (!canvas) return
 
     const rect = canvas.getBoundingClientRect()
-    const x = (e.clientX - rect.left)
-    const y = (e.clientY - rect.top)
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
     
     setMousePos({ x, y })
     setIsHovering(true)
@@ -168,10 +187,11 @@ export default function DeptComponent() {
 
   return (
     <motion.div 
+      ref={containerRef}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-[200px]  mx-auto bg-black py-2 px-6 relative"
+      className="w-full h-full bg-black py-2 px-6 relative"
     >
       <motion.div 
         initial={{ y: -10, opacity: 0 }}
@@ -205,7 +225,7 @@ export default function DeptComponent() {
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-[calc(100%-1.5rem)]"
+        className="relative w-full h-[calc(100%-2rem)]"
       >
         <canvas
           ref={canvasRef}
