@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight, ChevronDown, Maximize2, X } from "lucide-react"
+import SalesChart from "./sales-chart"
+import DeptComponent from "./dept-graph"
 
 export default function EnhanceTradingView() {
   const [view, setView] = useState<"trading" | "depth">("trading")
@@ -40,7 +42,7 @@ export default function EnhanceTradingView() {
               <div className="flex items-center gap-6">
                 <span>$1,611.30</span>
                 <span>$1,611.30</span>
-                <span className="text-green-400">$23.4 (2.17)%</span>
+                <span className="text-slate-500">$23.4 (2.17)%</span>
               </div>
               <div className="flex items-center gap-6">
                 <span>$826,543,873</span>
@@ -57,7 +59,7 @@ export default function EnhanceTradingView() {
             >
               {/* Left Side - Time Intervals */}
               <div className="flex items-center gap-1">
-                <span className="text-gray-400 mr-2">Time</span>
+                <span className="text-gray-400 mr-2">Time Frame</span>
                 <div className="flex gap-1">
                   {intervals.map((interval) => (
                     <motion.button
@@ -65,56 +67,29 @@ export default function EnhanceTradingView() {
                       whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedInterval(interval)}
-                      className={`px-3 py-1 rounded ${
+                      className={`px-3 py-1 rounded bg-black border border-gray-800 ${
                         selectedInterval === interval 
                           ? "bg-gray-700" 
-                          : "hover:bg-gray-800"
+                          : ""
                       }`}
                     >
                       {interval}
                     </motion.button>
                   ))}
-                  <motion.button
-                    whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-1 rounded"
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </motion.button>
+               
                 </div>
               </div>
 
-              {/* Center - Tool Icons */}
-              <div className="flex items-center gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-1 rounded hover:bg-gray-800"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M2 12h20M12 2v20" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-1 rounded hover:bg-gray-800"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round"/>
-                    <path d="M7 17l4-4 4 4 4-4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </motion.button>
-              </div>
+      
 
               {/* Right Side - View Toggle */}
               <div className="flex items-center gap-4">
-                <div className="flex rounded bg-gray-800">
+                <div className="flex rounded bg-black  border border-gray-800">
                   <motion.button
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setView("trading")}
                     className={`px-4 py-1 rounded ${
-                      view === "trading" ? "bg-gray-700" : ""
+                      view === "trading" ? "bg-gray-800" : ""
                     }`}
                   >
                     Trading view
@@ -123,7 +98,7 @@ export default function EnhanceTradingView() {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setView("depth")}
                     className={`px-4 py-1 rounded ${
-                      view === "depth" ? "bg-gray-700" : ""
+                      view === "depth" ? "bg-gray-800" : ""
                     }`}
                   >
                     Depth
@@ -156,7 +131,7 @@ export default function EnhanceTradingView() {
                     transition={{ type: "spring", stiffness: 200, damping: 10 }}
                     className="text-4xl font-bold"
                   >
-                    Trading View
+                    <SalesChart />
                   </motion.h2>
                 </motion.div>
               ) : (
@@ -173,7 +148,7 @@ export default function EnhanceTradingView() {
                     transition={{ type: "spring", stiffness: 200, damping: 10 }}
                     className="text-4xl font-bold"
                   >
-                    Depth Content
+                  <DeptComponent />
                   </motion.h2>
                 </motion.div>
               )}
