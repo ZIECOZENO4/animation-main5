@@ -11,23 +11,26 @@ type HoveredDot = {
 
 // Modified to scatter dots across the entire height
 const generateDots = (count: number) => {
-    return Array.from({ length: count }, () => {
-        const x = Math.random() * 800
-        const y = Math.random() * (200 - 20) + 20 // Increased range for more scatter
-        return {
-            x: x,
-            y: y,
-            color: '#cccccc'
-        }
-    })
+  return Array.from({ length: count }, () => {
+      const x = Math.random() * 800
+      const y = Math.random() * (200 - 20) + 20
+      return {
+          x: x,
+          y: y,
+          color: '#000000',
+          borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
+          hasBorder: Math.random() > 0.3
+      }
+  })
 }
 
 // Modified to generate bars with more spacing
 const generateBars = (count: number) => {
-    return Array.from({ length: count }, () => ({
-        height: Math.random() * 30 + 15,
-        value: Math.random() * (105 - 0) + 0
-    }))
+  return Array.from({ length: count }, () => ({
+      height: Math.random() * 30 + 15,
+      value: Math.random() * (105 - 0) + 0,
+      isSmall: Math.random() > 0.5
+  }))
 }
 
 // Generate random line points
@@ -118,11 +121,18 @@ export default function SalesChart() {
 
         // Draw scattered dots
         dots.forEach((dot, index) => {
-            ctx.beginPath()
-            ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 3 : 1.5, 0, Math.PI * 2)
-            ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
-            ctx.fill()
-        })
+          ctx.beginPath()
+          ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
+          
+          if (dot.hasBorder) {
+              ctx.strokeStyle = dot.borderColor
+              ctx.lineWidth = 2
+              ctx.stroke()
+          }
+          
+          ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
+          ctx.fill()
+      })
 
         // Draw animated main line
         ctx.strokeStyle = '#64748b'
@@ -144,24 +154,24 @@ export default function SalesChart() {
 
         // Bar Chart with increased spacing
         const totalWidth = canvas.width - 80
-        const barWidth = 24 // Wider bars
-        const barSpacing = (totalWidth / bars.length) - barWidth
+        const barWidth = 24
+        const barSpacing = (totalWidth / bars.length) - barWidth * 1.5 // Increased spacing
         
         bars.forEach((bar, index) => {
             const xPos = 50 + (index * (barWidth + barSpacing))
-            const yPos = canvas.height - bar.height - 100
+            const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
 
-            // Draw bar border
+            // Draw rectangular bar without rounded corners
+            ctx.beginPath()
+            ctx.rect(
+                xPos, 
+                canvas.height - 100, 
+                barWidth, 
+                -(bar.isSmall ? bar.height * 0.6 : bar.height)
+            )
             ctx.strokeStyle = '#64748b'
             ctx.lineWidth = 1
-            ctx.beginPath()
-            ctx.moveTo(xPos, canvas.height - 100)
-            ctx.lineTo(xPos, yPos + 5)
-            ctx.arc(xPos + barWidth/2, yPos + 5, barWidth/2, Math.PI, 0)
-            ctx.lineTo(xPos + barWidth, canvas.height - 100)
             ctx.stroke()
-
-            // Fill bar with transparency
             ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
             ctx.fill()
 
@@ -171,6 +181,7 @@ export default function SalesChart() {
                 ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
             }
         })
+
 
         // Enhanced hover crosshair
         if (isHovering) {
