@@ -21,7 +21,7 @@ type HoverInfo = {
 const generateDots = (count: number) => {
   return Array.from({ length: 100 }, () => {
     const x = Math.random() * (window.innerWidth - 100) // Full width minus padding
-    const y = Math.random() * (window.innerHeight - 280) + 20 // Full height with padding
+    const y = Math.random() * (window.innerHeight - 300) + 20 // Full height with padding
     return {
       x: x,
       y: y,
