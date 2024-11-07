@@ -171,35 +171,9 @@ export default function DeptComponent() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-full flex-grow flex  mx-auto bg-black py-2 px-6 relative"
+      className="w-full h-[200px] flex  mx-auto bg-black py-2 px-6 relative"
     >
-      <motion.div 
-        initial={{ y: -10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.3 }}
-        className="flex items-center gap-1 mb-2"
-      >
-        <motion.svg 
-          initial={{ rotate: -90 }}
-          animate={{ rotate: 0 }}
-          transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
-          className="w-6 h-3"
-          viewBox="0 0 24 24" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M3 3v18h18" stroke="#999999" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M7 17l4-4 4 4 4-4" stroke="#999999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </motion.svg>
-        <motion.span 
-          initial={{ x: -5, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.3 }}
-          className="text-[#999999] text-xs"
-        >
-          DEPTH
-        </motion.span>
-      </motion.div>
+    
       
       <motion.div 
         initial={{ opacity: 0 }}

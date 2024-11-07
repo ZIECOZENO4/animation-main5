@@ -123,7 +123,7 @@ export default function EnhanceTradingView() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="p-4 h-[calc(100vh-120px)] w-full flex items-center justify-center"
+                  className="p-4 h-[calc(100vh-120px)] w-full flex-grow flex items-center justify-center"
                 >
                   <motion.h2
                     initial={{ scale: 0.9, opacity: 0 }}
@@ -177,7 +177,7 @@ export default function EnhanceTradingView() {
                 delay: 0.2
               }}
               onClick={() => setIsZoomedOut(false)}
-              className="absolute top-4 right-1/2 left-1/2 align-middle items-center justify-center p-2 border-2 border-gray-600 rounded-full hover:border-gray-400 transition-colors"
+              className="absolute top-8 cursor-pointer align-middle items-center justify-center p-2 border-2 border-gray-600 rounded-full hover:border-gray-400 transition-colors"
             >
               <X className="w-6 h-6" />
             </motion.button>
