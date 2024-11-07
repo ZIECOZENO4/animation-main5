@@ -25,7 +25,7 @@ export default function EnhanceTradingView() {
   }, [isZoomedOut])
 
   return (
-    <div className="h-[calc(100vh-5rem)] bg-black  border border-gray-800">
+    <div className="min-h-screen bg-black  border border-gray-800">
       <AnimatePresence>
         {!isZoomedOut && (
           <motion.div
@@ -186,7 +186,7 @@ export default function EnhanceTradingView() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ delay: 0.3 }}
-              className="w-full  mx-auto p-8"
+              className="w-full  mx-auto p-8 top-4"
             >
               {view === "trading" ? (
                 <motion.div
