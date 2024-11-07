@@ -44,27 +44,35 @@ const generateBars = (count: number) => {
 
 // Generate random line points
 const generateLinePoints = () => {
-  // Random starting positions (top, middle, bottom)
+  const getCanvasWidth = () => window.innerWidth - 60
+
+  // Scale the x coordinates to full width
+  const width = getCanvasWidth()
+  const segmentWidth = width / 8 // Divide width into 8 segments for movements
+
+  // Keep the original y-axis range (0.69 to 0.73)
   const basePositions = [
-      { min: 30, max: 40 },  // Top
-      { min: 50, max: 60 },  // Middle
-      { min: 70, max: 80 }   // Bottom
+    { min: 0.71, max: 0.72 },  // Middle range for natural movement
   ]
   
-  const selectedPosition = basePositions[Math.floor(Math.random() * basePositions.length)]
+  const selectedPosition = basePositions[0]
   const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
 
+  // Convert y values to canvas coordinates (higher value = lower position)
+  const yScale = (window.innerHeight - 240) / (0.73 - 0.69)
+  const getScaledY = (value: number) => ((0.73 - value) * yScale) + 20
+
   return [
-      { x: 0, y: baseY },
-      { x: 100, y: baseY },
-      { x: 100, y: baseY - 15 }, // Movement up
-      { x: 200, y: baseY - 15 },
-      { x: 200, y: baseY + 10 }, // Movement down
-      { x: 400, y: baseY + 10 },
-      { x: 400, y: baseY - 10 }, // Movement up
-      { x: 600, y: baseY - 10 },
-      { x: 600, y: baseY }, // Return to base
-      { x: 800, y: baseY }
+    { x: 0, y: getScaledY(baseY) },
+    { x: segmentWidth, y: getScaledY(baseY) },
+    { x: segmentWidth, y: getScaledY(baseY + 0.005) },     // Movement up
+    { x: segmentWidth * 2, y: getScaledY(baseY + 0.005) },
+    { x: segmentWidth * 2, y: getScaledY(baseY - 0.003) }, // Movement down
+    { x: segmentWidth * 4, y: getScaledY(baseY - 0.003) },
+    { x: segmentWidth * 4, y: getScaledY(baseY + 0.004) }, // Movement up
+    { x: segmentWidth * 6, y: getScaledY(baseY + 0.004) },
+    { x: segmentWidth * 6, y: getScaledY(baseY) },         // Return to base
+    { x: width, y: getScaledY(baseY) }
   ]
 }
 
