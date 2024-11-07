@@ -309,7 +309,7 @@ export default function SalesChart() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full h-full container mx-auto bg-black p-4 relative"
+        className="w-[calc(100vw-40px)] h-[calc(100vh-140px)]  container mx-auto bg-black p-4 relative"
       >
       
         
