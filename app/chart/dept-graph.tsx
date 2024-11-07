@@ -171,9 +171,9 @@ export default function DeptComponent() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-full h-[200px] flex  mx-auto bg-black py-2 px-6 relative"
+      className="w-full h-full flex-grow flex  mx-auto bg-black py-2 px-6 relative"
     >
-    
+     
       
       <motion.div 
         initial={{ opacity: 0 }}
