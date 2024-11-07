@@ -10,33 +10,27 @@ export default function DeptComponent() {
   const [isHovering, setIsHovering] = useState(false)
 
   const generateSteppedData = (width: number, height: number) => {
-    const steps = 40 // Number of potential steps
+    const steps = 80 // Increased number of steps
     const data = []
-    let currentY = height - 20 // Start from bottom
+    let currentY = height - 20
     let currentX = 2.5
 
     while (currentX < width) {
-      // Add current point
       data.push({ x: currentX, y: currentY })
 
-      // Randomly decide whether to go up, stay, or make a small down movement
       const rand = Math.random()
-      const stepSize = Math.random() * 8 + 2 // Random step size between 2 and 10
+      const stepSize = Math.random() * 8 + 2
       
-      if (rand < 0.7) { // 70% chance to go up (overall ascending trend)
+      if (rand < 0.7) {
         currentY = Math.max(30, currentY - stepSize)
-      } else if (rand < 0.9) { // 20% chance to stay
+      } else if (rand < 0.9) {
         currentY = currentY
-      } else { // 10% chance to go down slightly
+      } else {
         currentY = Math.min(height - 20, currentY + stepSize / 2)
       }
 
-      // Add point at new height (creates vertical line)
       data.push({ x: currentX, y: currentY })
-
-      // Move right
       currentX += (width - 5) / steps
-      // Add horizontal line point
       data.push({ x: currentX, y: currentY })
     }
 
@@ -51,40 +45,49 @@ export default function DeptComponent() {
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, width, height)
 
-    // Grid lines
+    // Grid lines with labels
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.25
 
-    // Vertical grid lines
+    // Calculate step values for vertical grid
+    const verticalSteps = width / 40 // Adjust for desired density
+    const verticalValueStep = (0.95 - 0.72) / verticalSteps
+    
+    // Vertical grid lines with labels
     for (let i = 2.5; i < width; i += 2.5) {
       ctx.beginPath()
       ctx.moveTo(i, 0)
       ctx.lineTo(i, height - 15)
       ctx.stroke()
+
+      // Add label every 40 pixels
+      if (i % 40 === 0) {
+        const value = (0.72 + (i / width) * (0.95 - 0.72)).toFixed(3)
+        ctx.fillStyle = '#666666'
+        ctx.font = '10px monospace'
+        ctx.fillText(value, i - 15, height - 5)
+      }
     }
 
-    // Horizontal grid lines
+    // Calculate step values for horizontal grid
+    const horizontalSteps = height / 30 // Adjust for desired density
+    const horizontalValueStep = 111 / horizontalSteps
+
+    // Horizontal grid lines with labels
     for (let i = 15; i < height - 15; i += 15) {
       ctx.beginPath()
       ctx.moveTo(2, i)
       ctx.lineTo(width, i)
       ctx.stroke()
+
+      // Add label every 30 pixels
+      if (i % 30 === 0) {
+        const value = Math.round(111 - (i / height) * 111)
+        ctx.fillStyle = '#666666'
+        ctx.font = '10px monospace'
+        ctx.fillText(value.toString(), 0.5, i + 4)
+      }
     }
-
-    // Y-axis labels
-    ctx.fillStyle = '#666666'
-    ctx.font = '10px monospace'
-    const yLabels = ['111', '84', '56', '29', '1']
-    yLabels.forEach((label, i) => {
-      ctx.fillText(label, 0.5, 20 + i * 30)
-    })
-
-    // X-axis labels
-    const xLabels = ['0.72', '0.78', '0.89', '0.95']
-    xLabels.forEach((label, i) => {
-      const x = 2.5 + (i * (width - 5) / (xLabels.length - 1))
-      ctx.fillText(label, x - 7.5, height - 5)
-    })
 
     // Generate and draw stepped data
     const depthData = generateSteppedData(width, height)
@@ -114,13 +117,11 @@ export default function DeptComponent() {
       ctx.strokeStyle = '#666666'
       ctx.setLineDash([5, 5])
       
-      // Vertical line
       ctx.beginPath()
       ctx.moveTo(mousePos.x, 0)
       ctx.lineTo(mousePos.x, height - 15)
       ctx.stroke()
       
-      // Horizontal line
       ctx.beginPath()
       ctx.moveTo(2, mousePos.y)
       ctx.lineTo(width, mousePos.y)
@@ -128,10 +129,10 @@ export default function DeptComponent() {
       
       ctx.setLineDash([])
 
-      // Show value
       const value = Math.round(111 - ((mousePos.y) / (height - 15)) * 111)
+      const xValue = (0.72 + (mousePos.x / width) * (0.95 - 0.72)).toFixed(3)
       ctx.fillStyle = '#ffffff'
-      ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+      ctx.fillText(`Value: ${value} (${xValue})`, mousePos.x + 10, mousePos.y - 10)
     }
   }
 
@@ -171,10 +172,8 @@ export default function DeptComponent() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      className="w-[calc(100vw-40px)] h-[calc(100vh-140px)] flex-grow flex  mx-auto bg-black py-2 px-6 relative"
+      className="w-[calc(100vw-40px)] h-[calc(100vh-140px)] flex-grow flex mx-auto bg-black py-2 px-6 relative"
     >
-     
-      
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
