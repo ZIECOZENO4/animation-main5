@@ -154,19 +154,21 @@ export default function SalesChart() {
 
         // Bar Chart with increased spacing
         const totalWidth = canvas.width - 80
-        const barWidth = 24
-        const barSpacing = (totalWidth / bars.length) - barWidth * 1.5 // Increased spacing
-        
+        const barWidth = 48  // Doubled from 24 to 48
+        const barSpacing = 8  // Fixed 8px spacing (px-2 equivalent)
+        const availableSpace = totalWidth - (bars.length * barSpacing)
+        const adjustedBarWidth = availableSpace / bars.length
+
         bars.forEach((bar, index) => {
-            const xPos = 50 + (index * (barWidth + barSpacing))
+            const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
             const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
 
             // Draw rectangular bar without rounded corners
             ctx.beginPath()
             ctx.rect(
-                xPos, 
-                canvas.height - 100, 
-                barWidth, 
+                xPos,
+                canvas.height - 100,
+                adjustedBarWidth,  // Use adjusted width to fill space
                 -(bar.isSmall ? bar.height * 0.6 : bar.height)
             )
             ctx.strokeStyle = '#64748b'
@@ -176,11 +178,12 @@ export default function SalesChart() {
             ctx.fill()
 
             // Show value on hover
-            if (mousePos.x >= xPos && mousePos.x <= xPos + barWidth && isHovering) {
+            if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
                 ctx.fillStyle = '#ffffff'
                 ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
             }
         })
+
 
 
         // Enhanced hover crosshair
@@ -253,33 +256,33 @@ export default function SalesChart() {
     }, [dots, hoveredDot, hoveredBar, bars])
 
     const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        const canvas = canvasRef.current
-        if (!canvas) return
+      const canvas = canvasRef.current
+      if (!canvas) return
 
-        const rect = canvas.getBoundingClientRect()
-        const x = (e.clientX - rect.left) * window.devicePixelRatio
-        const y = (e.clientY - rect.top) * window.devicePixelRatio
-        
-        setMousePos({ x, y })
-        setIsHovering(true)
+      const rect = canvas.getBoundingClientRect()
+      const x = (e.clientX - rect.left) * window.devicePixelRatio
+      const y = (e.clientY - rect.top) * window.devicePixelRatio
+      setMousePos({ x, y })
+      setIsHovering(true)
 
-        // Check for bar hover
-        const totalWidth = canvas.width - 60
-        const barWidth = 24
-        const barSpacing = (totalWidth / bars.length) - barWidth * 1.5
-        
-        const barIndex = bars.findIndex((_, index) => {
-            const xPos = 50 + (index * (barWidth + barSpacing))
-            return x >= xPos && x <= xPos + barWidth
-        })
-        
-        setHoveredBar(barIndex)
+      // Updated bar hover detection
+      const totalWidth = canvas.width - 80
+      const barSpacing = 8
+      const availableSpace = totalWidth - (bars.length * barSpacing)
+      const adjustedBarWidth = availableSpace / bars.length
 
-        const ctx = canvas.getContext('2d')
-        if (ctx) {
-            drawChart(ctx, canvas, progressRef.current)
-        }
-    }
+      const barIndex = bars.findIndex((_, index) => {
+          const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
+          return x >= xPos && x <= xPos + adjustedBarWidth
+      })
+
+      setHoveredBar(barIndex)
+
+      const ctx = canvas.getContext('2d')
+      if (ctx) {
+          drawChart(ctx, canvas, progressRef.current)
+      }
+  }
 
     const handleMouseLeave = () => {
         setIsHovering(false)
