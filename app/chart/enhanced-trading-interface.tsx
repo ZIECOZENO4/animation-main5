@@ -123,7 +123,7 @@ export default function EnhanceTradingView() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="p-4 h-[calc(100vh-120px)] w-full flex-grow flex items-center justify-center"
+                  className="h-full w-full flex items-center justify-center"
                 >
                   <motion.h2
                     initial={{ scale: 0.9, opacity: 0 }}
