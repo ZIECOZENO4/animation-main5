@@ -44,30 +44,27 @@ const generateBars = (count: number) => {
 
 // Generate random line points
 const generateLinePoints = () => {
-  const getCanvasWidth = () => window.innerWidth * 0.7 - 60
-  const width = getCanvasWidth()
-  const segmentWidth = width / 8
+  // Random starting positions (top, middle, bottom)
+  const basePositions = [
+      { min: 30, max: 40 },  // Top
+      { min: 50, max: 60 },  // Middle
+      { min: 70, max: 80 }   // Bottom
+  ]
   
-  // Adjust y-scale to use full height
-  const yScale = (window.innerHeight * 0.37 - 40) / (0.73 - 0.69)
-  const getScaledY = (value: number) => ((0.73 - value) * yScale) + 20
-
-  // Rest of the points calculation remains the same
-  const basePositions = [{ min: 0.71, max: 0.72 }]
-  const selectedPosition = basePositions[0]
+  const selectedPosition = basePositions[Math.floor(Math.random() * basePositions.length)]
   const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
 
   return [
-    { x: 0, y: getScaledY(baseY) },
-    { x: segmentWidth, y: getScaledY(baseY) },
-    { x: segmentWidth, y: getScaledY(baseY + 0.005) },
-    { x: segmentWidth * 2, y: getScaledY(baseY + 0.005) },
-    { x: segmentWidth * 2, y: getScaledY(baseY - 0.003) },
-    { x: segmentWidth * 4, y: getScaledY(baseY - 0.003) },
-    { x: segmentWidth * 4, y: getScaledY(baseY + 0.004) },
-    { x: segmentWidth * 6, y: getScaledY(baseY + 0.004) },
-    { x: segmentWidth * 6, y: getScaledY(baseY) },
-    { x: width, y: getScaledY(baseY) }
+      { x: 0, y: baseY },
+      { x: 100, y: baseY },
+      { x: 100, y: baseY - 15 }, // Movement up
+      { x: 200, y: baseY - 15 },
+      { x: 200, y: baseY + 10 }, // Movement down
+      { x: 400, y: baseY + 10 },
+      { x: 400, y: baseY - 10 }, // Movement up
+      { x: 600, y: baseY - 10 },
+      { x: 600, y: baseY }, // Return to base
+      { x: 800, y: baseY }
   ]
 }
 
