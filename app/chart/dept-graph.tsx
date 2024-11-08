@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
 import React, { useRef, useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export default function DeptComponent() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -10,7 +10,7 @@ export default function DeptComponent() {
   const [isHovering, setIsHovering] = useState(false)
 
   const generateSteppedData = (width: number, height: number) => {
-    const steps = 80 // Increased number of steps
+    const steps = 80
     const data = []
     let currentY = height - 20
     let currentX = 2.5
@@ -41,26 +41,21 @@ export default function DeptComponent() {
     const width = canvas.width / window.devicePixelRatio
     const height = canvas.height / window.devicePixelRatio
 
-    // Background
     ctx.fillStyle = '#000000'
     ctx.fillRect(0, 0, width, height)
 
-    // Grid lines with labels
     ctx.strokeStyle = '#333333'
     ctx.lineWidth = 0.25
 
-    // Calculate step values for vertical grid
-    const verticalSteps = width / 40 // Adjust for desired density
+    const verticalSteps = width / 40
     const verticalValueStep = (0.95 - 0.72) / verticalSteps
     
-    // Vertical grid lines with labels
     for (let i = 2.5; i < width; i += 2.5) {
       ctx.beginPath()
       ctx.moveTo(i, 0)
       ctx.lineTo(i, height - 15)
       ctx.stroke()
 
-      // Add label every 40 pixels
       if (i % 40 === 0) {
         const value = (0.72 + (i / width) * (0.95 - 0.72)).toFixed(3)
         ctx.fillStyle = '#666666'
@@ -69,18 +64,15 @@ export default function DeptComponent() {
       }
     }
 
-    // Calculate step values for horizontal grid
-    const horizontalSteps = height / 30 // Adjust for desired density
+    const horizontalSteps = height / 30
     const horizontalValueStep = 111 / horizontalSteps
 
-    // Horizontal grid lines with labels
     for (let i = 15; i < height - 15; i += 15) {
       ctx.beginPath()
       ctx.moveTo(2, i)
       ctx.lineTo(width, i)
       ctx.stroke()
 
-      // Add label every 30 pixels
       if (i % 30 === 0) {
         const value = Math.round(111 - (i / height) * 111)
         ctx.fillStyle = '#666666'
@@ -89,10 +81,8 @@ export default function DeptComponent() {
       }
     }
 
-    // Generate and draw stepped data
     const depthData = generateSteppedData(width, height)
 
-    // Draw stepped line
     ctx.strokeStyle = '#64748b'
     ctx.lineWidth = 1
     ctx.beginPath()
@@ -105,14 +95,12 @@ export default function DeptComponent() {
     })
     ctx.stroke()
 
-    // Fill area under the line
     ctx.lineTo(depthData[depthData.length - 1].x, height)
     ctx.lineTo(depthData[0].x, height)
     ctx.closePath()
     ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
     ctx.fill()
 
-    // Draw crosshair if hovering
     if (isHovering) {
       ctx.strokeStyle = '#666666'
       ctx.setLineDash([5, 5])
@@ -143,12 +131,22 @@ export default function DeptComponent() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    canvas.width = canvas.offsetWidth * window.devicePixelRatio
-    canvas.height = canvas.offsetHeight * window.devicePixelRatio
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement
+      if (!parent) return
+      
+      canvas.width = parent.offsetWidth * window.devicePixelRatio
+      canvas.height = parent.offsetHeight * window.devicePixelRatio
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+      
+      drawChart(ctx, canvas)
+    }
 
-    drawChart(ctx, canvas)
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
     setIsLoaded(true)
+
+    return () => window.removeEventListener('resize', resizeCanvas)
   }, [isHovering, mousePos])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -168,17 +166,12 @@ export default function DeptComponent() {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="min-w-[1024px] h-[65%] flex-grow flex mx-auto bg-black py-2 px-6 relative"
-    >
+    <div className="w-full h-full">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-[calc(65%-1.5rem)]"
+        className="w-full h-full"
       >
         <canvas
           ref={canvasRef}
@@ -188,6 +181,6 @@ export default function DeptComponent() {
           onMouseLeave={handleMouseLeave}
         />
       </motion.div>
-    </motion.div>
+    </div>
   )
 }
