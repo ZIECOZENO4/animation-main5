@@ -21,7 +21,7 @@ type HoverInfo = {
 const generateDots = (count: number) => {
   return Array.from({ length: 100 }, () => {
     const x = Math.random() * (window.innerWidth * 0.7 - 100) // 70% of viewport width
-    const y = Math.random() * (window.innerHeight * 0.37 - 300) + 20 // 37% of viewport height
+    const y = Math.random() * (window.innerHeight * 0.37 - 40) + 20 // Adjusted for full height
     return {
       x: x,
       y: y,
@@ -44,20 +44,18 @@ const generateBars = (count: number) => {
 
 // Generate random line points
 const generateLinePoints = () => {
-  const getCanvasWidth = () => (window.innerWidth * 0.7) - 60 // 70% of viewport width
+  const getCanvasWidth = () => window.innerWidth * 0.7 - 60
   const width = getCanvasWidth()
   const segmentWidth = width / 8
   
-  const basePositions = [
-    { min: 0.71, max: 0.72 },
-  ]
-  
+  // Adjust y-scale to use full height
+  const yScale = (window.innerHeight * 0.37 - 40) / (0.73 - 0.69)
+  const getScaledY = (value: number) => ((0.73 - value) * yScale) + 20
+
+  // Rest of the points calculation remains the same
+  const basePositions = [{ min: 0.71, max: 0.72 }]
   const selectedPosition = basePositions[0]
   const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
-  
-  // Adjust y-scale based on new height
-  const yScale = (window.innerHeight * 0.37 - 240) / (0.73 - 0.69)
-  const getScaledY = (value: number) => ((0.73 - value) * yScale) + 20
 
   return [
     { x: 0, y: getScaledY(baseY) },
@@ -72,7 +70,6 @@ const generateLinePoints = () => {
     { x: width, y: getScaledY(baseY) }
   ]
 }
-
 
 export default function SalesChart() {
   const [linePoints] = useState(() => generateLinePoints())
@@ -332,29 +329,31 @@ export default function SalesChart() {
     }
 
   
-    return (
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-[calc(100vw-30vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
-      >
-      
-        
-        <motion.div 
-          initial={{ scale: 0.95 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="relative w-full h-full"
-        >
-          <canvas
-            ref={canvasRef}
-            className="w-full h-full cursor-crosshair"
-            style={{ imageRendering: 'pixelated' }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          />
 
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-[calc(100vw-30vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative flex items-center justify-center"
+        >
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative w-full h-full flex items-center justify-center"
+          >
+            <canvas
+              ref={canvasRef}
+              className="w-full h-full cursor-crosshair"
+              style={{ 
+                imageRendering: 'pixelated',
+                maxHeight: '100%',
+                objectFit: 'contain'
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            />
           <AnimatePresence>
             <div className="absolute inset-0 pointer-events-none">
               {dots.map((dot, index) => (
