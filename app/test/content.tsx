@@ -86,7 +86,7 @@ export default function TestContent() {
     className?: string;
   }) => (
     <div className="relative h-full">
-      <div className="relative  p-6 h-full">{children}</div>
+      <div className="relative  h-full">{children}</div>
       {/* Top border */}
       <div
         className="absolute -top-[2px] -right-[2px] -left-[2px]"
@@ -245,7 +245,7 @@ export default function TestContent() {
             className="h-full  w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col h-full gap-4">
+              <div className="flex flex-col h-full p-6 gap-4">
                 {/* Top Section */}
                 <div className="space-y-4">
                   {/* First Row */}
