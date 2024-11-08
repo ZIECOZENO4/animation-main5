@@ -20,8 +20,8 @@ type HoverInfo = {
 // Modified generateDots function
 const generateDots = (count: number) => {
   return Array.from({ length: 100 }, () => {
-    const x = Math.random() * (window.innerWidth - 100) // Full width minus padding
-    const y = Math.random() * (window.innerHeight - 300) + 20 // Full height with padding
+    const x = Math.random() * (window.innerWidth * 0.7 - 100) // 70% of viewport width
+    const y = Math.random() * (window.innerHeight * 0.37 - 300) + 20 // 37% of viewport height
     return {
       x: x,
       y: y,
@@ -44,37 +44,35 @@ const generateBars = (count: number) => {
 
 // Generate random line points
 const generateLinePoints = () => {
-  const getCanvasWidth = () => window.innerWidth - 60
-
-  // Scale the x coordinates to full width
+  const getCanvasWidth = () => (window.innerWidth * 0.7) - 60 // 70% of viewport width
   const width = getCanvasWidth()
-  const segmentWidth = width / 8 // Divide width into 8 segments for movements
-
-  // Keep the original y-axis range (0.69 to 0.73)
+  const segmentWidth = width / 8
+  
   const basePositions = [
-    { min: 0.71, max: 0.72 },  // Middle range for natural movement
+    { min: 0.71, max: 0.72 },
   ]
   
   const selectedPosition = basePositions[0]
   const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
-
-  // Convert y values to canvas coordinates (higher value = lower position)
-  const yScale = (window.innerHeight - 240) / (0.73 - 0.69)
+  
+  // Adjust y-scale based on new height
+  const yScale = (window.innerHeight * 0.37 - 240) / (0.73 - 0.69)
   const getScaledY = (value: number) => ((0.73 - value) * yScale) + 20
 
   return [
     { x: 0, y: getScaledY(baseY) },
     { x: segmentWidth, y: getScaledY(baseY) },
-    { x: segmentWidth, y: getScaledY(baseY + 0.005) },     // Movement up
+    { x: segmentWidth, y: getScaledY(baseY + 0.005) },
     { x: segmentWidth * 2, y: getScaledY(baseY + 0.005) },
-    { x: segmentWidth * 2, y: getScaledY(baseY - 0.003) }, // Movement down
+    { x: segmentWidth * 2, y: getScaledY(baseY - 0.003) },
     { x: segmentWidth * 4, y: getScaledY(baseY - 0.003) },
-    { x: segmentWidth * 4, y: getScaledY(baseY + 0.004) }, // Movement up
+    { x: segmentWidth * 4, y: getScaledY(baseY + 0.004) },
     { x: segmentWidth * 6, y: getScaledY(baseY + 0.004) },
-    { x: segmentWidth * 6, y: getScaledY(baseY) },         // Return to base
+    { x: segmentWidth * 6, y: getScaledY(baseY) },
     { x: width, y: getScaledY(baseY) }
   ]
 }
+
 
 export default function SalesChart() {
   const [linePoints] = useState(() => generateLinePoints())
@@ -90,19 +88,16 @@ export default function SalesChart() {
   const progressRef = useRef(0)
   const [hoverInfo, setHoverInfo] = useState<HoverInfo>(null)
 
-     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setDots(prevDots => 
-                prevDots.map(dot => ({
-                    ...dot,
-                    x: Math.random() * 800,
-                    y: Math.random() * (200 - 20) + 20
-                }))
-            )
-        }, 10000)
-
-        return () => clearInterval(intervalId)
-    }, [])
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDots(prevDots => prevDots.map(dot => ({
+        ...dot,
+        x: Math.random() * (window.innerWidth * 0.7),
+        y: Math.random() * (window.innerHeight * 0.37 - 20) + 20
+      })))
+    }, 10000)
+    return () => clearInterval(intervalId)
+  }, [])
 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -342,7 +337,7 @@ export default function SalesChart() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-[calc(100vw-35vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
+        className="w-[calc(100vw-30vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
       >
       
         
