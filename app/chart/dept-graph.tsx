@@ -166,7 +166,7 @@ export default function DeptComponent() {
   }
 
   return (
-    <div className="w-full h-full">
+    <div className="w-[100%] h-[calc(100%-40px)]">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
@@ -176,7 +176,10 @@ export default function DeptComponent() {
         <canvas
           ref={canvasRef}
           className="w-full h-full cursor-crosshair"
-          style={{ imageRendering: 'pixelated' }}
+          style={{ 
+            imageRendering: 'pixelated',
+            display: 'block' // Add this to remove any default spacing
+          }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         />

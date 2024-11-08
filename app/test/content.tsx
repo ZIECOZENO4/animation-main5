@@ -270,7 +270,7 @@ export default function TestContent() {
                   <div className="w-full h-[51px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-end items-center h-full">
-                        <span className="text-[20px] text-[#F7F2DA80]">
+                        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
                           BEAT
                         </span>
                       </div>
@@ -323,7 +323,7 @@ export default function TestContent() {
                   <div className="w-full h-[51px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-end items-center h-full">
-                        <span className="text-[20px] text-[#F7F2DA80]">
+                        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
                           BEAT
                         </span>
                       </div>
