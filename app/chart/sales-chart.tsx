@@ -16,22 +16,19 @@ type HoverInfo = {
   value: number;
 } | null;
 // Modified to scatter dots across the entire height
-
-// Modified generateDots function
 const generateDots = (count: number) => {
-  return Array.from({ length: 100 }, () => {
-    const x = Math.random() * (window.innerWidth * 0.7 - 100) // 70% of viewport width
-    const y = Math.random() * (window.innerHeight * 0.37 - 40) + 20 // Adjusted for full height
-    return {
-      x: x,
-      y: y,
-      color: '#000000',
-      borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
-      hasBorder: Math.random() > 0.3
-    }
+  return Array.from({ length: count }, () => {
+      const x = Math.random() * 800
+      const y = Math.random() * (200 - 20) + 20
+      return {
+          x: x,
+          y: y,
+          color: '#000000',
+          borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
+          hasBorder: Math.random() > 0.3
+      }
   })
 }
-
 
 // Modified to generate bars with more spacing
 const generateBars = (count: number) => {
@@ -70,7 +67,7 @@ const generateLinePoints = () => {
 
 export default function SalesChart() {
   const [linePoints] = useState(() => generateLinePoints())
-  const [dots, setDots] = useState(() => generateDots(100)) 
+  const [dots, setDots] = useState(() => generateDots(70))
   const [bars] = useState(() => generateBars(24))
   const [hoveredDot, setHoveredDot] = useState<number | null>(null)
   const [hoveredBar, setHoveredBar] = useState<number | null>(null)
@@ -82,173 +79,154 @@ export default function SalesChart() {
   const progressRef = useRef(0)
   const [hoverInfo, setHoverInfo] = useState<HoverInfo>(null)
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDots(prevDots => prevDots.map(dot => ({
-        ...dot,
-        x: Math.random() * (window.innerWidth * 0.7),
-        y: Math.random() * (window.innerHeight * 0.37 - 20) + 20
-      })))
-    }, 10000)
-    return () => clearInterval(intervalId)
-  }, [])
+     useEffect(() => {
+        const intervalId = setInterval(() => {
+            setDots(prevDots => 
+                prevDots.map(dot => ({
+                    ...dot,
+                    x: Math.random() * 800,
+                    y: Math.random() * (200 - 20) + 20
+                }))
+            )
+        }, 10000)
+
+        return () => clearInterval(intervalId)
+    }, [])
 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-  
-      // Background
-      ctx.fillStyle = '#000000'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-  
-      ctx.beginPath()
-      ctx.moveTo(40, canvas.height - 100)
-      ctx.lineTo(canvas.width - 20, canvas.height - 100)
-      ctx.strokeStyle = '#64748b'
-      ctx.lineWidth = 2
-      ctx.stroke()
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Vertical border line
-      ctx.strokeStyle = '#333333'
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.moveTo(40, 20)
-      ctx.lineTo(40, canvas.height - 100)
-      ctx.stroke()
-  
-      // Calculate grid lines and labels dynamically
-      const startY = 20
-      const endY = canvas.height - 100
-      const gridSpacing = 40
-      const numberOfLines = Math.floor((endY - startY) / gridSpacing) + 1
-      const maxValue = 0.73
-      const minValue = 0.69
-      const valueStep = (maxValue - minValue) / (numberOfLines - 1)
-  
-      // Draw grid lines and labels
-      for (let i = 0; i < numberOfLines; i++) {
-          const yPos = startY + (i * gridSpacing)
-          const value = maxValue - (i * valueStep)
-  
-          // Draw grid line
-          ctx.strokeStyle = '#333333'
-          ctx.lineWidth = 0.5
-          ctx.beginPath()
-          ctx.moveTo(41, yPos)
-          ctx.lineTo(canvas.width - 20, yPos)
-          ctx.stroke()
-  
-          // Draw y-axis label
-          ctx.fillStyle = '#666666'
-          ctx.font = '12px monospace'
-          ctx.fillText(value.toFixed(3), 10, yPos + 4)
-      }
-  
-      // Draw scattered dots
-      dots.forEach((dot, index) => {
+        // Background
+        ctx.fillStyle = '#000000'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        // Vertical border line
+        ctx.strokeStyle = '#333333'
+        ctx.lineWidth = 1
         ctx.beginPath()
-        ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
-        
-        if (dot.hasBorder) {
-          ctx.strokeStyle = dot.borderColor
-          ctx.lineWidth = 2
-          ctx.stroke()
+        ctx.moveTo(40, 20)
+        ctx.lineTo(40, canvas.height - 100)
+        ctx.stroke()
+
+        // Grid lines
+        ctx.strokeStyle = '#333333'
+        ctx.lineWidth = 0.5
+        for (let i = 30; i < canvas.height - 100; i += 40) {
+            ctx.beginPath()
+            ctx.moveTo(41, i)
+            ctx.lineTo(canvas.width - 20, i)
+            ctx.stroke()
         }
-        
-        ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
-        ctx.fill()
-      })
-  
-      // Draw animated main line
-      ctx.strokeStyle = '#64748b'
-      ctx.lineWidth = 2
-      ctx.beginPath()
-      
-      const currentPoints = linePoints.filter((_, index) => 
-        index <= Math.floor(linePoints.length * progress)
-      )
-      
-      currentPoints.forEach((point, index) => {
-        if (index === 0) {
-          ctx.moveTo(point.x + 41, point.y)
-        } else {
-          ctx.lineTo(point.x + 41, point.y)
-        }
-      })
-      ctx.stroke()
-  
-      // Bar Chart with increased spacing
-      const totalWidth = canvas.width - 80
-      const barSpacing = 8
-      const availableSpace = totalWidth - (bars.length * barSpacing)
-      const adjustedBarWidth = availableSpace / bars.length
-  
-      bars.forEach((bar, index) => {
-          const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-          const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
-  
-          // Draw bar with bottom border
+
+        // Y-axis labels
+        ctx.fillStyle = '#666666'
+        ctx.font = '12px monospace'
+        const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
+        yLabels.forEach((label, i) => {
+            ctx.fillText(label, 10, 30 + i * 40)
+        })
+
+        // Draw scattered dots
+        dots.forEach((dot, index) => {
           ctx.beginPath()
-          ctx.rect(
-              xPos,
-              canvas.height - 100,
-              adjustedBarWidth,
-              -(bar.isSmall ? bar.height * 0.6 : bar.height)
-          )
-          ctx.strokeStyle = '#64748b'
-          ctx.lineWidth = 1
-          ctx.stroke()
-          ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-          ctx.fill()
-  
-          // Draw bottom border for bar
-          ctx.beginPath()
-          ctx.moveTo(xPos, canvas.height - 100)
-          ctx.lineTo(xPos + adjustedBarWidth, canvas.height - 100)
-          ctx.strokeStyle = '#64748b'
-          ctx.lineWidth = 2
-          ctx.stroke()
-  
-          // Show value on hover
-          if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
-              ctx.fillStyle = '#ffffff'
-              ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
+          ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
+          
+          if (dot.hasBorder) {
+              ctx.strokeStyle = dot.borderColor
+              ctx.lineWidth = 2
+              ctx.stroke()
           }
+          
+          ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
+          ctx.fill()
       })
-  
-      // Enhanced hover crosshair
-      if (isHovering) {
-          ctx.strokeStyle = '#666666'
-          ctx.setLineDash([5, 5])
-          
-          // Vertical line
-          ctx.beginPath()
-          ctx.moveTo(mousePos.x, 20)
-          ctx.lineTo(mousePos.x, canvas.height - 100)
-          ctx.stroke()
-          
-          // Horizontal line
-          ctx.beginPath()
-          ctx.moveTo(40, mousePos.y)
-          ctx.lineTo(canvas.width - 20, mousePos.y)
-          ctx.stroke()
-          
-          ctx.setLineDash([])
-  
-          // Show hover value
-          const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
-          ctx.fillStyle = '#ffffff'
-          ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
-      }
-  
-      // Time labels
-      const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
-      timeLabels.forEach((label, i) => {
-          ctx.fillStyle = '#666666'
-          ctx.font = '12px monospace'
-          const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-          ctx.fillText(label, xPos - 20, canvas.height - 80)
-      })
-  }
+
+        // Draw animated main line
+        ctx.strokeStyle = '#64748b'
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        
+        const currentPoints = linePoints.filter((_, index) => 
+            index <= Math.floor(linePoints.length * progress)
+        )
+        
+        currentPoints.forEach((point, index) => {
+            if (index === 0) {
+                ctx.moveTo(point.x + 41, point.y)
+            } else {
+                ctx.lineTo(point.x + 41, point.y)
+            }
+        })
+        ctx.stroke()
+
+        // Bar Chart with increased spacing
+        const totalWidth = canvas.width - 80
+        const barWidth = 48  // Doubled from 24 to 48
+        const barSpacing = 8  // Fixed 8px spacing (px-2 equivalent)
+        const availableSpace = totalWidth - (bars.length * barSpacing)
+        const adjustedBarWidth = availableSpace / bars.length
+
+        bars.forEach((bar, index) => {
+            const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
+            const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
+
+            // Draw rectangular bar without rounded corners
+            ctx.beginPath()
+            ctx.rect(
+                xPos,
+                canvas.height - 100,
+                adjustedBarWidth,  // Use adjusted width to fill space
+                -(bar.isSmall ? bar.height * 0.6 : bar.height)
+            )
+            ctx.strokeStyle = '#64748b'
+            ctx.lineWidth = 1
+            ctx.stroke()
+            ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+            ctx.fill()
+
+            // Show value on hover
+            if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
+                ctx.fillStyle = '#ffffff'
+                ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
+            }
+        })
+
+
+
+        // Enhanced hover crosshair
+        if (isHovering) {
+            ctx.strokeStyle = '#666666'
+            ctx.setLineDash([5, 5])
+            
+            // Vertical line
+            ctx.beginPath()
+            ctx.moveTo(mousePos.x, 20)
+            ctx.lineTo(mousePos.x, canvas.height - 100)
+            ctx.stroke()
+            
+            // Horizontal line
+            ctx.beginPath()
+            ctx.moveTo(40, mousePos.y)
+            ctx.lineTo(canvas.width - 20, mousePos.y)
+            ctx.stroke()
+            
+            ctx.setLineDash([])
+
+            // Show value
+            const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
+            ctx.fillStyle = '#ffffff'
+            ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+        }
+
+        // Time labels
+        const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+        timeLabels.forEach((label, i) => {
+            ctx.fillStyle = '#666666'
+            ctx.font = '12px monospace'
+            const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
+            ctx.fillText(label, xPos - 20, canvas.height - 80)
+        })
+    }
 
 
     useEffect(() => {
@@ -326,31 +304,73 @@ export default function SalesChart() {
     }
 
   
-
-      return (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-[calc(100vw-30vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative flex items-center justify-center"
+    return (
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full h-[400px] container mx-auto bg-black p-4 relative"
+      >
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex justify-between items-center mb-4"
         >
-          <motion.div
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="relative w-full h-full flex items-center justify-center"
+          <motion.div 
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
+            className="text-[#999999] text-sm  flex items-center gap-2"
           >
-            <canvas
-              ref={canvasRef}
-              className="w-full h-full cursor-crosshair"
-              style={{ 
-                imageRendering: 'pixelated',
-                maxHeight: '100%',
-                objectFit: 'contain'
-              }}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-            />
+            <motion.div 
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.3 }}
+              className="w-4 h-4" 
+            >
+              <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V3M9.5 8.5H9.51M19.5 7.5H19.51M14.5 12.5H14.51M8.5 15.5H8.51M18.5 15.5H18.51" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </motion.div>
+            <motion.span
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              SALES
+            </motion.span>
+          </motion.div>
+          <motion.div 
+            initial={{ x: 20 }}
+            animate={{ x: 0 }}
+            className="flex gap-2"
+          >
+            {['1D', '1W', '1M'].map((period) => (
+              <motion.button
+                key={period}
+                whileHover={{ scale: 1.05, backgroundColor: '#64748b' }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                className={`px-2 py-1 rounded text-sm ${
+                  period === '1D' ? 'bg-slate-500' : 'bg-[#333333]'
+                } text-[#999999] hover:bg-slate-600`}
+              >
+                {period}
+              </motion.button>
+            ))}
+          </motion.div>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ scale: 0.95 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.3 }}
+          className="relative w-full h-full"
+        >
+          <canvas
+            ref={canvasRef}
+            className="w-full h-full cursor-crosshair"
+            style={{ imageRendering: 'pixelated' }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          />
+          
           <AnimatePresence>
             <div className="absolute inset-0 pointer-events-none">
               {dots.map((dot, index) => (
