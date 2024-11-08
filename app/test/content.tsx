@@ -213,7 +213,7 @@ export default function TestContent() {
                   className="text-sm  text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-                  hello 
+            
                   <div className="m-0 p-0  h-full w-full flex-grow ">
                     <EnhanceTradingView />
                   </div>
