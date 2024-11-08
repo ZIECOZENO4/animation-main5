@@ -18,15 +18,16 @@ type HoverInfo = {
 // Modified to scatter dots across the entire height
 const generateDots = (count: number) => {
   return Array.from({ length: count }, () => {
-      const x = Math.random() * 800
-      const y = Math.random() * (200 - 20) + 20
-      return {
-          x: x,
-          y: y,
-          color: '#000000',
-          borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
-          hasBorder: Math.random() > 0.3
-      }
+    const x = Math.random() * 800
+    const y = Math.random() * (200 - 20) + 20
+    return {
+      x: x,
+      y: y,
+      color: '#000000',
+      borderColor: '#ffffff',
+      // Increase probability of dots without borders
+      hasBorder: Math.random() > 0.7 // Only 30% of dots will have borders
+    }
   })
 }
 
@@ -42,26 +43,19 @@ const generateBars = (count: number) => {
 // Generate random line points
 const generateLinePoints = () => {
   // Random starting positions (top, middle, bottom)
-  const basePositions = [
-      { min: 30, max: 40 },  // Top
-      { min: 50, max: 60 },  // Middle
-      { min: 70, max: 80 }   // Bottom
-  ]
-  
-  const selectedPosition = basePositions[Math.floor(Math.random() * basePositions.length)]
-  const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
+  const centerY = 100 
 
   return [
-      { x: 0, y: baseY },
-      { x: 100, y: baseY },
-      { x: 100, y: baseY - 15 }, // Movement up
-      { x: 200, y: baseY - 15 },
-      { x: 200, y: baseY + 10 }, // Movement down
-      { x: 400, y: baseY + 10 },
-      { x: 400, y: baseY - 10 }, // Movement up
-      { x: 600, y: baseY - 10 },
-      { x: 600, y: baseY }, // Return to base
-      { x: 800, y: baseY }
+    { x: 0, y: centerY },
+    { x: 100, y: centerY },
+    { x: 100, y: centerY - 15 },
+    { x: 200, y: centerY - 15 },
+    { x: 200, y: centerY + 10 },
+    { x: 400, y: centerY + 10 },
+    { x: 400, y: centerY - 10 },
+    { x: 600, y: centerY - 10 },
+    { x: 600, y: centerY },
+    { x: 800, y: centerY }
   ]
 }
 
@@ -165,19 +159,18 @@ export default function SalesChart() {
         const barSpacing = 8  // Fixed 8px spacing (px-2 equivalent)
         const availableSpace = totalWidth - (bars.length * barSpacing)
         const adjustedBarWidth = availableSpace / bars.length
-
         bars.forEach((bar, index) => {
-            const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-            const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
-
-            // Draw rectangular bar without rounded corners
-            ctx.beginPath()
-            ctx.rect(
-                xPos,
-                canvas.height - 100,
-                adjustedBarWidth,  // Use adjusted width to fill space
-                -(bar.isSmall ? bar.height * 0.6 : bar.height)
-            )
+          const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
+          // Adjust yPos to position bars at bottom
+          const yPos = canvas.height - 20 // Increased space from bottom
+          
+          ctx.beginPath()
+          ctx.rect(
+            xPos,
+            yPos,
+            adjustedBarWidth,
+            -(bar.isSmall ? bar.height * 0.6 : bar.height)
+          )
             ctx.strokeStyle = '#64748b'
             ctx.lineWidth = 1
             ctx.stroke()
@@ -221,12 +214,13 @@ export default function SalesChart() {
         // Time labels
         const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
         timeLabels.forEach((label, i) => {
-            ctx.fillStyle = '#666666'
-            ctx.font = '12px monospace'
-            const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-            ctx.fillText(label, xPos - 20, canvas.height - 80)
+          ctx.fillStyle = '#666666'
+          ctx.font = '12px monospace'
+          const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
+          // Adjust label position to align with bottom bars
+          ctx.fillText(label, xPos - 20, canvas.height - 5)
         })
-    }
+      }
 
 
     useEffect(() => {
@@ -309,10 +303,8 @@ export default function SalesChart() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-[calc(100vw-35vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
+        className="w-[calc(100vw-35vw)] h-[calc(100vh-65vh)] container mx-auto bg-black p-4 relative"
       >
-       
-        
         <motion.div 
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
