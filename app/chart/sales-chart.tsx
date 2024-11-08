@@ -94,7 +94,6 @@ export default function SalesChart() {
         return () => clearInterval(intervalId)
     }, [])
 
- 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
   
@@ -102,99 +101,94 @@ export default function SalesChart() {
       ctx.fillStyle = '#000000'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
   
-      ctx.beginPath()
-      ctx.moveTo(40, canvas.height - 100)
-      ctx.lineTo(canvas.width - 20, canvas.height - 100)
-      ctx.strokeStyle = '#64748b'
-      ctx.lineWidth = 2
-      ctx.stroke()
-
+      // Calculate dimensions
+      const chartTopMargin = 20
+      const chartBottomMargin = canvas.height * 0.35 // Reserve 35% for bars
+      const mainChartHeight = canvas.height - chartBottomMargin - chartTopMargin
+      const barChartTop = canvas.height - chartBottomMargin + 20
+  
       // Vertical border line
       ctx.strokeStyle = '#333333'
       ctx.lineWidth = 1
       ctx.beginPath()
-      ctx.moveTo(40, 20)
-      ctx.lineTo(40, canvas.height - 100)
+      ctx.moveTo(40, chartTopMargin)
+      ctx.lineTo(40, canvas.height - chartBottomMargin)
       ctx.stroke()
   
-      // Calculate grid lines and labels dynamically
-      const startY = 20
-      const endY = canvas.height - 100
-      const gridSpacing = 40
-      const numberOfLines = Math.floor((endY - startY) / gridSpacing) + 1
-      const maxValue = 0.73
-      const minValue = 0.69
-      const valueStep = (maxValue - minValue) / (numberOfLines - 1)
-  
-      // Draw grid lines and labels
-      for (let i = 0; i < numberOfLines; i++) {
-          const yPos = startY + (i * gridSpacing)
-          const value = maxValue - (i * valueStep)
-  
-          // Draw grid line
-          ctx.strokeStyle = '#333333'
-          ctx.lineWidth = 0.5
+      // Grid lines in main chart area
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 0.5
+      const gridCount = 4
+      const gridSpacing = mainChartHeight / gridCount
+      for (let i = 0; i <= gridCount; i++) {
+          const y = chartTopMargin + (i * gridSpacing)
           ctx.beginPath()
-          ctx.moveTo(41, yPos)
-          ctx.lineTo(canvas.width - 20, yPos)
+          ctx.moveTo(41, y)
+          ctx.lineTo(canvas.width - 20, y)
           ctx.stroke()
-  
-          // Draw y-axis label
-          ctx.fillStyle = '#666666'
-          ctx.font = '12px monospace'
-          ctx.fillText(value.toFixed(3), 10, yPos + 4)
       }
+  
+      // Y-axis labels with proper spacing
+      ctx.fillStyle = '#666666'
+      ctx.font = '12px monospace'
+      const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
+      yLabels.forEach((label, i) => {
+          const y = chartTopMargin + (i * gridSpacing)
+          ctx.fillText(label, 10, y + 4)
+      })
   
       // Draw scattered dots
       dots.forEach((dot, index) => {
-        ctx.beginPath()
-        ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
-        
-        if (dot.hasBorder) {
-          ctx.strokeStyle = dot.borderColor
-          ctx.lineWidth = 2
-          ctx.stroke()
-        }
-        
-        ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
-        ctx.fill()
+          const mappedY = chartTopMargin + ((dot.y - 20) / (180 - 20)) * mainChartHeight
+          if (mappedY >= chartTopMargin && mappedY <= canvas.height - chartBottomMargin) {
+              ctx.beginPath()
+              ctx.arc(dot.x + 41, mappedY, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
+              if (dot.hasBorder) {
+                  ctx.strokeStyle = dot.borderColor
+                  ctx.lineWidth = 2
+                  ctx.stroke()
+              }
+              ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
+              ctx.fill()
+          }
       })
   
       // Draw animated main line
       ctx.strokeStyle = '#64748b'
       ctx.lineWidth = 2
       ctx.beginPath()
-      
-      const currentPoints = linePoints.filter((_, index) => 
-        index <= Math.floor(linePoints.length * progress)
-      )
-      
+      const currentPoints = linePoints.filter((_, index) => index <= Math.floor(linePoints.length * progress))
       currentPoints.forEach((point, index) => {
-        if (index === 0) {
-          ctx.moveTo(point.x + 41, point.y)
-        } else {
-          ctx.lineTo(point.x + 41, point.y)
-        }
+          const mappedY = chartTopMargin + ((point.y - 20) / (180 - 20)) * mainChartHeight
+          if (index === 0) {
+              ctx.moveTo(point.x + 41, mappedY)
+          } else {
+              ctx.lineTo(point.x + 41, mappedY)
+          }
       })
       ctx.stroke()
   
-      // Bar Chart with increased spacing
+      // Bar Chart section
       const totalWidth = canvas.width - 80
-      const barSpacing = 8
+      const barSpacing = 20
       const availableSpace = totalWidth - (bars.length * barSpacing)
-      const adjustedBarWidth = availableSpace / bars.length
+      const adjustedBarWidth = (availableSpace / bars.length) * 0.8
   
+      // Calculate the baseline y-position (where bars start)
+      const baselineY = canvas.height - chartBottomMargin
+  
+      // Draw bars
       bars.forEach((bar, index) => {
           const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-          const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 100
+          const maxBarHeight = gridSpacing * 1.5 // Maximum height to reach near 0.69 line
+          const barHeight = bar.isSmall ? maxBarHeight * 0.4 : (bar.height > 25 ? maxBarHeight : maxBarHeight * 0.7)
   
-          // Draw bar with bottom border
           ctx.beginPath()
           ctx.rect(
               xPos,
-              canvas.height - 100,
+              baselineY, // Start from baseline
               adjustedBarWidth,
-              -(bar.isSmall ? bar.height * 0.6 : bar.height)
+              -barHeight // Negative height to draw upward
           )
           ctx.strokeStyle = '#64748b'
           ctx.lineWidth = 1
@@ -202,30 +196,31 @@ export default function SalesChart() {
           ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
           ctx.fill()
   
-          // Draw bottom border for bar
-          ctx.beginPath()
-          ctx.moveTo(xPos, canvas.height - 100)
-          ctx.lineTo(xPos + adjustedBarWidth, canvas.height - 100)
-          ctx.strokeStyle = '#64748b'
-          ctx.lineWidth = 2
-          ctx.stroke()
-  
           // Show value on hover
           if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
               ctx.fillStyle = '#ffffff'
-              ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
+              ctx.fillText(bar.value.toFixed(1), xPos - 10, baselineY - barHeight - 10)
           }
       })
   
-      // Enhanced hover crosshair
-      if (isHovering) {
+      // Time labels
+      const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+      timeLabels.forEach((label, i) => {
+          const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
+          ctx.fillStyle = '#666666'
+          ctx.font = '12px monospace'
+          ctx.fillText(label, xPos - 20, canvas.height - 20)
+      })
+  
+      // Enhanced hover crosshair (only in main chart area)
+      if (isHovering && mousePos.y >= chartTopMargin && mousePos.y <= baselineY) {
           ctx.strokeStyle = '#666666'
           ctx.setLineDash([5, 5])
           
           // Vertical line
           ctx.beginPath()
-          ctx.moveTo(mousePos.x, 20)
-          ctx.lineTo(mousePos.x, canvas.height - 100)
+          ctx.moveTo(mousePos.x, chartTopMargin)
+          ctx.lineTo(mousePos.x, baselineY)
           ctx.stroke()
           
           // Horizontal line
@@ -233,23 +228,14 @@ export default function SalesChart() {
           ctx.moveTo(40, mousePos.y)
           ctx.lineTo(canvas.width - 20, mousePos.y)
           ctx.stroke()
-          
           ctx.setLineDash([])
-  
-          // Show hover value
-          const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
+          
+          // Show value
+          const valueRange = 0.04 // Range from 0.73 to 0.69
+          const value = 0.73 - ((mousePos.y - chartTopMargin) / mainChartHeight) * valueRange
           ctx.fillStyle = '#ffffff'
-          ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
+          ctx.fillText(value.toFixed(4), mousePos.x + 10, mousePos.y - 10)
       }
-  
-      // Time labels
-      const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
-      timeLabels.forEach((label, i) => {
-          ctx.fillStyle = '#666666'
-          ctx.font = '12px monospace'
-          const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-          ctx.fillText(label, xPos - 20, canvas.height - 80)
-      })
   }
     useEffect(() => {
         const canvas = canvasRef.current
