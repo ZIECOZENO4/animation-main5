@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import React from 'react'
-
+import EnhanceTradingView from '../chart/enhanced-trading-interface'
 export default function TestContent() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -202,7 +202,9 @@ export default function TestContent() {
                   className="text-sm text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-
+    <div className="m-0 p-0">
+      <EnhanceTradingView />
+    </div>
                 </motion.span>
               </BorderComponent>
             </motion.div>
