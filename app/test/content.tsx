@@ -186,7 +186,7 @@ export default function TestContent() {
       animate="visible"
       variants={containerVariants}
     >
-      <div className="relative z-10 h-full p-6">
+      <div className="relative z-10 h-full p-2">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-6 h-full">
           {/* Left Column */}
           <div className="flex flex-col gap-6 h-full">

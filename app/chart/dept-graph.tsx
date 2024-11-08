@@ -178,7 +178,7 @@ export default function DeptComponent() {
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-[calc(100%-1.5rem)]"
+        className="relative w-full h-[calc(65%-1.5rem)]"
       >
         <canvas
           ref={canvasRef}
