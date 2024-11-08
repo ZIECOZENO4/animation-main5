@@ -189,7 +189,7 @@ export default function TestContent() {
       <div className="relative z-10 h-full p-2">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-6 h-full">
           {/* Left Column */}
-          <div className="flex flex-col gap-6 h-full">
+          <div className="flex flex-col h-full">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
