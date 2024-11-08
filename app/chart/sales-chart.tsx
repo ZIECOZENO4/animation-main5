@@ -103,16 +103,23 @@ export default function SalesChart() {
   
       // Calculate dimensions
       const chartTopMargin = 20
-      const chartBottomMargin = canvas.height * 0.35 // Reserve 35% for bars
+      const chartBottomMargin = canvas.height * 0.35
       const mainChartHeight = canvas.height - chartBottomMargin - chartTopMargin
       const barChartTop = canvas.height - chartBottomMargin + 20
   
+      // Bar Chart section with doubled width and full width coverage
+      const totalWidth = canvas.width - 80 // Total available width
+      const barCount = bars.length
+      const barSpacing = 16 // Doubled spacing
+      const availableSpace = totalWidth - ((barCount - 1) * barSpacing)
+      const adjustedBarWidth = (availableSpace / barCount) * 2 // Doubled bar width
+  
       // Vertical border line
-      ctx.strokeStyle = '#333333'
-      ctx.lineWidth = 1
       ctx.beginPath()
-      ctx.moveTo(40, chartTopMargin)
-      ctx.lineTo(40, canvas.height - chartBottomMargin)
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 2
+      ctx.moveTo(40, barChartTop)
+      ctx.lineTo(canvas.width - 20, barChartTop)
       ctx.stroke()
   
       // Grid lines in main chart area
@@ -169,47 +176,45 @@ export default function SalesChart() {
       ctx.stroke()
   
       // Bar Chart section
-      const totalWidth = canvas.width - 80
-      const barSpacing = 20
-      const availableSpace = totalWidth - (bars.length * barSpacing)
-      const adjustedBarWidth = (availableSpace / bars.length) * 0.8
+
   
       // Calculate the baseline y-position (where bars start)
       const baselineY = canvas.height - chartBottomMargin
   
       // Draw bars
       bars.forEach((bar, index) => {
-          const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-          const maxBarHeight = gridSpacing * 1.5 // Maximum height to reach near 0.69 line
-          const barHeight = bar.isSmall ? maxBarHeight * 0.4 : (bar.height > 25 ? maxBarHeight : maxBarHeight * 0.7)
-  
-          ctx.beginPath()
-          ctx.rect(
-              xPos,
-              baselineY, // Start from baseline
-              adjustedBarWidth,
-              -barHeight // Negative height to draw upward
-          )
-          ctx.strokeStyle = '#64748b'
-          ctx.lineWidth = 1
-          ctx.stroke()
-          ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-          ctx.fill()
-  
-          // Show value on hover
-          if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
-              ctx.fillStyle = '#ffffff'
-              ctx.fillText(bar.value.toFixed(1), xPos - 10, baselineY - barHeight - 10)
-          }
-      })
-  
+        const xPos = 50 + (index * ((availableSpace / barCount) + barSpacing))
+        const maxHeight = chartBottomMargin * 0.6 // Maximum height for bars
+        
+        // Calculate bar height based on value
+        const barHeight = bar.isSmall ? maxHeight * 0.4 : (bar.height > 25 ? maxHeight : maxHeight * 0.7)
+
+        ctx.beginPath()
+        ctx.rect(
+            xPos,
+            barChartTop, // Start from the baseline
+            adjustedBarWidth,
+            -barHeight // Negative height to draw upward
+        )
+        ctx.strokeStyle = '#64748b'
+        ctx.lineWidth = 1
+        ctx.stroke()
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+        ctx.fill()
+
+        // Show value on hover
+        if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
+            ctx.fillStyle = '#ffffff'
+            ctx.fillText(bar.value.toFixed(1), xPos - 10, barChartTop - barHeight - 10)
+        }
+    })
       // Time labels
       const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+      ctx.fillStyle = '#666666'
+      ctx.font = '12px monospace'
       timeLabels.forEach((label, i) => {
           const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-          ctx.fillStyle = '#666666'
-          ctx.font = '12px monospace'
-          ctx.fillText(label, xPos - 20, canvas.height - 20)
+          ctx.fillText(label, xPos - 20, canvas.height - 20) // Positioned below bars
       })
   
       // Enhanced hover crosshair (only in main chart area)
