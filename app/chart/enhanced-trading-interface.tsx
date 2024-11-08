@@ -104,14 +104,14 @@ export default function EnhanceTradingView() {
                     Depth
                   </motion.button>
                 </div>
-                <motion.button
+                {/* <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsZoomedOut(true)}
                   className="p-1 rounded hover:bg-gray-800 cursor-pointer"
                 >
                   <Maximize2  className="w-5 h-5" />
-                </motion.button>
+                </motion.button> */}
               </div>
             </motion.div>
 
