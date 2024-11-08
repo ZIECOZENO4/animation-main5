@@ -18,16 +18,15 @@ type HoverInfo = {
 // Modified to scatter dots across the entire height
 const generateDots = (count: number) => {
   return Array.from({ length: count }, () => {
-    const x = Math.random() * 800
-    const y = Math.random() * (200 - 20) + 20
-    return {
-      x: x,
-      y: y,
-      color: '#000000',
-      borderColor: '#ffffff',
-      // Increase probability of dots without borders
-      hasBorder: Math.random() > 0.7 // Only 30% of dots will have borders
-    }
+      const x = Math.random() * 800
+      const y = Math.random() * (200 - 20) + 20
+      return {
+          x: x,
+          y: y,
+          color: '#000000',
+          borderColor: Math.random() > 0.5 ? '#ffffff' : '#64748b',
+          hasBorder: Math.random() > 0.3
+      }
   })
 }
 
@@ -43,19 +42,26 @@ const generateBars = (count: number) => {
 // Generate random line points
 const generateLinePoints = () => {
   // Random starting positions (top, middle, bottom)
-  const centerY = 100 
+  const basePositions = [
+      { min: 30, max: 40 },  // Top
+      { min: 50, max: 60 },  // Middle
+      { min: 70, max: 80 }   // Bottom
+  ]
+  
+  const selectedPosition = basePositions[Math.floor(Math.random() * basePositions.length)]
+  const baseY = Math.random() * (selectedPosition.max - selectedPosition.min) + selectedPosition.min
 
   return [
-    { x: 0, y: centerY },
-    { x: 100, y: centerY },
-    { x: 100, y: centerY - 15 },
-    { x: 200, y: centerY - 15 },
-    { x: 200, y: centerY + 10 },
-    { x: 400, y: centerY + 10 },
-    { x: 400, y: centerY - 10 },
-    { x: 600, y: centerY - 10 },
-    { x: 600, y: centerY },
-    { x: 800, y: centerY }
+      { x: 0, y: baseY },
+      { x: 100, y: baseY },
+      { x: 100, y: baseY - 15 }, // Movement up
+      { x: 200, y: baseY - 15 },
+      { x: 200, y: baseY + 10 }, // Movement down
+      { x: 400, y: baseY + 10 },
+      { x: 400, y: baseY - 10 }, // Movement up
+      { x: 600, y: baseY - 10 },
+      { x: 600, y: baseY }, // Return to base
+      { x: 800, y: baseY }
   ]
 }
 
@@ -99,18 +105,18 @@ export default function SalesChart() {
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.moveTo(40, 20)
-        ctx.lineTo(40, canvas.height - 100)
+        ctx.lineTo(40, canvas.height - 40) 
         ctx.stroke()
 
         // Grid lines
         ctx.strokeStyle = '#333333'
         ctx.lineWidth = 0.5
-        for (let i = 30; i < canvas.height - 100; i += 40) {
-            ctx.beginPath()
-            ctx.moveTo(41, i)
-            ctx.lineTo(canvas.width - 20, i)
-            ctx.stroke()
-        }
+        for (let i = 30; i < canvas.height - 40; i += 20) { // Reduced spacing from 40 to 20
+          ctx.beginPath()
+          ctx.moveTo(41, i)
+          ctx.lineTo(canvas.width - 20, i)
+          ctx.stroke()
+      }
 
         // Y-axis labels
         ctx.fillStyle = '#666666'
@@ -159,17 +165,17 @@ export default function SalesChart() {
         const barSpacing = 8  // Fixed 8px spacing (px-2 equivalent)
         const availableSpace = totalWidth - (bars.length * barSpacing)
         const adjustedBarWidth = availableSpace / bars.length
+
         bars.forEach((bar, index) => {
           const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-          // Adjust yPos to position bars at bottom
-          const yPos = canvas.height - 20 // Increased space from bottom
+          const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 40 // Reduced from 100 to 40
           
           ctx.beginPath()
           ctx.rect(
-            xPos,
-            yPos,
-            adjustedBarWidth,
-            -(bar.isSmall ? bar.height * 0.6 : bar.height)
+              xPos,
+              canvas.height - 40, // Reduced from 100 to 40
+              adjustedBarWidth,
+              -(bar.isSmall ? bar.height * 0.6 : bar.height)
           )
             ctx.strokeStyle = '#64748b'
             ctx.lineWidth = 1
@@ -214,13 +220,10 @@ export default function SalesChart() {
         // Time labels
         const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
         timeLabels.forEach((label, i) => {
-          ctx.fillStyle = '#666666'
-          ctx.font = '12px monospace'
           const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-          // Adjust label position to align with bottom bars
-          ctx.fillText(label, xPos - 20, canvas.height - 5)
-        })
-      }
+          ctx.fillText(label, xPos - 20, canvas.height - 20) // Reduced from 80 to 20
+      })
+  }
 
 
     useEffect(() => {
@@ -303,8 +306,54 @@ export default function SalesChart() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-[calc(100vw-35vw)] h-[calc(100vh-65vh)] container mx-auto bg-black p-4 relative"
+        className="w-[calc(100vw-35vw)] h-[calc(100vh-64vh)] container mx-auto bg-black p-4 relative"
       >
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex justify-between items-center mb-4"
+        >
+          <motion.div 
+            initial={{ x: -20 }}
+            animate={{ x: 0 }}
+            className="text-[#999999] text-sm  flex items-center gap-2"
+          >
+            <motion.div 
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.3 }}
+              className="w-4 h-4" 
+            >
+              <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V3M9.5 8.5H9.51M19.5 7.5H19.51M14.5 12.5H14.51M8.5 15.5H8.51M18.5 15.5H18.51" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </motion.div>
+            <motion.span
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              SALES
+            </motion.span>
+          </motion.div>
+          <motion.div 
+            initial={{ x: 20 }}
+            animate={{ x: 0 }}
+            className="flex gap-2"
+          >
+            {['1D', '1W', '1M'].map((period) => (
+              <motion.button
+                key={period}
+                whileHover={{ scale: 1.05, backgroundColor: '#64748b' }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                className={`px-2 py-1 rounded text-sm ${
+                  period === '1D' ? 'bg-slate-500' : 'bg-[#333333]'
+                } text-[#999999] hover:bg-slate-600`}
+              >
+                {period}
+              </motion.button>
+            ))}
+          </motion.div>
+        </motion.div>
+        
         <motion.div 
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
