@@ -195,14 +195,14 @@ export default function TestContent() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               whileHover={{ scale: 1.01 }}
-              className="relative h-[65%] bg-[#1D1D1D]/45"
+              className="relative h-[65%] w-full bg-[#1D1D1D]/45"
             >
               <BorderComponent>
                 <motion.span 
-                  className="text-sm text-gray-500"
+                  className="text-sm w-full h-full text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-    <div className="m-0 p-0">
+    <div className="m-0 p-0 w-full h-full">
       <EnhanceTradingView />
     </div>
                 </motion.span>
