@@ -198,9 +198,9 @@ export default function TestContent() {
       variants={containerVariants}
     >
       <div className="relative z-10 h-full p-2">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-6 h-full">
+        <div className="flex flex-col w-screen  gap-6 h-full">
           {/* Left Column */}
-          <div className="flex flex-col gap-6 h-full">
+          <div className="flex w-[60%] flex-col gap-6 h-full">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -210,10 +210,10 @@ export default function TestContent() {
             >
               <BorderComponent>
                 <motion.span
-                  className="text-sm w-full h-full text-gray-500"
+                  className="text-sm  h-[65%] w-[680px] text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-                  <div className="m-0 p-0 w-full h-full">
+                  <div className="m-0 p-0  h-[65%] w-[680px]">
                     <EnhanceTradingView />
                   </div>
                 </motion.span>
@@ -225,7 +225,7 @@ export default function TestContent() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
               whileHover={{ scale: 1.01 }}
-              className="relative h-[35%]  w-[680px] bg-[#000000]"
+              className="relative h-[35%] w-[60%] bg-[#000000]"
             >
               <BorderComponent>
                 <motion.span
@@ -241,7 +241,7 @@ export default function TestContent() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full bg-[#000000]"
+            className="h-full  w-[60%]  bg-[#000000]"
           >
             <BorderComponent>
               <div className="flex flex-col h-full gap-4">
