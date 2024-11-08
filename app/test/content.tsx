@@ -200,7 +200,7 @@ export default function TestContent() {
       <div className="relative z-10 h-full p-2">
         <div className="flex flex-row w-full  gap-6 h-full">
           {/* Left Column */}
-          <div className="flex w-[65%] flex-col gap-6 h-full">
+          <div className="flex w-[70%] flex-col gap-6 h-full">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -213,6 +213,7 @@ export default function TestContent() {
                   className="text-sm  text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
+                  hello 
                   <div className="m-0 p-0  h-full w-full flex-grow ">
                     <EnhanceTradingView />
                   </div>
@@ -241,7 +242,7 @@ export default function TestContent() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full  w-[35%]  bg-[#000000]"
+            className="h-full  w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
               <div className="flex flex-col h-full gap-4">
