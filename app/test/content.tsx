@@ -198,9 +198,9 @@ export default function TestContent() {
       variants={containerVariants}
     >
       <div className="relative z-10 h-full p-2">
-        <div className="flex flex-row w-screen  gap-6 h-full">
+        <div className="flex flex-row w-full  gap-6 h-full">
           {/* Left Column */}
-          <div className="flex w-[60%] flex-col gap-6 h-full">
+          <div className="flex w-[65%] flex-col gap-6 h-full">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -241,7 +241,7 @@ export default function TestContent() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full  w-[40%]  bg-[#000000]"
+            className="h-full  w-[35%]  bg-[#000000]"
           >
             <BorderComponent>
               <div className="flex flex-col h-full gap-4">
