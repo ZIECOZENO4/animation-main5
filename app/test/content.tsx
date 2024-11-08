@@ -198,7 +198,7 @@ export default function TestContent() {
       variants={containerVariants}
     >
       <div className="relative z-10 h-full p-2">
-        <div className="flex flex-col w-screen  gap-6 h-full">
+        <div className="flex flex-row w-screen  gap-6 h-full">
           {/* Left Column */}
           <div className="flex w-[60%] flex-col gap-6 h-full">
             <motion.div
