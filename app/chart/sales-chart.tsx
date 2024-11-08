@@ -94,137 +94,136 @@ export default function SalesChart() {
     }, [])
 
     const drawChart = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, progress: number = 1) => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-        // Background
-        ctx.fillStyle = '#000000'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-        // Vertical border line
-        ctx.strokeStyle = '#333333'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.moveTo(40, 20)
-        ctx.lineTo(40, canvas.height - 40) 
-        ctx.stroke()
-
-        // Grid lines
-        ctx.strokeStyle = '#333333'
-        ctx.lineWidth = 0.5
-        for (let i = 30; i < canvas.height - 40; i += 20) { // Reduced spacing from 40 to 20
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+  
+      // Background
+      ctx.fillStyle = '#000000'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+  
+      // Calculate main chart area dimensions
+      const mainChartTop = 20
+      const mainChartBottom = canvas.height * 0.6 // Reserve 40% of height for bars
+      const mainChartHeight = mainChartBottom - mainChartTop
+  
+      // Vertical border line
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.moveTo(40, mainChartTop)
+      ctx.lineTo(40, mainChartBottom)
+      ctx.stroke()
+  
+      // Grid lines in main chart area
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 0.5
+      for (let i = mainChartTop; i < mainChartBottom; i += 20) {
           ctx.beginPath()
           ctx.moveTo(41, i)
           ctx.lineTo(canvas.width - 20, i)
           ctx.stroke()
       }
-
-        // Y-axis labels
-        ctx.fillStyle = '#666666'
-        ctx.font = '12px monospace'
-        const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
-        yLabels.forEach((label, i) => {
-            ctx.fillText(label, 10, 30 + i * 40)
-        })
-
-        // Draw scattered dots
-        dots.forEach((dot, index) => {
+  
+      // Y-axis labels
+      ctx.fillStyle = '#666666'
+      ctx.font = '12px monospace'
+      const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
+      const labelSpacing = mainChartHeight / (yLabels.length - 1)
+      yLabels.forEach((label, i) => {
+          ctx.fillText(label, 10, mainChartTop + (i * labelSpacing))
+      })
+  
+      // Draw scattered dots
+      dots.forEach((dot, index) => {
           ctx.beginPath()
           ctx.arc(dot.x + 41, dot.y, hoveredDot === index ? 4 : 2, 0, Math.PI * 2)
-          
           if (dot.hasBorder) {
               ctx.strokeStyle = dot.borderColor
               ctx.lineWidth = 2
               ctx.stroke()
           }
-          
           ctx.fillStyle = hoveredDot === index ? '#ffffff' : dot.color
           ctx.fill()
       })
-
-        // Draw animated main line
-        ctx.strokeStyle = '#64748b'
-        ctx.lineWidth = 2
-        ctx.beginPath()
-        
-        const currentPoints = linePoints.filter((_, index) => 
-            index <= Math.floor(linePoints.length * progress)
-        )
-        
-        currentPoints.forEach((point, index) => {
-            if (index === 0) {
-                ctx.moveTo(point.x + 41, point.y)
-            } else {
-                ctx.lineTo(point.x + 41, point.y)
-            }
-        })
-        ctx.stroke()
-
-        // Bar Chart with increased spacing
-        const totalWidth = canvas.width - 80
-        const barWidth = 48  // Doubled from 24 to 48
-        const barSpacing = 8  // Fixed 8px spacing (px-2 equivalent)
-        const availableSpace = totalWidth - (bars.length * barSpacing)
-        const adjustedBarWidth = availableSpace / bars.length
-
-        bars.forEach((bar, index) => {
+  
+      // Draw animated main line
+      ctx.strokeStyle = '#64748b'
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      const currentPoints = linePoints.filter((_, index) => index <= Math.floor(linePoints.length * progress))
+      currentPoints.forEach((point, index) => {
+          if (index === 0) {
+              ctx.moveTo(point.x + 41, point.y)
+          } else {
+              ctx.lineTo(point.x + 41, point.y)
+          }
+      })
+      ctx.stroke()
+  
+      // Bar Chart section (below main chart)
+      const barStartY = mainChartBottom + 20
+      const totalWidth = canvas.width - 80
+      const barSpacing = 8
+      const availableSpace = totalWidth - (bars.length * barSpacing)
+      const adjustedBarWidth = availableSpace / bars.length
+  
+      // Draw bars
+      bars.forEach((bar, index) => {
           const xPos = 50 + (index * (adjustedBarWidth + barSpacing))
-          const yPos = canvas.height - (bar.isSmall ? bar.height * 0.6 : bar.height) - 40 // Reduced from 100 to 40
+          const barHeight = bar.isSmall ? bar.height * 0.6 : bar.height
           
           ctx.beginPath()
           ctx.rect(
               xPos,
-              canvas.height - 40, // Reduced from 100 to 40
+              barStartY + barHeight,
               adjustedBarWidth,
-              -(bar.isSmall ? bar.height * 0.6 : bar.height)
+              -barHeight
           )
-            ctx.strokeStyle = '#64748b'
-            ctx.lineWidth = 1
-            ctx.stroke()
-            ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-            ctx.fill()
-
-            // Show value on hover
-            if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
-                ctx.fillStyle = '#ffffff'
-                ctx.fillText(bar.value.toFixed(1), xPos - 10, yPos - 10)
-            }
-        })
-
-
-
-        // Enhanced hover crosshair
-        if (isHovering) {
-            ctx.strokeStyle = '#666666'
-            ctx.setLineDash([5, 5])
-            
-            // Vertical line
-            ctx.beginPath()
-            ctx.moveTo(mousePos.x, 20)
-            ctx.lineTo(mousePos.x, canvas.height - 100)
-            ctx.stroke()
-            
-            // Horizontal line
-            ctx.beginPath()
-            ctx.moveTo(40, mousePos.y)
-            ctx.lineTo(canvas.width - 20, mousePos.y)
-            ctx.stroke()
-            
-            ctx.setLineDash([])
-
-            // Show value
-            const value = Math.round(105 - ((mousePos.y - 20) / (canvas.height - 120)) * 105)
-            ctx.fillStyle = '#ffffff'
-            ctx.fillText(`Value: ${value}`, mousePos.x + 10, mousePos.y - 10)
-        }
-
-        // Time labels
-        const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
-        timeLabels.forEach((label, i) => {
+          ctx.strokeStyle = '#64748b'
+          ctx.lineWidth = 1
+          ctx.stroke()
+          ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+          ctx.fill()
+  
+          // Show value on hover
+          if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
+              ctx.fillStyle = '#ffffff'
+              ctx.fillText(bar.value.toFixed(1), xPos - 10, barStartY - 10)
+          }
+      })
+  
+      // Enhanced hover crosshair (only in main chart area)
+      if (isHovering && mousePos.y < mainChartBottom) {
+          ctx.strokeStyle = '#666666'
+          ctx.setLineDash([5, 5])
+          
+          // Vertical line
+          ctx.beginPath()
+          ctx.moveTo(mousePos.x, mainChartTop)
+          ctx.lineTo(mousePos.x, mainChartBottom)
+          ctx.stroke()
+          
+          // Horizontal line
+          ctx.beginPath()
+          ctx.moveTo(40, mousePos.y)
+          ctx.lineTo(canvas.width - 20, mousePos.y)
+          ctx.stroke()
+          ctx.setLineDash([])
+          
+          // Show value
+          const value = 0.73 - ((mousePos.y - mainChartTop) / mainChartHeight) * 0.04
+          ctx.fillStyle = '#ffffff'
+          ctx.fillText(value.toFixed(4), mousePos.x + 10, mousePos.y - 10)
+      }
+  
+      // Time labels
+      const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
+      ctx.fillStyle = '#666666'
+      ctx.font = '12px monospace'
+      timeLabels.forEach((label, i) => {
           const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-          ctx.fillText(label, xPos - 20, canvas.height - 20) // Reduced from 80 to 20
+          ctx.fillText(label, xPos - 20, canvas.height - 20)
       })
   }
-
 
     useEffect(() => {
         const canvas = canvasRef.current
