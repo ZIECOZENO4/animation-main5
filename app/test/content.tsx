@@ -189,13 +189,13 @@ export default function TestContent() {
       <div className="relative z-10 h-full p-2">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-6 h-full">
           {/* Left Column */}
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col gap-6 h-full">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               whileHover={{ scale: 1.01 }}
-              className="relative h-[65%] w-full bg-[#1D1D1D]/45"
+              className="relative h-[65%] w-[680px] bg-[#1D1D1D]/45"
             >
               <BorderComponent>
                 <motion.span 
@@ -214,7 +214,7 @@ export default function TestContent() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
               whileHover={{ scale: 1.01 }}
-              className="relative h-[35%] bg-[#000000]"
+              className="relative h-[35%]  w-[680px] bg-[#000000]"
             >
               <BorderComponent>
                 <motion.span 
