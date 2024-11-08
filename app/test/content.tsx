@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import React from 'react'
-import EnhanceTradingView from '../chart/enhanced-trading-interface'
+import { motion } from "framer-motion";
+import React from "react";
+import EnhanceTradingView from "../chart/enhanced-trading-interface";
 export default function TestContent() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -13,78 +13,36 @@ export default function TestContent() {
         delayChildren: 0.2
       }
     }
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
-  }
+  };
 
-  const MiddleBorderComponent = ({ children }: { children?: React.ReactNode }) => (
+  const MiddleBorderComponent = ({
+    children
+  }: {
+    children?: React.ReactNode;
+  }) => (
     <div className="relative h-full">
-      <div className="relative p-6 h-full">
-        {children}
-      </div>
-      
+      <div className="relative p-6 h-full">{children}</div>
+
       {/* Top border - Solid Black */}
-      <div 
-        className="absolute -top-[2px] -right-[2px] -left-[2px]" 
-        style={{ 
-          height: '2px',
-          backgroundColor: '#000000'
-        }} 
+      <div
+        className="absolute -top-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundColor: "#000000"
+        }}
       />
-      
-      {/* Bottom border - Custom Pattern */}
-      <div className="absolute -bottom-[2px] -right-[2px] -left-[2px]" 
-  style={{ 
-    height: '2px', 
-    backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-  }} 
-/>
-      
-      {/* Left border - Solid Black */}
-      <div 
-        className="absolute -left-[2px] -top-[2px] -bottom-[2px]" 
-        style={{ 
-          width: '2px',
-          backgroundColor: '#000000'
-        }} 
-      />
-      
-      {/* Right border - Solid Black */}
-      <div 
-        className="absolute -right-[2px] -top-[2px] -bottom-[2px]" 
-        style={{ 
-          width: '2px',
-          backgroundColor: '#000000'
-        }} 
-      />
-    </div>
-  )
 
-  const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode, className?: string }) => (
-    <div className="relative h-full">
-      <div className="relative  p-6 h-full">
-        {children}
-      </div>
-      {/* Top border */}
-      <div className="absolute -top-[2px] -right-[2px] -left-[2px]"
-  style={{
-    height: '2px',
-    backgroundImage: `
+      {/* Bottom border - Custom Pattern */}
+      <div
+        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
       repeating-linear-gradient(
         to right,
         #555555 0,
@@ -97,67 +55,120 @@ export default function TestContent() {
         transparent 48px
       )
     `
-  }}
-/>
-      {/* Bottom border */}
-      <div className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-  style={{
-    height: '2px',
-    backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-  }}
-/>
-      {/* Left border */}
-      <div className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-  style={{
-    width: '2px',
-    backgroundImage: `
-      repeating-linear-gradient(
-        to bottom,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-  }}
-/>
-      {/* Right border */}
-      <div className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-  style={{
-    width: '2px',
-    backgroundImage: `
-      repeating-linear-gradient(
-        to bottom,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-  }}
-/>
+        }}
+      />
+
+      {/* Left border - Solid Black */}
+      <div
+        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundColor: "#000000"
+        }}
+      />
+
+      {/* Right border - Solid Black */}
+      <div
+        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundColor: "#000000"
+        }}
+      />
     </div>
-  )
+  );
+
+  const BorderComponent = ({
+    children,
+    className = ""
+  }: {
+    children?: React.ReactNode;
+    className?: string;
+  }) => (
+    <div className="relative h-full">
+      <div className="relative  p-6 h-full">{children}</div>
+      {/* Top border */}
+      <div
+        className="absolute -top-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Bottom border */}
+      <div
+        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Left border */}
+      <div
+        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Right border */}
+      <div
+        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+    </div>
+  );
 
   const BoxComponent = ({ title }: { title: string }) => (
     <motion.div
@@ -176,12 +187,12 @@ export default function TestContent() {
         </div>
       </BorderComponent>
     </motion.div>
-  )
+  );
 
   return (
-    <motion.div 
+    <motion.div
       className="overflow-hidden"
-      style={{ height: 'calc(100vh - 5rem)' }}
+      style={{ height: "calc(100vh - 5rem)" }}
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -198,13 +209,13 @@ export default function TestContent() {
               className="relative h-[65%] w-[680px] bg-[#1D1D1D]/45"
             >
               <BorderComponent>
-                <motion.span 
+                <motion.span
                   className="text-sm w-full h-full text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-    <div className="m-0 p-0 w-full h-full">
-      <EnhanceTradingView />
-    </div>
+                  <div className="m-0 p-0 w-full h-full">
+                    <EnhanceTradingView />
+                  </div>
                 </motion.span>
               </BorderComponent>
             </motion.div>
@@ -217,111 +228,112 @@ export default function TestContent() {
               className="relative h-[35%]  w-[680px] bg-[#000000]"
             >
               <BorderComponent>
-                <motion.span 
+                <motion.span
                   className="text-sm text-gray-500"
                   whileHover={{ color: "#ffffff" }}
-                >
-
-                </motion.span>
+                ></motion.span>
               </BorderComponent>
             </motion.div>
           </div>
 
-       {/* Right Column */}
-<motion.div
-  initial={{ opacity: 0, x: 50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.5, ease: "easeOut" }}
-  className="h-full bg-[#000000]"
->
-  <BorderComponent>
-    <div className="flex flex-col h-full gap-4">
-      {/* Top Section */}
-      <div className="space-y-4">
-        {/* First Row */}
-
-        <div className="flex gap-4">
-          <div className="w-[80%] h-[51px] bg-[#5555554D]">
+          {/* Right Column */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="h-full bg-[#000000]"
+          >
             <BorderComponent>
-              <div className="flex justify-end items-center h-full">
-                <span className="text-[20px] text-[#F7F2DA80]">NOMAD</span>
-              </div> 
+              <div className="flex flex-col h-full gap-4">
+                {/* Top Section */}
+                <div className="space-y-4">
+                  {/* First Row */}
 
-            </BorderComponent>
-          </div>
-          <div className="w-[20%] h-[51px] bg-[#5555554D]">
-            <BorderComponent>
-              <div className="flex items-center justify-center h-full">
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex justify-end items-center h-full">
+                          <span className="text-[20px] text-[#F7F2DA80]">
+                            NOMAD
+                          </span>
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex items-center justify-center h-full"></div>
+                      </BorderComponent>
+                    </div>
+                  </div>
+                  {/* Second Row - Full Width */}
+                  <div className="w-full h-[51px] bg-[#5555554D]">
+                    <BorderComponent>
+                      <div className="flex justify-end items-center h-full">
+                        <span className="text-[20px] text-[#F7F2DA80]">
+                          BEAT
+                        </span>
+                      </div>
+                    </BorderComponent>
+                  </div>
+                </div>
+
+                {/* Middle Empty Section with Border */}
+                <div className="flex-grow">
+                  <MiddleBorderComponent />
+                </div>
+
+                {/* Bottom Section */}
+                <div className="space-y-4">
+                  {/* First Row */}
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex justify-center items-center h-full">
+                          <span className="text-[20px] text-[#F7F2DA80]">
+                            NOMAD
+                          </span>
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex items-center justify-center h-full"></div>
+                      </BorderComponent>
+                    </div>
+                  </div>
+                  {/* Second Row */}
+                  <div className="flex gap-4 ">
+                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex justify-center items-center h-full">
+                          <span className="text-[20px] text-[#F7F2DA80]">
+                            NOMAD
+                          </span>
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex items-center justify-center h-full"></div>
+                      </BorderComponent>
+                    </div>
+                  </div>
+                  {/* Third Row - Full Width */}
+                  <div className="w-full h-[51px] bg-[#5555554D]">
+                    <BorderComponent>
+                      <div className="flex justify-end items-center h-full">
+                        <span className="text-[20px] text-[#F7F2DA80]">
+                          BEAT
+                        </span>
+                      </div>
+                    </BorderComponent>
+                  </div>
+                </div>
               </div>
             </BorderComponent>
-          </div>
-        </div>
-        {/* Second Row - Full Width */}
-        <div className="w-full h-[51px] bg-[#5555554D]">
-          <BorderComponent>
-            <div className="flex justify-end items-center h-full">
-         
-              <span className="text-[20px] text-[#F7F2DA80]">BEAT</span>
-            </div>
-          </BorderComponent>
-        </div>
-      </div>
-
-      {/* Middle Empty Section with Border */}
-      <div className="flex-grow">
-  <MiddleBorderComponent />
-</div>
-
-      {/* Bottom Section */}
-      <div className="space-y-4">
-        {/* First Row */}
-        <div className="flex gap-4">
-          <div className="w-[80%] h-[51px] bg-[#5555554D]">
-            <BorderComponent>
-              <div className="flex justify-center items-center h-full">
-      
-                <span className="text-[20px] text-[#F7F2DA80]">NOMAD</span>
-              </div>
-            </BorderComponent>
-          </div>
-          <div className="w-[20%] h-[51px] bg-[#5555554D]">
-            <BorderComponent>
-              <div className="flex items-center justify-center h-full">
-              </div>
-            </BorderComponent>
-          </div>
-        </div>
-        {/* Second Row */}
-        <div className="flex gap-4 ">
-          <div className="w-[80%] h-[51px] bg-[#5555554D]">
-            <BorderComponent>
-            <div className="flex justify-center items-center h-full">
-      
-      <span className="text-[20px] text-[#F7F2DA80]">NOMAD</span>
-    </div>
-            </BorderComponent>
-          </div>
-          <div className="w-[20%] h-[51px] bg-[#5555554D]">
-            <BorderComponent>
-              <div className="flex items-center justify-center h-full">
-              </div>
-            </BorderComponent>
-          </div>
-        </div>
-        {/* Third Row - Full Width */}
-        <div className="w-full h-[51px] bg-[#5555554D]">
-          <BorderComponent>
-            <div className="flex justify-end items-center h-full">
-            <span className="text-[20px] text-[#F7F2DA80]">BEAT</span>
-            </div>
-          </BorderComponent>
-        </div>
-      </div>
-    </div>
-  </BorderComponent>
-</motion.div>
+          </motion.div>
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
