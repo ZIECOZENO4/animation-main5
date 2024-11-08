@@ -309,53 +309,9 @@ export default function SalesChart() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full h-[400px] container mx-auto bg-black p-4 relative"
+        className="w-[calc(100vw-35vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
       >
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="flex justify-between items-center mb-4"
-        >
-          <motion.div 
-            initial={{ x: -20 }}
-            animate={{ x: 0 }}
-            className="text-[#999999] text-sm  flex items-center gap-2"
-          >
-            <motion.div 
-              whileHover={{ rotate: 180 }}
-              transition={{ duration: 0.3 }}
-              className="w-4 h-4" 
-            >
-              <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#999999"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V3M9.5 8.5H9.51M19.5 7.5H19.51M14.5 12.5H14.51M8.5 15.5H8.51M18.5 15.5H18.51" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            </motion.div>
-            <motion.span
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              SALES
-            </motion.span>
-          </motion.div>
-          <motion.div 
-            initial={{ x: 20 }}
-            animate={{ x: 0 }}
-            className="flex gap-2"
-          >
-            {['1D', '1W', '1M'].map((period) => (
-              <motion.button
-                key={period}
-                whileHover={{ scale: 1.05, backgroundColor: '#64748b' }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400 }}
-                className={`px-2 py-1 rounded text-sm ${
-                  period === '1D' ? 'bg-slate-500' : 'bg-[#333333]'
-                } text-[#999999] hover:bg-slate-600`}
-              >
-                {period}
-              </motion.button>
-            ))}
-          </motion.div>
-        </motion.div>
+       
         
         <motion.div 
           initial={{ scale: 0.95 }}
