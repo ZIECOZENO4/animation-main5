@@ -256,7 +256,7 @@ export default function TestContent() {
                       <BorderComponent>
                         <div className="flex justify-end items-center h-full">
                           <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                            NOMAD
+                            MONAD
                           </span>
                         </div>
                       </BorderComponent>
@@ -295,7 +295,7 @@ export default function TestContent() {
                 <BorderComponent>
                     <div className="flex justify-center items-center h-full">
                         <span className="text-[20px] text-[#F7F2DA80]">
-                            NOMAD
+                            MONAD
                         </span>
                     </div>
                 </BorderComponent>
@@ -312,7 +312,7 @@ export default function TestContent() {
                 <BorderComponent>
                     <div className="flex justify-center items-center h-full">
                         <span className="text-[20px] text-[#F7F2DA80]">
-                            NOMAD
+                            MONAD
                         </span>
                     </div>
                 </BorderComponent>
