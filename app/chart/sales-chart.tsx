@@ -102,25 +102,18 @@ export default function SalesChart() {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
   
       // Calculate dimensions
-      const chartTopMargin = 20
+      const chartTopMargin = 5
       const chartBottomMargin = canvas.height * 0.35
       const mainChartHeight = canvas.height - chartBottomMargin - chartTopMargin
-      const barChartTop = canvas.height - chartBottomMargin + 20
+      const timeLabelsY = canvas.height - 20
+      const barStartY = timeLabelsY - 25 // Bar baseline position
   
-      // Bar Chart section with doubled width and full width coverage
-      const totalWidth = canvas.width - 80 // Total available width
+      // Bar Chart section calculations
+      const totalWidth = canvas.width - 80
       const barCount = bars.length
-      const barSpacing = 16 // Doubled spacing
+      const barSpacing = 16
       const availableSpace = totalWidth - ((barCount - 1) * barSpacing)
-      const adjustedBarWidth = (availableSpace / barCount) * 2 // Doubled bar width
-  
-      // Vertical border line
-      ctx.beginPath()
-      ctx.strokeStyle = '#333333'
-      ctx.lineWidth = 2
-      ctx.moveTo(40, barChartTop)
-      ctx.lineTo(canvas.width - 20, barChartTop)
-      ctx.stroke()
+      const adjustedBarWidth = (availableSpace / barCount) * 2
   
       // Grid lines in main chart area
       ctx.strokeStyle = '#333333'
@@ -135,7 +128,7 @@ export default function SalesChart() {
           ctx.stroke()
       }
   
-      // Y-axis labels with proper spacing
+      // Y-axis labels
       ctx.fillStyle = '#666666'
       ctx.font = '12px monospace'
       const yLabels = ['0.73', '0.72', '0.71', '0.70', '0.69']
@@ -175,57 +168,58 @@ export default function SalesChart() {
       })
       ctx.stroke()
   
-      // Bar Chart section
-
-  
-      // Calculate the baseline y-position (where bars start)
-      const baselineY = canvas.height - chartBottomMargin
-  
-      // Draw bars
-      bars.forEach((bar, index) => {
-        const xPos = 50 + (index * ((availableSpace / barCount) + barSpacing))
-        const maxHeight = chartBottomMargin * 0.6 // Maximum height for bars
-        
-        // Calculate bar height based on value
-        const barHeight = bar.isSmall ? maxHeight * 0.4 : (bar.height > 25 ? maxHeight : maxHeight * 0.7)
-
-        ctx.beginPath()
-        ctx.rect(
-            xPos,
-            barChartTop, // Start from the baseline
-            adjustedBarWidth,
-            -barHeight // Negative height to draw upward
-        )
-        ctx.strokeStyle = '#64748b'
-        ctx.lineWidth = 1
-        ctx.stroke()
-        ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
-        ctx.fill()
-
-        // Show value on hover
-        if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
-            ctx.fillStyle = '#ffffff'
-            ctx.fillText(bar.value.toFixed(1), xPos - 10, barChartTop - barHeight - 10)
-        }
-    })
-      // Time labels
+      // Draw time labels first (behind bars)
       const timeLabels = ['1 PM', '6 PM', '11 PM', '4 AM']
       ctx.fillStyle = '#666666'
       ctx.font = '12px monospace'
       timeLabels.forEach((label, i) => {
           const xPos = 50 + (totalWidth * (i / (timeLabels.length - 1)))
-          ctx.fillText(label, xPos - 20, canvas.height - 20) // Positioned below bars
+          ctx.fillText(label, xPos - 20, timeLabelsY)
+      })
+  
+      // Draw baseline for bars
+      ctx.beginPath()
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 2
+      ctx.moveTo(40, barStartY)
+      ctx.lineTo(canvas.width - 20, barStartY)
+      ctx.stroke()
+  
+      // Draw bars
+      bars.forEach((bar, index) => {
+          const xPos = 50 + (index * ((availableSpace / barCount) + barSpacing))
+          const maxHeight = chartBottomMargin * 0.6
+          const barHeight = bar.isSmall ? maxHeight * 0.4 : (bar.height > 25 ? maxHeight : maxHeight * 0.7)
+  
+          ctx.beginPath()
+          ctx.rect(
+              xPos,
+              barStartY,
+              adjustedBarWidth,
+              -barHeight
+          )
+          ctx.strokeStyle = '#64748b'
+          ctx.lineWidth = 1
+          ctx.stroke()
+          ctx.fillStyle = 'rgba(100, 116, 139, 0.2)'
+          ctx.fill()
+  
+          // Show value on hover
+          if (mousePos.x >= xPos && mousePos.x <= xPos + adjustedBarWidth && isHovering) {
+              ctx.fillStyle = '#ffffff'
+              ctx.fillText(bar.value.toFixed(1), xPos - 10, barStartY - barHeight - 10)
+          }
       })
   
       // Enhanced hover crosshair (only in main chart area)
-      if (isHovering && mousePos.y >= chartTopMargin && mousePos.y <= baselineY) {
+      if (isHovering && mousePos.y >= chartTopMargin && mousePos.y <= canvas.height - chartBottomMargin) {
           ctx.strokeStyle = '#666666'
           ctx.setLineDash([5, 5])
           
           // Vertical line
           ctx.beginPath()
           ctx.moveTo(mousePos.x, chartTopMargin)
-          ctx.lineTo(mousePos.x, baselineY)
+          ctx.lineTo(mousePos.x, canvas.height - chartBottomMargin)
           ctx.stroke()
           
           // Horizontal line
@@ -236,7 +230,7 @@ export default function SalesChart() {
           ctx.setLineDash([])
           
           // Show value
-          const valueRange = 0.04 // Range from 0.73 to 0.69
+          const valueRange = 0.04
           const value = 0.73 - ((mousePos.y - chartTopMargin) / mainChartHeight) * valueRange
           ctx.fillStyle = '#ffffff'
           ctx.fillText(value.toFixed(4), mousePos.x + 10, mousePos.y - 10)
