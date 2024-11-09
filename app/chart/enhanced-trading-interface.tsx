@@ -25,7 +25,7 @@ export default function EnhanceTradingView() {
   }, [isZoomedOut])
 
   return (
-    <div className="h-auto w-full bg-black ">
+    <div className="h-full w-full bg-black ">
       <AnimatePresence>
         {!isZoomedOut && (
           <motion.div

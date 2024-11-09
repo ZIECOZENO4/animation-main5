@@ -200,42 +200,42 @@ export default function TestContent() {
       <div className="relative z-10 h-full p-2">
         <div className="flex flex-row w-full  gap-6 h-full">
           {/* Left Column */}
-          <div className="flex w-[70%] flex-col gap-6 h-full">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              whileHover={{ scale: 1.01 }}
-              className="relative h-[65%] w-full bg-[#1D1D1D]/45"
+     {/* Left Column */}
+<div className="flex w-[70%] flex-col gap-6 h-full">
+    <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        whileHover={{ scale: 1.01 }}
+        className="relative h-[calc(100%-215px)] w-full bg-[#1D1D1D]/45" // Adjusted height
+    >
+        <BorderComponent>
+            <motion.span
+                className="text-sm text-gray-500"
+                whileHover={{ color: "#ffffff" }}
             >
-              <BorderComponent>
-                <motion.span
-                  className="text-sm  text-gray-500"
-                  whileHover={{ color: "#ffffff" }}
-                >
-            
-                  <div className="m-0 p-0  h-full w-full flex-grow ">
+                <div className="m-0 p-0 h-full w-full flex-grow">
                     <EnhanceTradingView />
-                  </div>
-                </motion.span>
-              </BorderComponent>
-            </motion.div>
+                </div>
+            </motion.span>
+        </BorderComponent>
+    </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              whileHover={{ scale: 1.01 }}
-              className="relative h-[35%]  bg-[#000000]"
-            >
-              <BorderComponent>
-                <motion.span
-                  className="text-sm text-gray-500"
-                  whileHover={{ color: "#ffffff" }}
-                ></motion.span>
-              </BorderComponent>
-            </motion.div>
-          </div>
+    <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+        whileHover={{ scale: 1.01 }}
+        className="relative h-[215px] bg-[#000000]" // Fixed height to match right side
+    >
+        <BorderComponent>
+            <motion.span
+                className="text-sm text-gray-500"
+                whileHover={{ color: "#ffffff" }}
+            ></motion.span>
+        </BorderComponent>
+    </motion.div>
+</div>
 
           {/* Right Column */}
           <motion.div
