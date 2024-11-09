@@ -3,7 +3,7 @@ import TestContent from "./content";
 
 const TestPage = () => {
   return (
-    <div className='bg-black'>
+    <div className=''>
       <TestContent />
     </div>
   );
