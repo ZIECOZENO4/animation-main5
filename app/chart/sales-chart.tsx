@@ -377,8 +377,8 @@ export default function SalesChart() {
                 transform: `translateX(${mousePos.x}px)`,
               }}
             />
-          )}
-  {hoveredBar !== null && (
+          )} 
+{hoveredBar !== null && (
     <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -386,23 +386,34 @@ export default function SalesChart() {
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         style={{
             position: 'absolute',
-            left: mousePos.x + 10,
-            top: mousePos.y - 20,
-            transform: 'translate(-50%, -150%)',
+            left: Math.min(
+                Math.max(mousePos.x, 120), // Minimum 120px from left
+                (canvasRef.current?.width || 0) - 120 // Maximum position from right
+            ),
+            top: Math.min(
+                Math.max(mousePos.y - 20, 100), // Minimum 100px from top
+                (canvasRef.current?.height || 0) - 180 // Maximum position from bottom
+            ),
+            transform: 'translate(-50%, -50%)',
         }}
         className="z-50"
     >
-        <Card className="w-[100px] overflow-hidden border  bg-gradient-to-b from-black to-zinc-900 border-zinc-800 group">
+        <Card className="w-[200px] overflow-hidden border bg-gradient-to-b from-black to-zinc-900 border-zinc-800 group">
             <motion.div 
-                className="relative aspect-square "
+                className="relative w-full"
+                style={{ height: '100px' }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-               <img        src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif" alt='graph image' className='h-[50%] w-full object-contain' />
+                <img        
+                    src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif" 
+                    alt='graph image' 
+                    className='h-full w-full object-cover'
+                />
             </motion.div>
     
             <motion.div 
-                className="p-4 space-y-3"
+                className="p-2 space-y-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -411,24 +422,24 @@ export default function SalesChart() {
                     className="flex items-center gap-2"
                     whileHover={{ x: 5 }}
                 >
-                    <span className="text-zinc-500 text-sm font-mono">#</span>
-                    <span className="text-zinc-300 font-mono">{hoveredBar}</span>
+                    <span className="text-zinc-500 text-xs font-mono">#</span>
+                    <span className="text-zinc-300 text-xs font-mono">{hoveredBar}</span>
                 </motion.div>
     
-                <div className="grid grid-cols-2 gap-2 pt-2">
-                    <div className="space-y-1">
-                        <span className="text-xs text-zinc-500 font-medium">POSITION</span>
+                <div className="grid grid-cols-2 gap-2">
+                    <div className="space-y-0.5">
+                        <span className="text-[10px] text-zinc-500 font-medium">POSITION</span>
                         <motion.p 
-                            className="text-sm text-zinc-300 font-mono"
+                            className="text-xs text-zinc-300 font-mono"
                             whileHover={{ x: 5 }}
                         >
                             {`X: ${mousePos.x.toFixed(0)}`}
                         </motion.p>
                     </div>
-                    <div className="space-y-1">
-                        <span className="text-xs text-zinc-500 font-medium">VALUE</span>
+                    <div className="space-y-0.5">
+                        <span className="text-[10px] text-zinc-500 font-medium">VALUE</span>
                         <motion.p 
-                            className="text-sm text-zinc-300 font-mono"
+                            className="text-xs text-zinc-300 font-mono"
                             whileHover={{ x: 5 }}
                         >
                             {bars[hoveredBar]?.value?.toFixed(1) || ''}
