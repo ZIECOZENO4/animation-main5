@@ -166,7 +166,7 @@ export default function DeptComponent() {
   }
 
   return (
-    <div className="w-[calc(100vw-35vw)] h-[calc(100vh-63vh)]">
+    <div className="w-[calc(100vw-35vw)] h-[calc(100vh-61vh)]">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
@@ -178,12 +178,12 @@ export default function DeptComponent() {
           className="w-full h-full cursor-crosshair"
           style={{ 
             imageRendering: 'pixelated',
-            display: 'block' // Add this to remove any default spacing
+            display: 'block'
           }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         />
       </motion.div>
     </div>
-  )
+)
 }
