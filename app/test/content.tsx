@@ -247,8 +247,8 @@ export default function TestContent() {
             <BorderComponent>
               <div className="flex flex-col h-full p-6 gap-4">
                 {/* Top Section */}
-                <div className="h-[65%]">
-                <div className="space-y-4 ">
+     
+                <div className="space-y-4 h-[65%]">
                   {/* First Row */}
 
                   <div className="flex gap-4">
@@ -283,7 +283,7 @@ export default function TestContent() {
                 <div className="flex-grow">
                   <MiddleBorderComponent />
                 </div>
-                </div>
+         
            
 
                 {/* Bottom Section */}
