@@ -392,26 +392,13 @@ export default function SalesChart() {
         }}
         className="z-50"
     >
-        <Card className="w-[280px] overflow-hidden bg-gradient-to-b from-black to-zinc-900 border-zinc-800 group">
+        <Card className="w-[100px] overflow-hidden border  bg-gradient-to-b from-black to-zinc-900 border-zinc-800 group">
             <motion.div 
-                className="relative aspect-square bg-[#98d7d1] p-6"
+                className="relative aspect-square "
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-                <motion.div
-                    className="absolute inset-0 bg-black/5"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                />
-                <motion.div
-                    className="w-full h-full flex items-center justify-center text-4xl font-mono text-black/80"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                >
-                    {bars[hoveredBar]?.value?.toFixed(1) || ''}
-                </motion.div>
+               <img        src="https://usyrtqjsyizmjgpizckc.supabase.co/storage/v1/object/public/assets/nft%202.jfif" alt='graph image' className='h-[50%] w-full object-contain' />
             </motion.div>
     
             <motion.div 
