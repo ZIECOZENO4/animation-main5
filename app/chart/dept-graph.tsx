@@ -166,7 +166,7 @@ export default function DeptComponent() {
   }
 
   return (
-    <div className="w-[calc(100vw-35vw)] h-[calc(100vh-61vh)]">
+    <div className="w-[calc(100vw-35vw)] h-[calc(100vh-60vh)]">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
