@@ -214,7 +214,7 @@ export default function TestContent() {
                   whileHover={{ color: "#ffffff" }}
                 >
             
-                  <div className="m-0 p-0  h-full w-full flex-grow ">
+                  <div className="mx-0 pt-4 px-0  h-full w-full flex-grow ">
                     <EnhanceTradingView />
                   </div>
                 </motion.span>
