@@ -3,7 +3,7 @@ import TestContent from "./content";
 
 const TestPage = () => {
   return (
-    <div className=''>
+    <div className='px-4'>
       <TestContent />
     </div>
   );

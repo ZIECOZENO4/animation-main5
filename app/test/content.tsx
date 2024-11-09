@@ -205,7 +205,7 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              whileHover={{ scale: 1.01 }}
+       
               className="relative h-[65%] w-full bg-[#000000]"
             >
               <BorderComponent>
@@ -225,7 +225,7 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              whileHover={{ scale: 1.01 }}
+       
               className="relative h-[35%]  bg-[#000000]"
             >
               <BorderComponent>
