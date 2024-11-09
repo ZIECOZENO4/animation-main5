@@ -105,9 +105,8 @@ export default function SalesChart() {
       const chartTopMargin = 5
       const chartBottomMargin = canvas.height * 0.35
       const mainChartHeight = canvas.height - chartBottomMargin - chartTopMargin
-      const timeLabelsY = canvas.height - 20
-      const barStartY = timeLabelsY - 25 // Bar baseline position
-  
+      const timeLabelsY = canvas.height - 5
+      
       // Bar Chart section calculations
       const totalWidth = canvas.width - 80
       const barCount = bars.length
@@ -177,15 +176,8 @@ export default function SalesChart() {
           ctx.fillText(label, xPos - 20, timeLabelsY)
       })
   
-      // Draw baseline for bars
-      ctx.beginPath()
-      ctx.strokeStyle = '#333333'
-      ctx.lineWidth = 2
-      ctx.moveTo(40, barStartY)
-      ctx.lineTo(canvas.width - 20, barStartY)
-      ctx.stroke()
-  
       // Draw bars
+      const barStartY = timeLabelsY - 15 // Reduced gap between bars and time labels
       bars.forEach((bar, index) => {
           const xPos = 50 + (index * ((availableSpace / barCount) + barSpacing))
           const maxHeight = chartBottomMargin * 0.6
@@ -210,6 +202,14 @@ export default function SalesChart() {
               ctx.fillText(bar.value.toFixed(1), xPos - 10, barStartY - barHeight - 10)
           }
       })
+  
+      // Draw baseline for bars
+      ctx.beginPath()
+      ctx.strokeStyle = '#333333'
+      ctx.lineWidth = 2
+      ctx.moveTo(40, barStartY)
+      ctx.lineTo(canvas.width - 20, barStartY)
+      ctx.stroke()
   
       // Enhanced hover crosshair (only in main chart area)
       if (isHovering && mousePos.y >= chartTopMargin && mousePos.y <= canvas.height - chartBottomMargin) {
