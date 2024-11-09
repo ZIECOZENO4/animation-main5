@@ -34,21 +34,6 @@ export default function EnhanceTradingView() {
             exit={{ opacity: 0 }}
           >
             {/* Top Stats Bar */}
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-between px-4 py-2 border-b border-gray-800"
-            >
-              <div className="flex items-center gap-6">
-                <span>$1,611.30</span>
-                <span>$1,611.30</span>
-                <span className="text-slate-500">$23.4 (2.17)%</span>
-              </div>
-              <div className="flex items-center gap-6">
-                <span>$826,543,873</span>
-                <span>0.66%</span>
-              </div>
-            </motion.div>
 
             {/* Navigation Bar */}
             <motion.div 
