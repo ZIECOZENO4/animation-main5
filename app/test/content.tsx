@@ -252,7 +252,7 @@ export default function TestContent() {
                   {/* First Row */}
 
                   <div className="flex gap-4">
-                    <div className="w-[80%] h-[40px] bg-[#5555554D]">
+                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex justify-end items-center h-full">
                           <span className="text-[20px] pr-2 text-[#F7F2DA80]">
@@ -261,14 +261,14 @@ export default function TestContent() {
                         </div>
                       </BorderComponent>
                     </div>
-                    <div className="w-[20%] h-[40px] bg-[#5555554D]">
+                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex items-center justify-center h-full"></div>
                       </BorderComponent>
                     </div>
                   </div>
                   {/* Second Row - Full Width */}
-                  <div className="w-full h-[40px] bg-[#5555554D]">
+                  <div className="w-full h-[51px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-end items-center h-full">
                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
@@ -287,52 +287,55 @@ export default function TestContent() {
            
 
                 {/* Bottom Section */}
-                <div className="space-y-4 h-[35%]">
-                  {/* First Row */}
-                  <div className="flex gap-4">
-                    <div className="w-[80%] h-[40px] bg-[#5555554D]">
-                      <BorderComponent>
-                        <div className="flex justify-center items-center h-full">
-                          <span className="text-[20px] text-[#F7F2DA80]">
+                <div className="flex flex-col justify-between h-[35%]"> {/* Changed from space-y-4 to flex with justify-between */}
+    <div className="space-y-4"> {/* Container for top two rows */}
+        {/* First Row */}
+        <div className="flex gap-4">
+            <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                <BorderComponent>
+                    <div className="flex justify-center items-center h-full">
+                        <span className="text-[20px] text-[#F7F2DA80]">
                             NOMAD
-                          </span>
-                        </div>
-                      </BorderComponent>
-                    </div>
-                    <div className="w-[20%] h-[40px] bg-[#5555554D]">
-                      <BorderComponent>
-                        <div className="flex items-center justify-center h-full"></div>
-                      </BorderComponent>
-                    </div>
-                  </div>
-                  {/* Second Row */}
-                  <div className="flex gap-4 ">
-                    <div className="w-[80%] h-[40px] bg-[#5555554D]">
-                      <BorderComponent>
-                        <div className="flex justify-center items-center h-full">
-                          <span className="text-[20px] text-[#F7F2DA80]">
-                            NOMAD
-                          </span>
-                        </div>
-                      </BorderComponent>
-                    </div>
-                    <div className="w-[20%] h-[40px] bg-[#5555554D]">
-                      <BorderComponent>
-                        <div className="flex items-center justify-center h-full"></div>
-                      </BorderComponent>
-                    </div>
-                  </div>
-                  {/* Third Row - Full Width */}
-                  <div className="w-full h-[40px] bg-[#5555554D]">
-                    <BorderComponent>
-                      <div className="flex justify-end items-center h-full">
-                        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                          BEAT
                         </span>
-                      </div>
-                    </BorderComponent>
-                  </div>
-                </div>
+                    </div>
+                </BorderComponent>
+            </div>
+            <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                <BorderComponent>
+                    <div className="flex items-center justify-center h-full"></div>
+                </BorderComponent>
+            </div>
+        </div>
+        {/* Second Row */}
+        <div className="flex gap-4">
+            <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                <BorderComponent>
+                    <div className="flex justify-center items-center h-full">
+                        <span className="text-[20px] text-[#F7F2DA80]">
+                            NOMAD
+                        </span>
+                    </div>
+                </BorderComponent>
+            </div>
+            <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                <BorderComponent>
+                    <div className="flex items-center justify-center h-full"></div>
+                </BorderComponent>
+            </div>
+        </div>
+    </div>
+
+    {/* Third Row - Full Width (at bottom) */}
+    <div className="w-full h-[51px] bg-[#5555554D]">
+        <BorderComponent>
+            <div className="flex justify-end items-center h-full">
+                <span className="text-[20px] pr-2 text-[#F7F2DA80]">
+                    BEAT
+                </span>
+            </div>
+        </BorderComponent>
+    </div>
+</div>
               </div>
             </BorderComponent>
           </motion.div>
