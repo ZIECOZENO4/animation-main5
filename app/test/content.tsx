@@ -252,7 +252,7 @@ export default function TestContent() {
                   {/* First Row */}
 
                   <div className="flex gap-4">
-                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                    <div className="w-[80%] h-[40px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex justify-end items-center h-full">
                           <span className="text-[20px] pr-2 text-[#F7F2DA80]">
@@ -261,14 +261,14 @@ export default function TestContent() {
                         </div>
                       </BorderComponent>
                     </div>
-                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                    <div className="w-[20%] h-[40px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex items-center justify-center h-full"></div>
                       </BorderComponent>
                     </div>
                   </div>
                   {/* Second Row - Full Width */}
-                  <div className="w-full h-[51px] bg-[#5555554D]">
+                  <div className="w-full h-[40px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-end items-center h-full">
                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
@@ -290,7 +290,7 @@ export default function TestContent() {
                 <div className="space-y-4 h-[35%]">
                   {/* First Row */}
                   <div className="flex gap-4">
-                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                    <div className="w-[80%] h-[40px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex justify-center items-center h-full">
                           <span className="text-[20px] text-[#F7F2DA80]">
@@ -299,7 +299,7 @@ export default function TestContent() {
                         </div>
                       </BorderComponent>
                     </div>
-                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                    <div className="w-[20%] h-[40px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex items-center justify-center h-full"></div>
                       </BorderComponent>
@@ -307,7 +307,7 @@ export default function TestContent() {
                   </div>
                   {/* Second Row */}
                   <div className="flex gap-4 ">
-                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                    <div className="w-[80%] h-[40px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex justify-center items-center h-full">
                           <span className="text-[20px] text-[#F7F2DA80]">
@@ -316,14 +316,14 @@ export default function TestContent() {
                         </div>
                       </BorderComponent>
                     </div>
-                    <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                    <div className="w-[20%] h-[40px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex items-center justify-center h-full"></div>
                       </BorderComponent>
                     </div>
                   </div>
                   {/* Third Row - Full Width */}
-                  <div className="w-full h-[51px] bg-[#5555554D]">
+                  <div className="w-full h-[40px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-end items-center h-full">
                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
