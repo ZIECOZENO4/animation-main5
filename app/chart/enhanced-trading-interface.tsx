@@ -41,7 +41,9 @@ export default function EnhanceTradingView() {
             >
               {/* Left Side - Time Frame Toggle */}
               <div className="flex items-center gap-4">
-                <div className="flex rounded bg-black border border-gray-800">
+                
+                <h1 className="text-xl font-bold leading-6">Time Frame</h1>
+                <div className="flex rounded bg-black">
                   <Tabs 
                     variant="bordered" 
                     aria-label="Time frame options"
