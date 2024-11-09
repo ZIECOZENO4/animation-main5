@@ -200,42 +200,42 @@ export default function TestContent() {
       <div className="relative z-10 h-full p-2">
         <div className="flex flex-row w-full  gap-6 h-full">
           {/* Left Column */}
-     {/* Left Column */}
-<div className="flex w-[70%] flex-col gap-6 h-full">
-    <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        whileHover={{ scale: 1.01 }}
-        className="relative h-[calc(100%-288px)] w-full bg-[#000000]" // Adjusted height
-    >
-        <BorderComponent>
-            <motion.span
-                className="text-sm text-gray-500"
-                whileHover={{ color: "#ffffff" }}
+          <div className="flex w-[70%] flex-col gap-6 h-full">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{ scale: 1.01 }}
+              className="relative h-[65%] w-full bg-[#000000]"
             >
-                <div className="m-0 p-0 h-full w-full flex-grow">
+              <BorderComponent>
+                <motion.span
+                  className="text-sm  text-gray-500"
+                  whileHover={{ color: "#ffffff" }}
+                >
+            
+                  <div className="m-0 p-0  h-full w-full flex-grow ">
                     <EnhanceTradingView />
-                </div>
-            </motion.span>
-        </BorderComponent>
-    </motion.div>
+                  </div>
+                </motion.span>
+              </BorderComponent>
+            </motion.div>
 
-    <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-        whileHover={{ scale: 1.01 }}
-        className="relative h-[288px] bg-[#000000]" // Fixed height to match right side
-    >
-        <BorderComponent>
-            <motion.span
-                className="text-sm text-gray-500"
-                whileHover={{ color: "#ffffff" }}
-            ></motion.span>
-        </BorderComponent>
-    </motion.div>
-</div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              whileHover={{ scale: 1.01 }}
+              className="relative h-[35%]  bg-[#000000]"
+            >
+              <BorderComponent>
+                <motion.span
+                  className="text-sm text-gray-500"
+                  whileHover={{ color: "#ffffff" }}
+                ></motion.span>
+              </BorderComponent>
+            </motion.div>
+          </div>
 
           {/* Right Column */}
           <motion.div
@@ -247,7 +247,8 @@ export default function TestContent() {
             <BorderComponent>
               <div className="flex flex-col h-full p-6 gap-4">
                 {/* Top Section */}
-                <div className="space-y-4">
+                <div className="h-[65%]">
+                <div className="space-y-4 ">
                   {/* First Row */}
 
                   <div className="flex gap-4">
@@ -282,9 +283,11 @@ export default function TestContent() {
                 <div className="flex-grow">
                   <MiddleBorderComponent />
                 </div>
+                </div>
+           
 
                 {/* Bottom Section */}
-                <div className="space-y-4">
+                <div className="space-y-4 h-[35%]">
                   {/* First Row */}
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
@@ -320,7 +323,7 @@ export default function TestContent() {
                     </div>
                   </div>
                   {/* Third Row - Full Width */}
-                  <div className="w-full h-[51px] top-[73px] bg-[#5555554D]">
+                  <div className="w-full h-[51px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-end items-center h-full">
                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
