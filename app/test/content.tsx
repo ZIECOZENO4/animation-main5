@@ -207,7 +207,7 @@ export default function TestContent() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         whileHover={{ scale: 1.01 }}
-        className="relative h-[calc(100%-215px)] w-full bg-[#000000]" // Adjusted height
+        className="relative h-[calc(100%-288px)] w-full bg-[#000000]" // Adjusted height
     >
         <BorderComponent>
             <motion.span
@@ -226,7 +226,7 @@ export default function TestContent() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         whileHover={{ scale: 1.01 }}
-        className="relative h-[215px] bg-[#000000]" // Fixed height to match right side
+        className="relative h-[288px] bg-[#000000]" // Fixed height to match right side
     >
         <BorderComponent>
             <motion.span
