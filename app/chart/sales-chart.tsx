@@ -363,85 +363,6 @@ export default function SalesChart() {
             </div>
           </AnimatePresence>
           <AnimatePresence>
-          {hoverInfo && (
-  <motion.div
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    exit={{ scale: 0, opacity: 0 }}
-    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-    style={{
-      position: 'absolute',
-      left: `${hoverInfo.x}px`,
-      top: `${hoverInfo.y}px`,
-      transform: 'translate(-50%, -150%)',
-    }}
-    className="z-50"
-  >
-    <Card className="w-[280px] overflow-hidden bg-gradient-to-b from-black to-zinc-900 border-zinc-800 group">
-      <motion.div 
-        className="relative aspect-square bg-[#98d7d1] p-6"
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
-        <motion.div
-          className="absolute inset-0 bg-black/5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        />
-        <motion.div
-          className="w-full h-full flex items-center justify-center text-4xl font-mono text-black/80"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          {hoverInfo.value.toFixed(4)}
-        </motion.div>
-      </motion.div>
-
-      <motion.div 
-        className="p-4 space-y-3"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-      >
-        <motion.div 
-          className="flex items-center gap-2"
-          whileHover={{ x: 5 }}
-        >
-          <span className="text-zinc-500 text-sm font-mono">#</span>
-          <span className="text-zinc-300 font-mono">{hoverInfo.index}</span>
-        </motion.div>
-
-        <div className="grid grid-cols-2 gap-2 pt-2">
-          <div className="space-y-1">
-            <span className="text-xs text-zinc-500 font-medium">POSITION</span>
-            <motion.p 
-              className="text-sm text-zinc-300 font-mono"
-              whileHover={{ x: 5 }}
-            >
-              {`X: ${hoverInfo.x.toFixed(0)}`}
-            </motion.p>
-          </div>
-          <div className="space-y-1">
-            <span className="text-xs text-zinc-500 font-medium">VALUE</span>
-            <motion.p 
-              className="text-sm text-zinc-300 font-mono"
-              whileHover={{ x: 5 }}
-            >
-              {hoverInfo.value.toFixed(4)}
-            </motion.p>
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        initial={false}
-      />
-    </Card>
-  </motion.div>
-)}
         </AnimatePresence>
           {isHovering && (
             <motion.div
@@ -450,28 +371,92 @@ export default function SalesChart() {
               exit={{ opacity: 0 }}
               className="absolute top-0 left-0 pointer-events-none"
               style={{
-                height: 'calc(100% - 100px)',
+                height: 'calc(100%)',
                 width: '2px',
                 backgroundColor: '#666666',
                 transform: `translateX(${mousePos.x}px)`,
               }}
             />
           )}
-  
-          {hoveredBar !== null && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="absolute bg-slate-800 text-slate-200 px-2 py-1 rounded text-xs"
-              style={{
-                left: mousePos.x + 10,
-                top: mousePos.y - 20,
-              }}
+  {hoveredBar !== null && (
+    <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        style={{
+            position: 'absolute',
+            left: mousePos.x + 10,
+            top: mousePos.y - 20,
+            transform: 'translate(-50%, -150%)',
+        }}
+        className="z-50"
+    >
+        <Card className="w-[280px] overflow-hidden bg-gradient-to-b from-black to-zinc-900 border-zinc-800 group">
+            <motion.div 
+                className="relative aspect-square bg-[#98d7d1] p-6"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              {bars[hoveredBar]?.value?.toFixed(1) || ''}
+                <motion.div
+                    className="absolute inset-0 bg-black/5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                />
+                <motion.div
+                    className="w-full h-full flex items-center justify-center text-4xl font-mono text-black/80"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    {bars[hoveredBar]?.value?.toFixed(1) || ''}
+                </motion.div>
             </motion.div>
-          )}
+    
+            <motion.div 
+                className="p-4 space-y-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+            >
+                <motion.div 
+                    className="flex items-center gap-2"
+                    whileHover={{ x: 5 }}
+                >
+                    <span className="text-zinc-500 text-sm font-mono">#</span>
+                    <span className="text-zinc-300 font-mono">{hoveredBar}</span>
+                </motion.div>
+    
+                <div className="grid grid-cols-2 gap-2 pt-2">
+                    <div className="space-y-1">
+                        <span className="text-xs text-zinc-500 font-medium">POSITION</span>
+                        <motion.p 
+                            className="text-sm text-zinc-300 font-mono"
+                            whileHover={{ x: 5 }}
+                        >
+                            {`X: ${mousePos.x.toFixed(0)}`}
+                        </motion.p>
+                    </div>
+                    <div className="space-y-1">
+                        <span className="text-xs text-zinc-500 font-medium">VALUE</span>
+                        <motion.p 
+                            className="text-sm text-zinc-300 font-mono"
+                            whileHover={{ x: 5 }}
+                        >
+                            {bars[hoveredBar]?.value?.toFixed(1) || ''}
+                        </motion.p>
+                    </div>
+                </div>
+            </motion.div>
+    
+            <motion.div 
+                className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={false}
+            />
+        </Card>
+    </motion.div>
+)}
         </motion.div>
       </motion.div>
     )
