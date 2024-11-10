@@ -72,7 +72,7 @@ const CubicButton = () => {
               return (
                 <div className="flex flex-col sm:flex-row gap-1">
                    
-                  <motion.div 
+                  {/* <motion.div 
               className="w-auto h-[36.22px] shake-button border-[0.63px] border-[#000000]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -114,7 +114,7 @@ const CubicButton = () => {
                 </div>
               </div>
               <div className="w-full  h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
-            </motion.div>
+            </motion.div> */}
                   {/* Account & Balance Button */}
       
                   <motion.div 

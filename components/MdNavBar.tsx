@@ -8,6 +8,8 @@ import FullConnectButton from './fullConnectButton';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@nextui-org/react";
+import { ChevronDownIcon } from "lucide-react"
+
 
 type ActiveItem = string | null;
 
@@ -171,8 +173,9 @@ const MdNavBar = () => {
                   variant="light"
                   onClick={toggleNotification}
                 >
-                 <img  alt='notification ' src='/images/notification.png' className='h-ful w-full object-contain  rounded-full mx-2'
-/>
+                 {/* <img  alt='notification ' src='/images/notification.png' className='h-ful w-full object-contain  rounded-full mx-2'
+/> */}
+     <ChevronDownIcon />
                 </Button>
 
             </motion.div>
