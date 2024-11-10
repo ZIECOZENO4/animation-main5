@@ -21,7 +21,7 @@ import CardDemo from "./CardDemo";
 import CardGrid from "./Test";
 import "./WorkbenchFontTest.css";
 import Link from "next/link";
-
+type TabType = 'Featured' | 'Trending';
 interface ChainData {
   key: string
   name: string
@@ -47,9 +47,11 @@ export default function ComponentCoin() {
   const [maxPrice, setMaxPrice] = useState('')
   const [activeTab, setActiveTab] = useState('Featured');
 
-  const handleTabClick = (tab) => {
-      setActiveTab(tab);
-  };
+  const handleTabClick = (tab: TabType) => {
+    setActiveTab(tab);
+};
+
+
   const chainData: ChainData[] = [
     { key: 'all', name: 'All Chains' },
     { key: 'ethereum', name: 'Ethereum' },
