@@ -41,12 +41,13 @@ export default function EnhanceTradingView() {
             >
               {/* Left Side - Time Frame Toggle */}
               <div className="flex items-center gap-4">
-              <svg fill="#F7F2DA" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="#F7F2DA" stroke-width="0.00032"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 21 4 L 21 28 L 29 28 L 29 4 Z M 23 6 L 27 6 L 27 26 L 23 26 Z M 3 10 L 3 28 L 11 28 L 11 10 Z M 5 12 L 9 12 L 9 26 L 5 26 Z M 12 16 L 12 28 L 20 28 L 20 16 Z M 14 18 L 18 18 L 18 26 L 14 26 Z"></path></g></svg>
+         
                 <h1 className="text-xl font-bold leading-6">Time Frame</h1>
                 <div className="flex rounded bg-black">
                   <Tabs 
                     variant="bordered" 
                     aria-label="Time frame options"
+                    className='text-sm'
                     selectedKey={selectedTimeFrame}
                     onSelectionChange={(key) => setSelectedTimeFrame(key as string)}
                   >
@@ -62,6 +63,7 @@ export default function EnhanceTradingView() {
                 <Tabs 
                   variant="bordered" 
                   aria-label="View options"
+                  className='text-sm'
                   selectedKey={view}
                   onSelectionChange={(key) => setView(key as "trading" | "depth")}
                 >
