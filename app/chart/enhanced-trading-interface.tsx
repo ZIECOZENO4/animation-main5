@@ -45,7 +45,7 @@ export default function EnhanceTradingView() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-             <div className="flex items-center justify-between px-4 py-3 bg-zinc-900">
+             <div className="flex items-center justify-between px-4 py-3 ">
       <div className="flex items-center gap-2">
         <ChevronDown className="w-5 h-5 text-zinc-400" />
         <span className="text-sm font-medium tracking-wide text-zinc-200">SALES</span>
@@ -56,7 +56,7 @@ export default function EnhanceTradingView() {
           <motion.button
             key={timeFrame.id}
             className={`relative px-3 py-1 text-sm font-medium rounded-md ${
-              activeTimeFrame === timeFrame.id ? "text-white" : "text-zinc-400"
+              activeTimeFrame === timeFrame.id ? "text-[#F7F2DA]" : "text-zinc-400"
             }`}
             onClick={() => setActiveTimeFrame(timeFrame.id)}
             whileHover={{ scale: 1.05 }}
@@ -66,7 +66,7 @@ export default function EnhanceTradingView() {
             {activeTimeFrame === timeFrame.id && (
               <motion.div
                 layoutId="activeIndicator"
-                className="absolute inset-0 bg-orange-500/20 rounded-md"
+                className="absolute inset-0 bg-slate-500/20 rounded-md"
                 initial={false}
                 transition={{
                   type: "spring",
@@ -78,46 +78,35 @@ export default function EnhanceTradingView() {
           </motion.button>
         ))}
       </div>
+      <div className="flex items-center bg-zinc-800/50 rounded-lg p-1">
+  {["trading", "depth"].map((viewOption) => (
+    <motion.button
+      key={viewOption}
+      className={`relative px-3 py-1 text-sm font-medium rounded-md ${
+        view === viewOption ? "text-[#F7F2DA]" : "text-zinc-400"
+      }`}
+      onClick={() => setView(viewOption as "trading" | "depth")}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {viewOption.charAt(0).toUpperCase() + viewOption.slice(1)} {/* Capitalizes the first letter */}
+      {view === viewOption && (
+        <motion.div
+          layoutId="activeIndicator"
+          className="absolute inset-0 bg-slate-500/20 rounded-md"
+          initial={false}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30
+          }}
+        />
+      )}
+    </motion.button>
+  ))}
+</div>
     </div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="flex items-center justify-between px-4 py-3 border-b border-gray-800"
-            >
-              {/* Left Side - Time Frame Toggle */}
-              <div className="flex items-center gap-4">
-         
-                <h1 className="text-xl font-bold leading-6">Time Frame</h1>
-                <div className="flex rounded bg-black">
-                  <Tabs 
-                    variant="bordered" 
-                    aria-label="Time frame options"
-                    className='text-sm'
-                    selectedKey={selectedTimeFrame}
-                    onSelectionChange={(key) => setSelectedTimeFrame(key as string)}
-                  >
-                    {intervals.map((interval) => (
-                      <Tab key={interval} title={interval} />
-                    ))}
-                  </Tabs>
-                </div>
-              </div>
-
-              {/* Right Side - View Toggle */}
-              <div className="flex items-center gap-4">
-                <Tabs 
-                  variant="bordered" 
-                  aria-label="View options"
-                  className='text-sm'
-                  selectedKey={view}
-                  onSelectionChange={(key) => setView(key as "trading" | "depth")}
-                >
-                  <Tab key="trading" title="Trading view" />
-                  <Tab key="depth" title="Depth" />
-                </Tabs>
-              </div>
-            </motion.div>
+            
 
             {/* Main Content Area */}
             <AnimatePresence mode="wait">
