@@ -79,7 +79,7 @@ const MdNavBar = () => {
   return (
   <div className="div">
     <motion.div 
-            className='flex justify-between items-center text-[#F7F2DA] h-20 w-full py-5 sticky top-0 z-50'
+            className='flex justify-between items-center text-[#F7F2DA] h-20 w-full py-5 px-4 sticky top-0 z-50'
         >
             {/* Left Section: First Component */}
             <Link href="/" className="flex flex-row">
@@ -153,7 +153,7 @@ const MdNavBar = () => {
             </div>
 
             {/* Right Section: Cubic Button and Notification Icon */}
-            <div className="flex items-center justify-end ml-4">
+            <div className="flex items-center justify-end ">
                 <div className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
                     <CubicButton />
                 </div>
