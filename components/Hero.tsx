@@ -69,7 +69,7 @@ export function HeroSection() {
               className="object-cover"
               src={profile.image}
             />
-            <div className="absolute inset-0 rounded-full border-2 border-blue-400 opacity-50"></div>
+            <div className="absolute inset-0 rounded-full border-2 border-slate-800 opacity-50"></div>
           </motion.div>
           <motion.div 
             className="text-center sm:text-left"

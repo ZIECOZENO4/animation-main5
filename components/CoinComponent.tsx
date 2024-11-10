@@ -75,11 +75,11 @@ export default function ComponentCoin() {
 
   return (
     <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
-      <motion.div className="flex flex-row justify-between align-middle gap-4">
+      <motion.div className="flex flex-row justify-between align-middle ">
       <div className="flex justify-center space-x-4">
-    <motion.button
-        onClick={() => handleTabClick('Featured')}
-        className={`flex-1 px-4 py-2 text-left border-2 border-[#1a1a1a] 
+    <motion.div
+   
+        className={`flex-1 px-4 py-2 text-left border-2 gap-4 border-[#1a1a1a] 
         focus:outline-none relative transition-all duration-200 ${activeTab === 'Featured' ? 'bg-black text-[#F7F2DA]' : 'bg-transparent text-slate-500'}`}
         style={{
             boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
@@ -93,9 +93,12 @@ export default function ComponentCoin() {
             transform: 'translate(2px, 2px)',
         }}
     >
-        <span className={`tracking-wide ${activeTab === 'Featured' ? '' : 'opacity-50'}`}>Featured</span>
+      <button className="gap-4"     onClick={() => handleTabClick('Featured')}>
+      <span className={`tracking-wide ${activeTab === 'Featured' ? '' : 'opacity-50'}`}>Featured</span>
         <span className={`tracking-wide ${activeTab === 'Trending' ? '' : 'opacity-50'}`}>Trending</span>
-    </motion.button>
+      </button>
+  
+    </motion.div>
 </div>
 
         <Button color="default">USD</Button>
