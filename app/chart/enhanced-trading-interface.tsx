@@ -50,7 +50,7 @@ export default function EnhanceTradingView() {
         <ChevronDown className="w-5 h-5 text-zinc-400" />
         <span className="text-sm font-medium tracking-wide text-zinc-200">SALES</span>
       </div>
-      
+      <div className="flex gap-2">
       <div className="flex items-center bg-zinc-800/50 rounded-lg p-1">
         {timeFrames.map((timeFrame) => (
           <motion.button
@@ -105,6 +105,8 @@ export default function EnhanceTradingView() {
     </motion.button>
   ))}
 </div>
+      </div>
+
     </div>
             
 
