@@ -31,7 +31,7 @@ const RewardCard = () => {
   transition={{ delay: 0.3, type: "spring" }}
   className="px-3 py-1 bg-slate-500/20 rounded-full flex items-center gap-1"
 >
-  <CheckCircle size={12} className="text-[#F7F2DA] px-1" />    
+  <CheckCircle size={24} className="text-[#F7F2DA] px-1" />    
   <span className="text-[#F7F2DA] text-xs font-medium">Confirmed</span>
 </motion.div>
       </div>
