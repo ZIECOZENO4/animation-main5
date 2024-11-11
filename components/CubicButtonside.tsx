@@ -4,6 +4,32 @@ import { ChevronDownIcon, Copy, CheckCircle, Power, Plug, Loader2 } from "lucide
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useBalance, useDisconnect } from 'wagmi'
+const WalletIcon = ({ className = "", size = 24 }) => {
+  return (
+    <motion.svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`${className}`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {/* Main wallet body */}
+      <path d="M20 6H4C2.89543 6 2 6.89543 2 8V16C2 17.1046 2.89543 18 4 18H20C21.1046 18 22 17.1046 22 16V8C22 6.89543 21.1046 6 20 6Z" />
+      
+      {/* Wallet flap */}
+      <path d="M20 6V4C20 2.89543 19.1046 2 18 2H4C2.89543 2 2 2.89543 2 4" />
+      
+      {/* Card slot */}
+      <rect x="16" y="10" width="4" height="4" rx="1" />
+    </motion.svg>
+  )
+}
 
 const CubicButtonSide = () => {
   const [copied, setCopied] = useState(false)
@@ -75,7 +101,8 @@ const CubicButtonSide = () => {
                             animate={{ opacity: 1 }}
                           >
                             <span>CONNECT</span>
-                            <Plug size={18} />
+                         
+                            <WalletIcon size={18} />
                           </motion.div>
                         </div>
                       </div>

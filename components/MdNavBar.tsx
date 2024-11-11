@@ -205,19 +205,19 @@ const MdNavBar = () => {
                   <h2 className="text-xl text-center font-bold md:hidden px-4 md:px-8">
                     Quick Links
                   </h2>
-                  <h2 className="text-xl text-center font-bold hidden sm:flex px-4 md:px-8">
+                  <h2 className="text-sm text-center  hidden sm:flex px-4 md:px-8">
                   Wallet Details 
                   </h2>
 
                   <Button
-                    isIconOnly
-                    color="danger"
-                    variant="light"
-                    aria-label="Close"
-                    onClick={toggleNotification}
-                  >
-                    X
-                  </Button>
+  isIconOnly
+  className="bg-slate-500 hover:bg-slate-600 border border-slate-800 text-white"
+  variant="bordered"
+  aria-label="Close"
+  onClick={toggleNotification}
+>
+  <span className="font-bold">×</span>
+</Button>
                 </div>
                 <div className="space-y-4">
                   <div className="p-[3px]">
