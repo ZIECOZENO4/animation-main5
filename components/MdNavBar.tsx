@@ -220,7 +220,9 @@ const MdNavBar = () => {
                   </Button>
                 </div>
                 <div className="space-y-4">
+                  <div className="p-[3px]">
                   <CubicButtonSide />
+                  </div>
                   <div className="md:hidden p-3 gap-4 aligm-middle flex flex-col">
                     <Link href="/">
                       <button className="p-[3px] relative w-full">
