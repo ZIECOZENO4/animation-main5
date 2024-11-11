@@ -75,11 +75,11 @@ export default function ComponentCoin() {
 
   return (
     <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
-        <motion.div className="flex flex-row justify-between align-middle">
+         <motion.div className="flex flex-row justify-between align-middle">
             <div className="flex justify-center space-x-4">
                 <motion.div
-                    className={`flex-1 px-4 py-2 text-left border-2 border-[#1a1a1a] 
-                    focus:outline-none relative transition-all duration-200`}
+                    className="flex-1 px-4 py-2 text-left border-2 border-[#1a1a1a] 
+                    focus:outline-none relative transition-all duration-200"
                     style={{
                         boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
                     }}
@@ -92,14 +92,13 @@ export default function ComponentCoin() {
                         transform: 'translate(2px, 2px)',
                     }}
                 >
-                    <div className="flex relative">
-                        {/* Background Slider */}
+                    <div className="flex relative h-full">
+                        {/* Full-height Background Slider */}
                         <motion.div
-                            className="absolute h-full rounded-md bg-black"
+                            className="absolute top-0 bottom-0 w-1/2 bg-black rounded-md"
                             initial={false}
                             animate={{
-                                x: activeTab === 'Featured' ? 0 : '100%',
-                                width: '50%'
+                                x: activeTab === 'Featured' ? '0%' : '100%',
                             }}
                             transition={{
                                 type: "spring",
@@ -108,29 +107,31 @@ export default function ComponentCoin() {
                             }}
                         />
 
-                        {/* Buttons */}
-                        <button 
-                            className={`relative px-4 py-1 z-10 transition-colors duration-200 ${
-                                activeTab === 'Featured' ? 'text-[#F7F2DA]' : 'text-slate-500'
-                            }`}
-                            onClick={() => handleTabClick('Featured')}
-                        >
-                            Featured
-                        </button>
-                        <button 
-                            className={`relative px-4 py-1 z-10 transition-colors duration-200 ${
-                                activeTab === 'Trending' ? 'text-[#F7F2DA]' : 'text-slate-500'
-                            }`}
-                            onClick={() => handleTabClick('Trending')}
-                        >
-                            Trending
-                        </button>
+                        {/* Button Container - ensures equal width distribution */}
+                        <div className="flex w-full relative z-10">
+                            <button 
+                                className={`flex-1 px-4 py-1 transition-colors duration-200 ${
+                                    activeTab === 'Featured' ? 'text-[#F7F2DA]' : 'text-slate-500'
+                                }`}
+                                onClick={() => handleTabClick('Featured')}
+                            >
+                                Featured
+                            </button>
+                            <button 
+                                className={`flex-1 px-4 py-1 transition-colors duration-200 ${
+                                    activeTab === 'Trending' ? 'text-[#F7F2DA]' : 'text-slate-500'
+                                }`}
+                                onClick={() => handleTabClick('Trending')}
+                            >
+                                Trending
+                            </button>
+                        </div>
                     </div>
                 </motion.div>
             </div>
 
             <Button 
-                className={`relative px-4 py-2 border-2 border-[#1a1a1a]`}
+                className="relative rounded-none px-4 py-2 border-2 border-[#1a1a1a]"
                 style={{
                     boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
                 }}
