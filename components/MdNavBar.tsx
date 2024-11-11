@@ -9,6 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@nextui-org/react";
 import { ChevronDownIcon } from "lucide-react"
+import CubicButtonSide from './CubicButtonside';
 
 
 type ActiveItem = string | null;
@@ -118,7 +119,7 @@ const MdNavBar = () => {
             </Link>
 
             {/* Center Section: Navigation Items */}
-            <div className="flex-grow flex items-center  pl-[18%]  justify-center">
+            <div className="flex-grow flex items-center  pl-[15%]  justify-center">
                 <nav className="flex items-center">
                     {navItems.map((item) => (
                         <motion.div
@@ -169,7 +170,8 @@ const MdNavBar = () => {
                         variant="light"
                         onClick={toggleNotification}
                     >
-                        <ChevronDownIcon />
+                                  <img  alt='notification ' src='/images/notification.png' className='h-ful w-full object-contain  rounded-full mx-2'
+/>
                     </Button>
                 </motion.div>
             </div>
@@ -218,6 +220,7 @@ const MdNavBar = () => {
                   </Button>
                 </div>
                 <div className="space-y-4">
+                  <CubicButtonSide />
                   <div className="md:hidden p-3 gap-4 aligm-middle flex flex-col">
                     <Link href="/">
                       <button className="p-[3px] relative w-full">
