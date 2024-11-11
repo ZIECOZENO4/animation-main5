@@ -1,12 +1,13 @@
 "use client"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { ChevronDownIcon, Copy, CheckCircle, Power, Plug } from "lucide-react"
+import { ChevronDownIcon, Copy, CheckCircle, Power, Plug, Loader2 } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { useBalance } from 'wagmi'
+import { useBalance, useDisconnect } from 'wagmi'
 
 const CubicButtonSide = () => {
   const [copied, setCopied] = useState(false)
+  const { disconnect } = useDisconnect()
 
   return (
     <ConnectButton.Custom>
@@ -18,7 +19,7 @@ const CubicButtonSide = () => {
         openConnectModal,
         mounted,
       }) => {
-        const { data: balanceData } = useBalance({
+        const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
           address: account?.address && account.address.startsWith('0x') 
             ? (account.address as `0x${string}`)
             : undefined,
@@ -32,6 +33,14 @@ const CubicButtonSide = () => {
             await navigator.clipboard.writeText(account.address)
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
+          }
+        }
+
+        const handleDisconnect = async () => {
+          try {
+            await disconnect()
+          } catch (error) {
+            console.error("Failed to disconnect:", error)
           }
         }
 
@@ -50,31 +59,29 @@ const CubicButtonSide = () => {
               if (!connected) {
                 return (
                   <div className="px-6">
-      <motion.div 
-                    className="w-full h-[36.22px] shake-button border-[0.63px] border-[#000000]"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    onClick={openConnectModal}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className="flex">
-                      <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
-                      <div className="flex items-center justify-center w-full text-center h-[33px] bg-[#787878]">
-                        <motion.div 
-                          className="flex items-center justify-between gap-4 text-[20px] text-[#F7F2DA] text-center font-normal"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                        >
-                    
-                          <span>CONNECT</span>
-                          <Plug size={18} />
-                        </motion.div>
+                    <motion.div 
+                      className="w-full h-[36.22px] shake-button border-[0.63px] border-[#000000]"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      onClick={openConnectModal}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="flex">
+                        <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
+                        <div className="flex items-center justify-center w-full text-center h-[33px] bg-[#787878]">
+                          <motion.div 
+                            className="flex items-center justify-between gap-4 text-[20px] text-[#F7F2DA] text-center font-normal"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                          >
+                            <span>CONNECT</span>
+                            <Plug size={18} />
+                          </motion.div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="w-full h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
-                  </motion.div>
+                      <div className="w-full h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
+                    </motion.div>
                   </div>
-            
                 )
               }
 
@@ -90,15 +97,21 @@ const CubicButtonSide = () => {
                   >
                     <div className="flex">
                       <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
-                      <div className="w-full px-4 shadow-md flex items-center justify-between h-[33px] bg-[#787878]">
-                        <motion.div className="flex items-center gap-2 text-[#F7F2DA]">
-                          {copied ? (
+                      <div className="w-full px-4 shadow-md flex text-center items-center justify-between h-[33px] bg-[#787878]">
+                        <motion.div className="flex items-center w-full justify-between text-[#F7F2DA]">
+                          {isBalanceLoading || !account?.address ? (
+                            <motion.div
+                              className="flex items-center text-center gap-4 w-full justify-between"
+                            >
+                              <span className="text-sm">Waiting for address...</span>
+                              <Loader2 className="animate-spin" size={18} />
+                            </motion.div>
+                          ) : copied ? (
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="flex items-center text-center gap-4"
+                              className="flex items-center text-center gap-4 w-full justify-between"
                             >
-                           
                               <span className="text-sm">Copied!</span>
                               <CheckCircle size={18} />
                             </motion.div>
@@ -106,9 +119,8 @@ const CubicButtonSide = () => {
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="flex items-center text-center gap-4"
+                              className="flex items-center text-center gap-4 w-full justify-between"
                             >
-                           
                               <span className="text-sm">Copy Address</span>
                               <Copy size={18} />
                             </motion.div>
@@ -124,18 +136,17 @@ const CubicButtonSide = () => {
                     className="w-full h-[36.22px] shake-button border-[0.63px] border-[#000000]"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    onClick={openAccountModal}
+                    onClick={handleDisconnect}
                     whileHover={{ scale: 1.05 }}
                   >
                     <div className="flex">
                       <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
-                      <div className="w-full px-4 shadow-md flex items-center justify-between h-[33px] bg-[#787878]">
+                      <div className="w-full px-4 shadow-md flex items-center text-center justify-between h-[33px] bg-[#787878]">
                         <motion.div 
-                          className="flex items-center text-center justify-between gap-4 text-[#F7F2DA]"
+                          className="flex items-center text-center justify-between gap-4 w-full text-[#F7F2DA]"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                         >
-                        
                           <span className="text-sm">Disconnect</span>
                           <Power size={18} />
                         </motion.div>
