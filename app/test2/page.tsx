@@ -1,10 +1,9 @@
 import React from "react";
-import ExamplePage from "./content2";
+import TradingChart from "./chart1";
 const TestPage = () => {
   return (
     <div>
-       <ExamplePage />
-
+       <TradingChart />
     </div>
   );
 };
