@@ -78,102 +78,102 @@ const MdNavBar = () => {
     };
   return (
   <div className="div">
-    <motion.div 
-            className='flex justify-between items-center text-[#F7F2DA] h-20 w-full py-5 px-4 sticky top-0 z-50'
-        >
-            {/* Left Section: First Component */}
-            <Link href="/" className="flex flex-row">
-                <motion.p
-                    className="mt-2 leading-10 tracking-tight text-[#F7F2DA] text-center hover:text-gray-500 text-md md:text-2xl ml-2 md:ml-4 hover:scale-110 hover:text-xl md:hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out text-xl font-normal relative"
-                    whileHover={{
-                        y: [-2, 2, -2],
-                        transition: { repeat: Infinity, duration: 0.5 }
+<motion.div 
+    className='fixed top-0 left-0 w-full h-20 flex items-center px-4 z-50'
+>
+    {/* Left Section: Logo */}
+    <div className="flex-none">
+        <Link href="/" className="flex flex-row">
+            <motion.p
+                className="leading-10 tracking-tight text-[#F7F2DA] text-center hover:text-gray-500 text-xl md:text-2xl transition-all duration-300 ease-in-out relative"
+                whileHover={{
+                    y: [-2, 2, -2],
+                    transition: { repeat: Infinity, duration: 0.5 }
+                }}
+            >
+                KANNON
+                <motion.span
+                    className="absolute inset-0 text-transparent pointer-events-none"
+                    style={{
+                        textShadow: `
+                            0 0 20px rgba(247, 242, 218, 0.7),
+                            0 0 40px rgba(247, 242, 218, 0.5), 
+                            0 0 60px rgba(247, 242, 218, 0.3)
+                        `,
+                        WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 1, 1, 0] }}
+                    transition={{ 
+                        repeat: Infinity,
+                        duration: 5,
+                        times: [0, 0.1, 0.9, 1],
+                        ease: "easeInOut"
                     }}
                 >
                     KANNON
-                    <motion.span
-                        className="absolute inset-0 text-transparent pointer-events-none"
-                        style={{
-                            textShadow: `
-                                0 0 20px rgba(247, 242, 218, 0.7),
-                                0 0 40px rgba(247, 242, 218, 0.5), 
-                                0 0 60px rgba(247, 242, 218, 0.3)
-                            `,
-                            WebkitTextStroke: "2px rgba(247, 242, 218, 0.2)",
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                            opacity: [0, 1, 1, 0] 
-                        }}
-                        transition={{ 
-                            repeat: Infinity,
-                            duration: 5,
-                            times: [0, 0.1, 0.9, 1],
-                            ease: "easeInOut"
-                        }}
-                    >
-                        KANNON
-                    </motion.span>
-                </motion.p>
-            </Link>
+                </motion.span>
+            </motion.p>
+        </Link>
+    </div>
 
-            {/* Center Section: Navigation Items */}
-            <div className="flex-grow flex items-center justify-center">
-                <nav className="flex items-center">
-                    {navItems.map((item) => (
-                        <motion.div
-                            key={item.name}
-                            className="relative mx-4"
-                            onHoverStart={() => setActiveItem(item.name)}
-                            onHoverEnd={() => setActiveItem(null)}
-                            onClick={() => setActiveItem(item.name)}
-                        >
-                            <Link
-                                href={item.path}
-                                className={`text-md hover:scale-110 transition-all duration-300 ease-in-out font-bold ${
-                                    currentPath === item.path ? "text-[#F7F2DA]" : "text-gray-500 hover:text-[#F7F2DA]"
-                                }`}
-                            >
-                                {item.name}
-                            </Link>
-                            <AnimatePresence>
-                                {activeItem === item.name && (
-                                    <motion.div
-                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
-                                        initial={{ width: "0%" }}
-                                        animate={{ width: "100%" }}
-                                        exit={{ width: "0%" }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    ))}
-                </nav>
-            </div>
-
-            {/* Right Section: Cubic Button and Notification Icon */}
-            <div className="flex items-center justify-end ">
-                <div className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
-                    <CubicButton />
-                </div>
+    {/* Center Section: Navigation Items - Absolute positioning for perfect center */}
+    <div className="absolute left-1/2 transform -translate-x-1/2">
+        <nav className="flex items-center">
+            {navItems.map((item) => (
                 <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-opacity-60 text-[#F7F2DA] p-2 md:px-3 md:py-2 rounded-md text-sm font-medium cursor-pointer"
+                    key={item.name}
+                    className="relative mx-4"
+                    onHoverStart={() => setActiveItem(item.name)}
+                    onHoverEnd={() => setActiveItem(null)}
+                    onClick={() => setActiveItem(item.name)}
                 >
-                    <Button
-                        radius="full"
-                        isIconOnly
-                        aria-label="Notifications and Sidebar"
-                        variant="light"
-                        onClick={toggleNotification}
+                    <Link
+                        href={item.path}
+                        className={`text-md hover:scale-110 transition-all duration-300 ease-in-out font-bold ${
+                            currentPath === item.path ? "text-[#F7F2DA]" : "text-gray-500 hover:text-[#F7F2DA]"
+                        }`}
                     >
-                        <ChevronDownIcon />
-                    </Button>
+                        {item.name}
+                    </Link>
+                    <AnimatePresence>
+                        {activeItem === item.name && (
+                            <motion.div
+                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                                initial={{ width: "0%" }}
+                                animate={{ width: "100%" }}
+                                exit={{ width: "0%" }}
+                                transition={{ duration: 0.3 }}
+                            />
+                        )}
+                    </AnimatePresence>
                 </motion.div>
-            </div>
+            ))}
+        </nav>
+    </div>
+
+    {/* Right Section: Buttons */}
+    <div className="flex-none flex items-center gap-4">
+        <div className="hidden sm:flex">
+            <CubicButton />
+        </div>
+        <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+        >
+            <Button
+                radius="full"
+                isIconOnly
+                aria-label="Notifications and Sidebar"
+                variant="light"
+                onClick={toggleNotification}
+                className="text-[#F7F2DA]"
+            >
+                <ChevronDownIcon />
+            </Button>
         </motion.div>
+    </div>
+</motion.div>
     <AnimatePresence>
         {isNotificationOpen && (
           <>
