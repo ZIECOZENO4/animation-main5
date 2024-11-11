@@ -346,7 +346,8 @@ export default function SalesChart() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-[calc(100vw-35vw)] h-[calc(100vh-60vh)] container mx-auto bg-black p-4 relative"
+          className="w-[calc(100vw-35vw)] md:h-[calc(100vh-60vh)]   h-[calc(100vh-60vh)] 
+          [@media(min-width:3024px)]:h-[calc(100vh-50vh)] container mx-auto bg-black p-4 relative"
         >
           <motion.div
             initial={{ scale: 0.95 }}
