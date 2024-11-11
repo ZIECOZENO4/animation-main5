@@ -1,5 +1,6 @@
 import React from "react";
 import {Tabs, Tab, Card, CardBody, Switch} from "@nextui-org/react";
+import RewardCard from "./transactioncontent";
 
 export default function NotificationAlert() {
   const [isVertical, setIsVertical] = React.useState(false);
@@ -20,13 +21,7 @@ export default function NotificationAlert() {
           <Tab key="All" title="All">
             <Card className="w-full">
               <CardBody className='flex flex-col gap-4 space-y-2 text-center align-middle'>
-                No Transaction Yet
-                <button className="p-[3px] relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-500 to-slate-700 rounded-lg" />
-                  <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                    Create Coin
-                  </div>
-                </button>
+        <RewardCard />
               </CardBody>
             </Card>  
           </Tab>

@@ -205,7 +205,7 @@ const MdNavBar = () => {
                   <h2 className="text-xl text-center font-bold md:hidden px-4 md:px-8">
                     Quick Links
                   </h2>
-                  <h2 className="text-sm text-center  hidden sm:flex px-4 md:px-8">
+                  <h2 className="text-md text-center  hidden sm:flex px-4 md:px-8">
                   Wallet Details 
                   </h2>
 
