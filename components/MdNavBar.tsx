@@ -167,7 +167,7 @@ const MdNavBar = () => {
                         isIconOnly
                         aria-label="Notifications and Sidebar"
                         variant="light"
-                        onClick={() => console.log("Toggle Notification")} // Replace with your function
+                        onClick={toggleNotification}
                     >
                         <ChevronDownIcon />
                     </Button>
