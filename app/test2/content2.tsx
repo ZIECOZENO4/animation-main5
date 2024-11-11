@@ -73,7 +73,7 @@ export default function ExamplePage() {
             `,
           }}
         />
-        {/* Right border */}
+
         <div 
           className="absolute -right-[4px] -top-[4px] -bottom-[4px]"
           style={{

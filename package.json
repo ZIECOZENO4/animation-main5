@@ -38,6 +38,7 @@
     "tailwind-merge": "^2.5.2",
     "tailwind-scrollbar": "^3.1.0",
     "thirdweb": "^5.58.3",
+    "lightweight-charts": "^4.1.1",
     "three": "^0.169.0",
     "three-globe": "^2.31.1",
     "uploadthing": "^7.1.0",
