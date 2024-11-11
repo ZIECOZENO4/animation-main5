@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
-import { Check } from "lucide-react" 
+import { CheckCircle } from "lucide-react" 
 
 const RewardCard = () => {
   return (
@@ -8,7 +8,7 @@ const RewardCard = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full rounded-xl p-6 shadow-xl"
+      className="w-full rounded-xl p-2 shadow-2xl"
     >
       <div className="flex items-start justify-between">
         <motion.div
@@ -17,8 +17,8 @@ const RewardCard = () => {
           transition={{ delay: 0.2 }}
           className="flex items-center gap-3"
         >
-          <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
-            <span className="text-[#F7F2DA] font-semibold">TT</span>
+          <div className="w-8 h-8 rounded-md bg-slate-800 flex items-center justify-center">
+            <span className="text-[#F7F2DA] p-2">TT</span>
           </div>
           <div>
             <h3 className="text-slate-500 font-medium">Nomad</h3>
@@ -31,7 +31,7 @@ const RewardCard = () => {
   transition={{ delay: 0.3, type: "spring" }}
   className="px-3 py-1 bg-slate-500/20 rounded-full flex items-center gap-1"
 >
-  <Check className="text-[#F7F2DA] w-3 h-3" /> {/* Added check icon */}
+  <CheckCircle size={12} className="text-[#F7F2DA] px-1" />    
   <span className="text-[#F7F2DA] text-xs font-medium">Confirmed</span>
 </motion.div>
       </div>
@@ -51,7 +51,7 @@ const RewardCard = () => {
 
       </motion.div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-1">
           <span className="text-slate-500 text-sm">0.9854 TT = 0.0096 ETH</span>
           <span>
          
