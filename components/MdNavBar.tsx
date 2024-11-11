@@ -118,7 +118,7 @@ const MdNavBar = () => {
             </Link>
 
             {/* Center Section: Navigation Items */}
-            <div className="flex-grow flex items-center  left-1/2  justify-center">
+            <div className="flex-grow flex items-center  pl-[60%]  justify-center">
                 <nav className="flex items-center">
                     {navItems.map((item) => (
                         <motion.div

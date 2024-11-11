@@ -309,30 +309,67 @@ export default function SalesChart() {
             }
         }
     }
-
+    useEffect(() => {
+        const handleResize = () => {
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          
+          // Maintain aspect ratio while fitting parent container
+          const container = canvas.parentElement;
+          if (!container) return;
+          
+          const containerWidth = container.offsetWidth;
+          const containerHeight = container.offsetHeight;
+          
+          // Set canvas size to match container while maintaining pixel density
+          canvas.style.width = '100%';
+          canvas.style.height = '100%';
+          canvas.width = containerWidth * window.devicePixelRatio;
+          canvas.height = containerHeight * window.devicePixelRatio;
+          
+          // Update context scale
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            drawChart(ctx, canvas, progressRef.current);
+          }
+        };
+      
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial resize
+      
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
   
-    return (
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-[calc(100vw-35vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
-      >
-     
-        
+      return (
         <motion.div 
-          initial={{ scale: 0.95 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="relative w-full h-full"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-[calc(100vw-35vw)] h-[calc(100vh-63vh)] container mx-auto bg-black p-4 relative"
         >
-          <canvas
-            ref={canvasRef}
-            className="w-full h-full cursor-crosshair"
-            style={{ imageRendering: 'pixelated' }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          />
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative w-full h-full"
+            style={{
+              aspectRatio: '16/9',
+              maxWidth: '100%',
+              margin: '0 auto'
+            }}
+          >
+            <canvas
+              ref={canvasRef}
+              className="w-full h-full cursor-crosshair"
+              style={{ 
+                imageRendering: 'pixelated',
+                maxWidth: '100%',
+                maxHeight: '100%'
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            />
           
           <AnimatePresence>
             <div className="absolute inset-0 pointer-events-none">
