@@ -70,7 +70,7 @@ const CubicButtonSide = () => {
                         <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
                         <div className="flex items-center justify-center w-full text-center h-[33px] bg-[#787878]">
                           <motion.div 
-                            className="flex items-center justify-between gap-4 text-[20px] text-[#F7F2DA] text-center font-normal"
+                            className="flex items-center  gap-4 text-[20px] text-[#F7F2DA] text-center font-normal"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                           >
@@ -110,7 +110,7 @@ const CubicButtonSide = () => {
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="flex items-center text-center gap-4 w-full justify-between"
+                              className="flex items-center text-center gap-4 w-full "
                             >
                               <span className="text-sm">Copied!</span>
                               <CheckCircle size={18} />
@@ -119,7 +119,7 @@ const CubicButtonSide = () => {
                             <motion.div
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="flex items-center text-center gap-4 w-full justify-between"
+                              className="flex items-center text-center gap-4 w-full "
                             >
                               <span className="text-sm">Copy Address</span>
                               <Copy size={18} />
@@ -143,7 +143,7 @@ const CubicButtonSide = () => {
                       <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
                       <div className="w-full px-4 shadow-md flex items-center text-center justify-between h-[33px] bg-[#787878]">
                         <motion.div 
-                          className="flex items-center text-center justify-between gap-4 w-full text-[#F7F2DA]"
+                          className="flex items-center text-center  gap-4 w-full text-[#F7F2DA]"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                         >
