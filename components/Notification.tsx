@@ -5,9 +5,6 @@ export default function NotificationAlert() {
   const [isVertical, setIsVertical] = React.useState(false);
   return (
     <div className="flex flex-col w-full px-4 md:px-8">
-      <Switch className="mb-4 text-[#F7F2DA]" isSelected={isVertical} onValueChange={setIsVertical}>
-        Vision
-      </Switch>
       <div className="flex w-full flex-col">
         <Tabs 
           aria-label="Options" 
