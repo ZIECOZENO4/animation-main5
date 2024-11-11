@@ -211,12 +211,12 @@ const MdNavBar = () => {
 
                   <Button
   isIconOnly
-  className="bg-slate-500 hover:bg-slate-600 border border-slate-800 text-white"
+  className="bg-black hover:bg-slate-800 border border-slate-800 "
   variant="bordered"
   aria-label="Close"
   onClick={toggleNotification}
 >
-  <span className="font-bold">×</span>
+  <span className="font-bold text-2xl">×</span>
 </Button>
                 </div>
                 <div className="space-y-4">
