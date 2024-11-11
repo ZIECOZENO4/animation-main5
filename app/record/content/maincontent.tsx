@@ -301,7 +301,7 @@ export default function MainComponent() {
         </div>
           <Settings className="w-4 h-4" />
           <div className="flex items-center bg-black border border-slate-800 text-[#F7F2DA] rounded-md pr-2">
-            <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
+            <button className="px-2 py-1 text-gray-400 hover:text-[#F7F2DA]" onClick={() => setQuantity(Math.max(0, quantity - 1))}>-</button>
             <input
             aria-label='number'
               type="number"
@@ -309,7 +309,7 @@ export default function MainComponent() {
               onChange={(e) => setQuantity(Math.max(0, parseInt(e.target.value) || 0))}
               className="w-12 bg-transpaent text-center"
             />
-            <button className="px-2 py-1 text-gray-400 hover:text-white" onClick={() => setQuantity(quantity + 1)}>+</button>
+            <button className="px-2 py-1 text-gray-400 hover:text-[#F7F2DA]" onClick={() => setQuantity(quantity + 1)}>+</button>
           </div>
           <input aria-label='number' type="range" min="0" max="100" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} className="w-32" />
         </div>

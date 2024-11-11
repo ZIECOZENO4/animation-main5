@@ -112,7 +112,7 @@ const CryptoDisplay = () => {
             <motion.button
 
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }} className="mt-8 px-8 py-3 bg-slate-500 text-white rounded-md hover:bg-slate-600 transition-colors text-lg font-medium">
+            whileTap={{ scale: 0.95 }} className="mt-8 px-8 py-3 bg-slate-500 text-[#F7F2DA] rounded-md hover:bg-slate-600 transition-colors text-lg font-medium">
               JOIN COMMUNITY
             </motion.button>
           </div>

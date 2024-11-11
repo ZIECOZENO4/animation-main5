@@ -18,7 +18,7 @@
 //   return (
 //     <main className="min-h-screen bg-black p-4">
 //       <div className="max-w-7xl mx-auto">
-//         <h1 className="text-white text-2xl mb-4">Trading Chart</h1>
+//         <h1 className="text-[#F7F2DA] text-2xl mb-4">Trading Chart</h1>
 //         <TradeChart 
 //           data={sampleData}
 //           scatterPoints={sampleScatterPoints}

@@ -18,10 +18,10 @@ export default function Component() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-900">
       {isOpen && (
-        <div className="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden w-full max-w-2xl">
+        <div className="bg-gray-800 text-[#F7F2DA] rounded-lg shadow-lg overflow-hidden w-full max-w-2xl">
           <div className="flex justify-between items-center p-4 border-b border-gray-700">
             <h2 className="text-xl font-semibold">Sign in</h2>
-            <button   aria-label='number' onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white">
+            <button   aria-label='number' onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-[#F7F2DA]">
               <X className="h-6 w-6" />
             </button>
           </div>

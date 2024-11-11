@@ -40,7 +40,7 @@ const TableRow: React.FC<TokenData & { isHeader?: boolean }> = ({
       <div className={cellClass}>{attention}</div>
       <div className={cellClass}>
         {isHeader ? 'Buy' : (
-          <button className="bg-gray-700 text-white px-4 py-1 rounded">
+          <button className="bg-gray-700 text-[#F7F2DA] px-4 py-1 rounded">
             BUY
           </button>
         )}
