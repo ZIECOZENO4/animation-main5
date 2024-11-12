@@ -599,7 +599,7 @@ export default function TestContent() {
      
                 <div className="space-y-4 h-[65%]">
                   {/* First Row */}
-<p className='text-center mb-2 text-xl'>Swap Token</p>
+<p className='text-center mb-2 text-[#F7F2DA80] text-xl'>Swap Token</p>
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
