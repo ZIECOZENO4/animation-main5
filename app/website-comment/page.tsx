@@ -89,7 +89,7 @@ export default function Component() {
       <style jsx global>{`
         Input:focus, textarea:focus {
           outline: none;
-          border-color: #4ae436 !important;
+          border-color: #F7F2DA !important;
         }
       `}</style>
         <h2 className="text-2xl font-bold mb-4">Recent Comments</h2>

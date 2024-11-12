@@ -85,7 +85,7 @@ export default function PreSalePage() {
         input:focus,
         textarea:focus {
           outline: none;
-          border-color: #4ae436 !important;
+          border-color: #F7F2DA !important;
         }
       `}</style>
 
@@ -201,7 +201,7 @@ export default function PreSalePage() {
                   aria-label="Liquidity locked"
                   size="md"
                   value={lockPercentage}
-                  color="success"
+                  color="default"
                   showValueLabel={false}
                   className="max-w-md"
                 />
