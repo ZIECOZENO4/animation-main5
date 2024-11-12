@@ -273,9 +273,7 @@ const MdNavBar = () => {
                         </div>
                       </button>
                     </Link>
-                    <div className="w-full">
-            <FullConnectButton />
-            </div>
+                 
                   </div>
                   <div className="space-y-4 mt-6">
                     <h2 className="text-xl text-center font-bold mt-6 md:hidden px-4 md:px-8">
