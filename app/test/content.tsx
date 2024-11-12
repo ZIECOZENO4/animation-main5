@@ -612,7 +612,7 @@ export default function TestContent() {
                     </div>
                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
-                      <div className="flex items-center text-xs justify-center h-full">Select</div>
+                      <div className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full">Select</div>
                       </BorderComponent>
                     </div>
                   </div>
@@ -628,7 +628,7 @@ export default function TestContent() {
                     </div>
                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
-                        <div className="flex items-center text-xs justify-center h-full">Select</div>
+                        <div className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full">Select</div>
                       </BorderComponent>
                     </div>
                   </div>
