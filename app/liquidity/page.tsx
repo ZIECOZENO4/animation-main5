@@ -26,7 +26,7 @@ export default function Component() {
         }
       `}</style>
       
-      <Card className="bg-black border border-gray-600 p-6 mb-8">
+      <Card className="bg-black border border-gray-600 p-6 mb-8 rounded-none">
         <h1 className="text-gray-400 mb-4">Liquidity Pool</h1>
         <p className="text-2xl mb-6">Deposit and withdraw your liquidity</p>
         <div className="grid grid-cols-2 gap-4">
@@ -42,7 +42,7 @@ export default function Component() {
       </Card>
       
       <div className="grid md:grid-cols-2 gap-8 mb-8">
-        <Card className="bg-black border border-gray-600 p-6">
+        <Card className="bg-black border border-gray-600 p-6 rounded-none">
           <CardHeader>
             <h2 className="text-2xl">Deposit</h2>
           </CardHeader>
@@ -54,7 +54,7 @@ export default function Component() {
               id="deposit-amount"
               type="number"
               placeholder="0.0"
-              className="bg-black w-full text-[#F7F2DA] mb-4 rounded-2xl border-white hover:border hover:border-green-500"
+              className="bg-black w-full text-[#F7F2DA] mb-4 rounded-none border-white hover:border hover:border-green-500"
               variant="bordered"
             />
             <button
@@ -74,7 +74,7 @@ export default function Component() {
           </div>
         </Card>
         
-        <Card className="bg-black border border-gray-600 p-6">
+        <Card className="bg-black border border-gray-600 p-6 rounded-none">
           <CardHeader>
             <h2 className="text-2xl">Withdraw</h2>
           </CardHeader>
@@ -86,7 +86,7 @@ export default function Component() {
               id="withdraw-amount"
               type="number"
               placeholder="0.0"
-              className="bg-black w-full text-[#F7F2DA] mb-4 rounded-2xl border-white hover:border hover:border-green-500"
+              className="bg-black rounded-none w-full text-[#F7F2DA] mb-4  border-white hover:border hover:border-green-500"
               variant="bordered"
             />
  
@@ -109,8 +109,8 @@ export default function Component() {
       </div>
       
       <Button
-        variant="bordered"
-        className="w-full shake-button bg-gradient-to-r mt-2 md:mt-6 from-slate-600 to-slate-800 hover:from-slate-700 hover:to-slate-900 text-[#F7F2DA] border-blue-300"
+        variant="ghost"
+        className="w-full shake-button rounded-none bg-gradient-to-r mt-2 md:mt-6 from-slate-600 to-slate-800 hover:from-slate-700 hover:to-slate-900 text-[#F7F2DA] border-blue-300"
       >
         Learn More
       </Button>

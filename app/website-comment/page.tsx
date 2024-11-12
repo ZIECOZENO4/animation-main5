@@ -128,21 +128,21 @@ export default function Component() {
                 label="Your nickname"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
-                className="bg-black text-[#F7F2DA] rounded-2xl border-white hover:border hover:border-green-500"
+                className="bg-black text-[#F7F2DA]  border-white hover:border hover:border-[#F7F2DA]"
                 variant="bordered"
               />
               <Input
                 label="Your address"
                 value="0x1234...5678"
                 readOnly
-                className="bg-black text-[#F7F2DA] rounded-2xl  border-white hover:border hover:border-green-500"
+                className="bg-black text-[#F7F2DA]   border-white hover:border hover:border-[#F7F2DA]"
                 variant="bordered"
               />
               <Textarea
                 label="Type your comment here..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="bg-black text-[#F7F2DA] rounded-2xl border-white hover:border hover:border-green-500"
+                className="bg-black text-[#F7F2DA]  border-white hover:border hover:border-[#F7F2DA]"
                 variant="bordered"
               />
        
