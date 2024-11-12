@@ -82,11 +82,10 @@
   
   .text {
     display: inline-block;
-    white-space: nowrap;
+    white-space: nowrap;                                                                        
     overflow: hidden;
-    border-right: 0.2em solid slategrey; /* Cursor */
+    border-right: 0.2em solid #F7F2DA; /* Cursor */
     animation: typeAndDelete 4s steps(11) infinite,
       blinkCursor 0.5s step-end infinite alternate;
     margin-top: 1.5em;
   }
-  

@@ -4,11 +4,11 @@ import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 
 export function HeroSearchInput() {
   const placeholders = [
-    "Search Coin by Name",
-    "Search Coin by Chain",
-    "Search Coin by Stats",
-    "Search Coin by ID",
-    "Search Coin by Creation Date",
+    "Search Token by Name",
+    "Search Token by Chain",
+    "Search Token by Stats",
+    "Search Token by ID",
+    "Search Token by Creation Date",
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
