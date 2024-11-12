@@ -599,7 +599,7 @@ export default function TestContent() {
      
                 <div className="space-y-4 h-[65%]">
                   {/* First Row */}
-<p className='text-center my-2 text-xl'>Swap Token</p>
+<p className='text-center mb-2 text-xl'>Swap Token</p>
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
@@ -612,7 +612,7 @@ export default function TestContent() {
                     </div>
                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
-                        <div className="flex items-center justify-center h-full"></div>
+                      <div className="flex items-center text-xs justify-center h-full">Select</div>
                       </BorderComponent>
                     </div>
                   </div>
@@ -621,23 +621,23 @@ export default function TestContent() {
                       <BorderComponent>
                         <div className="flex justify-end items-center h-full">
                           <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                            MONAD
+                          BEAT
                           </span>
                         </div>
                       </BorderComponent>
                     </div>
                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
-                        <div className="flex items-center justify-center h-full"></div>
+                        <div className="flex items-center text-xs justify-center h-full">Select</div>
                       </BorderComponent>
                     </div>
                   </div>
                   {/* Second Row - Full Width */}
                   <div className="w-full h-[51px] bg-[#5555554D]">
                     <BorderComponent>
-                      <div className="flex justify-end items-center h-full">
+                      <div className="flex justify-center items-center h-full">
                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                          BEAT
+                         CONFIRM SWAP
                         </span>
                       </div>
                     </BorderComponent>
