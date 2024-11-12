@@ -154,7 +154,7 @@ const MdNavBar = () => {
             </div>
 
             {/* Right Section: Cubic Button and Notification Icon */}
-            <div className="flex items-center justify-end ">
+            <div className="flex items-center justify-end mr-2">
                 <div   onClick={toggleNotification} className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
                     <CubicButton />
                 </div>

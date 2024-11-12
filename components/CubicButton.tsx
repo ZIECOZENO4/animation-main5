@@ -77,7 +77,7 @@ const CubicButton = () => {
               className="w-auto h-[36.22px] shake-button border-[0.63px] border-[#000000]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              onClick={openAccountModal}
+      
               whileHover={{ scale: 1.05 }}
             >
               <div className="flex">
