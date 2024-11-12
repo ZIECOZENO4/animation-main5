@@ -155,25 +155,10 @@ const MdNavBar = () => {
 
             {/* Right Section: Cubic Button and Notification Icon */}
             <div className="flex items-center justify-end ">
-                <div className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
+                <div   onClick={toggleNotification} className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
                     <CubicButton />
                 </div>
-                <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-opacity-60 text-[#F7F2DA] p-2 md:px-3 md:py-2 rounded-md text-sm font-medium cursor-pointer"
-                >
-                    <Button
-                        radius="full"
-                        isIconOnly
-                        aria-label="Notifications and Sidebar"
-                        variant="light"
-                        onClick={toggleNotification}
-                    >
-                                  <img  alt='notification ' src='/images/notification.png' className='h-ful w-full object-contain  rounded-full mx-2'
-/>
-                    </Button>
-                </motion.div>
+       
             </div>
         </motion.div>
     <AnimatePresence>

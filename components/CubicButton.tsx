@@ -48,7 +48,7 @@ const CubicButton = () => {
               className="w-[110.08px] h-[36.22px] shake-button border-[0.63px] border-[#000000]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              onClick={openConnectModal}
+
               whileHover={{ scale: 1.05 }}
             >
               <div className="flex">
@@ -71,51 +71,7 @@ const CubicButton = () => {
 
               return (
                 <div className="flex flex-col sm:flex-row gap-1">
-                   
-                  {/* <motion.div 
-              className="w-auto h-[36.22px] shake-button border-[0.63px] border-[#000000]"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              onClick={openChainModal}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex">
-                <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
-                <div className=" w-auto px-2 shadow-md flex items-center justify-between h-[33px] bg-[#787878]">
-                  <motion.p 
-                    className="text-[20px] text-[#F7F2DA] text-center font-normal"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-        
-                  >
-              <div className="flex items-center gap-2">
-                          {chain.iconUrl && (
-                            <Image
-                              src={chain.iconUrl}
-                              alt={chain.name || "Network"}
-                              width={25}
-                              height={25}
-                              className="rounded-full"
-                            />
-                          )}
-         <span className="text-[#F7F2DA] text-sm font-normal px-1">
-  {(chain.name ?? "Unknown").length <= 8 
-    ? chain.name 
-    : `${chain.name?.slice(0, 8)}...`}
-</span>
-{chain.unsupported && (
-                          <span className="text-red-500 text-sm">
-                            ⚠️ Unsupported
-                          </span>
-                        )}
-                          <ChevronDownIcon />
-                        </div>
-                  </motion.p>
-                </div>
-              </div>
-              <div className="w-full  h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
-            </motion.div> */}
-                  {/* Account & Balance Button */}
+            
       
                   <motion.div 
               className="w-auto h-[36.22px] shake-button border-[0.63px] border-[#000000]"
