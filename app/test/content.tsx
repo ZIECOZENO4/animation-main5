@@ -450,317 +450,207 @@ const tokens: Token[] = [
   }
 ];
 
-const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
-  isOpen,
-  onOpenChange,
-  onTokenSelect,
-  selectedTokens
-}) => {
-  const availableTokens = tokens.filter(
-    (token) => !selectedTokens.includes(token.symbol)
-  );
-  const BorderComponent = ({
-    children,
-    className = ""
-  }: {
-    children?: React.ReactNode;
-    className?: string;
-  }) => (
-    <div className="relative h-full">
-      <div className="relative  h-full">{children}</div>
-      {/* Top border */}
-      <div
-        className="absolute -top-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Bottom border */}
-      <div
-        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Left border */}
-      <div
-        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to bottom,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Right border */}
-      <div
-        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to bottom,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-    </div>
-  );
-  return (
-    <BorderComponent>
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      classNames={{
-        backdrop: "bg-[#000000]/50 backdrop-blur-sm rounded-none",
-        base: "bg-[#000000] border-[#555555] border-2",
-        header: "border-b border-[#555555]",
-        body: "py-6"
+const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode; className?: string; }) => (
+  <div className={`relative h-full ${className}`}>
+    <div className="relative h-full">{children}</div>
+    {/* Top border */}
+    <div className="absolute -top-[2px] -right-[2px] -left-[2px]"
+      style={{
+        height: "2px",
+        backgroundImage: `
+          repeating-linear-gradient(
+            to right,
+            #555555 0,
+            #555555 8px,
+            transparent 8px,
+            transparent 16px,
+            #555555 16px,
+            #555555 32px,
+            transparent 32px,
+            transparent 48px
+          )
+        `
       }}
-    >
-      <ModalContent>
-        <ModalHeader className="text-[#F7F2DA80] ">Select Token</ModalHeader>
-        <ModalBody>
-        <BorderComponent>
-          <input
-            type="text"
-            placeholder="Search tokens..."
-            className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3 border border-[#555555] focus:outline-none"
-          />
-          </BorderComponent>
-          <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto">
-            {availableTokens.map((token) => (
-              <motion.div
-                key={token.symbol}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex justify-between items-center p-3 cursor-pointer hover:bg-[#5555554D] "
-                onClick={() => onTokenSelect(token)}
-              >
-                <div className="flex flex-col">
-                  <span className="text-[#F7F2DA80] text-lg">{token.name}</span>
-                  <span className="text-[#F7F2DA40] text-xs">
-                    ${token.rate}
-                  </span>
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="text-[#F7F2DA40] text-sm">
-                    {token.chain}
-                  </span>
-                  <span className="text-[#F7F2DA40] text-xs">
-                    Balance: {token.balance}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
-    </BorderComponent>
-  );
-};
+    />
+    {/* Bottom border */}
+    <div className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
+      style={{
+        height: "2px",
+        backgroundImage: `
+          repeating-linear-gradient(
+            to right,
+            #555555 0,
+            #555555 8px,
+            transparent 8px,
+            transparent 16px,
+            #555555 16px,
+            #555555 32px,
+            transparent 32px,
+            transparent 48px
+          )
+        `
+      }}
+    />
+    {/* Left border */}
+    <div className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+      style={{
+        width: "2px",
+        backgroundImage: `
+          repeating-linear-gradient(
+            to bottom,
+            #555555 0,
+            #555555 8px,
+            transparent 8px,
+            transparent 16px,
+            #555555 16px,
+            #555555 32px,
+            transparent 32px,
+            transparent 48px
+          )
+        `
+      }}
+    />
+    {/* Right border */}
+    <div className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
+      style={{
+        width: "2px",
+        backgroundImage: `
+          repeating-linear-gradient(
+            to bottom,
+            #555555 0,
+            #555555 8px,
+            transparent 8px,
+            transparent 16px,
+            #555555 16px,
+            #555555 32px,
+            transparent 32px,
+            transparent 48px
+          )
+        `
+      }}
+    />
+  </div>
+);
 
-const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
-  isOpen,
-  onOpenChange,
-  token1,
-  token2,
-  amount1,
-  amount2
-}) => {
-  const BorderComponent = ({
-    children,
-    className = ""
-  }: {
-    children?: React.ReactNode;
-    className?: string;
-  }) => (
-    <div className="relative h-full">
-      <div className="relative  h-full">{children}</div>
-      {/* Top border */}
-      <div
-        className="absolute -top-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Bottom border */}
-      <div
-        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Left border */}
-      <div
-        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to bottom,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Right border */}
-      <div
-        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to bottom,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-    </div>
-  );
+// Modified TokenSelectModal with custom borders
+const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChange, onTokenSelect, selectedTokens }) => {
+  const availableTokens = tokens.filter(token => !selectedTokens.includes(token.symbol));
+
   return (
-    <BorderComponent>
-    <Modal
-      isOpen={isOpen}
+    <Modal 
+      isOpen={isOpen} 
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: "bg-[#000000] border-[#555555] border-2",
-        header: "border-b border-[#555555]",
-        body: "py-6"
+        base: "bg-transparent border-0", // Remove default modal styling
+        header: "border-b-0",
+        body: "p-0",
       }}
     >
       <ModalContent>
-        <ModalHeader className="text-[#F7F2DA80]">Confirm Swap</ModalHeader>
-        <ModalBody>
-          <div className="space-y-4">
-            <div className="bg-[#5555554D] p-4 ">
-              <div className="flex justify-between mb-2">
-                <span className="text-[#F7F2DA80]">From:</span>
-                <span className="text-[#F7F2DA80]">
-                  {amount1} {token1?.symbol}
-                </span>
-              </div>
-              <div className="text-[#F7F2DA40] text-sm">
-                Chain: {token1?.chain}
-              </div>
+        {(onClose) => (
+          <BorderComponent className="bg-[#000000]">
+            <div className="p-6">
+              <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
+              <ModalBody className="px-0">
+                <BorderComponent>
+                  <input
+                    type="text"
+                    placeholder="Search tokens..."
+                    className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3 focus:outline-none"
+                  />
+                </BorderComponent>
+                
+                <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto">
+                  {availableTokens.map((token) => (
+                    <BorderComponent key={token.symbol}>
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex justify-between items-center p-3 cursor-pointer bg-[#5555554D]"
+                        onClick={() => onTokenSelect(token)}
+                      >
+                        <div className="flex flex-col">
+                          <span className="text-[#F7F2DA80] text-lg">{token.name}</span>
+                          <span className="text-[#F7F2DA40] text-xs">${token.rate}</span>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <span className="text-[#F7F2DA40] text-sm">{token.chain}</span>
+                          <span className="text-[#F7F2DA40] text-xs">Balance: {token.balance}</span>
+                        </div>
+                      </motion.div>
+                    </BorderComponent>
+                  ))}
+                </div>
+              </ModalBody>
             </div>
-
-            <div className="bg-[#5555554D] p-4 ">
-              <div className="flex justify-between mb-2">
-                <span className="text-[#F7F2DA80]">To:</span>
-                <span className="text-[#F7F2DA80]">
-                  {amount2} {token2?.symbol}
-                </span>
-              </div>
-              <div className="text-[#F7F2DA40] text-sm">
-                Chain: {token2?.chain}
-              </div>
-            </div>
-            <BorderComponent>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3  border border-[#555555]"
-              onClick={() => {
-                // Handle swap confirmation here
-                console.log("Swap confirmed");
-              }}
-            >
-              SWAP TOKENS
-            </motion.button>
-            </BorderComponent>
-          </div>
-        </ModalBody>
+          </BorderComponent>
+        )}
       </ModalContent>
     </Modal>
-    </BorderComponent>
+  );
+};
+
+// Modified ConfirmSwapModal with custom borders
+const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChange, token1, token2, amount1, amount2 }) => {
+  return (
+    <Modal 
+      isOpen={isOpen} 
+      onOpenChange={onOpenChange}
+      classNames={{
+        backdrop: "bg-[#000000]/50 backdrop-blur-sm",
+        base: "bg-transparent border-0",
+        header: "border-b-0",
+        body: "p-0",
+      }}
+    >
+      <ModalContent>
+        {(onClose) => (
+          <BorderComponent className="bg-[#000000]">
+            <div className="p-6">
+              <ModalHeader className="text-[#F7F2DA80] px-0">Confirm Swap</ModalHeader>
+              <ModalBody className="px-0">
+                <div className="space-y-4">
+                  <BorderComponent>
+                    <div className="bg-[#5555554D] p-4">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-[#F7F2DA80]">From:</span>
+                        <span className="text-[#F7F2DA80]">{amount1} {token1?.symbol}</span>
+                      </div>
+                      <div className="text-[#F7F2DA40] text-sm">Chain: {token1?.chain}</div>
+                    </div>
+                  </BorderComponent>
+
+                  <BorderComponent>
+                    <div className="bg-[#5555554D] p-4">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-[#F7F2DA80]">To:</span>
+                        <span className="text-[#F7F2DA80]">{amount2} {token2?.symbol}</span>
+                      </div>
+                      <div className="text-[#F7F2DA40] text-sm">Chain: {token2?.chain}</div>
+                    </div>
+                  </BorderComponent>
+
+                  <BorderComponent>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3"
+                      onClick={() => {
+                        console.log("Swap confirmed");
+                        onClose();
+                      }}
+                    >
+                      SWAP TOKENS
+                    </motion.button>
+                  </BorderComponent>
+                </div>
+              </ModalBody>
+            </div>
+          </BorderComponent>
+        )}
+      </ModalContent>
+    </Modal>
   );
 };
 
