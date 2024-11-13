@@ -1,347 +1,3 @@
-// "use client";
-
-// import { motion } from "framer-motion";
-// import React from "react";
-// import EnhanceTradingView from "../chart/enhanced-trading-interface";
-// export default function TestContent() {
-//   const containerVariants = {
-//     hidden: { opacity: 0 },
-//     visible: {
-//       opacity: 1,
-//       transition: {
-//         staggerChildren: 0.1,
-//         delayChildren: 0.2
-//       }
-//     }
-//   };
-
-//   const itemVariants = {
-//     hidden: { opacity: 0, y: 20 },
-//     visible: { opacity: 1, y: 0 }
-//   };
-
-//   const MiddleBorderComponent = ({
-//     children
-//   }: {
-//     children?: React.ReactNode;
-//   }) => (
-//     <div className="relative h-full">
-//       <div className="relative p-6 h-full">{children}</div>
-
-//       {/* Top border - Solid Black */}
-//       <div
-//         className="absolute -top-[2px] -right-[2px] -left-[2px]"
-//         style={{
-//           height: "2px",
-//           backgroundColor: "#000000"
-//         }}
-//       />
-
-//       {/* Bottom border - Custom Pattern */}
-//       <div
-//         className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-//         style={{
-//           height: "2px",
-//           backgroundImage: `
-//       repeating-linear-gradient(
-//         to right,
-//         #555555 0,
-//         #555555 8px,
-//         transparent 8px,
-//         transparent 16px,
-//         #555555 16px,
-//         #555555 32px,
-//         transparent 32px,
-//         transparent 48px
-//       )
-//     `
-//         }}
-//       />
-
-//       {/* Left border - Solid Black */}
-//       <div
-//         className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-//         style={{
-//           width: "2px",
-//           backgroundColor: "#000000"
-//         }}
-//       />
-
-//       {/* Right border - Solid Black */}
-//       <div
-//         className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-//         style={{
-//           width: "2px",
-//           backgroundColor: "#000000"
-//         }}
-//       />
-//     </div>
-//   );
-
-//   const BorderComponent = ({
-//     children,
-//     className = ""
-//   }: {
-//     children?: React.ReactNode;
-//     className?: string;
-//   }) => (
-//     <div className="relative h-full">
-//       <div className="relative  h-full">{children}</div>
-//       {/* Top border */}
-//       <div
-//         className="absolute -top-[2px] -right-[2px] -left-[2px]"
-//         style={{
-//           height: "2px",
-//           backgroundImage: `
-//       repeating-linear-gradient(
-//         to right,
-//         #555555 0,
-//         #555555 8px,
-//         transparent 8px,
-//         transparent 16px,
-//         #555555 16px,
-//         #555555 32px,
-//         transparent 32px,
-//         transparent 48px
-//       )
-//     `
-//         }}
-//       />
-//       {/* Bottom border */}
-//       <div
-//         className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-//         style={{
-//           height: "2px",
-//           backgroundImage: `
-//       repeating-linear-gradient(
-//         to right,
-//         #555555 0,
-//         #555555 8px,
-//         transparent 8px,
-//         transparent 16px,
-//         #555555 16px,
-//         #555555 32px,
-//         transparent 32px,
-//         transparent 48px
-//       )
-//     `
-//         }}
-//       />
-//       {/* Left border */}
-//       <div
-//         className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-//         style={{
-//           width: "2px",
-//           backgroundImage: `
-//       repeating-linear-gradient(
-//         to bottom,
-//         #555555 0,
-//         #555555 8px,
-//         transparent 8px,
-//         transparent 16px,
-//         #555555 16px,
-//         #555555 32px,
-//         transparent 32px,
-//         transparent 48px
-//       )
-//     `
-//         }}
-//       />
-//       {/* Right border */}
-//       <div
-//         className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-//         style={{
-//           width: "2px",
-//           backgroundImage: `
-//       repeating-linear-gradient(
-//         to bottom,
-//         #555555 0,
-//         #555555 8px,
-//         transparent 8px,
-//         transparent 16px,
-//         #555555 16px,
-//         #555555 32px,
-//         transparent 32px,
-//         transparent 48px
-//       )
-//     `
-//         }}
-//       />
-//     </div>
-//   );
-
-//   const BoxComponent = ({ title }: { title: string }) => (
-//     <motion.div
-//       variants={itemVariants}
-//       whileHover={{ scale: 1.02 }}
-//       className="mb-4"
-//     >
-//       <BorderComponent>
-//         <div className="flex justify-between items-center p-2">
-//           <span className="text-xs text-gray-500">{title}</span>
-//           <motion.div
-//             whileHover={{ scale: 1.1, borderColor: "#ffffff" }}
-//             whileTap={{ scale: 0.9 }}
-//             className="w-4 h-4 border border-gray-800 cursor-pointer"
-//           />
-//         </div>
-//       </BorderComponent>
-//     </motion.div>
-//   );
-
-//   return (
-//     <motion.div
-//       className="overflow-hidden"
-//       style={{ height: "calc(100vh - 5rem)" }}
-//       initial="hidden"
-//       animate="visible"
-//       variants={containerVariants}
-//     >
-//       <div className="relative z-10 h-full p-2">
-//         <div className="flex flex-row w-full  gap-6 h-full">
-//           {/* Left Column */}
-//           <div className="flex w-[70%] flex-col gap-6 h-full">
-//             <motion.div
-//               initial={{ opacity: 0, x: -50 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ duration: 0.5, ease: "easeOut" }}
-
-//               className="relative h-[65%] w-full bg-[#000000]"
-//             >
-//               <BorderComponent>
-//                 <motion.span
-//                   className="text-sm  text-gray-500"
-//                   whileHover={{ color: "#ffffff" }}
-//                 >
-
-//                   <div className="mx-0 pt-4 px-0  h-full w-full flex-grow ">
-//                     <EnhanceTradingView />
-//                   </div>
-//                 </motion.span>
-//               </BorderComponent>
-//             </motion.div>
-
-//             <motion.div
-//               initial={{ opacity: 0, x: -50 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-
-//               className="relative h-[35%]  bg-[#000000]"
-//             >
-//               <BorderComponent>
-//                 <motion.span
-//                   className="text-sm text-gray-500"
-//                   whileHover={{ color: "#ffffff" }}
-//                 ></motion.span>
-//               </BorderComponent>
-//             </motion.div>
-//           </div>
-
-//           {/* Right Column */}
-//           <motion.div
-//             initial={{ opacity: 0, x: 50 }}
-//             animate={{ opacity: 1, x: 0 }}
-//             transition={{ duration: 0.5, ease: "easeOut" }}
-//             className="h-full  w-[30%]  bg-[#000000]"
-//           >
-//             <BorderComponent>
-//               <div className="flex flex-col h-full p-6 gap-4">
-//                 {/* Top Section */}
-
-//                 <div className="space-y-4 h-[65%]">
-//                   {/* First Row */}
-
-//                   <div className="flex gap-4">
-//                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
-//                       <BorderComponent>
-//                         <div className="flex justify-end items-center h-full">
-//                           <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-//                             MONAD
-//                           </span>
-//                         </div>
-//                       </BorderComponent>
-//                     </div>
-//                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
-//                       <BorderComponent>
-//                         <div className="flex items-center justify-center h-full"></div>
-//                       </BorderComponent>
-//                     </div>
-//                   </div>
-//                   {/* Second Row - Full Width */}
-//                   <div className="w-full h-[51px] bg-[#5555554D]">
-//                     <BorderComponent>
-//                       <div className="flex justify-end items-center h-full">
-//                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-//                           BEAT
-//                         </span>
-//                       </div>
-//                     </BorderComponent>
-//                   </div>
-//                 </div>
-
-//                 {/* Middle Empty Section with Border */}
-//                 <div className="flex-grow">
-//                   <MiddleBorderComponent />
-//                 </div>
-
-//                 {/* Bottom Section */}
-//                 <div className="flex flex-col justify-between h-[35%]"> {/* Changed from space-y-4 to flex with justify-between */}
-//     <div className="space-y-4"> {/* Container for top two rows */}
-//         {/* First Row */}
-//         <div className="flex gap-4">
-//             <div className="w-[80%] h-[51px] bg-[#5555554D]">
-//                 <BorderComponent>
-//                     <div className="flex justify-center items-center h-full">
-//                         <span className="text-[20px] text-[#F7F2DA80]">
-//                             MONAD
-//                         </span>
-//                     </div>
-//                 </BorderComponent>
-//             </div>
-//             <div className="w-[20%] h-[51px] bg-[#5555554D]">
-//                 <BorderComponent>
-//                     <div className="flex items-center justify-center h-full"></div>
-//                 </BorderComponent>
-//             </div>
-//         </div>
-//         {/* Second Row */}
-//         <div className="flex gap-4">
-//             <div className="w-[80%] h-[51px] bg-[#5555554D]">
-//                 <BorderComponent>
-//                     <div className="flex justify-center items-center h-full">
-//                         <span className="text-[20px] text-[#F7F2DA80]">
-//                             MONAD
-//                         </span>
-//                     </div>
-//                 </BorderComponent>
-//             </div>
-//             <div className="w-[20%] h-[51px] bg-[#5555554D]">
-//                 <BorderComponent>
-//                     <div className="flex items-center justify-center h-full"></div>
-//                 </BorderComponent>
-//             </div>
-//         </div>
-//     </div>
-
-//     {/* Third Row - Full Width (at bottom) */}
-//     <div className="w-full h-[51px] bg-[#5555554D]">
-//         <BorderComponent>
-//             <div className="flex justify-end items-center h-full">
-//                 <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-//                     BEAT
-//                 </span>
-//             </div>
-//         </BorderComponent>
-//     </div>
-// </div>
-//               </div>
-//             </BorderComponent>
-//           </motion.div>
-//         </div>
-//       </div>
-//     </motion.div>
-//   );
-// }
 
 "use client";
 
@@ -381,11 +37,171 @@ interface ConfirmSwapModalProps {
   amount2: string;
 }
 
+const chains = [
+  { name: 'Ethereum', logo: '/images/eth.png' },
+  { name: 'Arbitrum', logo: '/images/arbi.png' },
+  { name: 'Optimism', logo: '/images/opti.png' },
+  { name: 'Sepolia', logo: '/images/sepo.png' }
+];
+
 interface BorderComponentProps {
   children: React.ReactNode;
 }
 
 const tokens: Token[] = [
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Arbitrum",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/arbi.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Polygon",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Arbitrum",
+    symbol: "BEAT",
+    balance: "100",
+    icon: "/images/arbi.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Ethereum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Arbitrum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/arbi.png"
+  },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Arbitrum",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/arbi.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Polygon",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Arbitrum",
+    symbol: "BEAT",
+    balance: "100",
+    icon: "/images/arbi.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Ethereum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Arbitrum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/arbi.png"
+  },
   {
     name: "MONAD",
     rate: "1.234",
@@ -544,13 +360,14 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
 
 const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChange, onTokenSelect, selectedTokens }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  
+  const [selectedChain, setSelectedChain] = useState<string>("Ethereum"); // Default to Ethereum
+
   const filteredTokens = tokens.filter(token => {
     const isNotSelected = !selectedTokens.includes(token.symbol);
+    const matchesChain = token.chain === selectedChain; // Filter by selected chain
     const searchTerm = searchQuery.toLowerCase();
-    return isNotSelected && (
+    return isNotSelected && matchesChain && (
       token.name.toLowerCase().includes(searchTerm) ||
-      token.chain.toLowerCase().includes(searchTerm) ||
       token.symbol.toLowerCase().includes(searchTerm)
     );
   });
@@ -585,20 +402,35 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   <IoClose size={24} />
                 </motion.button>
               </div>
+
+              {/* Chain Logos and Selection */}
+              <div className="flex justify-between items-center mt-4 mb-2">
+                {chains.map((chain) => (
+                  <motion.div
+                    key={chain.name}
+                    whileHover={{ scale: 1.05 }}
+                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'border-b-2 border-[#F7F2DA80]' : ''}`}
+                    onClick={() => setSelectedChain(chain.name)}
+                  >
+                    <img src={chain.logo} alt={chain.name} className="w-8 h-8 mb-1" />
+                    <span className="text-[#F7F2DA80] text-sm">{chain.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+
               <ModalBody className="px-4">
                 <div className="px-3">
-                <BorderComponent>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={handleSearch}
-                    placeholder="Search by token name or chain..."
-                    className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7F2DA40]"
-                  />
-                </BorderComponent>
+                  <BorderComponent>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={handleSearch}
+                      placeholder="Search by token name..."
+                      className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7F2DA40]"
+                    />
+                  </BorderComponent>
                 </div>
-              
-                
+
                 <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
                   {filteredTokens.length > 0 ? (
                     filteredTokens.map((token) => (
@@ -614,19 +446,19 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                           }}
                         >
                           <div className="flex flex-col">
-                            <span className="text-[#F7F2DA80] text-lg">{token.name}</span>
-                            <span className="text-[#F7F2DA40] text-xs">${token.rate}</span>
+                            <span className="text-[#F7TDA80] text-lg">{token.name}</span>
+                            <span className="text-[#F7TDA40] text-xs">${token.rate}</span>
                           </div>
                           <div className="flex flex-col items-end">
-                            <span className="text-[#F7F2DA40] text-sm">{token.chain}</span>
-                            <span className="text-[#F7F2DA40] text-xs">Balance: {token.balance}</span>
+                            <span className="text-[#F7TDA40] text-sm">{token.chain}</span>
+                            <span className="text-[#F7TDA40] text-xs">Balance: {token.balance}</span>
                           </div>
                         </motion.div>
                       </BorderComponent>
                     ))
                   ) : (
-                    <div className="text-center text-[#F7F2DA40] py-4">
-                      No tokens found
+                    <div className="text-center text-[#F7TDA40] py-4">
+                      No tokens found for this chain
                     </div>
                   )}
                 </div>
@@ -638,7 +470,6 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
     </Modal>
   );
 };
-
 // Modified ConfirmSwapModal with custom borders
 const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChange, token1, token2, amount1, amount2 }) => {
   const [showSuccess, setShowSuccess] = useState(false);
