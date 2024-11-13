@@ -352,7 +352,6 @@
 import { motion } from "framer-motion";
 import React from "react";
 import EnhanceTradingView from "../chart/enhanced-trading-interface";
-
 const MovingBorderButton = () => {
   const borderVariants = {
     animate: {
@@ -364,7 +363,35 @@ const MovingBorderButton = () => {
       }
     }
   };
-}
+
+  return (
+    <div className="w-full h-[51px] bg-[#5555554D] relative">
+      <motion.div
+        variants={borderVariants}
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.2 }
+        }}
+        animate="animate"
+        className="absolute inset-0"
+        style={{
+          background: `
+            linear-gradient(90deg, transparent 50%, #555555 50%) top/8px 2px repeat-x,
+            linear-gradient(90deg, transparent 50%, #555555 50%) bottom/8px 2px repeat-x,
+            linear-gradient(0deg, transparent 50%, #555555 50%) left/2px 8px repeat-y,
+            linear-gradient(0deg, transparent 50%, #555555 50%) right/2px 8px repeat-y
+          `
+        }}
+      />
+      <div className="relative z-10 flex justify-center items-center h-full">
+        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
+          CONFIRM SWAP
+        </span>
+      </div>
+    </div>
+  );
+};
+
 export default function TestContent() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -377,7 +404,6 @@ export default function TestContent() {
     }
   };
 
-  
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
@@ -656,33 +682,8 @@ export default function TestContent() {
                       </div>
                     </BorderComponent>
                   </div> */}
-                          <div className="w-full h-[51px] bg-[#5555554D] relative">
-      <motion.div
-        variants={borderVariants}
-        whileHover={{
-          scale: 1.02,
-          transition: { duration: 0.2 }
-        }}
-        animate="animate"
-        className="absolute inset-0"
-        style={{
-          background: `
-            linear-gradient(90deg, transparent 50%, #555555 50%) top/8px 2px repeat-x,
-            linear-gradient(90deg, transparent 50%, #555555 50%) bottom/8px 2px repeat-x,
-            linear-gradient(0deg, transparent 50%, #555555 50%) left/2px 8px repeat-y,
-            linear-gradient(0deg, transparent 50%, #555555 50%) right/2px 8px repeat-y
-          `
-        }}
-      />
-      <div className="relative z-10 flex justify-center items-center h-full">
-        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-          CONFIRM SWAP
-        </span>
-      </div>
-    </div>
-<MovingBorderButton />
+                  <MovingBorderButton />
                 </div>
-           
 
                 {/* Middle Empty Section with Border */}
                 <div className="flex-grow">
@@ -748,39 +749,4 @@ export default function TestContent() {
       </div>
     </motion.div>
   );
-}         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-          
+}
