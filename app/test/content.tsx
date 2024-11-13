@@ -604,13 +604,18 @@ export default function TestContent() {
 <p className='text-center mb-2 text-[#F7F2DA80]  text-xl'>SWAP TOKENS</p>
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
-                      <BorderComponent>
-                        <div className="flex justify-end items-center h-full">
-                          <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                            MONAD
-                          </span>
-                        </div>
-                      </BorderComponent>
+                    <BorderComponent>
+  <div className="flex justify-between items-center h-full px-4">
+    <input 
+      type="text"
+      placeholder="Enter amount..."
+      className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+    />
+    <span className="text-[20px] text-[#F7F2DA80]">
+      MONAD
+    </span>
+  </div>
+</BorderComponent>
                     </div>
                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
@@ -621,11 +626,16 @@ export default function TestContent() {
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
-                        <div className="flex justify-end items-center h-full">
-                          <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                          BEAT
-                          </span>
-                        </div>
+                      <div className="flex justify-between items-center h-full px-4">
+    <input 
+      type="text"
+      placeholder="Enter amount..."
+      className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+    />
+    <span className="text-[20px] text-[#F7F2DA80]">
+ BEAT
+    </span>
+    </div>
                       </BorderComponent>
                     </div>
                     <div className="w-[20%] h-[51px] bg-[#5555554D]">
