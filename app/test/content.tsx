@@ -362,9 +362,10 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedChain, setSelectedChain] = useState<string>("Ethereum"); // Default to Ethereum
 
+  // Filter tokens based on selected chain and search query
   const filteredTokens = tokens.filter(token => {
     const isNotSelected = !selectedTokens.includes(token.symbol);
-    const matchesChain = token.chain === selectedChain; // Filter by selected chain
+    const matchesChain = token.chain === selectedChain; // Ensure only tokens from the selected chain are shown
     const searchTerm = searchQuery.toLowerCase();
     return isNotSelected && matchesChain && (
       token.name.toLowerCase().includes(searchTerm) ||
@@ -387,7 +388,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
         body: "p-4",
       }}
     >
-      <BorderComponent className="bg-[#000000]"> {/* Apply BorderComponent here */}
+      <BorderComponent className="bg-[#000000]"> {/* Ensure this wraps all content */}
         <ModalContent>
           {(onClose) => (
             <div>
@@ -409,10 +410,10 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   <motion.div
                     key={chain.name}
                     whileHover={{ scale: 1.05 }}
-                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? ' bg-opacity-50 bg-[#444444]' : ''} p-1 rounded`}
-                    onClick={() => setSelectedChain(chain.name)}
+                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'bg-[#444444]' : ''} p-2 rounded`}
+                    onClick={() => setSelectedChain(chain.name)} // Set selected chain
                   >
-                    <img src={chain.logo} alt={chain.name} className="w-8 h-8 mb-1 rounded-md" />
+                    <img src={chain.logo} alt={chain.name} className="w-8 h-8 mb-1" />
                   </motion.div>
                 ))}
               </div>
