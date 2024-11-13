@@ -389,8 +389,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
     >
       <ModalContent>
         {(onClose) => (
-          <BorderComponent className="bg-[#000000] ">
-            <div className="">
+          <BorderComponent className="bg-[#000000]">
+            <div>
               <div className="flex justify-between items-center px-4">
                 <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
                 <motion.button
@@ -409,7 +409,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   <motion.div
                     key={chain.name}
                     whileHover={{ scale: 1.05 }}
-                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'bg-[#5555554D]' : ''} p-2 rounded`}
+                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'bg-[#444444]' : ''} p-2 rounded`}
                     onClick={() => setSelectedChain(chain.name)}
                   >
                     <img src={chain.logo} alt={chain.name} className="w-8 h-8 mb-1" />
@@ -425,7 +425,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                       value={searchQuery}
                       onChange={handleSearch}
                       placeholder="Search by token name..."
-                      className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7F2DA40]"
+                      className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7TDA40]"
                     />
                   </BorderComponent>
                 </div>
@@ -469,6 +469,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
     </Modal>
   );
 };
+
 // Modified ConfirmSwapModal with custom borders
 const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChange, token1, token2, amount1, amount2 }) => {
   const [showSuccess, setShowSuccess] = useState(false);
