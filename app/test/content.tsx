@@ -352,6 +352,19 @@
 import { motion } from "framer-motion";
 import React from "react";
 import EnhanceTradingView from "../chart/enhanced-trading-interface";
+
+const MovingBorderButton = () => {
+  const borderVariants = {
+    animate: {
+      backgroundPosition: ["0% 0%", "100% 100%"],
+      transition: {
+        duration: 3,
+        ease: "linear",
+        repeat: Infinity,
+      }
+    }
+  };
+}
 export default function TestContent() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -363,17 +376,7 @@ export default function TestContent() {
       }
     }
   };
-  const MovingBorderButton = () => {
-    const borderVariants = {
-      animate: {
-        backgroundPosition: ["0% 0%", "100% 100%"],
-        transition: {
-          duration: 3,
-          ease: "linear",
-          repeat: Infinity,
-        }
-      }
-    };
+
   
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -745,4 +748,39 @@ export default function TestContent() {
       </div>
     </motion.div>
   );
-}
+}         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+          
