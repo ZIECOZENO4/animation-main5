@@ -363,7 +363,18 @@ export default function TestContent() {
       }
     }
   };
-
+  const MovingBorderButton = () => {
+    const borderVariants = {
+      animate: {
+        backgroundPosition: ["0% 0%", "100% 100%"],
+        transition: {
+          duration: 3,
+          ease: "linear",
+          repeat: Infinity,
+        }
+      }
+    };
+  
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
@@ -633,7 +644,7 @@ export default function TestContent() {
                     </div>
                   </div>
                   {/* Second Row - Full Width */}
-                  <div className="w-full h-[51px] bg-[#5555554D]">
+                  {/* <div className="w-full h-[51px] bg-[#5555554D]">
                     <BorderComponent>
                       <div className="flex justify-center items-center h-full">
                         <span className="text-[20px] pr-2 text-[#F7F2DA80]">
@@ -641,8 +652,34 @@ export default function TestContent() {
                         </span>
                       </div>
                     </BorderComponent>
-                  </div>
+                  </div> */}
+                          <div className="w-full h-[51px] bg-[#5555554D] relative">
+      <motion.div
+        variants={borderVariants}
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.2 }
+        }}
+        animate="animate"
+        className="absolute inset-0"
+        style={{
+          background: `
+            linear-gradient(90deg, transparent 50%, #555555 50%) top/8px 2px repeat-x,
+            linear-gradient(90deg, transparent 50%, #555555 50%) bottom/8px 2px repeat-x,
+            linear-gradient(0deg, transparent 50%, #555555 50%) left/2px 8px repeat-y,
+            linear-gradient(0deg, transparent 50%, #555555 50%) right/2px 8px repeat-y
+          `
+        }}
+      />
+      <div className="relative z-10 flex justify-center items-center h-full">
+        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
+          CONFIRM SWAP
+        </span>
+      </div>
+    </div>
+<MovingBorderButton />
                 </div>
+           
 
                 {/* Middle Empty Section with Border */}
                 <div className="flex-grow">
