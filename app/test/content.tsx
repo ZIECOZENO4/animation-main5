@@ -348,7 +348,13 @@
 import { motion } from "framer-motion";
 import React from "react";
 import EnhanceTradingView from "../chart/enhanced-trading-interface";
-import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure
+} from "@nextui-org/react";
 import { useState } from "react";
 interface Token {
   name: string;
@@ -379,30 +385,89 @@ interface BorderComponentProps {
 }
 
 const tokens: Token[] = [
-  { name: "MONAD", rate: "1.234", chain: "Arbitrum", symbol: "MONAD", balance: "100" },
-  { name: "BEAT", rate: "0.567", chain: "Ethereum", symbol: "BEAT", balance: "200" },
-  { name: "USDC", rate: "1.000", chain: "Polygon", symbol: "USDC", balance: "500" },
-  { name: "MONAD", rate: "1.234", chain: "Polygon", symbol: "MONAD", balance: "100" },
-  { name: "BEAT", rate: "0.567", chain: "Arbitrum", symbol: "BEAT", balance: "200" },
-  { name: "USDC", rate: "1.000", chain: "Ethereum", symbol: "USDC", balance: "500" },
-   { name: "MONAD", rate: "1.234", chain: "Polygon", symbol: "MONAD", balance: "100" },
-  { name: "BEAT", rate: "0.567", chain: "Ethereum", symbol: "BEAT", balance: "200" },
-  { name: "USDC", rate: "1.000", chain: "Arbitrum", symbol: "USDC", balance: "500" },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Arbitrum",
+    symbol: "MONAD",
+    balance: "100"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Polygon",
+    symbol: "USDC",
+    balance: "500"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Arbitrum",
+    symbol: "BEAT",
+    balance: "200"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Ethereum",
+    symbol: "USDC",
+    balance: "500"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Arbitrum",
+    symbol: "USDC",
+    balance: "500"
+  }
 ];
 
-const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChange, onTokenSelect, selectedTokens }) => {
-  const availableTokens = tokens.filter(token => 
-    !selectedTokens.includes(token.symbol)
+const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
+  isOpen,
+  onOpenChange,
+  onTokenSelect,
+  selectedTokens
+}) => {
+  const availableTokens = tokens.filter(
+    (token) => !selectedTokens.includes(token.symbol)
   );
   return (
-    <Modal 
-      isOpen={isOpen} 
+    <Modal
+      isOpen={isOpen}
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
         base: "bg-[#000000] border-[#555555] border-2",
         header: "border-b border-[#555555]",
-        body: "py-6",
+        body: "py-6"
       }}
     >
       <ModalContent>
@@ -424,11 +489,17 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
               >
                 <div className="flex flex-col">
                   <span className="text-[#F7F2DA80] text-lg">{token.name}</span>
-                  <span className="text-[#F7F2DA40] text-xs">${token.rate}</span>
+                  <span className="text-[#F7F2DA40] text-xs">
+                    ${token.rate}
+                  </span>
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="text-[#F7F2DA40] text-sm">{token.chain}</span>
-                  <span className="text-[#F7F2DA40] text-xs">Balance: {token.balance}</span>
+                  <span className="text-[#F7F2DA40] text-sm">
+                    {token.chain}
+                  </span>
+                  <span className="text-[#F7F2DA40] text-xs">
+                    Balance: {token.balance}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -439,16 +510,23 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
   );
 };
 
-const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChange, token1, token2, amount1, amount2 }) => {
+const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
+  isOpen,
+  onOpenChange,
+  token1,
+  token2,
+  amount1,
+  amount2
+}) => {
   return (
-    <Modal 
-      isOpen={isOpen} 
+    <Modal
+      isOpen={isOpen}
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
         base: "bg-[#000000] border-[#555555] border-2",
         header: "border-b border-[#555555]",
-        body: "py-6",
+        body: "py-6"
       }}
     >
       <ModalContent>
@@ -458,17 +536,25 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
             <div className="bg-[#5555554D] p-4 rounded-lg">
               <div className="flex justify-between mb-2">
                 <span className="text-[#F7F2DA80]">From:</span>
-                <span className="text-[#F7F2DA80]">{amount1} {token1?.symbol}</span>
+                <span className="text-[#F7F2DA80]">
+                  {amount1} {token1?.symbol}
+                </span>
               </div>
-              <div className="text-[#F7F2DA40] text-sm">Chain: {token1?.chain}</div>
+              <div className="text-[#F7F2DA40] text-sm">
+                Chain: {token1?.chain}
+              </div>
             </div>
 
             <div className="bg-[#5555554D] p-4 rounded-lg">
               <div className="flex justify-between mb-2">
                 <span className="text-[#F7F2DA80]">To:</span>
-                <span className="text-[#F7F2DA80]">{amount2} {token2?.symbol}</span>
+                <span className="text-[#F7F2DA80]">
+                  {amount2} {token2?.symbol}
+                </span>
               </div>
-              <div className="text-[#F7F2DA40] text-sm">Chain: {token2?.chain}</div>
+              <div className="text-[#F7F2DA40] text-sm">
+                Chain: {token2?.chain}
+              </div>
             </div>
 
             <motion.button
@@ -754,132 +840,139 @@ export default function TestContent() {
                 {/* Top Section */}
 
                 <div className="space-y-4 h-[65%]">
-      <p className="text-center mb-2 text-[#F7F2DA80] text-xl">SWAP TOKENS</p>
-      
-      {/* First Token Input */}
-      <div className="flex gap-4">
-        <div className="w-[80%] h-[51px] bg-[#5555554D]">
-          <BorderComponent>
-            <div className="flex justify-between items-center h-full px-4">
-              <input
-                type="text"
-                value={amount1}
-                onChange={(e) => setAmount1(e.target.value)}
-                placeholder="Enter amount..."
-                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
-              />
-              {selectedToken1 && (
-                <div className="flex flex-col items-end">
-                  <span className="text-[20px] text-[#F7F2DA80]">
-                    {selectedToken1.symbol}
-                  </span>
-                  <span className="text-xs text-[#F7F2DA40]">
-                    {selectedToken1.chain}
-                  </span>
+                  <p className="text-center mb-2 text-[#F7F2DA80] text-xl">
+                    SWAP TOKENS
+                  </p>
+
+                  {/* First Token Input */}
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center h-full px-4">
+                          <input
+                            type="text"
+                            value={amount1}
+                            onChange={(e) => setAmount1(e.target.value)}
+                            placeholder="Enter amount..."
+                            className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+                          />
+                          {selectedToken1 && (
+                            <div className="flex flex-col items-end">
+                              <span className="text-[20px] text-[#F7F2DA80]">
+                                {selectedToken1.symbol}
+                              </span>
+                              <span className="text-xs text-[#F7F2DA40]">
+                                {selectedToken1.chain}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <motion.div
+                      className="w-[20%] h-[51px] bg-[#5555554D]"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <BorderComponent>
+                        <div
+                          className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+                          onClick={() => {
+                            setActiveInput(1);
+                            tokenModal.onOpen();
+                          }}
+                        >
+                          Select
+                        </div>
+                      </BorderComponent>
+                    </motion.div>
+                  </div>
+
+                  {/* Second Token Input */}
+                  <div className="flex gap-4">
+                    <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                      <BorderComponent>
+                        <div className="flex justify-between items-center h-full px-4">
+                          <input
+                            type="text"
+                            value={amount2}
+                            onChange={(e) => setAmount2(e.target.value)}
+                            placeholder="Enter amount..."
+                            className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+                          />
+                          {selectedToken2 && (
+                            <div className="flex flex-col items-end">
+                              <span className="text-[20px] text-[#F7F2DA80]">
+                                {selectedToken2.symbol}
+                              </span>
+                              <span className="text-xs text-[#F7F2DA40]">
+                                {selectedToken2.chain}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </BorderComponent>
+                    </div>
+                    <motion.div
+                      className="w-[20%] h-[51px] bg-[#5555554D]"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <BorderComponent>
+                        <div
+                          className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+                          onClick={() => {
+                            setActiveInput(2);
+                            tokenModal.onOpen();
+                          }}
+                        >
+                          Select
+                        </div>
+                      </BorderComponent>
+                    </motion.div>
+                  </div>
+
+                  {/* Confirm Button */}
+                  <motion.div
+                    className="w-full h-[51px] bg-[#5555554D]"
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={() => {
+                      if (
+                        selectedToken1 &&
+                        selectedToken2 &&
+                        amount1 &&
+                        amount2
+                      ) {
+                        confirmModal.onOpen();
+                      }
+                    }}
+                  >
+                    <BorderComponent>
+                      <div className="flex justify-center items-center h-full cursor-pointer">
+                        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
+                          CONFIRM SWAP
+                        </span>
+                      </div>
+                    </BorderComponent>
+                  </motion.div>
+
+                  <TokenSelectModal
+                    isOpen={tokenModal.isOpen}
+                    onOpenChange={tokenModal.onOpenChange}
+                    onTokenSelect={handleTokenSelect}
+                    selectedTokens={selectedTokens}
+                  />
+
+                  <ConfirmSwapModal
+                    isOpen={confirmModal.isOpen}
+                    onOpenChange={confirmModal.onOpenChange}
+                    token1={selectedToken1}
+                    token2={selectedToken2}
+                    amount1={amount1}
+                    amount2={amount2}
+                  />
                 </div>
-              )}
-            </div>
-          </BorderComponent>
-        </div>
-        <motion.div 
-          className="w-[20%] h-[51px] bg-[#5555554D]"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <BorderComponent>
-            <div 
-              className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
-              onClick={() => {
-                setActiveInput(1);
-                tokenModal.onOpen();
-              }}
-            >
-              Select
-            </div>
-          </BorderComponent>
-        </motion.div>
-      </div>
-
-      {/* Second Token Input */}
-      <div className="flex gap-4">
-        <div className="w-[80%] h-[51px] bg-[#5555554D]">
-          <BorderComponent>
-            <div className="flex justify-between items-center h-full px-4">
-              <input
-                type="text"
-                value={amount2}
-                onChange={(e) => setAmount2(e.target.value)}
-                placeholder="Enter amount..."
-                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
-              />
-              {selectedToken2 && (
-                <div className="flex flex-col items-end">
-                  <span className="text-[20px] text-[#F7F2DA80]">
-                    {selectedToken2.symbol}
-                  </span>
-                  <span className="text-xs text-[#F7F2DA40]">
-                    {selectedToken2.chain}
-                  </span>
-                </div>
-              )}
-            </div>
-          </BorderComponent>
-        </div>
-        <motion.div 
-          className="w-[20%] h-[51px] bg-[#5555554D]"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <BorderComponent>
-            <div 
-              className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
-              onClick={() => {
-                setActiveInput(2);
-                tokenModal.onOpen();
-              }}
-            >
-              Select
-            </div>
-          </BorderComponent>
-        </motion.div>
-      </div>
-
-      {/* Confirm Button */}
-      <motion.div 
-        className="w-full h-[51px] bg-[#5555554D]"
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
-        onClick={() => {
-          if (selectedToken1 && selectedToken2 && amount1 && amount2) {
-            confirmModal.onOpen();
-          }
-        }}
-      >
-        <BorderComponent>
-          <div className="flex justify-center items-center h-full cursor-pointer">
-            <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-              CONFIRM SWAP
-            </span>
-          </div>
-        </BorderComponent>
-      </motion.div>
-
-      <TokenSelectModal 
-        isOpen={tokenModal.isOpen}
-        onOpenChange={tokenModal.onOpenChange}
-        onTokenSelect={handleTokenSelect}
-        selectedTokens={selectedTokens}
-      />
-
-      <ConfirmSwapModal 
-        isOpen={confirmModal.isOpen}
-        onOpenChange={confirmModal.onOpenChange}
-        token1={selectedToken1}
-        token2={selectedToken2}
-        amount1={amount1}
-        amount2={amount2}
-      />
-    </div>
 
                 {/* Middle Empty Section with Border */}
                 <div className="flex-grow">
