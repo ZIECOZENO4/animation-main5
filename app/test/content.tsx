@@ -356,6 +356,7 @@ import {
   useDisclosure
 } from "@nextui-org/react";
 import { useState } from "react";
+import { IoClose } from "react-icons/io5";
 interface Token {
   name: string;
   rate: string;
