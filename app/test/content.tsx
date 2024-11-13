@@ -363,6 +363,7 @@ interface Token {
   chain: string;
   symbol: string;
   balance: string;
+  icon: string;
 }
 
 interface TokenSelectModalProps {
@@ -390,63 +391,72 @@ const tokens: Token[] = [
     rate: "1.234",
     chain: "Arbitrum",
     symbol: "MONAD",
-    balance: "100"
+    balance: "100",
+    icon: "/images/arbi.png"
   },
   {
     name: "BEAT",
     rate: "0.567",
     chain: "Ethereum",
     symbol: "BEAT",
-    balance: "200"
+    balance: "200",
+    icon: "/images/eth.png"
   },
   {
     name: "USDC",
     rate: "1.000",
     chain: "Polygon",
     symbol: "USDC",
-    balance: "500"
+    balance: "500",
+    icon: "/images/opti.png"
   },
   {
     name: "MONAD",
     rate: "1.234",
     chain: "Polygon",
     symbol: "MONAD",
-    balance: "100"
+    balance: "100",
+    icon: "/images/opti.png"
   },
   {
     name: "BEAT",
     rate: "0.567",
     chain: "Arbitrum",
     symbol: "BEAT",
-    balance: "200"
+    balance: "100",
+    icon: "/images/arbi.png"
   },
   {
     name: "USDC",
     rate: "1.000",
     chain: "Ethereum",
     symbol: "USDC",
-    balance: "500"
+    balance: "500",
+    icon: "/images/eth.png"
   },
   {
     name: "MONAD",
     rate: "1.234",
     chain: "Polygon",
     symbol: "MONAD",
-    balance: "100"
+    balance: "100",
+    icon: "/images/opti.png"
   },
   {
     name: "BEAT",
     rate: "0.567",
     chain: "Ethereum",
     symbol: "BEAT",
-    balance: "200"
+    balance: "200",
+    icon: "/images/eth.png"
   },
   {
     name: "USDC",
     rate: "1.000",
     chain: "Arbitrum",
     symbol: "USDC",
-    balance: "500"
+    balance: "500",
+    icon: "/images/arbi.png"
   }
 ];
 
@@ -555,7 +565,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: "bg-transparent border border-slate-800",
+        base: "bg-transparent border-0",
         header: "border-b-0",
         body: "p-4",
       }}
@@ -576,6 +586,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                 </motion.button>
               </div>
               <ModalBody className="px-4">
+                <div className="px-3">
                 <BorderComponent>
                   <input
                     type="text"
@@ -585,6 +596,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                     className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7F2DA40]"
                   />
                 </BorderComponent>
+                </div>
+              
                 
                 <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
                   {filteredTokens.length > 0 ? (
@@ -708,39 +721,39 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
 
       {/* Success Notification */}
       <AnimatePresence>
-        {showSuccess && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            className="fixed top-8 left-1/2  w-full transform -translate-x-1/2 z-50"
-          >
-            <BorderComponent>
-              <div className="bg-[#000000] px-6 py-4 flex leading-8 items-center space-x-3">
-                <div className="text-[#F7F2DA40]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <span className="text-[#F7F2DA80]">
-                  Swap Successfully Completed, Please Visit Your Dashboard For More Details
-                </span>
-              </div>
-            </BorderComponent>
-          </motion.div>
-        )}
-      </AnimatePresence>
+  {showSuccess && (
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      className="fixed top-8 right-8 w-auto transform z-50"
+    >
+      <BorderComponent>
+        <div className="bg-[#000000] px-6 py-4 flex leading-8 items-center space-x-3">
+          <div className="text-[#F7F2DA40]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+          <span className="text-[#F7F2DA80]">
+            Swap Successfully Completed, Please Visit Your Dashboard For More Details
+          </span>
+        </div>
+      </BorderComponent>
+    </motion.div>
+  )}
+</AnimatePresence>
     </>
   );
 };
@@ -1048,7 +1061,16 @@ export default function TestContent() {
                             tokenModal.onOpen();
                           }}
                         >
-                          Select
+                          <div className="">
+              {selectedToken1 ? (
+                <div className="flex items-center">
+                  <img src={selectedToken1.icon} alt={selectedToken1.name} className="w-6 h-6 " />
+               
+                </div>
+              ) : (
+                <span className="">Select</span>
+              )}
+            </div>
                         </div>
                       </BorderComponent>
                     </motion.div>
@@ -1090,7 +1112,16 @@ export default function TestContent() {
                             tokenModal.onOpen();
                           }}
                         >
-                          Select
+                               <div className="">
+              {selectedToken2 ? (
+                <div className="flex items-center">
+                  <img src={selectedToken2.icon} alt={selectedToken2.name} className="w-6 h-6 " />
+               
+                </div>
+              ) : (
+                <span className="">Select</span>
+              )}
+            </div>
                         </div>
                       </BorderComponent>
                     </motion.div>
