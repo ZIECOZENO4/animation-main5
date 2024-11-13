@@ -404,16 +404,15 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
               </div>
 
               {/* Chain Logos and Selection */}
-              <div className="flex justify-between items-center mt-4 mb-2">
+              <div className="flex justify-around items-center mt-4 mb-2">
                 {chains.map((chain) => (
                   <motion.div
                     key={chain.name}
                     whileHover={{ scale: 1.05 }}
-                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'border-b-2 border-[#F7F2DA80]' : ''}`}
+                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'bg-[#5555554D]' : ''} p-2 rounded`}
                     onClick={() => setSelectedChain(chain.name)}
                   >
                     <img src={chain.logo} alt={chain.name} className="w-8 h-8 mb-1" />
-                    <span className="text-[#F7F2DA80] text-sm">{chain.name}</span>
                   </motion.div>
                 ))}
               </div>
