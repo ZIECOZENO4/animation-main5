@@ -459,32 +459,126 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   const availableTokens = tokens.filter(
     (token) => !selectedTokens.includes(token.symbol)
   );
+  const BorderComponent = ({
+    children,
+    className = ""
+  }: {
+    children?: React.ReactNode;
+    className?: string;
+  }) => (
+    <div className="relative h-full">
+      <div className="relative  h-full">{children}</div>
+      {/* Top border */}
+      <div
+        className="absolute -top-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Bottom border */}
+      <div
+        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Left border */}
+      <div
+        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Right border */}
+      <div
+        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+    </div>
+  );
   return (
+    <BorderComponent>
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       classNames={{
-        backdrop: "bg-[#000000]/50 backdrop-blur-sm",
+        backdrop: "bg-[#000000]/50 backdrop-blur-sm rounded-none",
         base: "bg-[#000000] border-[#555555] border-2",
         header: "border-b border-[#555555]",
         body: "py-6"
       }}
     >
       <ModalContent>
-        <ModalHeader className="text-[#F7F2DA80]">Select Token</ModalHeader>
+        <ModalHeader className="text-[#F7F2DA80] ">Select Token</ModalHeader>
         <ModalBody>
+        <BorderComponent>
           <input
             type="text"
             placeholder="Search tokens..."
-            className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3 rounded-lg border border-[#555555] focus:outline-none"
+            className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3 border border-[#555555] focus:outline-none"
           />
+          </BorderComponent>
           <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto">
             {availableTokens.map((token) => (
               <motion.div
                 key={token.symbol}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex justify-between items-center p-3 cursor-pointer hover:bg-[#5555554D] rounded-lg"
+                className="flex justify-between items-center p-3 cursor-pointer hover:bg-[#5555554D] "
                 onClick={() => onTokenSelect(token)}
               >
                 <div className="flex flex-col">
@@ -507,6 +601,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
         </ModalBody>
       </ModalContent>
     </Modal>
+    </BorderComponent>
   );
 };
 
@@ -518,7 +613,99 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
   amount1,
   amount2
 }) => {
+  const BorderComponent = ({
+    children,
+    className = ""
+  }: {
+    children?: React.ReactNode;
+    className?: string;
+  }) => (
+    <div className="relative h-full">
+      <div className="relative  h-full">{children}</div>
+      {/* Top border */}
+      <div
+        className="absolute -top-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Bottom border */}
+      <div
+        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
+        style={{
+          height: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to right,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Left border */}
+      <div
+        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+      {/* Right border */}
+      <div
+        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
+        style={{
+          width: "2px",
+          backgroundImage: `
+      repeating-linear-gradient(
+        to bottom,
+        #555555 0,
+        #555555 8px,
+        transparent 8px,
+        transparent 16px,
+        #555555 16px,
+        #555555 32px,
+        transparent 32px,
+        transparent 48px
+      )
+    `
+        }}
+      />
+    </div>
+  );
   return (
+    <BorderComponent>
     <Modal
       isOpen={isOpen}
       onOpenChange={onOpenChange}
@@ -533,7 +720,7 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
         <ModalHeader className="text-[#F7F2DA80]">Confirm Swap</ModalHeader>
         <ModalBody>
           <div className="space-y-4">
-            <div className="bg-[#5555554D] p-4 rounded-lg">
+            <div className="bg-[#5555554D] p-4 ">
               <div className="flex justify-between mb-2">
                 <span className="text-[#F7F2DA80]">From:</span>
                 <span className="text-[#F7F2DA80]">
@@ -545,7 +732,7 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
               </div>
             </div>
 
-            <div className="bg-[#5555554D] p-4 rounded-lg">
+            <div className="bg-[#5555554D] p-4 ">
               <div className="flex justify-between mb-2">
                 <span className="text-[#F7F2DA80]">To:</span>
                 <span className="text-[#F7F2DA80]">
@@ -556,22 +743,24 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
                 Chain: {token2?.chain}
               </div>
             </div>
-
+            <BorderComponent>
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3 rounded-lg border border-[#555555]"
+              className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3  border border-[#555555]"
               onClick={() => {
                 // Handle swap confirmation here
                 console.log("Swap confirmed");
               }}
             >
-              Confirm Swap
+              SWAP TOKENS
             </motion.button>
+            </BorderComponent>
           </div>
         </ModalBody>
       </ModalContent>
     </Modal>
+    </BorderComponent>
   );
 };
 
@@ -850,7 +1039,7 @@ export default function TestContent() {
                       <BorderComponent>
                         <div className="flex justify-between items-center h-full px-4">
                           <input
-                            type="text"
+                            type="number"
                             value={amount1}
                             onChange={(e) => setAmount1(e.target.value)}
                             placeholder="Enter amount..."
@@ -894,7 +1083,7 @@ export default function TestContent() {
                       <BorderComponent>
                         <div className="flex justify-between items-center h-full px-4">
                           <input
-                            type="text"
+                             type="number"
                             value={amount2}
                             onChange={(e) => setAmount2(e.target.value)}
                             placeholder="Enter amount..."
