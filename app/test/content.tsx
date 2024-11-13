@@ -532,9 +532,22 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
   </div>
 );
 
-// Modified TokenSelectModal with custom borders
 const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChange, onTokenSelect, selectedTokens }) => {
-  const availableTokens = tokens.filter(token => !selectedTokens.includes(token.symbol));
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  
+  const filteredTokens = tokens.filter(token => {
+    const isNotSelected = !selectedTokens.includes(token.symbol);
+    const searchTerm = searchQuery.toLowerCase();
+    return isNotSelected && (
+      token.name.toLowerCase().includes(searchTerm) ||
+      token.chain.toLowerCase().includes(searchTerm) ||
+      token.symbol.toLowerCase().includes(searchTerm)
+    );
+  });
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <Modal 
@@ -542,45 +555,67 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: "bg-transparent border-0", // Remove default modal styling
+        base: "bg-transparent border border-slate-800",
         header: "border-b-0",
-        body: "p-0",
+        body: "p-2",
       }}
     >
       <ModalContent>
         {(onClose) => (
-          <BorderComponent className="bg-[#000000]">
+          <BorderComponent className="bg-[#000000] ">
             <div className="p-6">
-              <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
+              <div className="flex justify-between items-center px-0">
+                <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={onClose}
+                  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
+                >
+                  <IoClose size={24} />
+                </motion.button>
+              </div>
               <ModalBody className="px-0">
                 <BorderComponent>
                   <input
                     type="text"
-                    placeholder="Search tokens..."
-                    className="w-full bg-[#5555554D] text-[#F7F2DA80] p-3 focus:outline-none"
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    placeholder="Search by token name or chain..."
+                    className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7F2DA40]"
                   />
                 </BorderComponent>
                 
-                <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto">
-                  {availableTokens.map((token) => (
-                    <BorderComponent key={token.symbol}>
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex justify-between items-center p-3 cursor-pointer bg-[#5555554D]"
-                        onClick={() => onTokenSelect(token)}
-                      >
-                        <div className="flex flex-col">
-                          <span className="text-[#F7F2DA80] text-lg">{token.name}</span>
-                          <span className="text-[#F7F2DA40] text-xs">${token.rate}</span>
-                        </div>
-                        <div className="flex flex-col items-end">
-                          <span className="text-[#F7F2DA40] text-sm">{token.chain}</span>
-                          <span className="text-[#F7F2DA40] text-xs">Balance: {token.balance}</span>
-                        </div>
-                      </motion.div>
-                    </BorderComponent>
-                  ))}
+                <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto px-2">
+                  {filteredTokens.length > 0 ? (
+                    filteredTokens.map((token) => (
+                      <BorderComponent key={token.symbol}>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex justify-between items-center p-3 cursor-pointer bg-[#5555554D]"
+                          onClick={() => {
+                            onTokenSelect(token);
+                            setSearchQuery("");
+                            onClose();
+                          }}
+                        >
+                          <div className="flex flex-col">
+                            <span className="text-[#F7F2DA80] text-lg">{token.name}</span>
+                            <span className="text-[#F7F2DA40] text-xs">${token.rate}</span>
+                          </div>
+                          <div className="flex flex-col items-end">
+                            <span className="text-[#F7F2DA40] text-sm">{token.chain}</span>
+                            <span className="text-[#F7F2DA40] text-xs">Balance: {token.balance}</span>
+                          </div>
+                        </motion.div>
+                      </BorderComponent>
+                    ))
+                  ) : (
+                    <div className="text-center text-[#F7F2DA40] py-4">
+                      No tokens found
+                    </div>
+                  )}
                 </div>
               </ModalBody>
             </div>
@@ -601,14 +636,24 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
         base: "bg-transparent border-0",
         header: "border-b-0",
-        body: "p-0",
+        body: "p-2",
       }}
     >
       <ModalContent>
         {(onClose) => (
           <BorderComponent className="bg-[#000000]">
             <div className="p-6">
-              <ModalHeader className="text-[#F7F2DA80] px-0">Confirm Swap</ModalHeader>
+            <div className="flex justify-between items-center px-6 py-4 border-b border-[#555555]">
+                <span className="text-[#F7F2DA80] text-lg font-medium">Select Token</span>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={onClose}
+                  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
+                >
+                  <IoClose size={24} />
+                </motion.button>
+              </div>
               <ModalBody className="px-0">
                 <div className="space-y-4">
                   <BorderComponent>
