@@ -564,7 +564,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
         {(onClose) => (
           <BorderComponent className="bg-[#000000] ">
             <div className="">
-              <div className="flex justify-between items-center px-0">
+              <div className="flex justify-between items-center px-4">
                 <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
@@ -575,7 +575,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   <IoClose size={24} />
                 </motion.button>
               </div>
-              <ModalBody className="px-0">
+              <ModalBody className="px-4">
                 <BorderComponent>
                   <input
                     type="text"
@@ -666,11 +666,11 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
                     <IoClose size={24} />
                   </motion.button>
                 </div>
-                <ModalBody className="px-0">
+                <ModalBody className="px-4">
                   <div className="space-y-4">
                     <BorderComponent>
-                      <div className="bg-[#5555554D] p-4">
-                        <div className="flex justify-between mb-2">
+                      <div className="bg-[#5555554D] p-2">
+                        <div className="flex justify-between mb-1">
                           <span className="text-[#F7F2DA80]">From:</span>
                           <span className="text-[#F7F2DA80]">{amount1} {token1?.symbol}</span>
                         </div>
@@ -679,8 +679,8 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
                     </BorderComponent>
 
                     <BorderComponent>
-                      <div className="bg-[#5555554D] p-4">
-                        <div className="flex justify-between mb-2">
+                      <div className="bg-[#5555554D] p-2">
+                        <div className="flex justify-between mb-1">
                           <span className="text-[#F7F2DA80]">To:</span>
                           <span className="text-[#F7F2DA80]">{amount2} {token2?.symbol}</span>
                         </div>
@@ -713,10 +713,10 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
+            className="fixed top-8 left-1/2  w-full transform -translate-x-1/2 z-50"
           >
             <BorderComponent>
-              <div className="bg-[#000000] px-6 py-4 flex items-center space-x-3">
+              <div className="bg-[#000000] px-6 py-4 flex leading-8 items-center space-x-3">
                 <div className="text-[#F7F2DA40]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1010,9 +1010,7 @@ export default function TestContent() {
                 {/* Top Section */}
 
                 <div className="space-y-4 h-[65%]">
-                  <p className="text-center mb-2 text-[#F7F2DA80] text-xl">
-                    SWAP TOKENS
-                  </p>
+       
 
                   {/* First Token Input */}
                   <div className="flex gap-4">
@@ -1031,9 +1029,7 @@ export default function TestContent() {
                               <span className="text-[20px] text-[#F7F2DA80]">
                                 {selectedToken1.symbol}
                               </span>
-                              <span className="text-xs text-[#F7F2DA40]">
-                                {selectedToken1.chain}
-                              </span>
+                          
                             </div>
                           )}
                         </div>
@@ -1075,9 +1071,7 @@ export default function TestContent() {
                               <span className="text-[20px] text-[#F7F2DA80]">
                                 {selectedToken2.symbol}
                               </span>
-                              <span className="text-xs text-[#F7F2DA40]">
-                                {selectedToken2.chain}
-                              </span>
+                             
                             </div>
                           )}
                         </div>
