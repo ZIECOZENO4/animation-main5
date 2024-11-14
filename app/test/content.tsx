@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -30,7 +29,7 @@ interface TokenSelectModalProps {
 }
 interface ConfirmSwapModalProps {
   isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;  // Modified to accept boolean parameter
+  onOpenChange: (isOpen: boolean) => void; 
   token1: Token | null;
   token2: Token | null;
   amount1: string;
@@ -38,10 +37,10 @@ interface ConfirmSwapModalProps {
 }
 
 const chains = [
-  { name: 'Ethereum', logo: '/images/eth.png' },
-  { name: 'Arbitrum', logo: '/images/arbi.png' },
-  { name: 'Optimism', logo: '/images/opti.png' },
-  { name: 'Sepolia', logo: '/images/sepo.png' }
+  { name: "Ethereum", logo: "/images/eth.png" },
+  { name: "Arbitrum", logo: "/images/arbi.png" },
+  { name: "Optimism", logo: "/images/opti.png" },
+  { name: "Sepolia", logo: "/images/sepo.png" }
 ];
 
 interface BorderComponentProps {
@@ -121,15 +120,78 @@ const tokens: Token[] = [
     balance: "500",
     icon: "/images/arbi.png"
   },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
-  { name: "TOKEN2", rate: "0.800", chain: "Sepolia", symbol: "TOKEN2", balance: "150", icon: "/images/sepo.png" },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
   {
     name: "MONAD",
     rate: "1.234",
@@ -276,11 +338,18 @@ const tokens: Token[] = [
   }
 ];
 
-const BorderComponent = ({ children, className = "" }: { children?: React.ReactNode; className?: string; }) => (
+const BorderComponent = ({
+  children,
+  className = ""
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) => (
   <div className={`relative h-full ${className}`}>
     <div className="relative h-full">{children}</div>
     {/* Top border */}
-    <div className="absolute -top-[2px] -right-[2px] -left-[2px]"
+    <div
+      className="absolute -top-[2px] -right-[2px] -left-[2px]"
       style={{
         height: "2px",
         backgroundImage: `
@@ -299,7 +368,8 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
       }}
     />
     {/* Bottom border */}
-    <div className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
+    <div
+      className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
       style={{
         height: "2px",
         backgroundImage: `
@@ -318,7 +388,8 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
       }}
     />
     {/* Left border */}
-    <div className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
+    <div
+      className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
       style={{
         width: "2px",
         backgroundImage: `
@@ -337,7 +408,8 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
       }}
     />
     {/* Right border */}
-    <div className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
+    <div
+      className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
       style={{
         width: "2px",
         backgroundImage: `
@@ -358,26 +430,33 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
   </div>
 );
 
-const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChange, onTokenSelect, selectedTokens }) => {
+const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
+  isOpen,
+  onOpenChange,
+  onTokenSelect,
+  selectedTokens
+}) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeChain, setActiveChain] = useState<string>("Ethereum");
 
   // Modified filtering logic to strictly filter by active chain first
   const filteredTokens = useMemo(() => {
-    return tokens.filter(token => {
+    return tokens.filter((token) => {
       // First check if token matches active chain
       if (token.chain !== activeChain) return false;
-      
+
       // Then check if token is not already selected
       if (selectedTokens.includes(token.symbol)) return false;
-      
+
       // Finally apply search filter if query exists
       if (searchQuery) {
         const search = searchQuery.toLowerCase();
-        return token.name.toLowerCase().includes(search) || 
-               token.symbol.toLowerCase().includes(search);
+        return (
+          token.name.toLowerCase().includes(search) ||
+          token.symbol.toLowerCase().includes(search)
+        );
       }
-      
+
       return true;
     });
   }, [activeChain, searchQuery, selectedTokens]);
@@ -388,141 +467,142 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
   };
 
   return (
-    <Modal 
-      isOpen={isOpen} 
+    <Modal
+      isOpen={isOpen}
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
         base: " border-0",
         header: "border-b-0",
         body: ""
- 
       }}
     >
       <BorderComponent>
-       <div className="bg-[#000000]">
-         <div  className="bg-[#000000] w-full ">
-        <ModalContent>
-          {(onClose) => (
-            <div className="bg-[#000000] w-full ">
-               <BorderComponent>
-             
-
-              {/* Chain Logos and SS'//election */}
-           
-
-              <ModalBody className="">
-
-             
-                <div className="flex gap-4">
-                      <div className="w-[100%] h-auto bg-black">
-                        <BorderComponent>
-                          <div className="flex flex-col justify-center items-center h-full">
-                          <div className="flex justify-between items-center px-4">
-
-<div className="text-[#F7F2DA80] px-0">Select Token</div>
-<motion.button
-  whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.9 }}
-  onClick={onClose}
-  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
->
-  <IoClose size={24} />
-</motion.button>
-</div>
-                          <div className="flex justify-around items-center mt-4 mb-2">
-                {chains.map((chain) => (
-                  <motion.div
-                    key={chain.name}
-                    whileHover={{ scale: 1.05 }}
-                    className={`flex flex-col items-center cursor-pointer 
-                      ${activeChain === chain.name ? 'bg-[#444444]' : ''} 
-                      p-2 rounded`}
-                    onClick={() => handleChainSelect(chain.name)}
-                  >
-                    <img 
-                      src={chain.logo} 
-                      alt={chain.name} 
-                      className="w-8 h-8 mb-1" 
-                    />
-                  </motion.div>
-                ))}
-              </div>
-                          <div className="px-3">
+        <div className="bg-[#000000]">
+          <div className="bg-[#000000] w-full ">
+            <ModalContent>
+              {(onClose) => (
+                <div className="bg-[#000000] w-full ">
                   <BorderComponent>
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder={`Search ${activeChain} tokens...`}
-                      className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 
+                    {/* Chain Logos and SS'//election */}
+
+                    <ModalBody className="">
+                      <div className="flex gap-4">
+                        <div className="w-[100%] h-auto bg-black">
+                          <BorderComponent>
+                            <div className="flex flex-col justify-center items-center h-full">
+                              <div className="flex justify-between items-center px-4">
+                                <div className="text-[#F7F2DA80] px-0">
+                                  Select Token
+                                </div>
+                                <motion.button
+                                  whileHover={{ scale: 1.1 }}
+                                  whileTap={{ scale: 0.9 }}
+                                  onClick={onClose}
+                                  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
+                                >
+                                  <IoClose size={24} />
+                                </motion.button>
+                              </div>
+                              <div className="flex justify-around items-center mt-4 mb-2">
+                                {chains.map((chain) => (
+                                  <motion.div
+                                    key={chain.name}
+                                    whileHover={{ scale: 1.05 }}
+                                    className={`flex flex-col items-center cursor-pointer 
+                      ${activeChain === chain.name ? "bg-[#444444]" : ""} 
+                      p-2 rounded`}
+                                    onClick={() =>
+                                      handleChainSelect(chain.name)
+                                    }
+                                  >
+                                    <img
+                                      src={chain.logo}
+                                      alt={chain.name}
+                                      className="w-8 h-8 mb-1"
+                                    />
+                                  </motion.div>
+                                ))}
+                              </div>
+                              <div className="px-3">
+                                <BorderComponent>
+                                  <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) =>
+                                      setSearchQuery(e.target.value)
+                                    }
+                                    placeholder={`Search ${activeChain} tokens...`}
+                                    className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 
                                focus:outline-none placeholder:text-[#F7F2DA40]"
-                    />
+                                  />
+                                </BorderComponent>
+                              </div>
+                              <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
+                                {filteredTokens.length > 0 ? (
+                                  filteredTokens.map((token) => (
+                                    <BorderComponent key={token.symbol}>
+                                      <motion.div
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex justify-between items-center p-3 
+                                   cursor-pointer bg-[#5555554D]"
+                                        onClick={() => {
+                                          onTokenSelect(token);
+                                          setSearchQuery("");
+                                          onClose();
+                                        }}
+                                      >
+                                        <div className="flex flex-col">
+                                          <span className="text-[#F7F2DA80] text-lg">
+                                            {token.name}
+                                          </span>
+                                          <span className="text-[#F7F2DA40] text-xs">
+                                            ${token.rate}
+                                          </span>
+                                        </div>
+                                        <div className="flex flex-col items-end">
+                                          <span className="text-[#F7F2DA40] text-sm">
+                                            {token.chain}
+                                          </span>
+                                          <span className="text-[#F7F2DA40] text-xs">
+                                            Balance: {token.balance}
+                                          </span>
+                                        </div>
+                                      </motion.div>
+                                    </BorderComponent>
+                                  ))
+                                ) : (
+                                  <div className="text-center text-[#F7F2DA40] py-4">
+                                    No tokens found for {activeChain}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </BorderComponent>
+                        </div>
+                      </div>
+                    </ModalBody>
                   </BorderComponent>
                 </div>
-                <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
-                  {filteredTokens.length > 0 ? (
-                    filteredTokens.map((token) => (
-                      <BorderComponent key={token.symbol}>
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="flex justify-between items-center p-3 
-                                   cursor-pointer bg-[#5555554D]"
-                          onClick={() => {
-                            onTokenSelect(token);
-                            setSearchQuery("");
-                            onClose();
-                          }}
-                        >
-                          <div className="flex flex-col">
-                            <span className="text-[#F7F2DA80] text-lg">
-                              {token.name}
-                            </span>
-                            <span className="text-[#F7F2DA40] text-xs">
-                              ${token.rate}
-                            </span>
-                          </div>
-                          <div className="flex flex-col items-end">
-                            <span className="text-[#F7F2DA40] text-sm">
-                              {token.chain}
-                            </span>
-                            <span className="text-[#F7F2DA40] text-xs">
-                              Balance: {token.balance}
-                            </span>
-                          </div>
-                        </motion.div>
-                      </BorderComponent>
-                    ))
-                  ) : (
-                    <div className="text-center text-[#F7F2DA40] py-4">
-                      No tokens found for {activeChain}
-                    </div>
-                  )}
-                </div>
-                          </div>
-                        </BorderComponent>
-                      </div>
-                  
-                    </div>
-                
-              </ModalBody>
-
-               </BorderComponent>
-
-            </div>
-          )}
-        </ModalContent>
+              )}
+            </ModalContent>
+          </div>
         </div>
-       </div>
-     
       </BorderComponent>
     </Modal>
   );
 };
 
 // Modified ConfirmSwapModal with custom borders
-const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChange, token1, token2, amount1, amount2 }) => {
+const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
+  isOpen,
+  onOpenChange,
+  token1,
+  token2,
+  amount1,
+  amount2
+}) => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSwapConfirm = () => {
@@ -536,14 +616,14 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
 
   return (
     <>
-      <Modal 
-        isOpen={isOpen} 
+      <Modal
+        isOpen={isOpen}
         onOpenChange={onOpenChange}
         classNames={{
           backdrop: "bg-[#000000]/50 backdrop-blur-sm",
           base: "bg-transparent border-0",
           header: "border-b-0",
-          body: "p-4",
+          body: "p-4"
         }}
       >
         <ModalContent>
@@ -551,7 +631,9 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
             <BorderComponent className="bg-[#000000]">
               <div className="">
                 <div className="flex justify-between items-center px-6 py-4 border-b border-[#555555]">
-                  <span className="text-[#F7F2DA80] text-lg font-medium">Confirm Swap</span>
+                  <span className="text-[#F7F2DA80] text-lg font-medium">
+                    Confirm Swap
+                  </span>
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -567,9 +649,13 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
                       <div className="bg-[#5555554D] p-2">
                         <div className="flex justify-between mb-1">
                           <span className="text-[#F7F2DA80]">From:</span>
-                          <span className="text-[#F7F2DA80]">{amount1} {token1?.symbol}</span>
+                          <span className="text-[#F7F2DA80]">
+                            {amount1} {token1?.symbol}
+                          </span>
                         </div>
-                        <div className="text-[#F7F2DA40] text-sm">Chain: {token1?.chain}</div>
+                        <div className="text-[#F7F2DA40] text-sm">
+                          Chain: {token1?.chain}
+                        </div>
                       </div>
                     </BorderComponent>
 
@@ -577,9 +663,13 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
                       <div className="bg-[#5555554D] p-2">
                         <div className="flex justify-between mb-1">
                           <span className="text-[#F7F2DA80]">To:</span>
-                          <span className="text-[#F7F2DA80]">{amount2} {token2?.symbol}</span>
+                          <span className="text-[#F7F2DA80]">
+                            {amount2} {token2?.symbol}
+                          </span>
                         </div>
-                        <div className="text-[#F7F2DA40] text-sm">Chain: {token2?.chain}</div>
+                        <div className="text-[#F7F2DA40] text-sm">
+                          Chain: {token2?.chain}
+                        </div>
                       </div>
                     </BorderComponent>
 
@@ -603,39 +693,40 @@ const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({ isOpen, onOpenChang
 
       {/* Success Notification */}
       <AnimatePresence>
-  {showSuccess && (
-    <motion.div
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      className="fixed top-8 right-8 w-auto transform z-50"
-    >
-      <BorderComponent>
-        <div className="bg-[#000000] px-6 py-4 flex leading-8 items-center space-x-3">
-          <div className="text-[#F7F2DA40]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <span className="text-[#F7F2DA80]">
-            Swap Successfully Completed, Please Visit Your Dashboard For More Details
-          </span>
-        </div>
-      </BorderComponent>
-    </motion.div>
-  )}
-</AnimatePresence>
+        {showSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="fixed top-8 right-8 w-auto transform z-50"
+          >
+            <BorderComponent>
+              <div className="bg-[#000000] px-6 py-4 flex leading-8 items-center space-x-3">
+                <div className="text-[#F7F2DA40]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <span className="text-[#F7F2DA80]">
+                  Swap Successfully Completed, Please Visit Your Dashboard For
+                  More Details
+                </span>
+              </div>
+            </BorderComponent>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
@@ -791,7 +882,7 @@ export default function TestContent() {
         className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
         style={{
           width: "2px",
-          backgroundImage: `
+          backgroundImage: `   
       repeating-linear-gradient(
         to bottom,
         #555555 0,
@@ -905,8 +996,6 @@ export default function TestContent() {
                 {/* Top Section */}
 
                 <div className="space-y-4 h-[65%]">
-       
-
                   {/* First Token Input */}
                   <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
@@ -924,7 +1013,6 @@ export default function TestContent() {
                               <span className="text-[20px] text-[#F7F2DA80]">
                                 {selectedToken1.symbol}
                               </span>
-                          
                             </div>
                           )}
                         </div>
@@ -944,15 +1032,18 @@ export default function TestContent() {
                           }}
                         >
                           <div className="">
-              {selectedToken1 ? (
-                <div className="flex items-center">
-                  <img src={selectedToken1.icon} alt={selectedToken1.name} className="w-6 h-6 " />
-               
-                </div>
-              ) : (
-                <span className="">Select</span>
-              )}
-            </div>
+                            {selectedToken1 ? (
+                              <div className="flex items-center">
+                                <img
+                                  src={selectedToken1.icon}
+                                  alt={selectedToken1.name}
+                                  className="w-6 h-6 "
+                                />
+                              </div>
+                            ) : (
+                              <span className="">Select</span>
+                            )}
+                          </div>
                         </div>
                       </BorderComponent>
                     </motion.div>
@@ -964,7 +1055,7 @@ export default function TestContent() {
                       <BorderComponent>
                         <div className="flex justify-between items-center h-full px-4">
                           <input
-                             type="number"
+                            type="number"
                             value={amount2}
                             onChange={(e) => setAmount2(e.target.value)}
                             placeholder="Enter amount..."
@@ -975,7 +1066,6 @@ export default function TestContent() {
                               <span className="text-[20px] text-[#F7F2DA80]">
                                 {selectedToken2.symbol}
                               </span>
-                             
                             </div>
                           )}
                         </div>
@@ -994,16 +1084,19 @@ export default function TestContent() {
                             tokenModal.onOpen();
                           }}
                         >
-                               <div className="">
-              {selectedToken2 ? (
-                <div className="flex items-center">
-                  <img src={selectedToken2.icon} alt={selectedToken2.name} className="w-6 h-6 " />
-               
-                </div>
-              ) : (
-                <span className="">Select</span>
-              )}
-            </div>
+                          <div className="">
+                            {selectedToken2 ? (
+                              <div className="flex items-center">
+                                <img
+                                  src={selectedToken2.icon}
+                                  alt={selectedToken2.name}
+                                  className="w-6 h-6 "
+                                />
+                              </div>
+                            ) : (
+                              <span className="">Select</span>
+                            )}
+                          </div>
                         </div>
                       </BorderComponent>
                     </motion.div>
