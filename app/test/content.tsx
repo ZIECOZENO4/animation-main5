@@ -467,18 +467,20 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      classNames={{
-        backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: " border-0",
-        header: "border-b-0",
-        body: ""
-      }}
-    >
+ <Modal
+  isOpen={isOpen}
+  onOpenChange={onOpenChange}
+  hideCloseButton={true}
+  classNames={{
+    backdrop: "bg-[#000000]/50 backdrop-blur-sm",
+    base: "border-0 p-0",
+    header: "border-b-0 p-0",
+    body: "p-0",
+    wrapper: "p-0"
+  }}
+>
       <BorderComponent>
-        <div className="bg-[#000000]">
+        <div className="bg-[#000000] max-w-sm">
           <div className="bg-[#000000] w-full ">
             <ModalContent>
               {(onClose) => (
@@ -490,7 +492,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                       <div className="flex gap-4">
                         <div className="w-[100%] h-auto bg-black">
                           <BorderComponent>
-                            <div className="flex flex-col justify-center items-center h-full">
+                            <div className="w-full h-full">
                               <div className="flex justify-between items-center px-4">
                                 <div className="text-[#F7F2DA80] px-0">
                                   Select Token
