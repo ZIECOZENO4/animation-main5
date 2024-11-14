@@ -406,21 +406,31 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
           {(onClose) => (
             <div className="bg-[#000000] w-full ">
                <BorderComponent>
-               <div className="flex justify-between items-center px-4">
+             
 
-                <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={onClose}
-                  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
-                >
-                  <IoClose size={24} />
-                </motion.button>
-              </div>
+              {/* Chain Logos and SS'//election */}
+           
 
-              {/* Chain Logos and Selection */}
-              <div className="flex justify-around items-center mt-4 mb-2">
+              <ModalBody className="">
+
+             
+                <div className="flex gap-4">
+                      <div className="w-[100%] h-auto bg-black">
+                        <BorderComponent>
+                          <div className="flex flex-col justify-center items-center h-full">
+                          <div className="flex justify-between items-center px-4">
+
+<div className="text-[#F7F2DA80] px-0">Select Token</div>
+<motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  onClick={onClose}
+  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
+>
+  <IoClose size={24} />
+</motion.button>
+</div>
+                          <div className="flex justify-around items-center mt-4 mb-2">
                 {chains.map((chain) => (
                   <motion.div
                     key={chain.name}
@@ -438,15 +448,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   </motion.div>
                 ))}
               </div>
-
-              <ModalBody className="px-4">
-              <div className='bg-black w-full min-h-screen p-0 m-0 '>
-<BorderComponent>
-<div className="w-full h-full bg-[#5555554D]  
-                            " > hello</div>
-  </BorderComponent>
-</div>
-                <div className="px-3">
+                          <div className="px-3">
                   <BorderComponent>
                     <input
                       type="text"
@@ -458,18 +460,6 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                     />
                   </BorderComponent>
                 </div>
-                <div className="flex gap-4">
-                      <div className="w-[100%] h-[51px] bg-black">
-                        <BorderComponent>
-                          <div className="flex justify-center items-center h-full">
-                            <span className="text-[20px] text-[#F7F2DA80]">
-                              MONAD
-                            </span>
-                          </div>
-                        </BorderComponent>
-                      </div>
-                  
-                    </div>
                 <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
                   {filteredTokens.length > 0 ? (
                     filteredTokens.map((token) => (
@@ -510,6 +500,12 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                     </div>
                   )}
                 </div>
+                          </div>
+                        </BorderComponent>
+                      </div>
+                  
+                    </div>
+                
               </ModalBody>
 
                </BorderComponent>
