@@ -40,7 +40,7 @@ interface ConfirmSwapModalProps {
 const chains = [
   { name: "Ethereum", logo: "/images/eth.png" },
   { name: "Arbitrum", logo: "/images/arbi2.png" },
-  { name: "Optimism", logo: "/images/opti2.png" },
+  { name: "Optimism", logo: "/images/op2.png" },
   { name: "Sepolia", logo: "/images/sepo.png" }
 ];
 
@@ -71,7 +71,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/opti2.png"
+    icon: "/images/op2.png"
   },
   {
     name: "MONAD",
@@ -79,7 +79,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti2.png"
+    icon: "/images/op2.png"
   },
   {
     name: "BEAT",
@@ -103,151 +103,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti2.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Ethereum",
-    symbol: "BEAT",
-    balance: "200",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Arbitrum",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/arbi2.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Arbitrum",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/arbi2.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Ethereum",
-    symbol: "BEAT",
-    balance: "200",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Polygon",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/opti2.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Polygon",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/opti2.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Arbitrum",
-    symbol: "BEAT",
-    balance: "100",
-    icon: "/images/arbi2.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Ethereum",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Polygon",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/opti2.png"
+    icon: "/images/op2.png"
   },
   {
     name: "BEAT",
@@ -264,6 +120,78 @@ const tokens: Token[] = [
     symbol: "USDC",
     balance: "500",
     icon: "/images/arbi2.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
   },
   {
     name: "MONAD",
@@ -287,7 +215,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/opti2.png"
+    icon: "/images/op2.png"
   },
   {
     name: "MONAD",
@@ -295,7 +223,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti2.png"
+    icon: "/images/op2.png"
   },
   {
     name: "BEAT",
@@ -319,7 +247,79 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti2.png"
+    icon: "/images/op2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Arbitrum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Arbitrum",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Polygon",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/op2.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/op2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Arbitrum",
+    symbol: "BEAT",
+    balance: "100",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Ethereum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/op2.png"
   },
   {
     name: "BEAT",
@@ -431,6 +431,7 @@ const BorderComponent = ({
   </div>
 );
 
+
 const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   isOpen,
   onOpenChange,
@@ -442,154 +443,146 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
 
   // Simplified filtering logic to only show tokens for active chain
   const filteredTokens = useMemo(() => {
-    return tokens.filter((token) => {
-      // Only show tokens from active chain
-      if (token.chain !== activeChain) return false;
+      return tokens.filter((token) => {
+          // Only show tokens from active chain
+          if (token.chain !== activeChain) return false;
 
-      // Apply search filter if query exists
-      if (searchQuery) {
-        const search = searchQuery.toLowerCase();
-        return (
-          token.name.toLowerCase().includes(search) ||
-          token.symbol.toLowerCase().includes(search)
-        );
-      }
-      return true;
-    });
+          // Apply search filter if query exists
+          if (searchQuery) {
+              const search = searchQuery.toLowerCase();
+              return (
+                  token.name.toLowerCase().includes(search) ||
+                  token.symbol.toLowerCase().includes(search)
+              );
+          }
+          return true;
+      });
   }, [activeChain, searchQuery]);
 
   const handleChainSelect = (chainName: string) => {
-    setActiveChain(chainName);
-    setSearchQuery("");
+      setActiveChain(chainName);
+      setSearchQuery("");
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      hideCloseButton={true}
-      classNames={{
-        backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: "border-0 p-0",
-        header: "border-b-0 p-0",
-        body: "p-0",
-        wrapper: "p-0"
-      }}
-    >
-      <BorderComponent>
-        <div className="bg-[#000000] max-w-sm">
-          <div className="bg-[#000000] w-full">
-            <ModalContent>
-              {(onClose) => (
-                <div className="bg-[#000000] w-full">
-                  <BorderComponent>
-                    <ModalBody className="">
-                      <div className="flex gap-4">
-                        <div className="w-full p-2 h-auto bg-black">
-                          <BorderComponent>
-                            <div className="w-full h-full">
-                              <div className="flex justify-between items-center px-4">
-                                <div className="text-[#F7F2DA80] px-0">
-                                  Select Token
-                                </div>
-                                <motion.button
-                                  whileHover={{ scale: 1.1 }}
-                                  whileTap={{ scale: 0.9 }}
-                                  onClick={onClose}
-                                  className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
-                                >
-                                  <IoClose size={24} />
-                                </motion.button>
-                              </div>
+      <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          hideCloseButton={true}
+          classNames={{
+              backdrop: "bg-[#000000]/50 backdrop-blur-sm",
+              base: "border-0 p-0",
+              header: "border-b-0 p-0",
+              body: "p-0",
+              wrapper: "p-0"
+          }}
+      >
+          <BorderComponent>
+              <div className="bg-[#000000] max-w-sm">
+                  <ModalContent>
+                      {(onClose) => (
+                          <div className="bg-[#000000] w-full">
+                              <BorderComponent>
+                                  <ModalBody>
+                                      <div className="flex gap-4">
+                                          <div className="w-full p-2 h-auto bg-black">
+                                              <BorderComponent>
+                                                  <div className="w-full h-full">
+                                                      <div className="flex justify-between items-center px-4">
+                                                          <div className="text-[#F7F2DA80] px-0"> Select Token </div>
+                                                          <motion.button
+                                                              whileHover={{ scale: 1.1 }}
+                                                              whileTap={{ scale: 0.9 }}
+                                                              onClick={onClose}
+                                                              className="text-[#F7F2DA80] hover:text-[#F7F2DA] p-2"
+                                                          >
+                                                              <IoClose size={24} />
+                                                          </motion.button>
+                                                      </div>
 
-                              {/* Chain Selection */}
-                              <div className="flex justify-around items-center mt-4 mb-2">
-                                {chains.map((chain) => (
-                                  <motion.div
-                                    key={chain.name}
-                                    whileHover={{ scale: 1.05 }}
-                                    className={`flex flex-col items-center cursor-pointer 
-                                      ${activeChain === chain.name ? "bg-[#444444]" : ""} 
-                                      p-2 rounded`}
-                                    onClick={() => handleChainSelect(chain.name)}
-                                  >
-                                    <img
-                                      src={chain.logo}
-                                      alt={chain.name}
-                                      className="w-8 h-8 mb-1"
-                                    />
-                                  </motion.div>
-                                ))}
-                              </div>
+                                                      {/* Chain Selection */}
+                                                      <div className="flex justify-around items-center mt-4 mb-2">
+                                                          {chains.map((chain) => (
+                                                              <motion.div
+                                                                  key={chain.name}
+                                                                  whileHover={{ scale: 1.05 }}
+                                                                  className={`flex flex-col items-center cursor-pointer 
+                                                                    ${activeChain === chain.name ? "bg-[#444444]" : ""} 
+                                                                    p-2 rounded`}
+                                                                  onClick={() => handleChainSelect(chain.name)}
+                                                              >
+                                                                  {/* Recommended text for non-active Ethereum tokens */}
+                                                                  {activeChain !== 'Ethereum' && chain.name === 'Ethereum' && (
+                                                                      <span className="text-red-500 text-xs absolute top-[-10px]">Recommended</span>
+                                                                  )}
+                                                                  <img
+                                                                      src={chain.logo}
+                                                                      alt={chain.name}
+                                                                      className={`w-8 h-8 mb-1 ${activeChain === chain.name ? 'opacity-70' : ''}`}
+                                                                  />
+                                                              </motion.div>
+                                                          ))}
+                                                      </div>
 
-                              {/* Search Input */}
-                              <div className="px-3">
-                                <BorderComponent>
-                                  <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder={`Search ${activeChain} tokens...`}
-                                    className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 
-                                      focus:outline-none placeholder:text-[#F7F2DA40]"
-                                  />
-                                </BorderComponent>
-                              </div>
+                                                      {/* Search Input */}
+                                                      <div className="px-3">
+                                                          <BorderComponent>
+                                                              <input
+                                                                  type="text"
+                                                                  value={searchQuery}
+                                                                  onChange={(e) => setSearchQuery(e.target.value)}
+                                                                  placeholder={`Search ${activeChain} tokens...`}
+                                                                  className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 
+                                                                    focus:outline-none placeholder:text-[#F7F2DA40]"
+                                                              />
+                                                          </BorderComponent>
+                                                      </div>
 
-                              {/* Token List */}
-                              <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
-                                {filteredTokens.length > 0 ? (
-                                  filteredTokens.map((token) => (
-                                    <BorderComponent key={token.symbol}>
-                                      <motion.div
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className="flex justify-between items-center p-3 
-                                          cursor-pointer bg-[#5555554D]"
-                                        onClick={() => {
-                                          onTokenSelect(token);
-                                          setSearchQuery("");
-                                          onClose();
-                                        }}
-                                      >
-                                        <div className="flex flex-col">
-                                          <span className="text-[#F7F2DA80] text-lg">
-                                            {token.name}
-                                          </span>
-                                          <span className="text-[#F7F2DA40] text-xs">
-                                            ${token.rate}
-                                          </span>
-                                        </div>
-                                        <div className="flex flex-col items-end">
-                                          <span className="text-[#F7F2DA40] text-sm">
-                                            {token.chain}
-                                          </span>
-                                          <span className="text-[#F7F2DA40] text-xs">
-                                            Balance: {token.balance}
-                                          </span>
-                                        </div>
-                                      </motion.div>
-                                    </BorderComponent>
-                                  ))
-                                ) : (
-                                  <div className="text-center text-[#F7F2DA40] py-4">
-                                    No tokens found for {activeChain}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </BorderComponent>
-                        </div>
-                      </div>
-                    </ModalBody>
-                  </BorderComponent>
-                </div>
-              )}
-            </ModalContent>
-          </div>
-        </div>
-      </BorderComponent>
-    </Modal>
+                                                      {/* Token List */}
+                                                      <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
+                                                          {filteredTokens.length > 0 ? (
+                                                              filteredTokens.map((token) => (
+                                                                  <BorderComponent key={token.symbol}>
+                                                                      <motion.div
+                                                                          whileHover={{ scale: 1.02 }}
+                                                                          whileTap={{ scale: 0.98 }}
+                                                                          className="flex justify-between items-center p-3 
+                                                                            cursor-pointer bg-[#5555554D]"
+                                                                          onClick={() => {
+                                                                              onTokenSelect(token);
+                                                                              setSearchQuery("");
+                                                                              onClose();
+                                                                          }}
+                                                                      >
+                                                                          <div className="flex flex-col">
+                                                                              <span className="text-[#F7F2DA80] text-lg"> {token.name} </span>
+                                                                              <span className="text-[#F7F2DA40] text-xs"> ${token.rate} </span>
+                                                                          </div>
+                                                                          <div className="flex flex-col items-end">
+                                                                              <span className="text-[#F7F2DA40] text-sm"> {token.chain} </span>
+                                                                              <span className="text-[#F7F2DA40] text-xs"> Balance: {token.balance} </span>
+                                                                          </div>
+                                                                      </motion.div>
+                                                                  </BorderComponent>
+                                                              ))
+                                                          ) : (
+                                                              <div className="text-center text-[#F7F2DA40] py-4">
+                                                                  No tokens found for {activeChain}
+                                                              </div>
+                                                          )}
+                                                      </div>
+                                                  </div>
+                                              </BorderComponent>
+                                          </div>
+                                      </div>
+                                  </ModalBody>
+                              </BorderComponent>
+                          </div>
+                      )}
+                  </ModalContent>
+              </div>
+          </BorderComponent>
+      </Modal>
   );
 };
 // Modified ConfirmSwapModal with custom borders
