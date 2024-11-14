@@ -490,7 +490,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
 
                     <ModalBody className="">
                       <div className="flex gap-4">
-                        <div className="w-[100%] h-auto bg-black">
+                        <div className="w-full p-2  h-auto bg-black">
                           <BorderComponent>
                             <div className="w-full h-full">
                               <div className="flex justify-between items-center px-4">
