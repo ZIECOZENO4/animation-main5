@@ -39,8 +39,8 @@ interface ConfirmSwapModalProps {
 
 const chains = [
   { name: 'Ethereum', logo: '/images/eth.png' },
-  { name: 'Arbitrum', logo: '/images/arbi.png' },
-  { name: 'Optimism', logo: '/images/opti.png' },
+  { name: 'Arbitrum', logo: '/images/arbi2.png' },
+  { name: 'Optimism', logo: '/images/op2.png' },
   { name: 'Sepolia', logo: '/images/sepo.png' }
 ];
 
@@ -362,29 +362,22 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeChain, setActiveChain] = useState<string>("Ethereum");
 
-  // Modified filtering logic to strictly filter by active chain first
   const filteredTokens = useMemo(() => {
     return tokens.filter(token => {
-      // First check if token matches active chain
       if (token.chain !== activeChain) return false;
-      
-      // Then check if token is not already selected
       if (selectedTokens.includes(token.symbol)) return false;
-      
-      // Finally apply search filter if query exists
       if (searchQuery) {
         const search = searchQuery.toLowerCase();
         return token.name.toLowerCase().includes(search) || 
                token.symbol.toLowerCase().includes(search);
       }
-      
       return true;
     });
   }, [activeChain, searchQuery, selectedTokens]);
 
   const handleChainSelect = (chainName: string) => {
     setActiveChain(chainName);
-    setSearchQuery(""); // Reset search when changing chains
+    setSearchQuery("");
   };
 
   return (
@@ -393,18 +386,16 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: " border-0",
+        base: "border-0",
         header: "border-b-0",
-        body: ""
- 
+        body: "",
+        wrapper: "bg-[#000000]"
       }}
     >
-      <BorderComponent>
-       <div className="bg-[#000000]">
-         <div  className="bg-[#000000] w-full ">
-        <ModalContent>
-          {(onClose) => (
-            <div>
+      <ModalContent>
+        {(onClose) => (
+          <BorderComponent>
+            <div className="bg-[#000000]">
               <div className="flex justify-between items-center px-4">
                 <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
                 <motion.button
@@ -417,7 +408,6 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                 </motion.button>
               </div>
 
-              {/* Chain Logos and Selection */}
               <div className="flex justify-around items-center mt-4 mb-2">
                 {chains.map((chain) => (
                   <motion.div
@@ -466,18 +456,22 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                             onClose();
                           }}
                         >
-                          <div className="flex flex-col">
-                            <span className="text-[#F7F2DA80] text-lg">
-                              {token.name}
-                            </span>
-                            <span className="text-[#F7F2DA40] text-xs">
-                              ${token.rate}
-                            </span>
+                          <div className="flex items-center space-x-3">
+                            <img 
+                              src={token.icon} 
+                              alt={token.name} 
+                              className="w-8 h-8"
+                            />
+                            <div className="flex flex-col">
+                              <span className="text-[#F7F2DA80] text-lg">
+                                {token.name}
+                              </span>
+                              <span className="text-[#F7F2DA40] text-xs">
+                                ${token.rate}
+                              </span>
+                            </div>
                           </div>
                           <div className="flex flex-col items-end">
-                            <span className="text-[#F7F2DA40] text-sm">
-                              {token.chain}
-                            </span>
                             <span className="text-[#F7F2DA40] text-xs">
                               Balance: {token.balance}
                             </span>
@@ -493,12 +487,9 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                 </div>
               </ModalBody>
             </div>
-          )}
-        </ModalContent>
-        </div>
-       </div>
-     
-      </BorderComponent>
+          </BorderComponent>
+        )}
+      </ModalContent>
     </Modal>
   );
 };
