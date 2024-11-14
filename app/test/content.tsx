@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
+import React, { useMemo } from "react";
 import EnhanceTradingView from "../chart/enhanced-trading-interface";
 import {
   Modal,
@@ -360,21 +360,31 @@ const BorderComponent = ({ children, className = "" }: { children?: React.ReactN
 
 const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChange, onTokenSelect, selectedTokens }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedChain, setSelectedChain] = useState<string>("Ethereum"); // Default to Ethereum
+  const [activeChain, setActiveChain] = useState<string>("Ethereum");
 
-  // Filter tokens based on selected chain and search query
-  const filteredTokens = tokens.filter(token => {
-    const isNotSelected = !selectedTokens.includes(token.symbol);
-    const matchesChain = token.chain === selectedChain; // Ensure only tokens from the selected chain are shown
-    const searchTerm = searchQuery.toLowerCase();
-    return isNotSelected && matchesChain && (
-      token.name.toLowerCase().includes(searchTerm) ||
-      token.symbol.toLowerCase().includes(searchTerm)
-    );
-  });
+  // Modified filtering logic to strictly filter by active chain first
+  const filteredTokens = useMemo(() => {
+    return tokens.filter(token => {
+      // First check if token matches active chain
+      if (token.chain !== activeChain) return false;
+      
+      // Then check if token is not already selected
+      if (selectedTokens.includes(token.symbol)) return false;
+      
+      // Finally apply search filter if query exists
+      if (searchQuery) {
+        const search = searchQuery.toLowerCase();
+        return token.name.toLowerCase().includes(search) || 
+               token.symbol.toLowerCase().includes(search);
+      }
+      
+      return true;
+    });
+  }, [activeChain, searchQuery, selectedTokens]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleChainSelect = (chainName: string) => {
+    setActiveChain(chainName);
+    setSearchQuery(""); // Reset search when changing chains
   };
 
   return (
@@ -388,7 +398,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
         body: "p-4",
       }}
     >
-      <BorderComponent className="bg-[#000000]"> {/* Ensure this wraps all content */}
+      <BorderComponent className="bg-[#000000]">
         <ModalContent>
           {(onClose) => (
             <div>
@@ -410,10 +420,16 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   <motion.div
                     key={chain.name}
                     whileHover={{ scale: 1.05 }}
-                    className={`flex flex-col items-center cursor-pointer ${selectedChain === chain.name ? 'bg-[#444444]' : ''} p-2 rounded`}
-                    onClick={() => setSelectedChain(chain.name)} // Set selected chain
+                    className={`flex flex-col items-center cursor-pointer 
+                      ${activeChain === chain.name ? 'bg-[#444444]' : ''} 
+                      p-2 rounded`}
+                    onClick={() => handleChainSelect(chain.name)}
                   >
-                    <img src={chain.logo} alt={chain.name} className="w-8 h-8 mb-1" />
+                    <img 
+                      src={chain.logo} 
+                      alt={chain.name} 
+                      className="w-8 h-8 mb-1" 
+                    />
                   </motion.div>
                 ))}
               </div>
@@ -424,9 +440,10 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                     <input
                       type="text"
                       value={searchQuery}
-                      onChange={handleSearch}
-                      placeholder="Search by token name..."
-                      className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 focus:outline-none placeholder:text-[#F7TDA40]"
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder={`Search ${activeChain} tokens...`}
+                      className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 
+                               focus:outline-none placeholder:text-[#F7F2DA40]"
                     />
                   </BorderComponent>
                 </div>
@@ -438,7 +455,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                         <motion.div
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="flex justify-between items-center p-3 cursor-pointer bg-[#5555554D]"
+                          className="flex justify-between items-center p-3 
+                                   cursor-pointer bg-[#5555554D]"
                           onClick={() => {
                             onTokenSelect(token);
                             setSearchQuery("");
@@ -446,19 +464,27 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                           }}
                         >
                           <div className="flex flex-col">
-                            <span className="text-[#F7TDA80] text-lg">{token.name}</span>
-                            <span className="text-[#F7TDA40] text-xs">${token.rate}</span>
+                            <span className="text-[#F7F2DA80] text-lg">
+                              {token.name}
+                            </span>
+                            <span className="text-[#F7F2DA40] text-xs">
+                              ${token.rate}
+                            </span>
                           </div>
                           <div className="flex flex-col items-end">
-                            <span className="text-[#F7TDA40] text-sm">{token.chain}</span>
-                            <span className="text-[#F7TDA40] text-xs">Balance: {token.balance}</span>
+                            <span className="text-[#F7F2DA40] text-sm">
+                              {token.chain}
+                            </span>
+                            <span className="text-[#F7F2DA40] text-xs">
+                              Balance: {token.balance}
+                            </span>
                           </div>
                         </motion.div>
                       </BorderComponent>
                     ))
                   ) : (
-                    <div className="text-center text-[#F7TDA40] py-4">
-                      No tokens found for this chain
+                    <div className="text-center text-[#F7F2DA40] py-4">
+                      No tokens found for {activeChain}
                     </div>
                   )}
                 </div>
@@ -466,7 +492,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
             </div>
           )}
         </ModalContent>
-      </BorderComponent> {/* Closing BorderComponent */}
+      </BorderComponent>
     </Modal>
   );
 };
