@@ -459,7 +459,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                   </BorderComponent>
                 </div>
                 <div className="flex gap-4">
-                      <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                      <div className="w-[100%] h-[51px] bg-black">
                         <BorderComponent>
                           <div className="flex justify-center items-center h-full">
                             <span className="text-[20px] text-[#F7F2DA80]">
@@ -468,11 +468,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                           </div>
                         </BorderComponent>
                       </div>
-                      <div className="w-[20%] h-[51px] bg-[#5555554D]">
-                        <BorderComponent>
-                          <div className="flex items-center justify-center h-full"></div>
-                        </BorderComponent>
-                      </div>
+                  
                     </div>
                 <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
                   {filteredTokens.length > 0 ? (
