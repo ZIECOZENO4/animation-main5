@@ -507,14 +507,12 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                                                                   key={chain.name}
                                                                   whileHover={{ scale: 1.05 }}
                                                                   className={`flex flex-col items-center cursor-pointer 
-                                                                    ${activeChain === chain.name ? "bg-[#444444]" : ""} 
+                                                                    ${activeChain === chain.name ? "bg-[#444444] border border-slate-800 bg-opacity-60" : " bg-black border border-slate-800 bg-opacity-60"} 
                                                                     p-2 rounded`}
                                                                   onClick={() => handleChainSelect(chain.name)}
                                                               >
                                                                   {/* Recommended text for non-active Ethereum tokens */}
-                                                                  {activeChain !== 'Ethereum' && chain.name === 'Ethereum' && (
-                                                                      <span className="text-red-500 text-xs absolute top-[-10px]">Recommended</span>
-                                                                  )}
+                                                                  
                                                                   <img
                                                                       src={chain.logo}
                                                                       alt={chain.name}
@@ -540,6 +538,9 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
 
                                                       {/* Token List */}
                                                       <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
+                                                      {/* {activeChain !== 'Ethereum' && chain.name === 'Ethereum' && (
+                                                                      <span className="text-red-500 text-xs absolute top-[-10px]">Recommended</span>
+                                                                  )} */}
                                                           {filteredTokens.length > 0 ? (
                                                               filteredTokens.map((token) => (
                                                                   <BorderComponent key={token.symbol}>
