@@ -442,10 +442,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
               <ModalBody className="px-4">
               <div className='bg-black w-full min-h-screen p-0 m-0 '>
 <BorderComponent>
-<div
-                      className="w-full h-full bg-[#5555554D]  
-                            "
-                    />
+<div className="w-full h-full bg-[#5555554D]  
+                            " > hello</div>
   </BorderComponent>
 </div>
                 <div className="px-3">
@@ -460,7 +458,22 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                     />
                   </BorderComponent>
                 </div>
-
+                <div className="flex gap-4">
+                      <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                        <BorderComponent>
+                          <div className="flex justify-center items-center h-full">
+                            <span className="text-[20px] text-[#F7F2DA80]">
+                              MONAD
+                            </span>
+                          </div>
+                        </BorderComponent>
+                      </div>
+                      <div className="w-[20%] h-[51px] bg-[#5555554D]">
+                        <BorderComponent>
+                          <div className="flex items-center justify-center h-full"></div>
+                        </BorderComponent>
+                      </div>
+                    </div>
                 <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
                   {filteredTokens.length > 0 ? (
                     filteredTokens.map((token) => (
