@@ -442,7 +442,10 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
               <ModalBody className="px-4">
               <div className='bg-black w-full min-h-screen p-0 m-0 '>
 <BorderComponent>
-  hello 
+<div
+                      className="w-full h-full bg-[#5555554D]  
+                            "
+                    />
   </BorderComponent>
 </div>
                 <div className="px-3">
