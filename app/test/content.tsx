@@ -11,7 +11,8 @@ import {
   useDisclosure
 } from "@nextui-org/react";
 import { useState } from "react";
-import { IoClose } from "react-icons/io5";
+import { IoAdd, IoClose } from "react-icons/io5";
+
 interface Token {
   name: string;
   rate: string;
@@ -38,8 +39,8 @@ interface ConfirmSwapModalProps {
 
 const chains = [
   { name: "Ethereum", logo: "/images/eth.png" },
-  { name: "Arbitrum", logo: "/images/arbi.png" },
-  { name: "Optimism", logo: "/images/opti.png" },
+  { name: "Arbitrum", logo: "/images/arbi2.png" },
+  { name: "Optimism", logo: "/images/opti2.png" },
   { name: "Sepolia", logo: "/images/sepo.png" }
 ];
 
@@ -54,7 +55,7 @@ const tokens: Token[] = [
     chain: "Arbitrum",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/arbi.png"
+    icon: "/images/arbi2.png"
   },
   {
     name: "BEAT",
@@ -70,7 +71,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/opti.png"
+    icon: "/images/opti2.png"
   },
   {
     name: "MONAD",
@@ -78,7 +79,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti.png"
+    icon: "/images/opti2.png"
   },
   {
     name: "BEAT",
@@ -86,7 +87,7 @@ const tokens: Token[] = [
     chain: "Arbitrum",
     symbol: "BEAT",
     balance: "100",
-    icon: "/images/arbi.png"
+    icon: "/images/arbi2.png"
   },
   {
     name: "USDC",
@@ -102,151 +103,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Ethereum",
-    symbol: "BEAT",
-    balance: "200",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Arbitrum",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/arbi.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Arbitrum",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/arbi.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Ethereum",
-    symbol: "BEAT",
-    balance: "200",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Polygon",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/opti.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Polygon",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/opti.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Arbitrum",
-    symbol: "BEAT",
-    balance: "100",
-    icon: "/images/arbi.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Ethereum",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Polygon",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/opti.png"
+    icon: "/images/opti2.png"
   },
   {
     name: "BEAT",
@@ -262,7 +119,79 @@ const tokens: Token[] = [
     chain: "Arbitrum",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/arbi.png"
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
   },
   {
     name: "MONAD",
@@ -270,7 +199,7 @@ const tokens: Token[] = [
     chain: "Arbitrum",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/arbi.png"
+    icon: "/images/arbi2.png"
   },
   {
     name: "BEAT",
@@ -286,7 +215,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/opti.png"
+    icon: "/images/opti2.png"
   },
   {
     name: "MONAD",
@@ -294,7 +223,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti.png"
+    icon: "/images/opti2.png"
   },
   {
     name: "BEAT",
@@ -302,7 +231,7 @@ const tokens: Token[] = [
     chain: "Arbitrum",
     symbol: "BEAT",
     balance: "100",
-    icon: "/images/arbi.png"
+    icon: "/images/arbi2.png"
   },
   {
     name: "USDC",
@@ -318,7 +247,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/opti.png"
+    icon: "/images/opti2.png"
   },
   {
     name: "BEAT",
@@ -334,7 +263,79 @@ const tokens: Token[] = [
     chain: "Arbitrum",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/arbi.png"
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Arbitrum",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Polygon",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/opti2.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Arbitrum",
+    symbol: "BEAT",
+    balance: "100",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Ethereum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Arbitrum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/arbi2.png"
   }
 ];
 
@@ -439,16 +440,13 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeChain, setActiveChain] = useState<string>("Ethereum");
 
-  // Modified filtering logic to strictly filter by active chain first
+  // Simplified filtering logic to only show tokens for active chain
   const filteredTokens = useMemo(() => {
     return tokens.filter((token) => {
-      // First check if token matches active chain
+      // Only show tokens from active chain
       if (token.chain !== activeChain) return false;
 
-      // Then check if token is not already selected
-      if (selectedTokens.includes(token.symbol)) return false;
-
-      // Finally apply search filter if query exists
+      // Apply search filter if query exists
       if (searchQuery) {
         const search = searchQuery.toLowerCase();
         return (
@@ -456,41 +454,38 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
           token.symbol.toLowerCase().includes(search)
         );
       }
-
       return true;
     });
-  }, [activeChain, searchQuery, selectedTokens]);
+  }, [activeChain, searchQuery]);
 
   const handleChainSelect = (chainName: string) => {
     setActiveChain(chainName);
-    setSearchQuery(""); // Reset search when changing chains
+    setSearchQuery("");
   };
 
   return (
- <Modal
-  isOpen={isOpen}
-  onOpenChange={onOpenChange}
-  hideCloseButton={true}
-  classNames={{
-    backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-    base: "border-0 p-0",
-    header: "border-b-0 p-0",
-    body: "p-0",
-    wrapper: "p-0"
-  }}
->
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      hideCloseButton={true}
+      classNames={{
+        backdrop: "bg-[#000000]/50 backdrop-blur-sm",
+        base: "border-0 p-0",
+        header: "border-b-0 p-0",
+        body: "p-0",
+        wrapper: "p-0"
+      }}
+    >
       <BorderComponent>
         <div className="bg-[#000000] max-w-sm">
-          <div className="bg-[#000000] w-full ">
+          <div className="bg-[#000000] w-full">
             <ModalContent>
               {(onClose) => (
-                <div className="bg-[#000000] w-full ">
+                <div className="bg-[#000000] w-full">
                   <BorderComponent>
-                    {/* Chain Logos and SS'//election */}
-
                     <ModalBody className="">
                       <div className="flex gap-4">
-                        <div className="w-full p-2  h-auto bg-black">
+                        <div className="w-full p-2 h-auto bg-black">
                           <BorderComponent>
                             <div className="w-full h-full">
                               <div className="flex justify-between items-center px-4">
@@ -506,17 +501,17 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                                   <IoClose size={24} />
                                 </motion.button>
                               </div>
+
+                              {/* Chain Selection */}
                               <div className="flex justify-around items-center mt-4 mb-2">
                                 {chains.map((chain) => (
                                   <motion.div
                                     key={chain.name}
                                     whileHover={{ scale: 1.05 }}
                                     className={`flex flex-col items-center cursor-pointer 
-                      ${activeChain === chain.name ? "bg-[#444444]" : ""} 
-                      p-2 rounded`}
-                                    onClick={() =>
-                                      handleChainSelect(chain.name)
-                                    }
+                                      ${activeChain === chain.name ? "bg-[#444444]" : ""} 
+                                      p-2 rounded`}
+                                    onClick={() => handleChainSelect(chain.name)}
                                   >
                                     <img
                                       src={chain.logo}
@@ -526,20 +521,22 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                                   </motion.div>
                                 ))}
                               </div>
+
+                              {/* Search Input */}
                               <div className="px-3">
                                 <BorderComponent>
                                   <input
                                     type="text"
                                     value={searchQuery}
-                                    onChange={(e) =>
-                                      setSearchQuery(e.target.value)
-                                    }
+                                    onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder={`Search ${activeChain} tokens...`}
                                     className="w-full bg-[#5555554D] text-[#F7F2DA40] p-3 
-                               focus:outline-none placeholder:text-[#F7F2DA40]"
+                                      focus:outline-none placeholder:text-[#F7F2DA40]"
                                   />
                                 </BorderComponent>
                               </div>
+
+                              {/* Token List */}
                               <div className="mt-4 space-y-2 max-h-[300px] overflow-y-auto p-2">
                                 {filteredTokens.length > 0 ? (
                                   filteredTokens.map((token) => (
@@ -548,7 +545,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         className="flex justify-between items-center p-3 
-                                   cursor-pointer bg-[#5555554D]"
+                                          cursor-pointer bg-[#5555554D]"
                                         onClick={() => {
                                           onTokenSelect(token);
                                           setSearchQuery("");
@@ -736,24 +733,47 @@ export default function TestContent() {
   const tokenModal = useDisclosure();
   const confirmModal = useDisclosure();
   const [selectedToken1, setSelectedToken1] = useState<Token | null>(null);
-  const [selectedToken2, setSelectedToken2] = useState<Token | null>(null);
+  const [selectedTokens2, setSelectedTokens2] = useState<Token[]>([]);
   const [activeInput, setActiveInput] = useState<number | null>(null);
+  const [components, setComponents] = useState<Array<{ id: number }>>([]);
+  const [nextId, setNextId] = useState(1);
+  const [amounts, setAmounts] = useState<{ [key: number]: string }>({});
   const [amount1, setAmount1] = useState<string>("");
   const [amount2, setAmount2] = useState<string>("");
 
-  const handleTokenSelect = (token: Token) => {
-    if (activeInput === 1) {
-      setSelectedToken1(token);
-    } else {
-      setSelectedToken2(token);
-    }
-    tokenModal.onClose();
+
+const [selectedTokens, setSelectedTokens] = useState<{ [key: number]: Token | null }>({});
+  const addNewComponent = () => {
+    setComponents([...components, { id: nextId }]);
+    setNextId(nextId + 1);
   };
 
-  const selectedTokens = [
-    selectedToken1?.symbol,
-    selectedToken2?.symbol
-  ].filter((symbol): symbol is string => symbol !== undefined);
+
+  const handleAmountChange = (id: number, value: string) => {
+    setAmounts(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+
+  const handleTokenSelect = (token: Token) => {
+    if (activeInput === 1) {
+        setSelectedToken1(token);
+    } else {
+        // Avoid adding duplicates
+        if (!selectedTokens2.some(selected => selected.symbol === token.symbol)) {
+            setSelectedTokens2(prev => [...prev, token]);
+        }
+    }
+    tokenModal.onClose();
+};
+
+const removeToken = (symbol: string) => {
+    setSelectedTokens2(prev => prev.filter(token => token.symbol !== symbol));
+};
+
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -1051,7 +1071,7 @@ export default function TestContent() {
                   </div>
 
                   {/* Second Token Input */}
-                  <div className="flex gap-4">
+                  {/* <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex justify-between items-center h-full px-4">
@@ -1101,7 +1121,107 @@ export default function TestContent() {
                         </div>
                       </BorderComponent>
                     </motion.div>
+                  </div> */}
+
+<div className="space-y-4">
+      {components.length === 0 ? (
+        <motion.div
+          className="flex items-center justify-center gap-2 cursor-pointer"
+          onClick={addNewComponent}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span className="text-[#F7F2DA80]">Add Token</span>
+          <IoAdd size={24} className="text-[#F7F2DA80]" />
+        </motion.div>
+      ) : (
+        <>
+          {components.map((component) => (
+            <div key={component.id} className="flex gap-4">
+              <div className="w-[80%] h-[51px] bg-[#5555554D]">
+                <BorderComponent>
+                  <div className="flex justify-between items-center h-full px-4">
+                    <input
+                      type="number"
+                      value={amounts[component.id] || ''}
+                      onChange={(e) => handleAmountChange(component.id, e.target.value)}
+                      placeholder="Enter amount..."
+                      className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+                    />
+                    {selectedTokens[component.id] && (
+                      <div className="flex flex-col items-end">
+                        <span className="text-[20px] text-[#F7F2DA80]">
+                          {selectedTokens[component.id]?.symbol}
+                        </span>
+                      </div>
+                    )}
                   </div>
+                </BorderComponent>
+              </div>
+              <motion.div
+                className="w-[20%] h-[51px] bg-[#5555554D]"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BorderComponent>
+                  <div
+                    className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+                    onClick={() => {
+                      setActiveInput(component.id);
+                      tokenModal.onOpen();
+                    }}
+                  >
+                    <div className="">
+                      {selectedTokens[component.id] ? (
+                        <div className="flex items-center">
+                          <img
+                            src={selectedTokens[component.id]?.icon}
+                            alt={selectedTokens[component.id]?.name}
+                            className="w-6 h-6"
+                          />
+                        </div>
+                      ) : (
+                        <span className="">Select</span>
+                      )}
+                    </div>
+                  </div>
+                </BorderComponent>
+              </motion.div>
+            </div>
+          ))}
+          
+          <motion.div
+            className="flex items-center justify-center gap-2 cursor-pointer mt-4"
+            onClick={addNewComponent}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="text-[#F7F2DA80]">Add Another Token</span>
+            <IoAdd size={24} className="text-[#F7F2DA80]" />
+          </motion.div>
+          <div>
+            {/* Render first token selection */}
+            {/* Render second token selections */}
+            {selectedTokens2.map(token => (
+                <div key={token.symbol}>
+                    <img src={token.icon} alt={token.name} />
+                    {token.symbol}
+                    <button onClick={() => removeToken(token.symbol)}>Remove</button>
+                </div>
+            ))}
+        </div>
+        </>
+      )}
+
+      <TokenSelectModal
+        isOpen={tokenModal.isOpen}
+        onOpenChange={tokenModal.onOpenChange}
+        onTokenSelect={handleTokenSelect}
+        selectedTokens={Object.values(selectedTokens)
+          .filter((token): token is Token => token !== null)
+          .map(token => token.symbol)}
+      />
+    </div>
 
                   {/* Confirm Button */}
                   <motion.div
@@ -1111,7 +1231,7 @@ export default function TestContent() {
                     onClick={() => {
                       if (
                         selectedToken1 &&
-                        selectedToken2 &&
+                        selectedTokens2 &&
                         amount1 &&
                         amount2
                       ) {
@@ -1127,7 +1247,7 @@ export default function TestContent() {
                       </div>
                     </BorderComponent>
                   </motion.div>
-
+{/* 
                   <TokenSelectModal
                     isOpen={tokenModal.isOpen}
                     onOpenChange={tokenModal.onOpenChange}
@@ -1139,10 +1259,10 @@ export default function TestContent() {
                     isOpen={confirmModal.isOpen}
                     onOpenChange={confirmModal.onOpenChange}
                     token1={selectedToken1}
-                    token2={selectedToken2}
+                    token2={selectedTokens2}
                     amount1={amount1}
                     amount2={amount2}
-                  />
+                  /> */}
                 </div>
 
                 {/* Middle Empty Section with Border */}
