@@ -398,7 +398,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
         body: "p-4",
       }}
     >
-      <BorderComponent className="bg-[#000000]">
+      <BorderComponent>
+        <div  className="bg-[#000000] w-full ">
         <ModalContent>
           {(onClose) => (
             <div>
@@ -492,6 +493,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
             </div>
           )}
         </ModalContent>
+        </div>
+    
       </BorderComponent>
     </Modal>
   );
