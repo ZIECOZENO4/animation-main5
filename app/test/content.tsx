@@ -362,22 +362,29 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeChain, setActiveChain] = useState<string>("Ethereum");
 
+  // Modified filtering logic to strictly filter by active chain first
   const filteredTokens = useMemo(() => {
     return tokens.filter(token => {
+      // First check if token matches active chain
       if (token.chain !== activeChain) return false;
+      
+      // Then check if token is not already selected
       if (selectedTokens.includes(token.symbol)) return false;
+      
+      // Finally apply search filter if query exists
       if (searchQuery) {
         const search = searchQuery.toLowerCase();
         return token.name.toLowerCase().includes(search) || 
                token.symbol.toLowerCase().includes(search);
       }
+      
       return true;
     });
   }, [activeChain, searchQuery, selectedTokens]);
 
   const handleChainSelect = (chainName: string) => {
     setActiveChain(chainName);
-    setSearchQuery("");
+    setSearchQuery(""); // Reset search when changing chains
   };
 
   return (
@@ -386,15 +393,17 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
       onOpenChange={onOpenChange}
       classNames={{
         backdrop: "bg-[#000000]/50 backdrop-blur-sm",
-        base: "border-0",
+        base: " border-0",
         header: "border-b-0",
-        body: "",
-        wrapper: "bg-[#000000]" // Use wrapper instead of border
+        body: ""
+ 
       }}
     >
-      <ModalContent>
-        {(onClose) => (
-          <BorderComponent>
+      <BorderComponent>
+       <div className="bg-[#000000]">
+         <div  className="bg-[#000000] w-full ">
+        <ModalContent>
+          {(onClose) => (
             <div>
               <div className="flex justify-between items-center px-4">
                 <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
@@ -408,6 +417,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                 </motion.button>
               </div>
 
+              {/* Chain Logos and Selection */}
               <div className="flex justify-around items-center mt-4 mb-2">
                 {chains.map((chain) => (
                   <motion.div
@@ -483,9 +493,12 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
                 </div>
               </ModalBody>
             </div>
-          </BorderComponent>
-        )}
-      </ModalContent>
+          )}
+        </ModalContent>
+        </div>
+       </div>
+     
+      </BorderComponent>
     </Modal>
   );
 };
