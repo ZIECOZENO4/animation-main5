@@ -407,11 +407,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
             <div className="bg-[#000000] w-full ">
                <BorderComponent>
                <div className="flex justify-between items-center px-4">
-<div className='bg-black w-full min-h-screen p-0 m-0 '>
-<BorderComponent>
-  hello 
-  </BorderComponent>
-</div>
+
                 <ModalHeader className="text-[#F7F2DA80] px-0">Select Token</ModalHeader>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
@@ -444,6 +440,11 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({ isOpen, onOpenChang
               </div>
 
               <ModalBody className="px-4">
+              <div className='bg-black w-full min-h-screen p-0 m-0 '>
+<BorderComponent>
+  hello 
+  </BorderComponent>
+</div>
                 <div className="px-3">
                   <BorderComponent>
                     <input
