@@ -742,6 +742,199 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
       </Modal>
   );
 };
+
+const TokenInputList: React.FC = () => {
+  const [baseAmount, setBaseAmount] = useState<string>("");
+  const [baseToken, setBaseToken] = useState<Token | null>(null);
+  const [components, setComponents] = useState<{ id: number }[]>([]);
+  const [amounts, setAmounts] = useState<Record<number, string>>({});
+  const [selectedTokens, setSelectedTokens] = useState<Record<number, Token | null>>({});
+  const [activeInput, setActiveInput] = useState<number | null>(null);
+  const [isBaseModalOpen, setIsBaseModalOpen] = useState(false);
+  const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
+
+  const handleAmountChange = (id: number | null, value: string) => {
+    if (id === null) {
+      setBaseAmount(value);
+    } else {
+      setAmounts(prev => ({
+        ...prev,
+        [id]: value
+      }));
+    }
+  };
+
+  const addNewComponent = () => {
+    const newId = components.length > 0 
+      ? Math.max(...components.map(c => c.id)) + 1 
+      : 1;
+    setComponents(prev => [...prev, { id: newId }]);
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Base Token Input (Cannot be removed) */}
+      <div className="flex gap-4">
+        <div className="w-[80%] h-[51px] bg-[#5555554D]">
+          <BorderComponent>
+            <div className="flex justify-between items-center h-full px-4">
+              <input
+                type="number"
+                value={baseAmount}
+                onChange={(e) => handleAmountChange(null, e.target.value)}
+                placeholder="Enter amount..."
+                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+              />
+              {baseToken && (
+                <div className="flex flex-col items-end">
+                  <span className="text-[20px] text-[#F7F2DA80]">
+                    {baseToken.symbol}
+                  </span>
+                </div>
+              )}
+            </div>
+          </BorderComponent>
+        </div>
+        <motion.div
+          className="w-[20%] h-[51px] bg-[#5555554D]"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <BorderComponent>
+            <div
+              className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+              onClick={() => setIsBaseModalOpen(true)}
+            >
+              <div className="">
+                {baseToken ? (
+                  <div className="flex items-center">
+                    <img
+                      src={baseToken.icon}
+                      alt={baseToken.name}
+                      className="w-6 h-6"
+                    />
+                  </div>
+                ) : (
+                  <span className="">Select</span>
+                )}
+              </div>
+            </div>
+          </BorderComponent>
+        </motion.div>
+      </div>
+
+      {/* Additional Token Inputs */}
+      {components.map((component) => (
+        <div key={component.id} className="flex flex-col gap-2">
+          <div className="flex gap-4">
+            <div className="w-[80%] h-[51px] bg-[#5555554D]">
+              <BorderComponent>
+                <div className="flex justify-between items-center h-full px-4">
+                  <input
+                    type="number"
+                    value={amounts[component.id] || ''}
+                    onChange={(e) => handleAmountChange(component.id, e.target.value)}
+                    placeholder="Enter amount..."
+                    className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+                  />
+                  {selectedTokens[component.id] && (
+                    <div className="flex flex-col items-end">
+                      <span className="text-[20px] text-[#F7F2DA80]">
+                        {selectedTokens[component.id]?.symbol}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </BorderComponent>
+            </div>
+            <motion.div
+              className="w-[20%] h-[51px] bg-[#5555554D]"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <BorderComponent>
+                <div
+                  className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+                  onClick={() => {
+                    setActiveInput(component.id);
+                    setIsTokenModalOpen(true);
+                  }}
+                >
+                  <div className="">
+                    {selectedTokens[component.id] ? (
+                      <div className="flex items-center">
+                        <img
+                          src={selectedTokens[component.id]?.icon}
+                          alt={selectedTokens[component.id]?.name}
+                          className="w-6 h-6"
+                        />
+                      </div>
+                    ) : (
+                      <span className="">Select</span>
+                    )}
+                  </div>
+                </div>
+              </BorderComponent>
+            </motion.div>
+          </div>
+          <motion.button
+            className="text-red-500 text-sm self-end"
+            onClick={() => {
+              setComponents(prev => prev.filter(c => c.id !== component.id));
+              setSelectedTokens(prev => {
+                const newTokens = { ...prev };
+                delete newTokens[component.id];
+                return newTokens;
+              });
+              setAmounts(prev => {
+                const newAmounts = { ...prev };
+                delete newAmounts[component.id];
+                return newAmounts;
+              });
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Remove
+          </motion.button>
+        </div>
+      ))}
+
+      {/* Add Token Button */}
+      <motion.div
+        className="flex items-center justify-center gap-2 cursor-pointer mt-4"
+        onClick={addNewComponent}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <span className="text-[#F7F2DA80]">Add Token</span>
+        <IoAdd size={24} className="text-[#F7F2DA80]" />
+      </motion.div>
+
+   
+      {/* Additional Tokens Modal */}
+      <TokenSelectModal
+        isOpen={isTokenModalOpen}
+        onOpenChange={() => setIsTokenModalOpen(false)}
+        onTokenSelect={(token) => {
+          if (activeInput !== null) {
+            setSelectedTokens(prev => ({
+              ...prev,
+              [activeInput]: token
+            }));
+          }
+          setIsTokenModalOpen(false);
+        }}
+        selectedTokens={[
+          ...(baseToken ? [baseToken.symbol] : []),
+          ...Object.values(selectedTokens)
+            .filter((token): token is Token => token !== null)
+            .map(token => token.symbol)
+        ]}
+      />
+    </div>
+  );
+};
 // Modified ConfirmSwapModal with custom borders
 const ConfirmSwapModal: React.FC<ConfirmSwapModalProps> = ({
   isOpen,
@@ -1168,7 +1361,7 @@ const removeToken = (symbol: string) => {
 
                 <div className="space-y-4 h-[65%]">
                   {/* First Token Input */}
-                  <div className="flex gap-4">
+                  {/* <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
                       <BorderComponent>
                         <div className="flex justify-between items-center h-full px-4">
@@ -1315,8 +1508,8 @@ const removeToken = (symbol: string) => {
       </motion.div>
     </>
   )}
-</div>
-
+</div> */}
+<TokenInputList />
 <BaseTokenSelect />
                   {/* Confirm Button */}
                   <motion.div
