@@ -773,7 +773,11 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
                 placeholder="Enter amount..."
                 className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
               />
-              <motion.div
+           
+            </div>
+          </BorderComponent>
+        </div>
+        <motion.div
                 className="w-[20%] h-[51px] bg-[#5555554D]"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -799,10 +803,6 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
                   </div>
                 </BorderComponent>
               </motion.div>
-            </div>
-          </BorderComponent>
-        </div>
-
         {/* Token Selection Modal */}
         {isModalOpen && (
           <TokenSelectModal
