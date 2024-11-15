@@ -803,7 +803,8 @@ const TokenInputList: React.FC = () => {
           <BorderComponent>
             <div
               className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
-              onClick={() => setIsBaseModalOpen(true)}
+              onClick={() => setIsTokenModalOpen(true)}
+          
             >
               <div className="">
                 {baseToken ? (
