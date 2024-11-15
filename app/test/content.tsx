@@ -438,7 +438,7 @@ const BorderComponent = ({
 const baseTokens: Token[] = Array.from({ length: 100 }, (_, i) => ({
   id: i + 1,
   name: `Token ${i + 1}`,
-  symbol: `TKN${i + 1}`,
+  symbol: `TOKEN${i + 1}`,
   rate: (Math.random() * 100).toFixed(2),
   balance: (Math.random() * 1000).toFixed(2)
 }));
@@ -890,7 +890,7 @@ export default function TestContent() {
   const [amounts, setAmounts] = useState<{ [key: number]: string }>({});
   const [amount1, setAmount1] = useState<string>("");
   const [amount2, setAmount2] = useState<string>("");
-
+  const [tokenModalOpen, setTokenModalOpen] = useState(false);
 
 const [selectedTokens, setSelectedTokens] = useState<{ [key: number]: Token | null }>({});
   const addNewComponent = () => {
@@ -1342,6 +1342,24 @@ const removeToken = (symbol: string) => {
                       </div>
                     </BorderComponent>
                   </motion.div>
+
+                  <TokenSelectModal
+        isOpen={tokenModalOpen}
+        onOpenChange={() => setTokenModalOpen(false)}
+        onTokenSelect={(token) => {
+          if (activeInput !== null) {
+            setSelectedTokens(prev => ({
+              ...prev,
+              [activeInput]: token
+            }));
+          }
+          setTokenModalOpen(false);
+        }}
+        selectedTokens={Object.values(selectedTokens)
+          .filter((token): token is Token => token !== null)
+          .map(token => token.symbol)}
+      />
+
 {/* 
                   <TokenSelectModal
                     isOpen={tokenModal.isOpen}
