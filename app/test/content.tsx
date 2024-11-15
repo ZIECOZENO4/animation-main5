@@ -750,6 +750,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
 };
 
 
+
 const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, amounts, selectedTokens, handleAmountChange }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
@@ -773,36 +774,41 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
                 placeholder="Enter amount..."
                 className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
               />
-           
+              <div className="flex flex-col items-end">
+                <span className="text-[20px] text-[#F7F2DA80]">
+                  {selectedTokens[componentId]?.symbol}
+                </span>
+              </div>
             </div>
           </BorderComponent>
         </div>
         <motion.div
-                className="w-[20%] h-[51px] bg-[#5555554D]"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <BorderComponent>
-                  <div
-                    className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    <div>
-                      {selectedTokens[componentId] ? (
-                        <div className="flex items-center">
-                          <img
-                            src={selectedTokens[componentId]?.icon}
-                            alt={selectedTokens[componentId]?.name}
-                            className="w-6 h-6"
-                          />
-                        </div>
-                      ) : (
-                        <span>Select</span>
-                      )}
-                    </div>
+          className="w-[20%] h-[51px] bg-[#5555554D]"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <BorderComponent>
+            <div
+              className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <div>
+                {selectedTokens[componentId] ? (
+                  <div className="flex items-center">
+                    <img
+                      src={selectedTokens[componentId]?.icon}
+                      alt={selectedTokens[componentId]?.name}
+                      className="w-6 h-6"
+                    />
                   </div>
-                </BorderComponent>
-              </motion.div>
+                ) : (
+                  <span>Select</span>
+                )}
+              </div>
+            </div>
+          </BorderComponent>
+        </motion.div>
+
         {/* Token Selection Modal */}
         {isModalOpen && (
           <TokenSelectModal
@@ -861,33 +867,6 @@ const TokenInputList: React.FC = () => {
         selectedTokens={selectedTokens}
         handleAmountChange={handleAmountChange}
       />
-        <motion.div
-          className="w-[20%] h-[51px] bg-[#5555554D]"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <BorderComponent>
-            <div
-              className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
-              onClick={() => setIsTokenModalOpen(true)}
-          
-            >
-              <div className="">
-                {baseToken ? (
-                  <div className="flex items-center">
-                    <img
-                      src={baseToken.icon}
-                      alt={baseToken.name}
-                      className="w-6 h-6"
-                    />
-                  </div>
-                ) : (
-                  <span className="">Select</span>
-                )}
-              </div>
-            </div>
-          </BorderComponent>
-        </motion.div>
       </div>
 
       {/* Additional Token Inputs */}
