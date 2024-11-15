@@ -23,6 +23,12 @@ interface Token {
   icon?: string;   // Make optional
 }
 
+interface CombinedTokenInputProps {
+  componentId: number;
+  amounts: Record<number, string>;
+  selectedTokens: Record<number, Token | null>;
+  handleAmountChange: (id: number, value: string) => void;
+}
 
 interface TokenSelectModalProps {
   isOpen: boolean;
@@ -743,6 +749,80 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   );
 };
 
+
+
+const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, amounts, selectedTokens, handleAmountChange }) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedToken, setSelectedToken] = useState<Token | null>(null);
+
+  const handleTokenSelect = (token: Token) => {
+    setSelectedToken(token);
+    setIsModalOpen(false);
+    selectedTokens[componentId] = token; // Update the selected token for this component
+  };
+
+  return (
+    <>
+      <div className="flex gap-4">
+        <div className="w-[80%] h-[51px] bg-[#5555554D]">
+          <BorderComponent>
+            <div className="flex justify-between items-center h-full px-4">
+              <input
+                type="number"
+                value={amounts[componentId] || ''}
+                onChange={(e) => handleAmountChange(componentId, e.target.value)}
+                placeholder="Enter amount..."
+                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+              />
+              <motion.div
+                className="w-[20%] h-[51px] bg-[#5555554D]"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BorderComponent>
+                  <div
+                    className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    <div>
+                      {selectedTokens[componentId] ? (
+                        <div className="flex items-center">
+                          <img
+                            src={selectedTokens[componentId]?.icon}
+                            alt={selectedTokens[componentId]?.name}
+                            className="w-6 h-6"
+                          />
+                        </div>
+                      ) : (
+                        <span>Select</span>
+                      )}
+                    </div>
+                  </div>
+                </BorderComponent>
+              </motion.div>
+            </div>
+          </BorderComponent>
+        </div>
+
+        {/* Token Selection Modal */}
+        {isModalOpen && (
+          <TokenSelectModal
+            isOpen={isModalOpen}
+            onOpenChange={() => setIsModalOpen(false)}
+            onTokenSelect={handleTokenSelect}
+            selectedTokens={Object.values(selectedTokens)
+              .filter((token): token is Token => token !== null)
+              .map(token => token.symbol)}
+          />
+        )}
+      </div>
+    </>
+  );
+};
+
+
+
+
 const TokenInputList: React.FC = () => {
   const [baseAmount, setBaseAmount] = useState<string>("");
   const [baseToken, setBaseToken] = useState<Token | null>(null);
@@ -775,26 +855,15 @@ const TokenInputList: React.FC = () => {
     <div className="space-y-4">
       {/* Base Token Input (Cannot be removed) */}
       <div className="flex gap-4">
-        <div className="w-[80%] h-[51px] bg-[#5555554D]">
-          <BorderComponent>
-            <div className="flex justify-between items-center h-full px-4">
-              <input
-                type="number"
-                value={baseAmount}
-                onChange={(e) => handleAmountChange(null, e.target.value)}
-                placeholder="Enter amount..."
-                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
-              />
-              {baseToken && (
-                <div className="flex flex-col items-end">
-                  <span className="text-[20px] text-[#F7F2DA80]">
-                    {baseToken.symbol}
-                  </span>
-                </div>
-              )}
-            </div>
-          </BorderComponent>
-        </div>
+      {components.map(component => (
+        <CombinedTokenInput
+          key={component.id}
+          componentId={component.id}
+          amounts={amounts}
+          selectedTokens={selectedTokens}
+          handleAmountChange={handleAmountChange}
+        />
+      ))}
         <motion.div
           className="w-[20%] h-[51px] bg-[#5555554D]"
           whileHover={{ scale: 1.02 }}
@@ -879,7 +948,7 @@ const TokenInputList: React.FC = () => {
             </motion.div>
           </div>
           <motion.button
-            className="text-red-500 text-sm self-end"
+            className="text-red-500 text-xs self-end"
             onClick={() => {
               setComponents(prev => prev.filter(c => c.id !== component.id));
               setSelectedTokens(prev => {
@@ -908,8 +977,8 @@ const TokenInputList: React.FC = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <span className="text-[#F7F2DA80]">Add Token</span>
-        <IoAdd size={24} className="text-[#F7F2DA80]" />
+        <span className="text-[#F7F2DA80] text-xs">Add Token</span>
+        <IoAdd size={12} className="text-[#F7F2DA80]" />
       </motion.div>
 
    
