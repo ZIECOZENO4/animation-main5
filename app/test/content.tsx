@@ -822,7 +822,6 @@ const TokenInputList: React.FC = () => {
           </BorderComponent>
         </motion.div>
       </div>
-
       {/* Additional Token Inputs */}
       {components.map((component) => (
         <div key={component.id} className="flex flex-col gap-2">
