@@ -750,7 +750,6 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
 };
 
 
-
 const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, amounts, selectedTokens, handleAmountChange }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
@@ -823,6 +822,7 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
 
 
 
+
 const TokenInputList: React.FC = () => {
   const [baseAmount, setBaseAmount] = useState<string>("");
   const [baseToken, setBaseToken] = useState<Token | null>(null);
@@ -855,15 +855,12 @@ const TokenInputList: React.FC = () => {
     <div className="space-y-4">
       {/* Base Token Input (Cannot be removed) */}
       <div className="flex gap-4">
-      {components.map(component => (
-        <CombinedTokenInput
-          key={component.id}
-          componentId={component.id}
-          amounts={amounts}
-          selectedTokens={selectedTokens}
-          handleAmountChange={handleAmountChange}
-        />
-      ))}
+      <CombinedTokenInput
+        componentId={1} // Example ID
+        amounts={amounts}
+        selectedTokens={selectedTokens}
+        handleAmountChange={handleAmountChange}
+      />
         <motion.div
           className="w-[20%] h-[51px] bg-[#5555554D]"
           whileHover={{ scale: 1.02 }}
