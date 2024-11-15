@@ -762,8 +762,8 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
   };
 
   return (
-    <>
-      <div className="flex gap-4">
+    <div className=" gap-2">
+      <div className="flex gap-4 w-full">
         <div className="w-[80%] h-[51px] bg-[#5555554D]">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
@@ -821,7 +821,7 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -862,7 +862,7 @@ const TokenInputList: React.FC = () => {
       {/* Base Token Input (Cannot be removed) */}
       <div className="flex gap-4">
       <CombinedTokenInput
-        componentId={1} // Example ID
+        componentId={100000000000000000000000000000000000000} // Example ID
         amounts={amounts}
         selectedTokens={selectedTokens}
         handleAmountChange={handleAmountChange}
@@ -924,7 +924,7 @@ const TokenInputList: React.FC = () => {
             </motion.div>
           </div>
           <motion.button
-            className="text-red-500 text-xs self-end"
+            className="text-slate-700 text-xs self-end hover:underline"
             onClick={() => {
               setComponents(prev => prev.filter(c => c.id !== component.id));
               setSelectedTokens(prev => {
@@ -948,7 +948,7 @@ const TokenInputList: React.FC = () => {
 
       {/* Add Token Button */}
       <motion.div
-        className="flex items-center justify-center gap-2 cursor-pointer mt-4"
+        className="flex items-center justify-center gap-2 cursor-pointer mt-2 self-end hover:underline"
         onClick={addNewComponent}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
