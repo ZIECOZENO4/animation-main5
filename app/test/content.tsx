@@ -762,7 +762,7 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
   };
 
   return (
-    <div className=" ">
+    <div className="w-[100%] ">
       <div  className="flex flex-col gap-2">
           <div className="flex gap-4">
             <div className="w-[80%] h-[51px] bg-[#5555554D]">
@@ -952,7 +952,7 @@ const TokenInputList: React.FC = () => {
 
       {/* Add Token Button */}
       <motion.div
-        className="flex items-center justify-between gap-2 cursor-pointer mt-2  hover:underline"
+        className="flex items-center justify-center gap-2 cursor-pointer mt-2  hover:underline"
         onClick={addNewComponent}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
