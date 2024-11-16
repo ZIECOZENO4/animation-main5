@@ -48,7 +48,8 @@ interface ConfirmSwapModalProps {
 const chains = [
   { name: "Ethereum", logo: "/images/eth.png" },
   { name: "Arbitrum", logo: "/images/arbi2.png" },
-  { name: "Optimism", logo: "/images/op2.png" },
+  { name: "Zksync", logo: "/images/zk.png" },
+  { name: "Optimism", logo: "/images/opti.png" },
   { name: "Sepolia", logo: "/images/sepo.png" }
 ];
 
@@ -79,7 +80,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/op2.png"
+    icon: "/images/opti.png"
   },
   {
     name: "MONAD",
@@ -87,7 +88,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/op2.png"
+    icon: "/images/opti.png"
   },
   {
     name: "BEAT",
@@ -111,151 +112,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/op2.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Ethereum",
-    symbol: "BEAT",
-    balance: "200",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Arbitrum",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/arbi2.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "TOKEN2",
-    rate: "0.800",
-    chain: "Sepolia",
-    symbol: "TOKEN2",
-    balance: "150",
-    icon: "/images/sepo.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Arbitrum",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/arbi2.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Ethereum",
-    symbol: "BEAT",
-    balance: "200",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Polygon",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/op2.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Polygon",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/op2.png"
-  },
-  {
-    name: "BEAT",
-    rate: "0.567",
-    chain: "Arbitrum",
-    symbol: "BEAT",
-    balance: "100",
-    icon: "/images/arbi2.png"
-  },
-  {
-    name: "USDC",
-    rate: "1.000",
-    chain: "Ethereum",
-    symbol: "USDC",
-    balance: "500",
-    icon: "/images/eth.png"
-  },
-  {
-    name: "MONAD",
-    rate: "1.234",
-    chain: "Polygon",
-    symbol: "MONAD",
-    balance: "100",
-    icon: "/images/op2.png"
+    icon: "/images/opti.png"
   },
   {
     name: "BEAT",
@@ -272,6 +129,78 @@ const tokens: Token[] = [
     symbol: "USDC",
     balance: "500",
     icon: "/images/arbi2.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
+  },
+  {
+    name: "TOKEN2",
+    rate: "0.800",
+    chain: "Sepolia",
+    symbol: "TOKEN2",
+    balance: "150",
+    icon: "/images/sepo.png"
   },
   {
     name: "MONAD",
@@ -295,7 +224,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "USDC",
     balance: "500",
-    icon: "/images/op2.png"
+    icon: "/images/opti.png"
   },
   {
     name: "MONAD",
@@ -303,7 +232,7 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/op2.png"
+    icon: "/images/opti.png"
   },
   {
     name: "BEAT",
@@ -327,7 +256,79 @@ const tokens: Token[] = [
     chain: "Polygon",
     symbol: "MONAD",
     balance: "100",
-    icon: "/images/op2.png"
+    icon: "/images/opti.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Arbitrum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Arbitrum",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Ethereum",
+    symbol: "BEAT",
+    balance: "200",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Polygon",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti.png"
+  },
+  {
+    name: "BEAT",
+    rate: "0.567",
+    chain: "Arbitrum",
+    symbol: "BEAT",
+    balance: "100",
+    icon: "/images/arbi2.png"
+  },
+  {
+    name: "USDC",
+    rate: "1.000",
+    chain: "Ethereum",
+    symbol: "USDC",
+    balance: "500",
+    icon: "/images/eth.png"
+  },
+  {
+    name: "MONAD",
+    rate: "1.234",
+    chain: "Polygon",
+    symbol: "MONAD",
+    balance: "100",
+    icon: "/images/opti.png"
   },
   {
     name: "BEAT",
@@ -483,7 +484,7 @@ const BaseTokenSelect: React.FC = () => {
                 placeholder="Enter amount..."
                 className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
               />
-              <div 
+              <div  
                 className="cursor-pointer"
                 onClick={() => setIsModalOpen(true)}
               >
@@ -678,7 +679,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                                                                   <img
                                                                       src={chain.logo}
                                                                       alt={chain.name}
-                                                                      className={`w-10 h-10 mb-1 ${activeChain === chain.name ? 'opacity-70' : ''}`}
+                                                                      className={`w-10 h-10 mb-1 rounded-full ${activeChain === chain.name ? 'opacity-70' : ''}`}
                                                                   />
                                                               </motion.div>
                                                           ))}
@@ -801,7 +802,7 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
                     <img
                       src={selectedTokens[componentId]?.icon}
                       alt={selectedTokens[componentId]?.name}
-                      className="w-6 h-6"
+                      className="w-6 h-6  rounded-full "
                     />
                   </div>
                 ) : (
@@ -916,7 +917,7 @@ const TokenInputList: React.FC = () => {
                         <img
                           src={selectedTokens[component.id]?.icon}
                           alt={selectedTokens[component.id]?.name}
-                          className="w-6 h-6"
+                          className="w-6 h-6  rounded-full "
                         />
                       </div>
                     ) : (
