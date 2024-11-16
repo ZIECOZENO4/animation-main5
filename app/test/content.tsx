@@ -766,6 +766,7 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
   return (
     <div className="w-[100%] ">
       <div  className="flex flex-col gap-2">
+        <p className='text-xs text-[#F7F2DA40]'>From</p>
           <div className="flex gap-4">
             <div className="w-[80%] h-[51px] bg-[#5555554D]">
               <BorderComponent>
@@ -878,6 +879,7 @@ const TokenInputList: React.FC = () => {
       {/* Additional Token Inputs */}
       {components.map((component) => (
         <div key={component.id} className="flex flex-col gap-2">
+          <p className='text-xs text-[#F7F2DA40]'>From</p>
           <div className="flex gap-4">
             <div className="w-[80%] h-[51px] bg-[#5555554D]">
               <BorderComponent>
