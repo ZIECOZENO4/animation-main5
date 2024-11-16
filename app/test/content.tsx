@@ -49,6 +49,7 @@ const chains = [
   { name: "Ethereum", logo: "/images/eth.png" },
   { name: "Arbitrum", logo: "/images/arbi2.png" },
   { name: "Zksync", logo: "/images/zk.png" },
+  { name: "Solana", logo: "/images/sola.png" },
   { name: "Optimism", logo: "/images/opti.png" },
   { name: "Sepolia", logo: "/images/sepo.png" }
 ];
