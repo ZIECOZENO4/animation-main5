@@ -802,7 +802,7 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
                     <img
                       src={selectedTokens[componentId]?.icon}
                       alt={selectedTokens[componentId]?.name}
-                      className="w-6 h-6  rounded-full "
+                      className="w-10 h-10  rounded-full "
                     />
                   </div>
                 ) : (
@@ -917,7 +917,7 @@ const TokenInputList: React.FC = () => {
                         <img
                           src={selectedTokens[component.id]?.icon}
                           alt={selectedTokens[component.id]?.name}
-                          className="w-6 h-6  rounded-full "
+                          className="w-10 h-10  rounded-full "
                         />
                       </div>
                     ) : (
