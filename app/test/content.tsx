@@ -762,37 +762,40 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
   };
 
   return (
-    <div className=" gap-2">
-      <div className="flex gap-4 w-full">
-        <div className="w-[80%] h-[51px] bg-[#5555554D]">
-          <BorderComponent>
-            <div className="flex justify-between items-center h-full px-4">
-              <input
-                type="number"
-                value={amounts[componentId] || ''}
-                onChange={(e) => handleAmountChange(componentId, e.target.value)}
-                placeholder="Enter amount..."
-                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
-              />
-              <div className="flex flex-col items-end">
-                <span className="text-[20px] text-[#F7F2DA80]">
-                  {selectedTokens[componentId]?.symbol}
-                </span>
-              </div>
+    <div className=" ">
+      <div  className="flex flex-col gap-2">
+          <div className="flex gap-4">
+            <div className="w-[80%] h-[51px] bg-[#5555554D]">
+              <BorderComponent>
+                <div className="flex justify-between items-center h-full px-4">
+                  <input
+                    type="number"
+                    value={amounts[componentId] || ''}
+                    onChange={(e) => handleAmountChange(componentId, e.target.value)}
+                    placeholder="Enter amount..."
+                    className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+                  />
+      
+                    <div className="flex flex-col items-end">
+                      <span className="text-[20px] text-[#F7F2DA80]">
+                      {selectedTokens[componentId]?.symbol}
+                      </span>
+                    </div>
+           
+                </div>
+              </BorderComponent>
             </div>
-          </BorderComponent>
-        </div>
-        <motion.div
-          className="w-[20%] h-[51px] bg-[#5555554D]"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <BorderComponent>
-            <div
-              className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
-              onClick={() => setIsModalOpen(true)}
+            <motion.div
+              className="w-[20%] h-[51px] bg-[#5555554D]"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div>
+              <BorderComponent>
+                <div
+                  className="flex items-center text-xs justify-center text-[#F7F2DA80] h-full cursor-pointer"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                    <div>
                 {selectedTokens[componentId] ? (
                   <div className="flex items-center">
                     <img
@@ -805,11 +808,10 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
                   <span>Select</span>
                 )}
               </div>
-            </div>
-          </BorderComponent>
-        </motion.div>
-
-        {/* Token Selection Modal */}
+                </div>
+              </BorderComponent>
+            </motion.div>
+                    {/* Token Selection Modal */}
         {isModalOpen && (
           <TokenSelectModal
             isOpen={isModalOpen}
@@ -820,7 +822,9 @@ const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, am
               .map(token => token.symbol)}
           />
         )}
-      </div>
+          </div>
+      
+        </div>
     </div>
   );
 };
@@ -948,13 +952,13 @@ const TokenInputList: React.FC = () => {
 
       {/* Add Token Button */}
       <motion.div
-        className="flex items-center justify-center gap-2 cursor-pointer mt-2 self-end hover:underline"
+        className="flex items-center justify-between gap-2 cursor-pointer mt-2  hover:underline"
         onClick={addNewComponent}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <span className="text-[#F7F2DA80] text-xs">Add Token</span>
-        <IoAdd size={12} className="text-[#F7F2DA80]" />
+        <IoAdd size={20} className="text-[#F7F2DA80]" />
       </motion.div>
 
    
