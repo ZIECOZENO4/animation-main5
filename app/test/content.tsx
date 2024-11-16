@@ -1258,7 +1258,6 @@ export default function TestContent() {
     `
         }}
       />
-
       {/* Left border - Solid Black */}
       <div
         className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
@@ -1267,7 +1266,6 @@ export default function TestContent() {
           backgroundColor: "#000000"
         }}
       />
-
       {/* Right border - Solid Black */}
       <div
         className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
