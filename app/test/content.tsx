@@ -475,6 +475,7 @@ const BaseTokenSelect: React.FC = () => {
   return (
     <>
       <div className="flex gap-4">
+      <p className='text-xs text-[#F7F2DA40]'>To</p>
         <div className="w-[100%] h-[51px] bg-[#5555554D]">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
@@ -751,8 +752,6 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   );
 };
 
-
-
 const CombinedTokenInput: React.FC<CombinedTokenInputProps> = ({ componentId, amounts, selectedTokens, handleAmountChange }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
@@ -879,7 +878,7 @@ const TokenInputList: React.FC = () => {
       {/* Additional Token Inputs */}
       {components.map((component) => (
         <div key={component.id} className="flex flex-col gap-2">
-          <p className='text-xs text-[#F7F2DA40]'>To</p>
+  
           <div className="flex gap-4">
             <div className="w-[80%] h-[51px] bg-[#5555554D]">
               <BorderComponent>
