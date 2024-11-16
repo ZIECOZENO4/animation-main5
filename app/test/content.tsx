@@ -1409,7 +1409,7 @@ const removeToken = (symbol: string) => {
               <div className="flex flex-col h-full  p-6 gap-4">
                 {/* Top Section */}
 
-                <div className="space-y-4 h-[65%] overflow-y-scroll">
+                <div className="space-y-4 h-[65%] p-2 overflow-y-scroll">
                   {/* First Token Input */}
                   {/* <div className="flex gap-4">
                     <div className="w-[80%] h-[51px] bg-[#5555554D]">
@@ -1627,7 +1627,7 @@ const removeToken = (symbol: string) => {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="flex flex-col justify-between h-[35%] overflow-y-scroll">
+                <div className="flex flex-col justify-between h-[35%] p-2 overflow-y-scroll">
                   {" "}
                   {/* Changed from space-y-4 to flex with justify-between */}
                   <div className="space-y-4">
