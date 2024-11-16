@@ -494,7 +494,7 @@ const BaseTokenSelect: React.FC = () => {
                     </span>
                   </div>
                 ) : (
-                  <span className="text-[#F7F2DA40]">Select Base Token</span>
+                  <span className="text-[#F7F2DA40]"> Base Token</span>
                 )}
               </div>
             </div>
