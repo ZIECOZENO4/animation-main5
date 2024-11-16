@@ -472,8 +472,8 @@ const BaseTokenSelect: React.FC = () => {
 
   return (
     <>
+      <div className="flex flex-col gap-2">
       <p className="text-xs text-[#F7F2DA40] -mb-2">To</p>
-      <div className="flex gap-2">
         <div className="w-[100%] h-[51px] bg-[#5555554D]">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
