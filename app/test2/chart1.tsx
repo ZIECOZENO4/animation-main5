@@ -32,24 +32,39 @@ export default function Component() {
   return (
     <div className="min-h-screen bg-[#1a1424] flex gap-4">
       {/* Toggle Buttons */}
-      <div className="align-middle flex flex-col gap-8 bg-[#2a233f]/50 backdrop-blur-sm rounded-full p-2 space-y-2">
-        <Button
-          isIconOnly
-          variant="ghost"
-          className={`rounded-full w-12 h-12 ${!isGasMode ? 'bg-[#1a1424] text-white' : 'text-gray-400'}`}
-          onClick={() => setIsGasMode(false)}
-        >
-          <ArrowLeftRight className="h-5 w-5" />
-        </Button>
-        <Button
-          isIconOnly
-          variant="ghost"
-          className={`rounded-full w-12 h-12 ${isGasMode ? 'bg-[#1a1424] text-white' : 'text-gray-400'}`}
-          onClick={() => setIsGasMode(true)}
-        >
-          <Wallet className="h-5 w-5" />
-        </Button>
-      </div>
+      <div className="mx-auto text-gray-700 font-black text-6xl flex">
+          <input 
+            type="checkbox" 
+            id="modeToggle" 
+            className="hidden peer" 
+            checked={isGasMode}
+            onChange={() => setIsGasMode(!isGasMode)}
+          />
+          <label 
+            htmlFor="modeToggle" 
+            className="w-[60px] h-[155px] bg-gray-300 rounded-[1.7rem] p-1 cursor-pointer flex justify-center transition-colors duration-300 peer-checked:bg-[#6c2bd9]"
+          >
+            <div className="w-[50px] h-[50px] bg-gray-50 rounded-full mt-[95px] transition-all duration-500 ease-in-out peer-checked:mt-0">
+              {isGasMode ? (
+                <div className="h-full flex items-center justify-center">
+                  <Wallet className="h-6 w-6 text-gray-400" />
+                </div>
+              ) : (
+                <div className="h-full flex items-center justify-center">
+                  <ArrowLeftRight className="h-6 w-6 text-gray-400" />
+                </div>
+              )}
+            </div>
+          </label>
+          <div className="flex flex-col text-white ml-4 leading-tight">
+            <span className={`transition-opacity duration-300 ${isGasMode ? 'opacity-0' : 'opacity-100'}`}>
+              Exchange
+            </span>
+            <span className={`transition-opacity duration-300 ${isGasMode ? 'opacity-100' : 'opacity-0'}`}>
+              Gas
+            </span>
+          </div>
+        </div>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-4">
@@ -109,15 +124,16 @@ export default function Component() {
                   <div>
                   
                     <Button
-                      className="w-full h-30 bg-[#2a233f] justify-between px-4"
+                      className="w-full h-24 bg-[#2a233f] justify-between px-4"
                       onClick={() => {
                         setSelectedField('from')
                         setShowSelect(true)
                       }}
                     >
-                
-                      <div className="flex items-center gap-3">
-                       <label className="text-sm text-gray-400 m-2 text-left  block">From</label>
+                <div className="gap-4">
+     <label className="text-sm text-gray-400 m-2 text-left  block">From</label>
+       <div className="flex items-center gap-3">
+                  
                         {selectedFromToken ? (
                           <>
                             <div className="w-10 h-10 rounded-full bg-[#1a1424] flex items-center justify-center">
@@ -134,6 +150,7 @@ export default function Component() {
                           </>
                         )}
                       </div>
+                </div>
                       <ChevronDown className="h-5 w-5 text-gray-400" />
                     </Button>
                   </div>
@@ -157,14 +174,16 @@ export default function Component() {
                   <div>
                  
                     <Button
-                      className="w-full h-30 bg-[#2a233f] justify-between px-4"
+                      className="w-full h-24 bg-[#2a233f] justify-between px-4"
                       onClick={() => {
                         setSelectedField('to')
                         setShowSelect(true)
                       }}
                     >
-                      <div className="flex items-center gap-3">
-                         <label className="text-sm text-gray-400 text-left mb-2 block">To</label>
+                        <div className="gap-4">
+                                  <label className="text-sm text-gray-400 text-left mb-2 block">To</label>
+                         <div className="flex items-center gap-3">
+               
                         {selectedToToken ? (
                           <>
                             <div className="w-10 h-10 rounded-full bg-[#1a1424] flex items-center justify-center">
@@ -181,6 +200,8 @@ export default function Component() {
                           </>
                         )}
                       </div>
+                        </div>
+                     
                       <ChevronDown className="h-5 w-5 text-gray-400" />
                     </Button>
                   </div>
