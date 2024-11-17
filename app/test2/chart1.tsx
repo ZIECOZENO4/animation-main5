@@ -32,39 +32,39 @@ export default function Component() {
   return (
     <div className="min-h-screen bg-[#1a1424] flex gap-4">
       {/* Toggle Buttons */}
-      <div className="mx-auto text-gray-700 font-black text-6xl flex">
-          <input 
-            type="checkbox" 
-            id="modeToggle" 
-            className="hidden peer" 
-            checked={isGasMode}
-            onChange={() => setIsGasMode(!isGasMode)}
-          />
-          <label 
-            htmlFor="modeToggle" 
-            className="w-[60px] h-[155px] bg-gray-300 rounded-[1.7rem] p-1 cursor-pointer flex justify-center transition-colors duration-300 peer-checked:bg-[#6c2bd9]"
-          >
-            <div className="w-[50px] h-[50px] bg-gray-50 rounded-full mt-[95px] transition-all duration-500 ease-in-out peer-checked:mt-0">
-              {isGasMode ? (
-                <div className="h-full flex items-center justify-center">
-                  <Wallet className="h-6 w-6 text-gray-400" />
-                </div>
-              ) : (
-                <div className="h-full flex items-center justify-center">
-                  <ArrowLeftRight className="h-6 w-6 text-gray-400" />
-                </div>
-              )}
-            </div>
-          </label>
-          <div className="flex flex-col text-white ml-4 leading-tight">
-            <span className={`transition-opacity duration-300 ${isGasMode ? 'opacity-0' : 'opacity-100'}`}>
-              Exchange
-            </span>
-            <span className={`transition-opacity duration-300 ${isGasMode ? 'opacity-100' : 'opacity-0'}`}>
-              Gas
-            </span>
+      <div className="mx-auto flex">
+        <input 
+          type="checkbox" 
+          id="modeToggle" 
+          className="hidden peer" 
+          checked={isGasMode}
+          onChange={() => setIsGasMode(!isGasMode)}
+        />
+        <label 
+          htmlFor="modeToggle" 
+          className="w-[60px] h-[155px] bg-[#2a233f] rounded-[1.7rem] p-1 cursor-pointer flex flex-col items-center justify-between py-4 relative"
+        >
+          {/* Top Icon */}
+          <div className="text-gray-400 z-10">
+            <Wallet className="h-6 w-6" />
           </div>
-        </div>
+
+          {/* Moving Button */}
+          <div 
+            className={`
+              absolute w-[50px] h-[50px] bg-[#1a1424] rounded-full 
+              left-[5px] transition-all duration-500 ease-in-out
+              ${isGasMode ? 'top-[10px]' : 'top-[95px]'}
+            `}
+          />
+
+          {/* Bottom Icon */}
+          <div className="text-gray-400 z-10">
+            <ArrowLeftRight className="h-6 w-6" />
+          </div>
+        </label>
+
+      </div>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-4">
@@ -156,9 +156,9 @@ export default function Component() {
                   </div>
 
                   {/* Swap Circle */}
-                  <div className="absolute left-1/2 -translate-x-1/2 z-10">
+                  <div className="absolute left-1/2 mb-4 -translate-x-1/2 z-10">
                     <motion.div
-                      className="w-10 h-10 bg-[#2a233f] rounded-full flex items-center justify-center cursor-pointer"
+                      className="w-10 h-10 bg-[#625686] rounded-full flex items-center justify-center cursor-pointer"
                       animate={{ y: [0, 4, 0] }}
                       transition={{ repeat: Infinity, duration: 1.5 }}
                       onClick={() => {
