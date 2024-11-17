@@ -30,9 +30,9 @@ export default function Component() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1a1424] flex">
+    <div className="min-h-screen bg-[#1a1424] flex gap-4">
       {/* Toggle Buttons */}
-      <div className="fixed flex flex-col gap-8 left-8 top-10  bg-[#2a233f]/50 backdrop-blur-sm rounded-full p-2 space-y-2">
+      <div className="align-middle flex flex-col gap-8 bg-[#2a233f]/50 backdrop-blur-sm rounded-full p-2 space-y-2">
         <Button
           isIconOnly
           variant="ghost"
@@ -107,15 +107,17 @@ export default function Component() {
                 {/* Exchange Fields */}
                 <div className="space-y-4 relative">
                   <div>
-                    <label className="text-sm text-gray-400 mb-2 block">From</label>
+                  
                     <Button
-                      className="w-full h-20 bg-[#2a233f] justify-between px-4"
+                      className="w-full h-30 bg-[#2a233f] justify-between px-4"
                       onClick={() => {
                         setSelectedField('from')
                         setShowSelect(true)
                       }}
                     >
+                
                       <div className="flex items-center gap-3">
+                       <label className="text-sm text-gray-400 m-2 text-left  block">From</label>
                         {selectedFromToken ? (
                           <>
                             <div className="w-10 h-10 rounded-full bg-[#1a1424] flex items-center justify-center">
@@ -153,15 +155,16 @@ export default function Component() {
                   </div>
 
                   <div>
-                    <label className="text-sm text-gray-400 mb-2 block">To</label>
+                 
                     <Button
-                      className="w-full h-20 bg-[#2a233f] justify-between px-4"
+                      className="w-full h-30 bg-[#2a233f] justify-between px-4"
                       onClick={() => {
                         setSelectedField('to')
                         setShowSelect(true)
                       }}
                     >
                       <div className="flex items-center gap-3">
+                         <label className="text-sm text-gray-400 text-left mb-2 block">To</label>
                         {selectedToToken ? (
                           <>
                             <div className="w-10 h-10 rounded-full bg-[#1a1424] flex items-center justify-center">
