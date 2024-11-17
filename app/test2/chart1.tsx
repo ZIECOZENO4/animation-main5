@@ -32,39 +32,7 @@ export default function Component() {
   return (
     <div className="min-h-screen bg-[#1a1424] flex gap-4">
       {/* Toggle Buttons */}
-      <div className="mx-auto flex">
-        <input 
-          type="checkbox" 
-          id="modeToggle" 
-          className="hidden peer" 
-          checked={isGasMode}
-          onChange={() => setIsGasMode(!isGasMode)}
-        />
-        <label 
-          htmlFor="modeToggle" 
-          className="w-[60px] h-[155px] bg-[#2a233f] rounded-[1.7rem] p-1 cursor-pointer flex flex-col items-center justify-between py-4 relative"
-        >
-          {/* Top Icon */}
-          <div className="text-gray-400 z-10">
-            <Wallet className="h-6 w-6" />
-          </div>
-
-          {/* Moving Button */}
-          <div 
-            className={`
-              absolute w-[50px] h-[50px] bg-[#1a1424] rounded-full 
-              left-[5px] transition-all duration-500 ease-in-out
-              ${isGasMode ? 'top-[10px]' : 'top-[95px]'}
-            `}
-          />
-
-          {/* Bottom Icon */}
-          <div className="text-gray-400 z-10">
-            <ArrowLeftRight className="h-6 w-6" />
-          </div>
-        </label>
-
-      </div>
+ 
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-4">
@@ -104,7 +72,41 @@ export default function Component() {
               </Card>
             </motion.div>
           ) : (
-            <Card className="w-full max-w-md bg-[#1f1830]/90 backdrop-blur-sm border-none text-white relative">
+            <div className="flex gap-4">
+                     <div className="mx-auto flex">
+        <input 
+          type="checkbox" 
+          id="modeToggle" 
+          className="hidden peer" 
+          checked={isGasMode}
+          onChange={() => setIsGasMode(!isGasMode)}
+        />
+        <label 
+          htmlFor="modeToggle" 
+          className="w-[60px] h-[155px] bg-[#2a233f] rounded-[1.7rem] p-1 cursor-pointer flex flex-col items-center justify-between py-4 relative"
+        >
+          {/* Top Icon */}
+          <div className="text-gray-400 z-10">
+            <Wallet className="h-6 w-6" />
+          </div>
+
+          {/* Moving Button */}
+          <div 
+            className={`
+              absolute w-[50px] h-[50px] bg-[#1a1424] rounded-full 
+              left-[5px] transition-all duration-500 ease-in-out
+              ${isGasMode ? 'top-[10px]' : 'top-[95px]'}
+            `}
+          />
+
+          {/* Bottom Icon */}
+          <div className="text-gray-400 z-10">
+            <ArrowLeftRight className="h-6 w-6" />
+          </div>
+        </label>
+
+      </div>
+      <Card className="w-full max-w-md bg-[#1f1830]/90 backdrop-blur-sm border-none text-white relative">
               <div className="p-6 space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">
@@ -237,6 +239,7 @@ export default function Component() {
                 </div>
               </div>
             </Card>
+            </div>
           )}
         </AnimatePresence>
 
@@ -319,3 +322,4 @@ export default function Component() {
     </div>
   )
 }
+
