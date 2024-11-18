@@ -1371,16 +1371,16 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              className="relative h-[35%]   overflow-y-auto 
+              className="relative h-[35%]    bg-[#000000]"
+            >
+              <BorderComponent>
+                <div className="p-4 gap-4 h-full overflow-y-auto 
               scrollbar-none 
               [-ms-overflow-style:'none'] 
               [scrollbar-width:'none'] 
-              [&::-webkit-scrollbar]:hidden bg-[#000000]"
-            >
-              <BorderComponent>
-                <div className="p-4 gap-4">
+              [&::-webkit-scrollbar]:hidden">
 
-                <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+                <div className="flex flex-col my-2 gap-4 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-1 items-center text-center align-middle">
@@ -1405,7 +1405,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+        <div className="flex flex-col gap-4 my-2 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-1 items-center text-center align-middle">
@@ -1430,7 +1430,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+        <div className="flex flex-col gap-4 my-2 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-1 items-center text-center align-middle">
@@ -1457,7 +1457,7 @@ export default function TestContent() {
         </div>
 
 
-        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+        <div className="flex flex-col gap-4 my-2 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-1 items-center text-center align-middle">
@@ -1482,7 +1482,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+        <div className="flex flex-col gap-4 my-2 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-1 items-center text-center align-middle">
@@ -1507,7 +1507,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+        <div className="flex flex-col gap-4 my-2 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-1 items-center text-center align-middle">
@@ -1532,7 +1532,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="absolute bottom-4 right-4 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+        <div className="absolute bottom-4 right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
