@@ -1390,7 +1390,7 @@ export default function TestContent() {
             className="h-full  w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col h-full  p-6 gap-4">
+              <div className="flex flex-col h-full overflow-y-scroll  p-6 gap-4">
   <div className="flex gap-4 -mb-4">
             <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
               <BorderComponent>
@@ -1526,6 +1526,56 @@ export default function TestContent() {
     </div>
 </div>
 
+        </div>
+        <div className="mt-6 gap-4">
+<div className="w-full h-[19px] text-center bg-[#D9D9D933]">
+<p className='text-[14px] text-center text-[#FFFFFF99]'>VIEWS</p>
+<div className="w-full gap-6 flex jusstify-between align-middle">
+<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+
+<BorderComponent>
+
+</BorderComponent>
+</div>
+<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+
+<BorderComponent>
+
+</BorderComponent>
+</div>
+<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+
+<BorderComponent>
+
+</BorderComponent>
+</div>
+<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+
+<BorderComponent>
+
+</BorderComponent>
+</div>
+</div>
+</div>
+        </div>
+        <div className="mt-6 gap-4">
+<div className="w-full h-[19px] text-center bg-[#D9D9D933]">
+<p className='text-[14px] text-center text-[#FFFFFF99]'>REACTIONS</p>
+<div className="w-full gap-6 flex jusstify-between align-middle">
+<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+
+</div>
+<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+
+</div>
+<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+
+</div>
+<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+
+</div>
+</div>
+</div>
         </div>
               </div>
             </BorderComponent>
