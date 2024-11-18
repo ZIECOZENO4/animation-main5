@@ -1445,7 +1445,7 @@ export default function TestContent() {
             <BorderComponent>
               <div className="flex flex-col h-full  p-6 gap-4">
   <div className="flex gap-4">
-            <div className="w-[80%] h-[51px] bg-[#5555554D]">
+            <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
                   <input
@@ -1466,7 +1466,7 @@ export default function TestContent() {
             </div>
    
 <motion.div
-  className="w-[20%] h-[51px] bg-[#2a233f] rounded-xl"
+  className="w-[25px] h-[25px] align-bottom -bottom-1 top-1/2 left-1/2 -right-1 bg-[#292929] rounded-xl"
   whileHover={{ scale: 1.02 }}
   whileTap={{ scale: 0.98 }}
 >
@@ -1480,7 +1480,7 @@ export default function TestContent() {
   </BorderComponent>
 </motion.div>
           </div>
-          <div className="w-[100%] h-[51px] bg-[#5555554D]">
+          <div className="w-[100%] h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
               <input
@@ -1505,72 +1505,34 @@ export default function TestContent() {
             </div>
           </BorderComponent>
         </div>
+        <motion.div 
+              className="w-full h-[36.22px] shake-button border-[0.63px] border-[#000000]"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
 
-        <div className='flex flex-row w-full shake-button'>
-      <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
-      <div className='flex flex-col flex-grow'>
-        <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
-          <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
-          VOTE FOR TOKEN
-          </span>
-        </div>
-        <div className="top-[69.7px] left-[1305px] w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
-      </div>
-
-                {/* Bottom Section */}
-                <div className="flex flex-col justify-between h-[35%] p-2 overflow-y-scroll">
-                  {" "}
-                  {/* Changed from space-y-4 to flex with justify-between */}
-                  <div className="space-y-4">
-                    {" "}
-                    {/* Container for top two rows */}
-                    {/* First Row */}
-                    <div className="flex gap-4">
-                      <div className="w-[80%] h-[51px] bg-[#5555554D]">
-                        <BorderComponent>
-                          <div className="flex justify-center items-center h-full">
-                            <span className="text-[20px] text-[#F7F2DA80]">
-                              MONAD
-                            </span>
-                          </div>
-                        </BorderComponent>
-                      </div>
-                      <div className="w-[20%] h-[51px] bg-[#5555554D]">
-                        <BorderComponent>
-                          <div className="flex items-center justify-center h-full"></div>
-                        </BorderComponent>
-                      </div>
-                    </div>
-                    {/* Second Row */}
-                    <div className="flex gap-4">
-                      <div className="w-[80%] h-[51px] bg-[#5555554D]">
-                        <BorderComponent>
-                          <div className="flex justify-center items-center h-full">
-                            <span className="text-[20px] text-[#F7F2DA80]">
-                              MONAD
-                            </span>
-                          </div>
-                        </BorderComponent>
-                      </div>
-                      <div className="w-[20%] h-[51px] bg-[#5555554D]">
-                        <BorderComponent>
-                          <div className="flex items-center justify-center h-full"></div>
-                        </BorderComponent>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Third Row - Full Width (at bottom) */}
-                  <div className="w-full h-[51px] bg-[#5555554D]">
-                    <BorderComponent>
-                      <div className="flex justify-end items-center h-full">
-                        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                          BEAT
-                        </span>
-                      </div>
-                    </BorderComponent>
-                  </div>
+              whileHover={{ scale: 1.05 }}
+            >
+              <div className="flex">
+                <div className="w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-black" />
+                <div className="flex items-center justify-center w-full text-center h-[33px] bg-[#787878]">
+                  <motion.p 
+                    className="text-[20px] text-[#F7F2DA]/60 text-center font-normal"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+        
+                  >
+            VOTE FOR TOKEN
+                  </motion.p>
                 </div>
               </div>
+              <div className="w-full  h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
+            </motion.div>
+            <div className="w-[100%] h-[100px] mt-6 bg-[#5555554D]/30" >
+
+          <BorderComponent>
+         
+          </BorderComponent>
+        </div>
               </div>
             </BorderComponent>
           </motion.div>
