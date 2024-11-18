@@ -1374,7 +1374,7 @@ export default function TestContent() {
               className="relative h-[35%]    bg-[#000000]"
             >
               <BorderComponent>
-                <div className="p-4 gap-4 h-full overflow-y-auto 
+                <div className="px-4 gap-4 h-full overflow-y-auto 
               scrollbar-none 
               [-ms-overflow-style:'none'] 
               [scrollbar-width:'none'] 
@@ -1536,7 +1536,7 @@ export default function TestContent() {
         <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
-        
+     
               </BorderComponent>
             </motion.div>
           </div>
@@ -1544,12 +1544,16 @@ export default function TestContent() {
           {/* Right Column */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}m
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-auto   w-[30%]  bg-[#000000]"
+            className="h-[100%]   w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col h-full overflow-y-scroll  p-6 gap-4">
+              <div className="flex flex-col h-full overflow-y-auto 
+              scrollbar-none 
+              [-ms-overflow-style:'none'] 
+              [scrollbar-width:'none'] 
+              [&::-webkit-scrollbar]:hidden  p-6 gap-4">
   <div className="flex gap-4 ">
             <div className="w-[80%] h-[51px] -mb-5 bg-[#5555554D]/30">
               <BorderComponent>
