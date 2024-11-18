@@ -1371,10 +1371,14 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              className="relative h-[35%] bg-[#000000]"
+              className="relative h-[35%]   overflow-y-auto 
+              scrollbar-none 
+              [-ms-overflow-style:'none'] 
+              [scrollbar-width:'none'] 
+              [&::-webkit-scrollbar]:hidden bg-[#000000]"
             >
               <BorderComponent>
-                <div className="p-4 ">
+                <div className="p-4 gap-4">
 
                 <div className="flex flex-col gap-4 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
@@ -1401,8 +1405,135 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="absolute bottom-4 right-4 w-[25px] h-[25px] bg-[#292929] rounded-sm flex items-center justify-center cursor-pointer">
-        <Plus className="h-4 w-4 text-gray-400" />
+        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[48px] px-2 py-1">
+<div className="flex justify-between">
+<div className="flex gap-1 items-center text-center align-middle">
+  <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
+  <div className="h-[12px] w-[32px] text-center bg-[#484848]">
+<p className="text-[10px] text-center text-[#BABABA]">3243e</p>
+  </div>
+  <p className="text-[12px] text-center text-[#555555]">10/10/24</p>
+</div>
+<div className="flex items-center justify-end gap-1">
+  <p className="text-[12px] text-[#FFFFFF66]">five likes</p>
+  <img 
+    src='/images/heart.png' 
+    alt='heart' 
+    className='h-[10px] w-[12px] object-contain'
+  />
+</div>
+</div>
+<div className="flex gap-2 items-center text-center leading-5 align-middle ">
+<p className="text-[14px]  text-[#555555]">#1667484</p>
+<p className="text-[14px]  text-[#FFFFFFB2]">hey, this is so cool!</p>
+</div>
+</div>
+        </div>
+        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[48px] px-2 py-1">
+<div className="flex justify-between">
+<div className="flex gap-1 items-center text-center align-middle">
+  <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
+  <div className="h-[12px] w-[32px] text-center bg-[#484848]">
+<p className="text-[10px] text-center text-[#BABABA]">3243e</p>
+  </div>
+  <p className="text-[12px] text-center text-[#555555]">10/10/24</p>
+</div>
+<div className="flex items-center justify-end gap-1">
+  <p className="text-[12px] text-[#FFFFFF66]">five likes</p>
+  <img 
+    src='/images/heart.png' 
+    alt='heart' 
+    className='h-[10px] w-[12px] object-contain'
+  />
+</div>
+</div>
+<div className="flex gap-2 items-center text-center leading-5 align-middle ">
+<p className="text-[14px]  text-[#555555]">#1667484</p>
+<p className="text-[14px]  text-[#FFFFFFB2]">hey, this is so cool!</p>
+</div>
+</div>
+        </div>
+
+
+        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[48px] px-2 py-1">
+<div className="flex justify-between">
+<div className="flex gap-1 items-center text-center align-middle">
+  <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
+  <div className="h-[12px] w-[32px] text-center bg-[#484848]">
+<p className="text-[10px] text-center text-[#BABABA]">3243e</p>
+  </div>
+  <p className="text-[12px] text-center text-[#555555]">10/10/24</p>
+</div>
+<div className="flex items-center justify-end gap-1">
+  <p className="text-[12px] text-[#FFFFFF66]">five likes</p>
+  <img 
+    src='/images/heart.png' 
+    alt='heart' 
+    className='h-[10px] w-[12px] object-contain'
+  />
+</div>
+</div>
+<div className="flex gap-2 items-center text-center leading-5 align-middle ">
+<p className="text-[14px]  text-[#555555]">#1667484</p>
+<p className="text-[14px]  text-[#FFFFFFB2]">hey, this is so cool!</p>
+</div>
+</div>
+        </div>
+        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[48px] px-2 py-1">
+<div className="flex justify-between">
+<div className="flex gap-1 items-center text-center align-middle">
+  <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
+  <div className="h-[12px] w-[32px] text-center bg-[#484848]">
+<p className="text-[10px] text-center text-[#BABABA]">3243e</p>
+  </div>
+  <p className="text-[12px] text-center text-[#555555]">10/10/24</p>
+</div>
+<div className="flex items-center justify-end gap-1">
+  <p className="text-[12px] text-[#FFFFFF66]">five likes</p>
+  <img 
+    src='/images/heart.png' 
+    alt='heart' 
+    className='h-[10px] w-[12px] object-contain'
+  />
+</div>
+</div>
+<div className="flex gap-2 items-center text-center leading-5 align-middle ">
+<p className="text-[14px]  text-[#555555]">#1667484</p>
+<p className="text-[14px]  text-[#FFFFFFB2]">hey, this is so cool!</p>
+</div>
+</div>
+        </div>
+        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[48px] px-2 py-1">
+<div className="flex justify-between">
+<div className="flex gap-1 items-center text-center align-middle">
+  <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
+  <div className="h-[12px] w-[32px] text-center bg-[#484848]">
+<p className="text-[10px] text-center text-[#BABABA]">3243e</p>
+  </div>
+  <p className="text-[12px] text-center text-[#555555]">10/10/24</p>
+</div>
+<div className="flex items-center justify-end gap-1">
+  <p className="text-[12px] text-[#FFFFFF66]">five likes</p>
+  <img 
+    src='/images/heart.png' 
+    alt='heart' 
+    className='h-[10px] w-[12px] object-contain'
+  />
+</div>
+</div>
+<div className="flex gap-2 items-center text-center leading-5 align-middle ">
+<p className="text-[14px]  text-[#555555]">#1667484</p>
+<p className="text-[14px]  text-[#FFFFFFB2]">hey, this is so cool!</p>
+</div>
+</div>
+        </div>
+        <div className="absolute bottom-4 right-4 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+        <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
         
@@ -1418,9 +1549,9 @@ export default function TestContent() {
             className="h-auto   w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col h-auto overflow-y-scroll  p-6 gap-4">
-  <div className="flex gap-4 -mb-5">
-            <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
+              <div className="flex flex-col h-full overflow-y-scroll  p-6 gap-4">
+  <div className="flex gap-4 ">
+            <div className="w-[80%] h-[51px] -mb-5 bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
                   <input
@@ -1453,7 +1584,7 @@ export default function TestContent() {
       </div>
       
       {/* Plus icon with background */}
-      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#5555554D]/30 rounded-sm flex items-center justify-center cursor-pointer">
+      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 text-gray-400" />
       </div>
     </div>
@@ -1461,7 +1592,7 @@ export default function TestContent() {
 </motion.div>
           </div>
           <div className="flex items-center justify-center bg-black"> {/* Parent container */}
-  <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#5555554D]/30 rounded-lg'>
+  <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#1A1A1A] rounded-lg'>
     <ArrowDown className="h-5 w-5 text-gray-400" />
   </div>
 </div>
@@ -1519,15 +1650,10 @@ export default function TestContent() {
           </BorderComponent>
         </div>
         <div className='flex w-full h-[100px] justify-between gap-4 p-2'>
-      {/* Image Container */}
-      <div className="min-w-[100px] h-[100px] bg-[#5555554D]/30 rounded-xl overflow-hidden">
-        <BorderComponent>
-          {/* Add your image here */}
-        </BorderComponent>
-      </div>
+   
 
       {/* Content Container */}
-      <div className='flex w-full h-[100px] justify-between gap-4'>
+      <div className='flex w-full h-[100px] justify-between gap-2'>
         <div className="w-[100px] h-[100px] bg-[#5555554D]/30" >
 
 <BorderComponent>
