@@ -1371,13 +1371,15 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              className="relative h-[35%] overflow-y-scroll p-4  bg-[#000000]"
+              className="relative h-[35%] overflow-y-scroll  bg-[#000000]"
             >
               <BorderComponent>
-        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
-<div className="w-full h-[44px] px-2 py-1">
+                <div className="p-4 ">
+
+                <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[48px] px-2 py-1">
 <div className="flex justify-between">
-<div className="flex gap-2 align-middle">
+<div className="flex gap-1 items-center text-center align-middle">
   <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
   <div className="h-[12px] w-[32px] text-center bg-[#484848]">
 <p className="text-[10px] text-center text-[#BABABA]">3243e</p>
@@ -1389,12 +1391,17 @@ export default function TestContent() {
 <img src='/images/heart.png' alt='heart' className='h-[10px] w-[12px]' />
 </div>
 </div>
-<div className="flex gap-2 leading-5 align-middle ">
+<div className="flex gap-2 items-center text-center leading-5 align-middle ">
 <p className="text-[14px]  text-[#555555]">#1667484</p>
 <p className="text-[14px]  text-[#FFFFFFB2]">hey, this is so cool!</p>
 </div>
 </div>
         </div>
+        <div className="absolute bottom-4 right-4 w-[25px] h-[25px] bg-[#292929] rounded-sm flex items-center justify-center cursor-pointer">
+        <Plus className="h-4 w-4 text-gray-400" />
+      </div>
+                </div>
+        
               </BorderComponent>
             </motion.div>
           </div>
