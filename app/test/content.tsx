@@ -1374,11 +1374,13 @@ export default function TestContent() {
               className="relative h-[35%]    bg-[#000000]"
             >
               <BorderComponent>
-                <div className="px-4 gap-4 h-full overflow-y-auto 
-              scrollbar-none 
-              [-ms-overflow-style:'none'] 
-              [scrollbar-width:'none'] 
-              [&::-webkit-scrollbar]:hidden">
+              <div className="relative h-full">
+              <div className="absolute inset-0 px-4 overflow-y-auto 
+        scrollbar-none 
+        [-ms-overflow-style:'none'] 
+        [scrollbar-width:'none'] 
+        [&::-webkit-scrollbar]:hidden
+      ">
 
                 <div className="flex flex-col my-2 gap-4 bg-[#1A1A1A]">
 <div className="w-full h-[48px] px-2 py-1">
@@ -1536,7 +1538,7 @@ export default function TestContent() {
         <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
-     
+                </div>
               </BorderComponent>
             </motion.div>
           </div>
