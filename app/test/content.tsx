@@ -1551,7 +1551,7 @@ export default function TestContent() {
             className="h-[100%]   w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-            <div className="h-full relative">
+            <div className="h-full p-6 relative">
       {/* Scrollable container */}
       <div 
         className="absolute inset-0 overflow-y-auto 
