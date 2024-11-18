@@ -1172,8 +1172,8 @@ export default function TestContent() {
   const [amount2, setAmount2] = useState<string>("");
   const [tokenModalOpen, setTokenModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false)
-  
-  const text = "****************************************************************************************************************************************************************************************************************************************"
+  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
   const [selectedTokens, setSelectedTokens] = useState<{
     [key: number]: Token | null;
   }>({});
@@ -1371,11 +1371,11 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              className="relative h-[35%] overflow-y-scroll  bg-[#000000]"
+              className="relative h-[35%] overflow-y-scroll p-4  bg-[#000000]"
             >
               <BorderComponent>
-        <div className="flex flex-col gap-4">
-<div className="w-full h-[44px] px-2">
+        <div className="flex flex-col gap-4 bg-[#1A1A1A]">
+<div className="w-full h-[44px] px-2 py-1">
 <div className="flex justify-between">
 <div className="flex gap-2 align-middle">
   <div className="h-[14px] w-[14px] rounded-full bg-[#484848]" />
@@ -1386,7 +1386,7 @@ export default function TestContent() {
 </div>
 <div className="leading-5 justify-end flex align-middle">
 <p className="text-[12px]  text-[#FFFFFF66]">five likes</p>
-<img src='/images/heart.png' alt='heart' className='h-auto w-auto' />
+<img src='/images/heart.png' alt='heart' className='h-[10px] w-[12px]' />
 </div>
 </div>
 <div className="flex gap-2 leading-5 align-middle ">
@@ -1408,7 +1408,7 @@ export default function TestContent() {
           >
             <BorderComponent>
               <div className="flex flex-col min-h-screen overflow-y-scroll  p-6 gap-4">
-  <div className="flex gap-4 -mb-4">
+  <div className="flex gap-4 -mb-6">
             <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
@@ -1430,7 +1430,7 @@ export default function TestContent() {
             </div>
    
             <motion.div
-  className="w-[20%] h-[51px] relative bg-[#5555554D]/30 rounded-xl"
+  className="w-[20%] h-[51px] relative bg-[#5555554D]/30 "
   whileHover={{ scale: 1.02 }}
   whileTap={{ scale: 0.98 }}
 >
@@ -1442,7 +1442,7 @@ export default function TestContent() {
       </div>
       
       {/* Plus icon with background */}
-      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#292929] rounded-lg flex items-center justify-center cursor-pointer">
+      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#292929] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 text-gray-400" />
       </div>
     </div>
@@ -1454,7 +1454,7 @@ export default function TestContent() {
     <ArrowDown className="h-5 w-5 text-gray-400" />
   </div>
 </div>
-          <div className="w-[100%] -mt-4 h-[51px] bg-[#5555554D]/30">
+          <div className="w-[100%] -mt-6 h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
               <input
@@ -1507,44 +1507,52 @@ export default function TestContent() {
          
           </BorderComponent>
         </div>
-        <div className='flex w-full h-[100px] justify-between gap-4'>
-        <div className="w-[100px] h-[100px] bg-[#5555554D]/30" >
-
-<BorderComponent>
-
-</BorderComponent>
-</div>
-<div className="w-full h-full flex flex-col gap-2" >
-<p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
-<div className="w-full ">
-      <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
-        {text}
-        {!isExpanded && (
-          <span 
-            className="absolute right-0 bottom-0 pl-2 cursor-pointer"
-            onClick={() => setIsExpanded(true)}
-          >
-            <span className="text-[#F7F2DA59] underline">more</span>
-          </span>
-        )}
-      </p>
-    </div>
-    <div className="w-full gap-2 flex justify-between">
-    <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
-      Website
+        <div className='flex w-full h-[100px] justify-between gap-4 p-2'>
+      {/* Image Container */}
+      <div className="min-w-[100px] h-[100px] bg-[#5555554D]/30 rounded-xl overflow-hidden">
+        <BorderComponent>
+          {/* Add your image here */}
+        </BorderComponent>
       </div>
-      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
-      
-      Twitter
-      </div>
-      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
-      Telegram
-      </div>
-    </div>
-</div>
 
+      {/* Content Container */}
+      <div className="flex-1 flex flex-col gap-2">
+        {/* Title */}
+        <h2 className="text-[#F7F2DA80] text-[20px] font-semibold truncate">
+          Beat Ass Tonight
+        </h2>
+
+        {/* Description */}
+        <div className="flex-1 relative">
+          <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''}`}>
+            {text}
+            {!isExpanded && text.length > 100 && (
+              <button 
+                className="ml-1 text-[#F7F2DA59] hover:text-[#F7F2DA80] underline inline-flex"
+                onClick={() => setIsExpanded(true)}
+              >
+                more
+              </button>
+            )}
+          </p>
         </div>
-        <div className="mt-6 gap-4">
+
+        {/* Social Links */}
+        <div className="w-full flex gap-2">
+          {['Website', 'Twitter', 'Telegram'].map((item) => (
+            <button
+              key={item}
+              className="flex-1 h-[19px] bg-[#D9D9D94D] hover:bg-[#D9D9D96D] 
+                         text-[14px] text-[#FFFFFF99] text-center rounded
+                         transition-colors duration-200"
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+        <div className="mt-6 gap-4 w-full h-auto">
 <div className="w-full h-[19px] text-center bg-[#D9D9D933]">
 <p className='text-[14px] text-center text-[#FFFFFF99]'>VIEWS</p>
 <div className="w-full gap-6 flex jusstify-between align-middle">
@@ -1575,7 +1583,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="mt-6 gap-4">
+        <div className="mt-6 gap-4  w-full h-auto">
 <div className="w-full h-[19px] text-center bg-[#D9D9D933]">
 <p className='text-[14px] text-center text-[#FFFFFF99]'>REACTIONS</p>
 <div className="w-full gap-6 flex jusstify-between align-middle">
