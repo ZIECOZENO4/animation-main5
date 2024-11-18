@@ -1371,7 +1371,7 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              className="relative h-[35%] overflow-y-scroll  bg-[#000000]"
+              className="relative h-[35%] overflow-y-scroll p-1 bg-[#000000]"
             >
               <BorderComponent>
                 <div className="p-4 ">
@@ -1411,11 +1411,11 @@ export default function TestContent() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full  w-[30%]  bg-[#000000]"
+            className="h-full  overflow-y-scroll  w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col min-h-screen overflow-y-scroll  p-6 gap-4">
-  <div className="flex gap-4 -mb-6">
+              <div className="flex flex-col h-full overflow-y-scroll  p-6 gap-4">
+  <div className="flex gap-4 -mb-5">
             <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
@@ -1449,19 +1449,19 @@ export default function TestContent() {
       </div>
       
       {/* Plus icon with background */}
-      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#292929] rounded-sm flex items-center justify-center cursor-pointer">
+      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#5555554D]/30 rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 text-gray-400" />
       </div>
     </div>
   </BorderComponent>
 </motion.div>
           </div>
-          <div className="flex items-center justify-center"> {/* Parent container */}
+          <div className="flex items-center justify-center bg-black"> {/* Parent container */}
   <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#5555554D]/30 rounded-lg'>
     <ArrowDown className="h-5 w-5 text-gray-400" />
   </div>
 </div>
-          <div className="w-[100%] -mt-6 h-[51px] bg-[#5555554D]/30">
+          <div className="w-[100%] -mt-5 h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
               <input
@@ -1523,41 +1523,43 @@ export default function TestContent() {
       </div>
 
       {/* Content Container */}
-      <div className="flex-1 flex flex-col gap-2">
-        {/* Title */}
-        <h2 className="text-[#F7F2DA80] text-[20px] font-semibold truncate">
-          Beat Ass Tonight
-        </h2>
+      <div className='flex w-full h-[100px] justify-between gap-4'>
+        <div className="w-[100px] h-[100px] bg-[#5555554D]/30" >
 
-        {/* Description */}
-        <div className="flex-1 relative">
-          <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''}`}>
-            {text}
-            {!isExpanded && text.length > 100 && (
-              <button 
-                className="ml-1 text-[#F7F2DA59] hover:text-[#F7F2DA80] underline inline-flex"
-                onClick={() => setIsExpanded(true)}
-              >
-                more
-              </button>
-            )}
-          </p>
-        </div>
+<BorderComponent>
 
-        {/* Social Links */}
-        <div className="w-full flex gap-2">
-          {['Website', 'Twitter', 'Telegram'].map((item) => (
-            <button
-              key={item}
-              className="flex-1 h-[19px] bg-[#D9D9D94D] hover:bg-[#D9D9D96D] 
-                         text-[14px] text-[#FFFFFF99] text-center rounded
-                         transition-colors duration-200"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
+</BorderComponent>
+</div>
+<div className="w-[calc(100%-100px)] h-full flex flex-col gap-2" >
+<p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
+<div className="w-full ">
+      <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
+        {text}
+        {!isExpanded && (
+          <span 
+            className="absolute right-0 bottom-0 ml-2 cursor-pointer"
+            onClick={() => setIsExpanded(true)}
+          >
+            <span className="text-[#F7F2DA59] underline">more</span>
+          </span>
+        )}
+      </p>
+    </div>
+    <div className="w-full gap-2 flex justify-between">
+    <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
+      Website
       </div>
+      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
+      
+      Twitter
+      </div>
+      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
+      Telegram
+      </div>
+    </div>
+</div>
+
+        </div>
     </div>
         <div className="mt-6 gap-4 w-full h-auto">
 <div className="w-full h-[19px] text-center bg-[#D9D9D933]">
