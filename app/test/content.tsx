@@ -12,7 +12,7 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { IoAdd, IoClose } from "react-icons/io5";
-import { Plus } from 'lucide-react'
+import { Plus, ArrowDown } from 'lucide-react'
 
 
 
@@ -1456,7 +1456,7 @@ export default function TestContent() {
                   />
                  
                     <div className="flex flex-col items-end">
-                      <span className="text-[20px] text-[#F7F2DA80]">
+                      <span className="text-[20px] text-[#F7F2DA80]/50">
                       USDT
                       </span>
                     </div>
@@ -1466,19 +1466,22 @@ export default function TestContent() {
             </div>
    
 <motion.div
-  className="w-[25px] h-[25px] align-bottom -bottom-1 top-1/2 left-1/2 -right-1 bg-[#292929] rounded-xl"
+  className="w-[20%] h-[51px] relative  bg-[#5555554D]/30 rounded-xl"
   whileHover={{ scale: 1.02 }}
   whileTap={{ scale: 0.98 }}
 >
   <BorderComponent>
     <div
-      className="flex items-center justify-center h-full cursor-pointer"
+      className="flex items-center align-bottom -bottom-1 top-1/2 left-1/2 -right-1 bg-[#292929]  justify-center h-full cursor-pointer"
       onClick={() => {/* your click handler */}}
     >
       <Plus className="h-5 w-5 text-gray-400" />
     </div>
   </BorderComponent>
 </motion.div>
+          </div>
+          <div className='h-[30px]  w-[30px] align-middle items-center justify-center bg-[#5555554D]/30'>
+<ArrowDown />
           </div>
           <div className="w-[100%] h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
@@ -1532,6 +1535,15 @@ export default function TestContent() {
           <BorderComponent>
          
           </BorderComponent>
+        </div>
+        <div className='flex w-full h-[100px] justify-between gap-4'>
+        <div className="w-[100px] h-[100px] bg-[#5555554D]/30" >
+
+<BorderComponent>
+
+</BorderComponent>
+</div>
+
         </div>
               </div>
             </BorderComponent>
