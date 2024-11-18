@@ -1371,7 +1371,7 @@ export default function TestContent() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              className="relative h-[35%] overflow-y-scroll p-1 bg-[#000000]"
+              className="relative h-[35%] bg-[#000000]"
             >
               <BorderComponent>
                 <div className="p-4 ">
@@ -1386,9 +1386,13 @@ export default function TestContent() {
   </div>
   <p className="text-[12px] text-center text-[#555555]">10/10/24</p>
 </div>
-<div className="leading-5 justify-end flex align-middle">
-<p className="text-[12px]  text-[#FFFFFF66]">five likes</p>
-<img src='/images/heart.png' alt='heart' className='h-[10px] w-[12px]' />
+<div className="flex items-center justify-end gap-1">
+  <p className="text-[12px] text-[#FFFFFF66]">five likes</p>
+  <img 
+    src='/images/heart.png' 
+    alt='heart' 
+    className='h-[10px] w-[12px] object-contain'
+  />
 </div>
 </div>
 <div className="flex gap-2 items-center text-center leading-5 align-middle ">
@@ -1411,10 +1415,10 @@ export default function TestContent() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full  overflow-y-scroll  w-[30%]  bg-[#000000]"
+            className="h-auto   w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col h-full overflow-y-scroll  p-6 gap-4">
+              <div className="flex flex-col h-auto overflow-y-scroll  p-6 gap-4">
   <div className="flex gap-4 -mb-5">
             <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
               <BorderComponent>
