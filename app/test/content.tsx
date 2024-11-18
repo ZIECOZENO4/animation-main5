@@ -1171,7 +1171,9 @@ export default function TestContent() {
   const [amount1, setAmount1] = useState<string>("");
   const [amount2, setAmount2] = useState<string>("");
   const [tokenModalOpen, setTokenModalOpen] = useState(false);
-
+  const [isExpanded, setIsExpanded] = useState(false)
+  
+  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
   const [selectedTokens, setSelectedTokens] = useState<{
     [key: number]: Token | null;
   }>({});
@@ -1223,61 +1225,6 @@ export default function TestContent() {
     visible: { opacity: 1, y: 0 }
   };
 
-  const MiddleBorderComponent = ({
-    children
-  }: {
-    children?: React.ReactNode;
-  }) => (
-    <div className="relative h-full">
-      <div className="relative p-6 h-full">{children}</div>
-
-      {/* Top border - Solid Black */}
-      <div
-        className="absolute -top-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: "2px",
-          backgroundColor: "#000000"
-        }}
-      />
-
-      {/* Bottom border - Custom Pattern */}
-      <div
-        className="absolute -bottom-[2px] -right-[2px] -left-[2px]"
-        style={{
-          height: "2px",
-          backgroundImage: `
-      repeating-linear-gradient(
-        to right,
-        #555555 0,
-        #555555 8px,
-        transparent 8px,
-        transparent 16px,
-        #555555 16px,
-        #555555 32px,
-        transparent 32px,
-        transparent 48px
-      )
-    `
-        }}
-      />
-      {/* Left border - Solid Black */}
-      <div
-        className="absolute -left-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: "2px",
-          backgroundColor: "#000000"
-        }}
-      />
-      {/* Right border - Solid Black */}
-      <div
-        className="absolute -right-[2px] -top-[2px] -bottom-[2px]"
-        style={{
-          width: "2px",
-          backgroundColor: "#000000"
-        }}
-      />
-    </div>
-  );
 
   const BorderComponent = ({
     children,
@@ -1444,7 +1391,7 @@ export default function TestContent() {
           >
             <BorderComponent>
               <div className="flex flex-col h-full  p-6 gap-4">
-  <div className="flex gap-4">
+  <div className="flex gap-4 -mb-4">
             <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
@@ -1465,25 +1412,32 @@ export default function TestContent() {
               </BorderComponent>
             </div>
    
-<motion.div
-  className="w-[20%] h-[51px] relative  bg-[#5555554D]/30 rounded-xl"
+            <motion.div
+  className="w-[20%] h-[51px] relative bg-[#5555554D]/30 rounded-xl"
   whileHover={{ scale: 1.02 }}
   whileTap={{ scale: 0.98 }}
 >
   <BorderComponent>
-    <div
-      className="flex items-center align-bottom -bottom-1 top-1/2 left-1/2 -right-1 bg-[#292929]  justify-center h-full cursor-pointer"
-      onClick={() => {/* your click handler */}}
-    >
-      <Plus className="h-5 w-5 text-gray-400" />
+    <div className="h-full relative">
+      {/* Main content area */}
+      <div className="flex items-center justify-center h-full cursor-pointer">
+        {/* Your main content here */}
+      </div>
+      
+      {/* Plus icon with background */}
+      <div className="absolute -bottom-3 -right-3 w-[25px] h-[25px] bg-[#292929] rounded-lg flex items-center justify-center cursor-pointer">
+        <Plus className="h-4 w-4 text-gray-400" />
+      </div>
     </div>
   </BorderComponent>
 </motion.div>
           </div>
-          <div className='h-[30px]  w-[30px] align-middle items-center justify-center bg-[#5555554D]/30'>
-<ArrowDown />
-          </div>
-          <div className="w-[100%] h-[51px] bg-[#5555554D]/30">
+          <div className="flex items-center justify-center"> {/* Parent container */}
+  <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#5555554D]/30 rounded-lg'>
+    <ArrowDown className="h-5 w-5 text-gray-400" />
+  </div>
+</div>
+          <div className="w-[100%] -mt-4 h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
               <input
@@ -1542,6 +1496,34 @@ export default function TestContent() {
 <BorderComponent>
 
 </BorderComponent>
+</div>
+<div className="w-full h-full flex flex-col gap-4" >
+<p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
+<div className="w-full  leading-5">
+      <p className={`text-[#F7F2DA59] text-[15px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
+        {text}
+        {!isExpanded && (
+          <span 
+            className="absolute right-0 bottom-0 pl-2 cursor-pointer"
+            onClick={() => setIsExpanded(true)}
+          >
+            <span className="text-[#F7F2DA59] underline">more</span>
+          </span>
+        )}
+      </p>
+    </div>
+    <div className="w-full gap-2 flex justify-between">
+    <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
+      Website
+      </div>
+      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
+      
+      Twitter
+      </div>
+      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
+      Telegram
+      </div>
+    </div>
 </div>
 
         </div>

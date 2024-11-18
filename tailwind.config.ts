@@ -38,9 +38,8 @@ const config: Config = {
  plugins: [
   nextui(),
   addVariablesForColors,
-  require('tailwind-scrollbar')({
-    nocompatible: true
-  })
+  require('@tailwindcss/line-clamp'),
+  require('tailwind-scrollbar')({ nocompatible: true }),
 ],
 
 };
