@@ -1551,10 +1551,10 @@ export default function TestContent() {
             className="h-[100%]   w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-            <div className="h-full p-6 relative">
+            <div className="h-full relative">
       {/* Scrollable container */}
       <div 
-        className="absolute inset-0 overflow-y-auto 
+        className="absolute  p-6 inset-0 overflow-y-auto 
           scrollbar-none 
           [-ms-overflow-style:'none'] 
           [scrollbar-width:'none'] 
@@ -1562,7 +1562,7 @@ export default function TestContent() {
         "
       >
   <div className="flex gap-4  space-y-4">
-            <div className="w-[80%] h-[51px] -mb-5 bg-[#5555554D]/30">
+            <div className="w-[80%] h-[51px]  bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
                   <input
@@ -1607,7 +1607,7 @@ export default function TestContent() {
     <ArrowDown className="h-5 w-5 text-gray-400" />
   </div>
 </div>
-          <div className="w-[100%] -mt-5 h-[51px] bg-[#5555554D]/30">
+          <div className="w-[100%]  h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
               <input
@@ -1671,7 +1671,7 @@ export default function TestContent() {
 
 </BorderComponent>
 </div>
-<div className="w-[calc(100%-100px)] h-full flex flex-col gap-2" >
+<div className="w-[calc(100%-100px)] h-full flex flex-col " >
 <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
 <div className="w-full ">
       <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
@@ -1686,7 +1686,7 @@ export default function TestContent() {
         )}
       </p>
     </div>
-    <div className="w-full gap-2 flex justify-between">
+    <div className="w-full gap-1 flex justify-between">
     <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
       Website
       </div>
@@ -1702,29 +1702,29 @@ export default function TestContent() {
 
         </div>
     </div>
-        <div className="mt-6 gap-4 w-full h-auto">
+        <div className="mt-6 gap-4 w-full h-[110px]">
 <div className="w-full h-[19px] text-center bg-[#D9D9D933]">
 <p className='text-[14px] text-center text-[#FFFFFF99]'>VIEWS</p>
 <div className="w-full gap-6 flex jusstify-between align-middle">
-<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
 
 <BorderComponent>
 
 </BorderComponent>
 </div>
-<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
 
 <BorderComponent>
 
 </BorderComponent>
 </div>
-<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
 
 <BorderComponent>
 
 </BorderComponent>
 </div>
-<div className="w-[73px] h-[75px] bg-[#1A1A1A] text-center" >
+<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
 
 <BorderComponent>
 
@@ -1733,20 +1733,23 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="mt-6 gap-4  w-full h-auto">
+        <div className="mt-6 gap-4  w-full h-[110px] ">
 <div className="w-full h-[19px] text-center bg-[#D9D9D933]">
 <p className='text-[14px] text-center text-[#FFFFFF99]'>REACTIONS</p>
 <div className="w-full gap-6 flex jusstify-between align-middle">
-<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
 
 </div>
-<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
 
 </div>
-<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
 
 </div>
-<div className="w-[50px] h-[50px] bg-[#1A1A1A] rounded-md" >
+<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
+
+</div>
+<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
 
 </div>
 </div>
