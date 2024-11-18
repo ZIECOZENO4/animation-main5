@@ -12,6 +12,9 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { IoAdd, IoClose } from "react-icons/io5";
+import { Plus } from 'lucide-react'
+
+
 
 interface Token {
   id?: number;
@@ -1441,60 +1444,78 @@ export default function TestContent() {
           >
             <BorderComponent>
               <div className="flex flex-col h-full  p-6 gap-4">
-                {/* Top Section */}
-
-                <div className="space-y-4 h-[65%] p-2 overflow-y-scroll">
-                
-                  <TokenInputList />
-                  <BaseTokenSelect />
-                  {/* Confirm Button */}
-                  <motion.div
-                    className="w-full h-[51px] bg-[#5555554D]"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    onClick={() => {
-                      if (
-                        selectedToken1 &&
-                        selectedTokens2 &&
-                        amount1 &&
-                        amount2
-                      ) {
-                        confirmModal.onOpen();
-                      }
-                    }}
-                  >
-                    <BorderComponent>
-                      <div className="flex justify-center items-center h-full cursor-pointer">
-                        <span className="text-[20px] pr-2 text-[#F7F2DA80]">
-                          CONFIRM SWAP
-                        </span>
-                      </div>
-                    </BorderComponent>
-                  </motion.div>
-
-                  <TokenSelectModal
-                    isOpen={tokenModalOpen}
-                    onOpenChange={() => setTokenModalOpen(false)}
-                    onTokenSelect={(token) => {
-                      if (activeInput !== null) {
-                        setSelectedTokens((prev) => ({
-                          ...prev,
-                          [activeInput]: token
-                        }));
-                      }
-                      setTokenModalOpen(false);
-                    }}
-                    selectedTokens={Object.values(selectedTokens)
-                      .filter((token): token is Token => token !== null)
-                      .map((token) => token.symbol)}
+  <div className="flex gap-4">
+            <div className="w-[80%] h-[51px] bg-[#5555554D]">
+              <BorderComponent>
+                <div className="flex justify-between items-center h-full px-4">
+                  <input
+                    type="number"
+                   
+                    placeholder="******"
+                    className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
                   />
-
+                 
+                    <div className="flex flex-col items-end">
+                      <span className="text-[20px] text-[#F7F2DA80]">
+                      USDT
+                      </span>
+                    </div>
+           
                 </div>
+              </BorderComponent>
+            </div>
+   
+<motion.div
+  className="w-[20%] h-[51px] bg-[#2a233f] rounded-xl"
+  whileHover={{ scale: 1.02 }}
+  whileTap={{ scale: 0.98 }}
+>
+  <BorderComponent>
+    <div
+      className="flex items-center justify-center h-full cursor-pointer"
+      onClick={() => {/* your click handler */}}
+    >
+      <Plus className="h-5 w-5 text-gray-400" />
+    </div>
+  </BorderComponent>
+</motion.div>
+          </div>
+          <div className="w-[100%] h-[51px] bg-[#5555554D]">
+          <BorderComponent>
+            <div className="flex justify-between items-center h-full px-4">
+              <input
+                type="number"
+   
+                placeholder="******"
+                className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+              />
+              <div
+                className="cursor-pointer"
+              
+              >
+            
+                  <div className="flex flex-col items-end">
+                    <span className="text-[20px] text-[#F7F2DA80]">
+                    USDT
+                    </span>
+                  </div>
+      
+             
+              </div>
+            </div>
+          </BorderComponent>
+        </div>
 
-                {/* Middle Empty Section with Border */}
-                <div className="flex-grow">
-                  <MiddleBorderComponent />
-                </div>
+        <div className='flex flex-row w-full shake-button'>
+      <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
+      <div className='flex flex-col flex-grow'>
+        <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
+          <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
+          VOTE FOR TOKEN
+          </span>
+        </div>
+        <div className="top-[69.7px] left-[1305px] w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
+      </div>
 
                 {/* Bottom Section */}
                 <div className="flex flex-col justify-between h-[35%] p-2 overflow-y-scroll">
@@ -1549,6 +1570,7 @@ export default function TestContent() {
                     </BorderComponent>
                   </div>
                 </div>
+              </div>
               </div>
             </BorderComponent>
           </motion.div>
