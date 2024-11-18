@@ -1551,12 +1551,17 @@ export default function TestContent() {
             className="h-[100%]   w-[30%]  bg-[#000000]"
           >
             <BorderComponent>
-              <div className="flex flex-col h-full overflow-y-auto 
-              scrollbar-none 
-              [-ms-overflow-style:'none'] 
-              [scrollbar-width:'none'] 
-              [&::-webkit-scrollbar]:hidden  p-6 gap-4">
-  <div className="flex gap-4 ">
+            <div className="h-full relative">
+      {/* Scrollable container */}
+      <div 
+        className="absolute inset-0 overflow-y-auto 
+          scrollbar-none 
+          [-ms-overflow-style:'none'] 
+          [scrollbar-width:'none'] 
+          [&::-webkit-scrollbar]:hidden
+        "
+      >
+  <div className="flex gap-4  space-y-4">
             <div className="w-[80%] h-[51px] -mb-5 bg-[#5555554D]/30">
               <BorderComponent>
                 <div className="flex justify-between items-center h-full px-4">
@@ -1747,6 +1752,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
+              </div>
               </div>
             </BorderComponent>
           </motion.div>
