@@ -1172,7 +1172,7 @@ export default function TestContent() {
   const [amount2, setAmount2] = useState<string>("");
   const [tokenModalOpen, setTokenModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false)
-  const text = "*************************************************************************************************************************************************************************************************************************************************"
+  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 
   const [selectedTokens, setSelectedTokens] = useState<{
     [key: number]: Token | null;
@@ -1558,7 +1558,7 @@ export default function TestContent() {
         [&::-webkit-scrollbar]:hidden"
       >
         {/* First Row */}
-        <div className="flex -mb-4 gap-4 min-h-[51px]">
+        <div className="flex -mb-6 gap-4 min-h-[51px]">
           <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
             <BorderComponent>
               <div className="flex justify-between items-center h-full px-4">
@@ -1597,7 +1597,7 @@ export default function TestContent() {
         </div>
 
         {/* Second Input */}
-        <div className="flex -mt-4 gap-4 min-h-[51px]">
+        <div className="flex -mt-6 gap-4 min-h-[51px]">
         <div className="w-full h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
@@ -1638,14 +1638,14 @@ export default function TestContent() {
             </motion.div>
 
         {/* Empty Border Component */}
-        <div className="flex gap-4 min-h-[100px]">
+        <div className="flex gap-4 mt-6 min-h-[100px]">
         <div className="w-full h-[100px] bg-[#5555554D]/30">
           <BorderComponent />
         </div>
         </div>
 
         {/* Project Info */}
-        <div className='w-full min-h-[100px] flex gap-2'>
+        <div className='w-full min-h-[100px] mb-6 flex gap-2'>
           <div className="w-[100px] h-[100px] bg-[#5555554D]/30">
             <BorderComponent />
           </div>
@@ -1666,7 +1666,7 @@ export default function TestContent() {
             </div>
             <div className="flex gap-1">
               {['Website', 'Twitter', 'Telegram'].map((item) => (
-                <div key={item} className="flex-1 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF99] text-center">
+                <div key={item} className="flex-1 h-[19px] bg-[#D9D9D94D] px-2 text-[14px] text-[#FFFFFF99] text-center">
                   {item}
                 </div>
               ))}
