@@ -1558,7 +1558,7 @@ export default function TestContent() {
         [&::-webkit-scrollbar]:hidden"
       >
         {/* First Row */}
-        <div className="flex gap-4 min-h-[51px]">
+        <div className="flex -mb-4 gap-4 min-h-[51px]">
           <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
             <BorderComponent>
               <div className="flex justify-between items-center h-full px-4">
@@ -1597,6 +1597,7 @@ export default function TestContent() {
         </div>
 
         {/* Second Input */}
+        <div className="flex -mt-4 gap-4 min-h-[51px]">
         <div className="w-full h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
@@ -1611,7 +1612,7 @@ export default function TestContent() {
             </div>
           </BorderComponent>
         </div>
-
+        </div>
         {/* Vote Button */}
         <motion.div 
               className="w-full h-[36.22px] shake-button border-[0.63px] border-[#000000]"
@@ -1637,8 +1638,10 @@ export default function TestContent() {
             </motion.div>
 
         {/* Empty Border Component */}
+        <div className="flex gap-4 min-h-[100px]">
         <div className="w-full h-[100px] bg-[#5555554D]/30">
           <BorderComponent />
+        </div>
         </div>
 
         {/* Project Info */}
@@ -1646,7 +1649,7 @@ export default function TestContent() {
           <div className="w-[100px] h-[100px] bg-[#5555554D]/30">
             <BorderComponent />
           </div>
-          <div className="flex-1 flex flex-col gap-2">
+          <div className="w-[calc(100%-100px)] pl-2 flex flex-col gap-2">
             <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
             <div className="flex-1">
               <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
@@ -1672,11 +1675,11 @@ export default function TestContent() {
         </div>
 
         {/* Views Section */}
-        <div className="w-full h-[110px]">
-          <div className="w-full h-[19px] text-center bg-[#D9D9D933] mb-2">
+        <div className="w-full h-[110px] mb-8">
+          <div className="w-full h-[19px] text-center bg-[#D9D9D933] mb-4">
             <p className='text-[14px] text-[#FFFFFF99]'>VIEWS</p>
           </div>
-          <div className="grid grid-cols-4 gap-6 h-[75px]">
+          <div className="grid grid-cols-4 gap-6 h-[75px] px-1">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-[#1A1A1A]">
                 <BorderComponent />
@@ -1686,11 +1689,11 @@ export default function TestContent() {
         </div>
 
         {/* Reactions Section */}
-        <div className="w-full h-[110px]">
-          <div className="w-full h-[19px] text-center bg-[#D9D9D933] mb-2">
+        <div className="w-full h-[110px] mb-8">
+          <div className="w-full h-[19px] text-center bg-[#D9D9D933] mb-4">
             <p className='text-[14px] text-[#FFFFFF99]'>REACTIONS</p>
           </div>
-          <div className="grid grid-cols-5 gap-6">
+          <div className="grid grid-cols-5 gap-6 px-1">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="h-[50px] bg-[#1A1A1A] rounded-md" />
             ))}
