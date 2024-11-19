@@ -1534,7 +1534,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="absolute bottom-4  sticky right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+        <div className="absolute bottom-4  right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
@@ -1645,7 +1645,7 @@ export default function TestContent() {
         </div>
 
         {/* Project Info */}
-        <div className='w-full min-h-[110px] mb-6 flex gap-2'>
+        <div className='w-full min-h-[110px] my-6 flex gap-2'>
           <div className="w-[100px] h-[110px] bg-[#5555554D]/30">
             <BorderComponent />
           </div>
