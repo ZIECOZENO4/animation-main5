@@ -1172,7 +1172,7 @@ export default function TestContent() {
   const [amount2, setAmount2] = useState<string>("");
   const [tokenModalOpen, setTokenModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false)
-  const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  const text = "*************************************************************************************************************************************************************************************************************************************************"
 
   const [selectedTokens, setSelectedTokens] = useState<{
     [key: number]: Token | null;
@@ -1545,93 +1545,74 @@ export default function TestContent() {
 
           {/* Right Column */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-[100%]   w-[30%]  bg-[#000000]"
-          >
-            <BorderComponent>
-            <div className="h-full relative">
-      {/* Scrollable container */}
-      <div 
-        className="absolute  p-6 inset-0 overflow-y-auto 
-          scrollbar-none 
-          [-ms-overflow-style:'none'] 
-          [scrollbar-width:'none'] 
-          [&::-webkit-scrollbar]:hidden
-        "
-      >
-  <div className="flex gap-4  space-y-4">
-            <div className="w-[80%] h-[51px]  bg-[#5555554D]/30">
-              <BorderComponent>
-                <div className="flex justify-between items-center h-full px-4">
-                  <input
-                    type="number"
-                   
-                    placeholder="******"
-                    className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
-                  />
-                 
-                    <div className="flex flex-col items-end">
-                      <span className="text-[20px] text-[#F7F2DA80]/50">
-                      USDT
-                      </span>
-                    </div>
-           
-                </div>
-              </BorderComponent>
-            </div>
-   
-            <motion.div
-  className="w-[20%] h-[51px] relative bg-[#5555554D]/30 "
-  whileHover={{ scale: 1.02 }}
-  whileTap={{ scale: 0.98 }}
+  initial={{ opacity: 0, x: 50 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.5, ease: "easeOut" }}
+  className="h-[100%] w-[30%] bg-[#000000]"
 >
   <BorderComponent>
     <div className="h-full relative">
-      {/* Main content area */}
-      <div className="flex items-center justify-center h-full cursor-pointer">
-        {/* Your main content here */}
-      </div>
-      
-      {/* Plus icon with background */}
-      <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
-        <Plus className="h-4 w-4 text-gray-400" />
-      </div>
-    </div>
-  </BorderComponent>
-</motion.div>
+      <div className="absolute inset-0 overflow-y-auto scrollbar-none p-6 flex flex-col gap-4
+        [-ms-overflow-style:'none'] 
+        [scrollbar-width:'none'] 
+        [&::-webkit-scrollbar]:hidden"
+      >
+        {/* First Row */}
+        <div className="flex gap-4 min-h-[51px]">
+          <div className="w-[80%] h-[51px] bg-[#5555554D]/30">
+            <BorderComponent>
+              <div className="flex justify-between items-center h-full px-4">
+                <input
+                  type="number"
+                  placeholder="******"
+                  className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
+                />
+                <div className="flex flex-col items-end">
+                  <span className="text-[20px] text-[#F7F2DA80]/50">USDT</span>
+                </div>
+              </div>
+            </BorderComponent>
           </div>
-          <div className="flex items-center justify-center bg-black"> {/* Parent container */}
-  <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#1A1A1A] rounded-lg'>
-    <ArrowDown className="h-5 w-5 text-gray-400" />
-  </div>
-</div>
-          <div className="w-[100%]  h-[51px] bg-[#5555554D]/30">
+
+          <motion.div
+            className="w-[20%] h-[51px] bg-[#5555554D]/30"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <BorderComponent>
+              <div className="h-full flex items-center justify-center">
+                <div className="absolute -bottom-1 -right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+                  <Plus className="h-4 w-4 text-gray-400" />
+                </div>
+              </div>
+            </BorderComponent>
+          </motion.div>
+        </div>
+
+        {/* Arrow Down */}
+        <div className="flex items-center justify-center h-[30px]">
+          <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#1A1A1A] rounded-lg'>
+            <ArrowDown className="h-5 w-5 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Second Input */}
+        <div className="w-full h-[51px] bg-[#5555554D]/30">
           <BorderComponent>
             <div className="flex justify-between items-center h-full px-4">
               <input
                 type="number"
-   
                 placeholder="******"
                 className="bg-transparent text-[#F7F2DA80] text-[20px] w-1/2 focus:outline-none placeholder:text-[#F7F2DA40]"
               />
-              <div
-                className="cursor-pointer"
-              
-              >
-            
-                  <div className="flex flex-col items-end">
-                    <span className="text-[20px] text-[#F7F2DA80]">
-                    USDT
-                    </span>
-                  </div>
-      
-             
+              <div className="flex flex-col items-end cursor-pointer">
+                <span className="text-[20px] text-[#F7F2DA80]">USDT</span>
               </div>
             </div>
           </BorderComponent>
         </div>
+
+        {/* Vote Button */}
         <motion.div 
               className="w-full h-[36.22px] shake-button border-[0.63px] border-[#000000]"
               initial={{ scale: 0 }}
@@ -1654,111 +1635,71 @@ export default function TestContent() {
               </div>
               <div className="w-full  h-[2px] bg-[#787878] border-t-[0.63px] border-[#000000]" />
             </motion.div>
-            <div className="w-[100%] h-[100px] mt-6 bg-[#5555554D]/30" >
 
-          <BorderComponent>
-         
-          </BorderComponent>
+        {/* Empty Border Component */}
+        <div className="w-full h-[100px] bg-[#5555554D]/30">
+          <BorderComponent />
         </div>
-        <div className='flex w-full h-[100px] justify-between gap-4 p-2'>
-   
 
-      {/* Content Container */}
-      <div className='flex w-full h-[100px] justify-between gap-2'>
-        <div className="w-[100px] h-[100px] bg-[#5555554D]/30" >
-
-<BorderComponent>
-
-</BorderComponent>
-</div>
-<div className="w-[calc(100%-100px)] h-full flex flex-col " >
-<p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
-<div className="w-full ">
-      <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
-        {text}
-        {!isExpanded && (
-          <span 
-            className="absolute right-0 bottom-0 ml-2 cursor-pointer"
-            onClick={() => setIsExpanded(true)}
-          >
-            <span className="text-[#F7F2DA59] underline">more</span>
-          </span>
-        )}
-      </p>
-    </div>
-    <div className="w-full gap-1 flex justify-between">
-    <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
-      Website
-      </div>
-      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
-      
-      Twitter
-      </div>
-      <div className="w-1/3 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF9] text-center">
-      Telegram
-      </div>
-    </div>
-</div>
-
+        {/* Project Info */}
+        <div className='w-full min-h-[100px] flex gap-2'>
+          <div className="w-[100px] h-[100px] bg-[#5555554D]/30">
+            <BorderComponent />
+          </div>
+          <div className="flex-1 flex flex-col gap-2">
+            <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
+            <div className="flex-1">
+              <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
+                {text}
+                {!isExpanded && (
+                  <span 
+                    className="absolute right-0 bottom-0 ml-2 cursor-pointer bg-[#000000] pl-2"
+                    onClick={() => setIsExpanded(true)}
+                  >
+                    <span className="text-[#F7F2DA59] underline">more</span>
+                  </span>
+                )}
+              </p>
+            </div>
+            <div className="flex gap-1">
+              {['Website', 'Twitter', 'Telegram'].map((item) => (
+                <div key={item} className="flex-1 h-[19px] bg-[#D9D9D94D] text-[14px] text-[#FFFFFF99] text-center">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-    </div>
-        <div className="mt-6 gap-4 w-full h-[110px]">
-<div className="w-full h-[19px] text-center bg-[#D9D9D933]">
-<p className='text-[14px] text-center text-[#FFFFFF99]'>VIEWS</p>
-<div className="w-full gap-6 flex jusstify-between align-middle">
-<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
 
-<BorderComponent>
-
-</BorderComponent>
-</div>
-<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
-
-<BorderComponent>
-
-</BorderComponent>
-</div>
-<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
-
-<BorderComponent>
-
-</BorderComponent>
-</div>
-<div className="w-1/4 h-[75px] bg-[#1A1A1A] text-center" >
-
-<BorderComponent>
-
-</BorderComponent>
-</div>
-</div>
-</div>
-        </div>
-        <div className="mt-6 gap-4  w-full h-[110px] ">
-<div className="w-full h-[19px] text-center bg-[#D9D9D933]">
-<p className='text-[14px] text-center text-[#FFFFFF99]'>REACTIONS</p>
-<div className="w-full gap-6 flex jusstify-between align-middle">
-<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
-
-</div>
-<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
-
-</div>
-<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
-
-</div>
-<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
-
-</div>
-<div className="w-1/5 h-[50px] bg-[#1A1A1A] rounded-md" >
-
-</div>
-</div>
-</div>
-        </div>
+        {/* Views Section */}
+        <div className="w-full h-[110px]">
+          <div className="w-full h-[19px] text-center bg-[#D9D9D933] mb-2">
+            <p className='text-[14px] text-[#FFFFFF99]'>VIEWS</p>
+          </div>
+          <div className="grid grid-cols-4 gap-6 h-[75px]">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-[#1A1A1A]">
+                <BorderComponent />
               </div>
-              </div>
-            </BorderComponent>
-          </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Reactions Section */}
+        <div className="w-full h-[110px]">
+          <div className="w-full h-[19px] text-center bg-[#D9D9D933] mb-2">
+            <p className='text-[14px] text-[#FFFFFF99]'>REACTIONS</p>
+          </div>
+          <div className="grid grid-cols-5 gap-6">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-[50px] bg-[#1A1A1A] rounded-md" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </BorderComponent>
+</motion.div>
         </div>
       </div>
     </motion.div>
