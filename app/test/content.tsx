@@ -1534,7 +1534,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="absolute bottom-4  right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+        <div className="fixed bottom-1 right-4 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
@@ -1590,7 +1590,7 @@ export default function TestContent() {
         </div>
 
         {/* Arrow Down */}
-        <div className="flex items-center justify-center h-[30px]">
+        <div className="flex items-center justify-center h-[30px] bg-[#1A1A1A]">
           <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#1A1A1A] rounded-lg'>
             <ArrowDown className="h-5 w-5 text-gray-400" />
           </div>
@@ -1638,41 +1638,45 @@ export default function TestContent() {
             </motion.div>
 
         {/* Empty Border Component */}
-        <div className="flex gap-4 mt-6 min-h-[100px]">
+        <div className="flex gap-4 mt-4 min-h-[100px]">
         <div className="w-full h-[100px] bg-[#5555554D]/30">
           <BorderComponent />
         </div>
         </div>
+{/* Project Info */}
+<div className='w-full min-h-[110px] my-8 flex gap-2'>
+  <div className="w-[100px] h-[110px] bg-[#5555554D]/30">
+    <BorderComponent />
+  </div>
+  
+  <div className="w-[calc(100%-100px)] pl-2 flex flex-col gap-2 transition-all duration-300 ease-in-out">
+    <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
+    
+    {/* Text Container */}
+    <div className={`flex-1 overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-full' : 'max-h-[40px]'}`}>
+      <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
+        {text}
+        {!isExpanded && (
+          <span 
+            className="absolute right-0 bottom-0 ml-2 cursor-pointer bg-[#000000] pl-2"
+            onClick={() => setIsExpanded(true)}
+          >
+            <span className="text-[#F7F2DA59] underline">more</span>
+          </span>
+        )}
+      </p>
+    </div>
 
-        {/* Project Info */}
-        <div className='w-full min-h-[110px] my-6 flex gap-2'>
-          <div className="w-[100px] h-[110px] bg-[#5555554D]/30">
-            <BorderComponent />
-          </div>
-          <div className="w-[calc(100%-100px)] pl-2 flex flex-col gap-2">
-            <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
-            <div className="flex-1">
-              <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
-                {text}
-                {!isExpanded && (
-                  <span 
-                    className="absolute right-0 bottom-0 ml-2 cursor-pointer bg-[#000000] pl-2"
-                    onClick={() => setIsExpanded(true)}
-                  >
-                    <span className="text-[#F7F2DA59] underline">more</span>
-                  </span>
-                )}
-              </p>
-            </div>
-            <div className="flex gap-1">
-              {['Website', 'Twitter', 'Telegram'].map((item) => (
-                <div key={item} className="flex-1 h-[19px] bg-[#D9D9D94D] px-2 text-[14px] text-[#FFFFFF99] text-center">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+    {/* Links */}
+    <div className="flex gap-1">
+      {['Website', 'Twitter', 'Telegram'].map((item) => (
+        <div key={item} className="flex-1 h-[19px] bg-[#D9D9D94D] px-4 text-[14px] text-[#FFFFFF99] text-center">
+          {item}
         </div>
+      ))}
+    </div>
+  </div>
+</div>
 
         {/* Views Section */}
         <div className="w-full h-[110px] mb-8">
