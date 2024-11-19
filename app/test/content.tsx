@@ -1360,7 +1360,7 @@ export default function TestContent() {
                   className="text-sm  text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-                  <div className="mx-0  px-0  h-full w-full flex-grow ">
+                  <div className="mx-0  px-0 pt-2 h-full w-full flex-grow ">
                     <EnhanceTradingView />
                   </div>
                 </motion.span>
@@ -1534,7 +1534,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="absolute bottom-4 right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+        <div className="absolute bottom-4  sticky right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4 z-50 text-gray-400" />
       </div>
                 </div>
@@ -1645,8 +1645,8 @@ export default function TestContent() {
         </div>
 
         {/* Project Info */}
-        <div className='w-full min-h-[100px] mb-6 flex gap-2'>
-          <div className="w-[100px] h-[100px] bg-[#5555554D]/30">
+        <div className='w-full min-h-[110px] mb-6 flex gap-2'>
+          <div className="w-[100px] h-[110px] bg-[#5555554D]/30">
             <BorderComponent />
           </div>
           <div className="w-[calc(100%-100px)] pl-2 flex flex-col gap-2">
@@ -1683,22 +1683,34 @@ export default function TestContent() {
            
               <div className="bg-[#1A1A1A]">
             <BorderComponent>
-
+<div className="text-center align-middle p-2 gap-4">
+  <p  className="text-center text-[15px] text-[#FFFFFF66] ">5M</p>
+  <p className="text-center  text-[20px] text-[#BD8F8F]">4.2%</p>
+</div>
             </BorderComponent>
               </div>
         <div className="bg-[#1A1A1A]">
-            <BorderComponent>
-              
+        <BorderComponent>
+<div className="text-center align-middle p-2 gap-4">
+  <p  className="text-center text-[15px] text-[#FFFFFF66] ">15M</p>
+  <p className="text-center  text-[20px] text-[#BD8F8F]">6.9%</p>
+</div>
             </BorderComponent>
               </div>
               <div className="bg-[#1A1A1A]">
-            <BorderComponent>
-              
+              <BorderComponent>
+<div className="text-center align-middle p-2 gap-4">
+  <p  className="text-center text-[15px] text-[#FFFFFF66] ">30M</p>
+  <p className="text-center  text-[20px] text-[#BD8F8F]">7.7%</p>
+</div>
             </BorderComponent>
               </div>
               <div className="bg-[#1A1A1A]">
-            <BorderComponent>
-              
+              <BorderComponent>
+<div className="text-center align-middle p-2 gap-4">
+  <p  className="text-center text-[15px] text-[#FFFFFF66] ">1H</p>
+  <p className="text-center  text-[20px] text-[#9CBD8F]">88.9%</p>
+</div>
             </BorderComponent>
               </div>
           </div>
