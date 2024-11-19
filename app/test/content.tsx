@@ -1360,7 +1360,7 @@ export default function TestContent() {
                   className="text-sm  text-gray-500"
                   whileHover={{ color: "#ffffff" }}
                 >
-                  <div className="mx-0 pt-4 px-0  h-full w-full flex-grow ">
+                  <div className="mx-0  px-0  h-full w-full flex-grow ">
                     <EnhanceTradingView />
                   </div>
                 </motion.span>
@@ -1680,11 +1680,27 @@ export default function TestContent() {
             <p className='text-[14px] text-[#FFFFFF99]'>VIEWS</p>
           </div>
           <div className="grid grid-cols-4 gap-6 h-[75px] px-1">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-[#1A1A1A]">
-                <BorderComponent />
+           
+              <div className="bg-[#1A1A1A]">
+            <BorderComponent>
+
+            </BorderComponent>
               </div>
-            ))}
+        <div className="bg-[#1A1A1A]">
+            <BorderComponent>
+              
+            </BorderComponent>
+              </div>
+              <div className="bg-[#1A1A1A]">
+            <BorderComponent>
+              
+            </BorderComponent>
+              </div>
+              <div className="bg-[#1A1A1A]">
+            <BorderComponent>
+              
+            </BorderComponent>
+              </div>
           </div>
         </div>
 
