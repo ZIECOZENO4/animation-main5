@@ -10,7 +10,7 @@ import {
   ModalBody,
   useDisclosure
 } from "@nextui-org/react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { IoAdd, IoClose } from "react-icons/io5";
 import { Plus, ArrowDown } from 'lucide-react'
 
@@ -1171,8 +1171,32 @@ export default function TestContent() {
   const [amount1, setAmount1] = useState<string>("");
   const [amount2, setAmount2] = useState<string>("");
   const [tokenModalOpen, setTokenModalOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false)
   const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [expandedHeight, setExpandedHeight] = useState(0);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (textRef.current && containerRef.current) {
+      // Get the actual height of the text content
+      const textHeight = textRef.current.scrollHeight;
+      // Add some padding to account for the bottom elements
+      setExpandedHeight(textHeight + 40); // 40px for padding and bottom elements
+    }
+  }, [text]); // Recalculate when text changes
+
+  const handleToggle = () => {
+    if (isExpanded) {
+      setIsExpanded(false);
+      if (containerRef.current) {
+        containerRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      setIsExpanded(true);
+    }
+  };
 
   const [selectedTokens, setSelectedTokens] = useState<{
     [key: number]: Token | null;
@@ -1644,39 +1668,54 @@ export default function TestContent() {
         </div>
         </div>
 {/* Project Info */}
-<div className='w-full min-h-[110px] my-8 flex gap-2'>
-  <div className="w-[100px] h-[110px] bg-[#5555554D]/30">
-    <BorderComponent />
-  </div>
-  
-  <div className="w-[calc(100%-100px)] pl-2 flex flex-col gap-2 transition-all duration-300 ease-in-out">
-    <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
-    
-    {/* Text Container */}
-    <div className={`flex-1 overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'h-[50vh]' : 'max-h-[40px]'}`}>
-      <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
-        {text}
-        {!isExpanded && (
-          <span 
-            className="absolute right-0 bottom-0 ml-2 cursor-pointer bg-[#000000] pl-2"
-            onClick={() => setIsExpanded(true)}
+<div className='w-full min-h-[110px] my-8 flex gap-2' ref={containerRef}>
+      <div className="w-[100px] h-[110px] bg-[#5555554D]/30">
+        <BorderComponent />
+      </div>
+      
+      <div className="w-[calc(100%-100px)] pl-2 flex flex-col gap-2 transition-all duration-300 ease-in-out">
+        <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
+        
+        {/* Text Container */}
+        <div 
+          className={`
+            flex-1 overflow-hidden transition-all duration-300 ease-in-out
+            ${isExpanded ? `h-[${expandedHeight}px]` : 'max-h-[40px]'}
+          `}
+        >
+          <p 
+            ref={textRef}
+            className={`
+              text-[#F7F2DA59] text-[14px] 
+              ${!isExpanded ? 'line-clamp-2' : ''} 
+              relative
+            `}
           >
-            <span className="text-[#F7F2DA59] underline">more</span>
-          </span>
-        )}
-      </p>
-    </div>
-
-    {/* Links */}
-    <div className="flex gap-1">
-      {['Website', 'Twitter', 'Telegram'].map((item) => (
-        <div key={item} className="flex-1 h-[19px] bg-[#D9D9D94D] px-2 text-[14px] text-[#FFFFFF99] text-center">
-          {item}
+            {text}
+            {!isExpanded && (
+              <span 
+                className="absolute right-0 bottom-0 ml-2 cursor-pointer bg-[#000000] pl-2"
+                onClick={() => setIsExpanded(true)}
+              >
+                <span className="text-[#F7F2DA59] underline">more</span>
+              </span>
+            )}
+          </p>
         </div>
-      ))}
+
+        {/* Links */}
+        <div className="flex gap-1 mt-auto">
+          {['Website', 'Twitter', 'Telegram'].map((item) => (
+            <div 
+              key={item} 
+              className="flex-1 h-[19px] bg-[#D9D9D94D] px-2 text-[14px] text-[#FFFFFF99] text-center"
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
         {/* Views Section */}
         <div className="w-full h-[110px] mb-8">
