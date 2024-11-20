@@ -21,7 +21,7 @@ import CardDemo from "./CardDemo";
 import CardGrid from "./Test";
 import "./WorkbenchFontTest.css";
 import Link from "next/link";
-type TabType = 'Featured' | 'Trending';
+type TabType = 'Initial' | 'Anonymous';
 interface ChainData {
   key: string
   name: string
@@ -42,10 +42,10 @@ export default function ComponentCoin() {
   const [isPriceOpen, setIsPriceOpen] = useState(false)
 
   // Selected values
-  const [selectedMarketCap, setSelectedMarketCap] = useState('All Market Cap')
+  const [selectedMarketCap, setSelectedMarketCap] = useState('Number Of Views')
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
-  const [activeTab, setActiveTab] = useState('Featured');
+  const [activeTab, setActiveTab] = useState('Initial');
 
   const handleTabClick = (tab: string) => {
       setActiveTab(tab);
@@ -67,10 +67,10 @@ export default function ComponentCoin() {
   };
 
   const marketCapOptions = [
-    { key: 'all', name: 'All Market Cap' },
-    { key: 'low', name: 'Low Cap (< $1B)' },
-    { key: 'mid', name: 'Mid Cap ($1B - $10B)' },
-    { key: 'high', name: 'High Cap (> $10B)' },
+    { key: 'all', name: 'Number Of Views' },
+    { key: 'low', name: 'Low Views (< 10K)' },
+    { key: 'mid', name: 'Mid Views (10K - 100K)' },
+    { key: 'high', name: 'High Views (> 100K)' },
   ]
 
   return (
@@ -98,7 +98,7 @@ export default function ComponentCoin() {
                             className="absolute top-0 bottom-0 w-1/2 bg-black rounded-md"
                             initial={false}
                             animate={{
-                                x: activeTab === 'Featured' ? '0%' : '100%',
+                                x: activeTab === 'Initial' ? '0%' : '100%',
                             }}
                             transition={{
                                 type: "spring",
@@ -111,19 +111,19 @@ export default function ComponentCoin() {
                         <div className="flex w-full relative z-10">
                             <button 
                                 className={`flex-1 px-4 py-1 transition-colors duration-200 ${
-                                    activeTab === 'Featured' ? 'text-[#F7F2DA]' : 'text-slate-500'
+                                    activeTab === 'Initial' ? 'text-[#F7F2DA]' : 'text-slate-500'
                                 }`}
-                                onClick={() => handleTabClick('Featured')}
+                                onClick={() => handleTabClick('Initial')}
                             >
-                                Featured
+                                Initial
                             </button>
                             <button 
                                 className={`flex-1 px-4 py-1 transition-colors duration-200 ${
-                                    activeTab === 'Trending' ? 'text-[#F7F2DA]' : 'text-slate-500'
+                                    activeTab === 'Anonymous' ? 'text-[#F7F2DA]' : 'text-slate-500'
                                 }`}
-                                onClick={() => handleTabClick('Trending')}
+                                onClick={() => handleTabClick('Anonymous')}
                             >
-                                Trending
+                                Anonymous
                             </button>
                         </div>
                     </div>
@@ -314,7 +314,7 @@ export default function ComponentCoin() {
       transform: 'translate(2px, 2px)',
     }}
   >
-    <span className="text-[#F7F2DA] tracking-wide">Price Filter</span>
+    <span className="text-[#F7F2DA] tracking-wide">Stake Amount</span>
   </motion.button>
 
   <AnimatePresence>
@@ -378,294 +378,294 @@ export default function ComponentCoin() {
         <CardGrid />
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
-          <Card />
-        </Link>
-      </div>
-
-      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
-          <Card />
-        </Link>
-
-        <Link href="/omnicoin">
-          <Card />
-        </Link>
-
-        <Link href="/omnicoin">
-          <Card />
-        </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
 
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
 
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
 
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
+          <Card />
+        </Link>
+      </div>
+
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+        <Link href="/test">
+          <Card />
+        </Link>
+
+        <Link href="/test">
+          <Card />
+        </Link>
+
+        <Link href="/test">
+          <Card />
+        </Link>
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>
       <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
 
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
-        <Link href="/omnicoin">
+        <Link href="/test">
           <Card />
         </Link>
       </div>

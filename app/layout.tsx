@@ -47,7 +47,7 @@ export default function RootLayout({
                 {children}
               </Suspense>
               <DynamicBackgroundVideo />
-              <BottomMore />
+           
             </div>
           </div>
         </Providers>
