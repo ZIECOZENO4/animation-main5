@@ -1534,7 +1534,7 @@ export default function TestContent() {
 </div>
 </div>
         </div>
-        <div className="fixed bottom-4 right-1 z-50 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+        <div className="fixed bottom-4 right-1 z-50 w-[25px] h-[25px] shadow-2xl bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
         <Plus className="h-4 w-4  text-gray-400" />
       </div>
                 </div>
@@ -1581,7 +1581,7 @@ export default function TestContent() {
           >
             <BorderComponent>
               <div className="h-full flex items-center justify-center">
-                <div className="absolute z-50 -bottom-1 -right-1 w-[25px] h-[25px] bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
+                <div className="absolute z-50 -bottom-1 -right-1 w-[25px] h-[25px] shadow-2xl bg-[#1A1A1A] rounded-sm flex items-center justify-center cursor-pointer">
                   <Plus className="h-4 w-4 text-gray-400" />
                 </div>
               </div>
@@ -1591,7 +1591,7 @@ export default function TestContent() {
 
         {/* Arrow Down */}
         <div className="flex items-center justify-center h-[30px] z-50">
-          <div className='h-[30px] w-[30px] flex items-center justify-center bg-[#1A1A1A] rounded-lg'>
+          <div className='h-[30px] w-[30px] flex items-center justify-center shadow-2xl bg-[#1A1A1A] rounded-lg'>
             <ArrowDown className="h-5 w-5 text-gray-400" />
           </div>
         </div>
@@ -1653,7 +1653,7 @@ export default function TestContent() {
     <p className="text-[#F7F2DA80] text-[20px]">Beat Ass Tonight</p>
     
     {/* Text Container */}
-    <div className={`flex-1 overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'min-h-[50vh]' : 'max-h-[40px]'}`}>
+    <div className={`flex-1 overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'h-[50vh]' : 'max-h-[40px]'}`}>
       <p className={`text-[#F7F2DA59] text-[14px] ${!isExpanded ? 'line-clamp-2' : ''} relative`}>
         {text}
         {!isExpanded && (
