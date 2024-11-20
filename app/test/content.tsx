@@ -1680,7 +1680,11 @@ export default function TestContent() {
         <div 
           className={`
             flex-1 overflow-hidden transition-all duration-300 ease-in-out
-            ${isExpanded ? `h-[${expandedHeight}px]` : 'max-h-[40px]'}
+            ${isExpanded ? `h-[${expandedHeight}px] overflow-y-auto 
+        scrollbar-none 
+        [-ms-overflow-style:'none'] 
+        [scrollbar-width:'none'] 
+        [&::-webkit-scrollbar]:hidden` : 'max-h-[40px]'}
           `}
         >
           <p 
