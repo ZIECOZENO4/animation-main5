@@ -14,9 +14,9 @@ const profiles = [
   {
     name: "EthCome",
     image: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
-    badges: [ "Verified", "Top Creator"],
-    marketCap: "36.67K",
-    replies: "34",
+    badges: [ "Initial", "First Phase"],
+    views: "36.67K",
+    reactions: "34",
     ticker: "ROB",
     tickerName: "Red or black",
     address:"OXytrf.....hgjhua",
@@ -24,9 +24,9 @@ const profiles = [
   {
     name: "SolanaBoy",
     image: "https://cryptologos.cc/logos/solana-sol-logo.png",
-    badges: ["Verified","Rising Star"],
-    marketCap: "22.5K",
-    replies: "28",
+    badges: ["Initial","Second Phase"],
+    views: "22.5K",
+    reactions: "28",
     ticker: "WHZ",
     tickerName: "WhizCoin",
     address:"OXvfdt.....hghuya",
@@ -34,9 +34,9 @@ const profiles = [
   {
     name: "BlockMaster",
     image: "https://cryptologos.cc/logos/tron-trx-logo.png",
-    badges: ["Verified", "Top Seller"],
-    marketCap: "45.2K",
-    replies: "52",
+    badges: ["Initial", "First Phase"],
+    views: "45.2K",
+    reactions: "52",
     ticker: "BLM",
     tickerName: "BlockMasterCoin",
     address:"OXvghf.....hgyfda",
@@ -87,8 +87,8 @@ export function HeroSection() {
                 </Chip>
               ))}
             </div>
-            <p className="mt-2 justify-center sm:justify-start  text-gray-500 flex">Market Cap: <span className='ml-2 text-[#F7F2DA]'>{profile.marketCap}</span> </p>
-            <p className=" justify-center sm:justify-start text-gray-500 flex">Replies:<span className='ml-2 text-[#F7F2DA]'> {profile.replies}</span> </p>
+            <p className="mt-2 justify-center sm:justify-start  text-gray-500 flex">Token Views: <span className='ml-2 text-[#F7F2DA]'>{profile.views}</span> </p>
+            <p className=" justify-center sm:justify-start text-gray-500 flex">Reactions:<span className='ml-2 text-[#F7F2DA]'> {profile.reactions}</span> </p>
             <p className="text-slate-500 mt-2">
               {profile.tickerName} [ticker: {profile.ticker}]
             </p>
