@@ -21,6 +21,7 @@ import CardDemo from "./CardDemo";
 import CardGrid from "./Test";
 import "./WorkbenchFontTest.css";
 import Link from "next/link";
+import { Shuffle } from "lucide-react";
 type TabType = 'Initial' | 'Anonymous';
 interface ChainData {
   key: string
@@ -40,6 +41,7 @@ export default function ComponentCoin() {
   const [isChainOpen, setIsChainOpen] = useState(false)
   const [isMarketCapOpen, setIsMarketCapOpen] = useState(false)
   const [isPriceOpen, setIsPriceOpen] = useState(false)
+  const [isLaunched, setIsLaunched] = useState(true)
 
   // Selected values
   const [selectedMarketCap, setSelectedMarketCap] = useState('Number Of Views')
@@ -153,18 +155,42 @@ export default function ComponentCoin() {
         </Button>
       </div>
       <motion.div className="flex flex-row gap-8 items-center">
-        <div className="md:flex-row justify-between hidden md:flex align-middle ">
-          <Switch defaultSelected color="default" className="md:text-xl">
-            Launched
-          </Switch>
-          <Button
-            startContent={<FaFilter />}
-            onClick={openModal}
-            className="md:hidden items-end text-end"
+      <div className="md:flex-row justify-between hidden md:flex align-middle items-center gap-3">
+    <AnimatePresence mode="wait">
+      {!isLaunched && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          className="flex items-center"
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear"
+            }}
           >
-            Filter
-          </Button>
-        </div>
+            <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+
+    <div className="flex items-center gap-2">
+      <span className="text-[#F7F2DA80] text-sm">
+        {isLaunched ? "Launched" : "Not Launched"}
+      </span>
+      <Switch
+        defaultSelected
+        color="default"
+        className="md:text-xl"
+        isSelected={isLaunched}
+        onValueChange={setIsLaunched}
+      />
+    </div>
+  </div>
 
         
 
@@ -377,7 +403,17 @@ export default function ComponentCoin() {
       <div className="md:hidden">
         <CardGrid />
       </div>
-      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+    
+      <AnimatePresence mode="wait">
+      {isLaunched ? (
+        <motion.div
+          key="launched"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          className="flex items-center gap-2"
+        >
+        <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
         <Link href="/test">
           <Card />
         </Link>
@@ -669,7 +705,49 @@ export default function ComponentCoin() {
           <Card />
         </Link>
       </div>
-
+        </motion.div>
+      ) : (
+        <motion.div
+          key="not-launched"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          className="flex items-center gap-4"
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
+          </motion.div>
+          <div className="grid grid-cols-4 gap-6 h-[75px] px-1">
+            {[
+              { label: '5M', value: '4.2%' },
+              { label: '15M', value: '6.9%' },
+              { label: '30M', value: '7.7%' },
+              { label: '1H', value: '83.5%' }
+            ].map((item, i) => (
+              <div key={i} className="bg-[#1A1A1A]">
+           
+                  <div className="h-full flex flex-col items-center justify-center gap-2">
+                    <span className="text-[#999999] text-sm font-medium">
+                      {item.label}
+                    </span>
+                    <span className="text-[#F7F2DA80] text-lg font-bold">
+                      {item.value}
+                    </span>
+                  </div>
+      
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
