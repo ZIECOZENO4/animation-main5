@@ -1311,26 +1311,16 @@ const Card2 = () => (
       "bg-[#0A0909]",
       "border-none",
       "before:bg-[#0A0909]",
-      "before:w-2",
-      "before:h-2", // reduced height
+      "before:w-2 before:h-2",
       "before:rotate-45",
       "before:transform",
       "before:absolute",
-      "before:top-[-4px]", // adjusted to push arrow up
-      "!bottom-[-4px]", // adjusted bottom position
+      "before:top-[50%]",
+      "!bottom-[-8px]", // Adjust this to move arrow up
       "before:left-1/2",
       "before:-translate-x-1/2",
-      "-mt-8",
-      "z-[-1]",
-      "overflow-hidden", // hide bottom part of arrow
-      "after:content-['']", // add pseudo element for flat top
-      "after:absolute",
-      "after:w-4",
-      "after:h-2",
-      "after:bg-[#0A0909]",
-      "after:top-0",
-      "after:left-1/2",
-      "after:-translate-x-1/2"
+      "translate-y-[50%]", // This will push half the arrow inside
+      "z-[-1]"
     ].join(" "),
     content: [
       "text-[#F7F2DA]",
