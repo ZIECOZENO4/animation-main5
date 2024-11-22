@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { BellOff } from "lucide-react"
 import { useLocalStorage } from "./use-local-storage"
-import './styles/fonts.css'
 
 export default function DigitalClock() {
   const [startTime, setStartTime] = useLocalStorage("clockStartTime", Date.now())
@@ -34,9 +33,9 @@ export default function DigitalClock() {
   const formatNumber = (num: number) => num.toString().padStart(2, "0")
 
   return (
-    <div className="flex flex-col items-center justify-center text-white font-digital">
+    <div className="flex flex-col items-center justify-center text-white">
    
-      <div className="flex space-x-2 text-6xl">
+      <div className="flex space-x-2 text-2xl">
         <motion.div
           key={time.hours}
           initial={{ opacity: 0, y: -20 }}

@@ -21,7 +21,7 @@ import CardDemo from "./CardDemo";
 import CardGrid from "./Test";
 import "./WorkbenchFontTest.css";
 import Link from "next/link";
-import { Shuffle } from "lucide-react";
+import { Lock, Shuffle } from "lucide-react";
 type TabType = 'Initial' | 'Anonymous';
 interface ChainData {
   key: string
@@ -165,9 +165,9 @@ export default function ComponentCoin() {
           className="flex items-center"
         >
           <motion.div
-            animate={{ rotate: 360 }}
+            animate={{ rotate: 90 }}
             transition={{ 
-              duration: 2,
+              duration: 10,
               repeat: Infinity,
               ease: "linear"
             }}
@@ -179,9 +179,7 @@ export default function ComponentCoin() {
     </AnimatePresence>
 
     <div className="flex items-center gap-2">
-      <span className="text-[#F7F2DA80] text-sm">
-        {isLaunched ? "Launched" : "Not Launched"}
-      </span>
+    
       <Switch
         defaultSelected
         color="default"
@@ -189,6 +187,9 @@ export default function ComponentCoin() {
         isSelected={isLaunched}
         onValueChange={setIsLaunched}
       />
+        <span className="text-[#F7F2DA80] text-md">
+        {isLaunched ? "Launched" : "Not Launched"}
+      </span>
     </div>
   </div>
 
@@ -405,7 +406,7 @@ export default function ComponentCoin() {
       </div>
     
       <AnimatePresence mode="wait">
-      {isLaunched ? (
+      {activeTab === 'Initial' ? (
         <motion.div
           key="launched"
           initial={{ opacity: 0, scale: 0 }}
@@ -708,12 +709,12 @@ export default function ComponentCoin() {
         </motion.div>
       ) : (
         <motion.div
-          key="not-launched"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          className="flex items-center gap-4"
-        >
+        key="anonymous"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+      >
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ 
@@ -845,6 +846,190 @@ const Card = () => (
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
           <div className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]" />
+
+          <div className="text-right flex flex-col p-2">
+            <div className="flex flex-row justify-between align-middle">
+              <motion.h2
+                className="text-left text-[#F7F2DA] font-normal"
+                style={{
+                  width: "70px",
+                  height: "20px",
+                  top: "14px",
+                  left: "137px",
+                  fontSize: "20px",
+                  lineHeight: "20px"
+                }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                [SPEAR]
+              </motion.h2>
+              <motion.h2
+                className="hover:underline text-[#F7F2DA] workbench-test"
+                style={{
+                  width: "20px",
+                  height: "10px",
+                  top: "9px",
+                  left: "302px",
+                  fontSize: "10px",
+                  fontWeight: 200,
+                  lineHeight: "20px",
+                  textAlign: "left",
+                  color: "#F7F2DA"
+                }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                More
+              </motion.h2>
+            </div>
+            <div className="flex flex-col align-middle">
+              <motion.p
+                className="text-[#F7F2DA] workbench-test flex flex-row mt-[5px]"
+                style={{
+                  width: "60px",
+                  height: "10px",
+                  left: "137px",
+                  fontSize: "10px",
+                  fontWeight: 200,
+                  lineHeight: "10px",
+                  textAlign: "left",
+                  color: "#F7F2DA"
+                }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Pear Network
+              </motion.p>
+
+              <motion.div
+                className="mt-[25px]"
+                style={{
+                  width: "180px",
+                  height: "10px",
+                  top: "85px",
+                  left: "137px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
+                <p
+                  className="workbench-test"
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 400,
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
+                  }}
+                >
+                  Time to Launch:
+                </p>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 400,
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
+                  }}
+                >
+                  00D/4H/24m
+                </p>
+              </motion.div>
+              <motion.div
+                className="my-[8px] workbench-test"
+                style={{
+                  width: "180px",
+                  height: "10px",
+                  top: "85px",
+                  left: "137px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
+                <p
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 400,
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
+                  }}
+                >
+                  Chain:
+                </p>
+                <p
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 400,
+                    lineHeight: "10px",
+                    textAlign: "left",
+                    color: "#F7F2DA"
+                  }}
+                >
+                  Arbitrum
+                </p>
+              </motion.div>
+              <motion.div
+                className="mb-[8px]"
+                style={{
+                  width: "180px",
+                  height: "10px",
+                  top: "102px",
+                  left: "137px",
+                  fontSize: "10px",
+                  fontWeight: 400,
+                  lineHeight: "10px",
+                  textAlign: "left",
+                  color: "#F7F2DA"
+                }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
+                aslan is a scammer, always have been
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
+const Card2 = () => (
+  <motion.div
+    className="w-full  md:w-[350px] px-2 mb-4"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 0.1}}
+    whileHover={{ scale: 1.07 }} // Increased from 1.01 to 1.05
+  >
+    <div
+      className="bg-[#0A0909] rounded-lg overflow-hidden"
+      style={{
+        height: "150px"
+      }}
+    >
+      <div className="p-3 text-[#F7F2DA]">
+        <div className="flex justify-between items-start">
+        <div className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative">
+  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center">
+    <Lock className="h-3 w-3 text-gray-400" />
+  </div>
+</div>
 
           <div className="text-right flex flex-col p-2">
             <div className="flex flex-row justify-between align-middle">
