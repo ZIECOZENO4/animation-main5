@@ -1473,3 +1473,9 @@ const Card2 = () => (
   </motion.div>
 )
 
+
+
+
+
+
+
