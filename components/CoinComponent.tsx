@@ -28,7 +28,10 @@ interface ChainData {
   name: string
 }
 
-
+interface TooltipProps {
+  children: React.ReactNode;
+  content: React.ReactNode;
+}
 
 export default function ComponentCoin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -1289,33 +1292,28 @@ const Card2 = () => (
     whileHover={{ scale: 1.07 }}
   >
     {/* Anonymous Stage Overlay - Shows on component hover */}
-    <motion.div
-      className="absolute inset-0 bg-black/80  opacity-0 flex items-center justify-center"
-      initial={{ opacity: 0 }}
-      whileHover={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-    >
-      <p className="text-[#F7F2DA] text-lg font-medium">Still in Anonymous Stage</p>
-    </motion.div>
+ 
 
     <div className="bg-[#0A0909]  overflow-hidden" style={{ height: "150px" }}>
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
           {/* Image container with lock */}
-          <motion.div 
-            className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
-            whileHover={{ 
-              boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
-              transition: { duration: 0.2 }
-            }}
-          >
+          <Tooltip content="Still in Anonymous Stage">
             <motion.div 
-              className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center"
-              whileHover={{ scale: 1.1 }}
+              className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
+              whileHover={{ 
+                boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+                transition: { duration: 0.2 }
+              }}
             >
-              <Lock className="h-3 w-3 text-gray-400" />
+              <motion.div 
+                className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+              >
+                <Lock className="h-3 w-3 text-gray-400" />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </Tooltip>
 
           <div className="text-right flex flex-col p-2">
             <div className="flex flex-row justify-between align-middle">
@@ -1444,3 +1442,23 @@ const Card2 = () => (
     </div>
   </motion.div>
 )
+
+// TooltipComponent.jsx
+
+
+const Tooltip: React.FC<TooltipProps> = ({ children, content }) => (
+  <div className="group relative">
+    {children}
+    <div className="pointer-events-none absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 
+                    transition-opacity group-hover:opacity-100">
+      <div className="flex flex-col items-center">
+        <div className="rounded bg-black px-3 py-2 text-sm text-white shadow-lg">
+          {content}
+        </div>
+        <div className="h-2 w-4 overflow-hidden">
+          <div className="h-2 w-2 origin-top-left rotate-45 transform bg-black"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
