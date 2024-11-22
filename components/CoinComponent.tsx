@@ -1294,12 +1294,40 @@ const Card2 = () => (
   >
     {/* Anonymous Stage Overlay - Shows on component hover */}
  
-
+    <Tooltip 
+  content="Still in Anonymous Stage"
+  placement="top"
+  showArrow={true}
+  offset={10}
+  classNames={{
+    base: "py-2 px-4 shadow-xl rounded-none bg-black border border-[#F7F2DA]/20",
+    arrow: "bg-black border-[#F7F2DA]/20",
+    content: "text-[#F7F2DA] text-sm font-normal px-2 py-1"
+  }}
+  motionProps={{
+    variants: {
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.1,
+          ease: "easeIn"
+        }
+      },
+      enter: {
+        opacity: 1,
+        transition: {
+          duration: 0.15,
+          ease: "easeOut"
+        }
+      }
+    }
+  }}
+>
     <div className="bg-[#0A0909]  overflow-hidden" style={{ height: "150px" }}>
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
           {/* Image container with lock */}
-          <Tooltip content="Still in Anonymous Stage">
+     
             <motion.div 
               className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
               whileHover={{ 
@@ -1314,7 +1342,7 @@ const Card2 = () => (
                 <Lock className="h-3 w-3 text-gray-400" />
               </motion.div>
             </motion.div>
-          </Tooltip>
+   
 
           <div className="text-right flex flex-col p-2">
             <div className="flex flex-row justify-between align-middle">
@@ -1441,6 +1469,7 @@ const Card2 = () => (
         </div>
       </div>
     </div>
+    </Tooltip>
   </motion.div>
 )
 
