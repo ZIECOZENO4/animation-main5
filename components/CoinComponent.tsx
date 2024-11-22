@@ -408,11 +408,11 @@ export default function ComponentCoin() {
       <AnimatePresence mode="wait">
       {activeTab === 'Initial' ? (
         <motion.div
-          key="launched"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          className="flex items-center gap-2"
+        key="initial"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
         >
         <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
         <Link href="/test">
@@ -715,38 +715,299 @@ export default function ComponentCoin() {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
       >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ 
-              duration: 2,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
-            <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
-          </motion.div>
-          <div className="grid grid-cols-4 gap-6 h-[75px] px-1">
-            {[
-              { label: '5M', value: '4.2%' },
-              { label: '15M', value: '6.9%' },
-              { label: '30M', value: '7.7%' },
-              { label: '1H', value: '83.5%' }
-            ].map((item, i) => (
-              <div key={i} className="bg-[#1A1A1A]">
-           
-                  <div className="h-full flex flex-col items-center justify-center gap-2">
-                    <span className="text-[#999999] text-sm font-medium">
-                      {item.label}
-                    </span>
-                    <span className="text-[#F7F2DA80] text-lg font-bold">
-                      {item.value}
-                    </span>
-                  </div>
-      
-              </div>
-            ))}
-          </div>
-        </motion.div>
+      <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+
+      <Link href="/test">
+        <Card2 />
+      </Link>
+      <Link href="/test">
+        <Card2 />
+      </Link>
+    </div>
+      </motion.div>
       )}
     </AnimatePresence>
       <Modal
