@@ -1307,21 +1307,6 @@ const Card2 = () => (
       "relative",
       "mb-4  " // Added margin bottom
     ].join(" "),
-    arrow: [
-      "bg-[#0A0909]",
-      "border-none",
-      "before:bg-[#0A0909]",
-      "before:w-2 before:h-2",
-      "before:rotate-45",
-      "before:transform",
-      "before:absolute",
-      "before:top-[50%]",
-      "!bottom-[-50%]", // Adjust this to move arrow up
-      "before:left-1/2",
-      "before:-translate-x-1/2",
-      "translate-y-[50%]", // This will push half the arrow inside
-      "z-[-1]"
-    ].join(" "),
     content: [
       "text-[#F7F2DA]",
       "text-sm",
