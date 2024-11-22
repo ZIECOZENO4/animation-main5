@@ -1293,36 +1293,40 @@ const Card2 = () => (
     whileHover={{ scale: 1.07 }}
   >
     {/* Anonymous Stage Overlay - Shows on component hover */}
- 
     <Tooltip 
   content="Still in Anonymous Stage"
   placement="top"
   showArrow={true}
-  offset={-10}
+  offset={-5}
   classNames={{
     base: [
       "py-2 px-4",
-      "bg-[#0A0909]",
+    
       "border-none",
-      "rounded-none",
+      "shadow-none",
+      "backdrop-blur-none",
+      "relative"
     ].join(" "),
     arrow: [
       "bg-[#0A0909]",
-      "w-4 h-4",
-      "!bottom-[-6px]",
-      "before:content-['']",
-      "before:absolute",
+      "border-none",
       "before:bg-[#0A0909]",
-      "before:w-4 before:h-2",
+      "before:w-2 before:h-4",
+      "before:rotate-45",
+      "before:transform",
+      "before:absolute",
       "before:top-[50%]",
-      "before:left-0",
-      "data-[placement=top]:rotate-45",
+      "!bottom-[-8px]",
+      "before:left-1/2",
+      "before:-translate-x-1/2",
+      "z-[-1]"
     ].join(" "),
     content: [
       "text-[#F7F2DA]",
       "text-sm",
       "font-normal",
       "px-2 py-1",
+      "rounded-none"
     ].join(" ")
   }}
   motionProps={{
