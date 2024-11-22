@@ -1316,7 +1316,7 @@ const Card2 = () => (
       "before:transform",
       "before:absolute",
       "before:top-[50%]",
-      "!bottom-[-8px]", // Adjust this to move arrow up
+      "!bottom-[-50%]", // Adjust this to move arrow up
       "before:left-1/2",
       "before:-translate-x-1/2",
       "translate-y-[50%]", // This will push half the arrow inside
