@@ -1097,17 +1097,43 @@ const Card = () => (
     transition={{ duration: 0.5, delay: 0.1 }}
     whileHover={{ scale: 1.07 }}
   >
-    {/* Initial Stage Overlay */}
-    <motion.div
-      className="absolute inset-0 bg-black/80  opacity-0 flex items-center justify-center z-10"
-      initial={{ opacity: 0 }}
-      whileHover={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-    >
-      <p className="text-[#F7F2DA] text-lg font-medium tracking-wider">Still in Initial Stage</p>
-    </motion.div>
+     <Tooltip 
+  content="Still in Initial Stage"
+  placement="top"
+  showArrow={false}
+  offset={-5}
+  classNames={{
+    base: [
+      "py-2 px-4",
+      "border-none",
+      "shadow-none",
+      "backdrop-blur-none",
+      "relative",
+      "mb-2  " // Added margin bottom
+    ].join(" "),
+    content: [
+      "text-[#F7F2DA]",
+      "text-sm",
+      "font-normal",
+      "px-2 py-1",
+      "rounded-none"
+    ].join(" ")
+  }}
+  motionProps={{
+    variants: {
+      exit: {
+        opacity: 0,
+        transition: { duration: 0.1, ease: "easeIn" }
+      },
+      enter: {
+        opacity: 1,
+        transition: { duration: 0.15, ease: "easeOut" }
+      }
+    }
+  }}
+>
 
-    <div
+<div
       className="bg-[#0A0909]  overflow-hidden"
       style={{ height: "150px" }}
     >
@@ -1281,6 +1307,8 @@ const Card = () => (
         </div>
       </div>
     </div>
+</Tooltip>
+
   </motion.div>
 );
 
@@ -1305,7 +1333,7 @@ const Card2 = () => (
       "shadow-none",
       "backdrop-blur-none",
       "relative",
-      "mb-4  " // Added margin bottom
+      "mb-2  " // Added margin bottom
     ].join(" "),
     content: [
       "text-[#F7F2DA]",
