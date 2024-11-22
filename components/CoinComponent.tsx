@@ -1095,23 +1095,38 @@ export default function ComponentCoin() {
 
 const Card = () => (
   <motion.div
-    className="w-full  md:w-[350px] px-2 mb-4"
+    className="w-full md:w-[350px] px-2 mb-4 relative"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 0.1}}
-    whileHover={{ scale: 1.07 }} // Increased from 1.01 to 1.05
+    transition={{ duration: 0.5, delay: 0.1 }}
+    whileHover={{ scale: 1.07 }}
   >
+    {/* Initial Stage Overlay */}
+    <motion.div
+      className="absolute inset-0 bg-black/80  opacity-0 flex items-center justify-center z-10"
+      initial={{ opacity: 0 }}
+      whileHover={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+    >
+      <p className="text-[#F7F2DA] text-lg font-medium tracking-wider">Still in Initial Stage</p>
+    </motion.div>
+
     <div
-      className="bg-[#0A0909] rounded-lg overflow-hidden"
-      style={{
-        height: "150px"
-      }}
+      className="bg-[#0A0909]  overflow-hidden"
+      style={{ height: "150px" }}
     >
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
-          <div className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]" />
+          <motion.div 
+            className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]"
+            whileHover={{ 
+              boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+              transition: { duration: 0.2 }
+            }}
+          />
 
           <div className="text-right flex flex-col p-2">
+            {/* Rest of your existing code remains exactly the same */}
             <div className="flex flex-row justify-between align-middle">
               <motion.h2
                 className="text-left text-[#F7F2DA] font-normal"
@@ -1283,7 +1298,7 @@ const Card2 = () => (
   >
     {/* Anonymous Stage Overlay - Shows on component hover */}
     <motion.div
-      className="absolute inset-0 bg-black/80 rounded-lg opacity-0 flex items-center justify-center"
+      className="absolute inset-0 bg-black/80  opacity-0 flex items-center justify-center"
       initial={{ opacity: 0 }}
       whileHover={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
@@ -1291,7 +1306,7 @@ const Card2 = () => (
       <p className="text-[#F7F2DA] text-lg font-medium">Still in Anonymous Stage</p>
     </motion.div>
 
-    <div className="bg-[#0A0909] rounded-lg overflow-hidden" style={{ height: "150px" }}>
+    <div className="bg-[#0A0909]  overflow-hidden" style={{ height: "150px" }}>
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
           {/* Image container with lock */}
