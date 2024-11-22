@@ -12,6 +12,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
+  Tooltip,
   ModalFooter
 } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -1443,22 +1444,3 @@ const Card2 = () => (
   </motion.div>
 )
 
-// TooltipComponent.jsx
-
-
-const Tooltip: React.FC<TooltipProps> = ({ children, content }) => (
-  <div className="group relative">
-    {children}
-    <div className="pointer-events-none absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 
-                    transition-opacity group-hover:opacity-100">
-      <div className="flex flex-col items-center">
-        <div className="rounded bg-black px-3 py-2 text-sm text-white shadow-lg">
-          {content}
-        </div>
-        <div className="h-2 w-4 overflow-hidden">
-          <div className="h-2 w-2 origin-top-left rotate-45 transform bg-black"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
