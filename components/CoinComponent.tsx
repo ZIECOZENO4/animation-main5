@@ -174,7 +174,7 @@ export default function ComponentCoin() {
           >
       <div className="relative">
   <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
-  <div className="absolute top-[100%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#F7F2DA80] rounded-full" />
+  <div className="absolute top-[100%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#F7F2DA80] rounded-full" />
 </div>
           </motion.div>
         </motion.div>
