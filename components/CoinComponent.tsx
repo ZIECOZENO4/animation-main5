@@ -1305,22 +1305,32 @@ const Card2 = () => (
       "shadow-none",
       "backdrop-blur-none",
       "relative",
-      "mb-4" // Added margin bottom
+      "mb-4  " // Added margin bottom
     ].join(" "),
     arrow: [
       "bg-[#0A0909]",
       "border-none",
       "before:bg-[#0A0909]",
-      "before:w-2 before:h-4",
+      "before:w-2",
+      "before:h-2", // reduced height
       "before:rotate-45",
       "before:transform",
       "before:absolute",
-      "before:top-[50%]",
-      "!bottom-[-8px]",
+      "before:top-[-4px]", // adjusted to push arrow up
+      "!bottom-[-4px]", // adjusted bottom position
       "before:left-1/2",
       "before:-translate-x-1/2",
-      "-mt-8", // Added negative margin top
-      "z-[-1]"
+      "-mt-8",
+      "z-[-1]",
+      "overflow-hidden", // hide bottom part of arrow
+      "after:content-['']", // add pseudo element for flat top
+      "after:absolute",
+      "after:w-4",
+      "after:h-2",
+      "after:bg-[#0A0909]",
+      "after:top-0",
+      "after:left-1/2",
+      "after:-translate-x-1/2"
     ].join(" "),
     content: [
       "text-[#F7F2DA]",

@@ -7,7 +7,7 @@ export function ViewMoreButton() {
     <div>
       <button
         aria-label='number'
-        className="bg-tertiary py-3 px-8 rounded-xl w-full outline-none  border border-slate-800 text-[#F7F2DA] font-bold shadow-md shadow-slate-900"
+        className="bg-tertiary p-2 rounded-xl w-full outline-none  border border-slate-800 text-[#F7F2DA] font-bold shadow-md shadow-slate-900"
       >
        <DigitalClock />
       </button>
