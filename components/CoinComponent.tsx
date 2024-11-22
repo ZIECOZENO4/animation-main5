@@ -1305,7 +1305,7 @@ const Card2 = () => (
       "shadow-none",
       "backdrop-blur-none",
       "relative",
-      "mb-2" // Added margin bottom
+      "mb-4" // Added margin bottom
     ].join(" "),
     arrow: [
       "bg-[#0A0909]",
@@ -1319,7 +1319,7 @@ const Card2 = () => (
       "!bottom-[-8px]",
       "before:left-1/2",
       "before:-translate-x-1/2",
-      "-mt-2", // Added negative margin top
+      "-mt-8", // Added negative margin top
       "z-[-1]"
     ].join(" "),
     content: [
