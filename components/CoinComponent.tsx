@@ -1296,53 +1296,44 @@ const Card2 = () => (
  
     <Tooltip 
   content="Still in Anonymous Stage"
-  placement="bottom"
+  placement="top"
   showArrow={true}
-  offset={-5}
+  offset={-10}
   classNames={{
     base: [
       "py-2 px-4",
-      "bg-transparent",
+      "bg-[#0A0909]",
       "border-none",
-      "shadow-none",
-      "backdrop-blur-none",
+      "rounded-none",
     ].join(" "),
     arrow: [
-      "bg-transparent",
-      "border-none",
-      "before:bg-[#0A0909]",
-      "before:w-2 before:h-2",
-      "before:rotate-45",
-      "before:transform",
+      "bg-[#0A0909]",
+      "w-4 h-4",
+      "!bottom-[-6px]",
+      "before:content-['']",
       "before:absolute",
-      "before:top-[-4px]",
-      "before:left-1/2",
-      "before:-translate-x-1/2"
+      "before:bg-[#0A0909]",
+      "before:w-4 before:h-2",
+      "before:top-[50%]",
+      "before:left-0",
+      "data-[placement=top]:rotate-45",
     ].join(" "),
     content: [
       "text-[#F7F2DA]",
       "text-sm",
       "font-normal",
       "px-2 py-1",
-      "bg-[#0A0909]",
-      "rounded-none"
     ].join(" ")
   }}
   motionProps={{
     variants: {
       exit: {
         opacity: 0,
-        transition: {
-          duration: 0.1,
-          ease: "easeIn"
-        }
+        transition: { duration: 0.1, ease: "easeIn" }
       },
       enter: {
         opacity: 1,
-        transition: {
-          duration: 0.15,
-          ease: "easeOut"
-        }
+        transition: { duration: 0.15, ease: "easeOut" }
       }
     }
   }}

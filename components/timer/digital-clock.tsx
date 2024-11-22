@@ -33,9 +33,9 @@ export default function DigitalClock() {
   const formatNumber = (num: number) => num.toString().padStart(2, "0")
 
   return (
-    <div className="flex flex-col items-center justify-center text-[#F7F2DA]">
+    <div className="flex flex-col items-center justify-center">
    
-      <div className="flex space-x-2 text-2xl tracking-wider font-['Digital-7']  leading-relaxed">
+      <div className="flex space-x-2 text-[20px] text-[#BD8F8F] tracking-wider font-['Digital-7']  leading-relaxed">
         <motion.div
           key={time.hours}
           initial={{ opacity: 0, y: -20 }}
@@ -59,6 +59,7 @@ export default function DigitalClock() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="text-[20px] text-[#9CBD8F]"
         >
           {formatNumber(time.seconds)}
         </motion.div>
