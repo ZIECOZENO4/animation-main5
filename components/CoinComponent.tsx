@@ -1301,11 +1301,11 @@ const Card2 = () => (
   classNames={{
     base: [
       "py-2 px-4",
-    
       "border-none",
       "shadow-none",
       "backdrop-blur-none",
-      "relative"
+      "relative",
+      "mb-2" // Added margin bottom
     ].join(" "),
     arrow: [
       "bg-[#0A0909]",
@@ -1319,6 +1319,7 @@ const Card2 = () => (
       "!bottom-[-8px]",
       "before:left-1/2",
       "before:-translate-x-1/2",
+      "-mt-2", // Added negative margin top
       "z-[-1]"
     ].join(" "),
     content: [
