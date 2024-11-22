@@ -161,23 +161,15 @@ export default function ComponentCoin() {
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          whileHover={{ scale: 1.07 }}
           className="flex items-center"
         >
-          <motion.div
-            animate={{ rotate: 30 }}
-            transition={{ 
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
       <div className="relative">
   <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
   <div className="absolute top-[100%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#F7F2DA80] rounded-full" />
 </div>
           </motion.div>
-        </motion.div>
       )}
     </AnimatePresence>
 
@@ -1185,7 +1177,7 @@ const Card = () => (
               </motion.p>
 
               <motion.div
-                className="mt-[25px]"
+                className="mt-[22px]"
                 style={{
                   width: "180px",
                   height: "10px",
@@ -1387,7 +1379,7 @@ const Card2 = () => (
 
               {/* Time to Launch Section */}
               <motion.div
-                className="mt-[25px]"
+                className="mt-[22px]"
                 style={{
                   width: "180px",
                   height: "10px",
