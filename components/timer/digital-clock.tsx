@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { BellOff } from "lucide-react"
 import { useLocalStorage } from "./use-local-storage"
-import '@/styles/fonts.css'
+import './styles/fonts.css'
 
 export default function DigitalClock() {
   const [startTime, setStartTime] = useLocalStorage("clockStartTime", Date.now())
