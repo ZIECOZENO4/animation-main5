@@ -1296,7 +1296,7 @@ const Card2 = () => (
     <Tooltip 
   content="Still in Anonymous Stage"
   placement="top"
-  showArrow={true}
+  showArrow={false}
   offset={-5}
   classNames={{
     base: [
