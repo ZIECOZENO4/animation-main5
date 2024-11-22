@@ -174,7 +174,7 @@ export default function ComponentCoin() {
           >
       <div className="relative">
   <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
-  <div className="absolute top-[100%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#F7F2DA80] rounded-full" />
+  <div className="absolute top-[100%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#F7F2DA80] rounded-full" />
 </div>
           </motion.div>
         </motion.div>
@@ -1275,25 +1275,40 @@ const Card = () => (
 
 const Card2 = () => (
   <motion.div
-    className="w-full  md:w-[350px] px-2 mb-4"
+    className="w-full md:w-[350px] px-2 mb-4 relative"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 0.1}}
-    whileHover={{ scale: 1.07 }} // Increased from 1.01 to 1.05
+    transition={{ duration: 0.5, delay: 0.1 }}
+    whileHover={{ scale: 1.07 }}
   >
-    <div
-      className="bg-[#0A0909] rounded-lg overflow-hidden"
-      style={{
-        height: "150px"
-      }}
+    {/* Anonymous Stage Overlay - Shows on component hover */}
+    <motion.div
+      className="absolute inset-0 bg-black/80 rounded-lg opacity-0 flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      whileHover={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
     >
+      <p className="text-[#F7F2DA] text-lg font-medium">Still in Anonymous Stage</p>
+    </motion.div>
+
+    <div className="bg-[#0A0909] rounded-lg overflow-hidden" style={{ height: "150px" }}>
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
-        <div className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative">
-  <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center">
-    <Lock className="h-3 w-3 text-gray-400" />
-  </div>
-</div>
+          {/* Image container with lock */}
+          <motion.div 
+            className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
+            whileHover={{ 
+              boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+              transition: { duration: 0.2 }
+            }}
+          >
+            <motion.div 
+              className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Lock className="h-3 w-3 text-gray-400" />
+            </motion.div>
+          </motion.div>
 
           <div className="text-right flex flex-col p-2">
             <div className="flex flex-row justify-between align-middle">
@@ -1302,13 +1317,16 @@ const Card2 = () => (
                 style={{
                   width: "70px",
                   height: "20px",
-                  top: "14px",
-                  left: "137px",
                   fontSize: "20px",
                   lineHeight: "20px"
                 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  color: "#F7F2DA",
+                  textShadow: "0 0 8px rgba(247, 242, 218, 0.5)"
+                }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
                 [SPEAR]
@@ -1318,134 +1336,97 @@ const Card2 = () => (
                 style={{
                   width: "20px",
                   height: "10px",
-                  top: "9px",
-                  left: "302px",
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "20px",
                   textAlign: "left",
                   color: "#F7F2DA"
                 }}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                whileHover={{ 
+                  scale: 1.1,
+                  color: "#F7F2DA",
+                }}
               >
                 More
               </motion.h2>
             </div>
+
             <div className="flex flex-col align-middle">
               <motion.p
                 className="text-[#F7F2DA] workbench-test flex flex-row mt-[5px]"
                 style={{
                   width: "60px",
                   height: "10px",
-                  left: "137px",
                   fontSize: "10px",
                   fontWeight: 200,
                   lineHeight: "10px",
                   textAlign: "left",
-                  color: "#F7F2DA"
                 }}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  color: "#F7F2DA",
+                }}
               >
                 Pear Network
               </motion.p>
 
+              {/* Time to Launch Section */}
               <motion.div
                 className="mt-[25px]"
                 style={{
                   width: "180px",
                   height: "10px",
-                  top: "85px",
-                  left: "137px",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center"
                 }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                whileHover={{ 
+                  backgroundColor: "rgba(247, 242, 218, 0.1)",
+                  borderRadius: "4px",
+                  padding: "4px"
+                }}
               >
-                <p
-                  className="workbench-test"
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: 400,
-                    lineHeight: "10px",
-                    textAlign: "left",
-                    color: "#F7F2DA"
-                  }}
-                >
-                  Time to Launch:
-                </p>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    lineHeight: "10px",
-                    textAlign: "left",
-                    color: "#F7F2DA"
-                  }}
-                >
-                  00D/4H/24m
-                </p>
+                <p className="text-[10px] text-[#F7F2DA]">Time to Launch:</p>
+                <p className="text-[12px] text-[#F7F2DA]">00D/4H/24m</p>
               </motion.div>
+
+              {/* Chain Section */}
               <motion.div
                 className="my-[8px] workbench-test"
                 style={{
                   width: "180px",
                   height: "10px",
-                  top: "85px",
-                  left: "137px",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center"
                 }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                whileHover={{ 
+                  backgroundColor: "rgba(247, 242, 218, 0.1)",
+                  borderRadius: "4px",
+                  padding: "4px"
+                }}
               >
-                <p
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: 400,
-                    lineHeight: "10px",
-                    textAlign: "left",
-                    color: "#F7F2DA"
-                  }}
-                >
-                  Chain:
-                </p>
-                <p
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: 400,
-                    lineHeight: "10px",
-                    textAlign: "left",
-                    color: "#F7F2DA"
-                  }}
-                >
-                  Arbitrum
-                </p>
+                <p className="text-[10px] text-[#F7F2DA]">Chain:</p>
+                <p className="text-[10px] text-[#F7F2DA]">Arbitrum</p>
               </motion.div>
+
+              {/* Description */}
               <motion.div
                 className="mb-[8px]"
                 style={{
                   width: "180px",
                   height: "10px",
-                  top: "102px",
-                  left: "137px",
                   fontSize: "10px",
                   fontWeight: 400,
                   lineHeight: "10px",
                   textAlign: "left",
                   color: "#F7F2DA"
                 }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                whileHover={{ 
+                  scale: 1.02,
+                  color: "#F7F2DA",
+                  textShadow: "0 0 8px rgba(247, 242, 218, 0.3)"
+                }}
               >
                 aslan is a scammer, always have been
               </motion.div>
@@ -1455,4 +1436,4 @@ const Card2 = () => (
       </div>
     </div>
   </motion.div>
-);
+)
