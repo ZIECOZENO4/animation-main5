@@ -1296,13 +1296,37 @@ const Card2 = () => (
  
     <Tooltip 
   content="Still in Anonymous Stage"
-  placement="top"
+  placement="bottom"
   showArrow={true}
-  offset={10}
+  offset={-5}
   classNames={{
-    base: "py-2 px-4 shadow-xl rounded-none bg-black border border-[#F7F2DA]/20",
-    arrow: "bg-black border-[#F7F2DA]/20",
-    content: "text-[#F7F2DA] text-sm font-normal px-2 py-1"
+    base: [
+      "py-2 px-4",
+      "bg-transparent",
+      "border-none",
+      "shadow-none",
+      "backdrop-blur-none",
+    ].join(" "),
+    arrow: [
+      "bg-transparent",
+      "border-none",
+      "before:bg-[#0A0909]",
+      "before:w-2 before:h-2",
+      "before:rotate-45",
+      "before:transform",
+      "before:absolute",
+      "before:top-[-4px]",
+      "before:left-1/2",
+      "before:-translate-x-1/2"
+    ].join(" "),
+    content: [
+      "text-[#F7F2DA]",
+      "text-sm",
+      "font-normal",
+      "px-2 py-1",
+      "bg-[#0A0909]",
+      "rounded-none"
+    ].join(" ")
   }}
   motionProps={{
     variants: {
