@@ -165,14 +165,17 @@ export default function ComponentCoin() {
           className="flex items-center"
         >
           <motion.div
-            animate={{ rotate: 90 }}
+            animate={{ rotate: 30 }}
             transition={{ 
-              duration: 10,
+              duration: 30,
               repeat: Infinity,
               ease: "linear"
             }}
           >
-            <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
+      <div className="relative">
+  <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#F7F2DA80] rounded-full" />
+</div>
           </motion.div>
         </motion.div>
       )}
@@ -1287,7 +1290,7 @@ const Card2 = () => (
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
         <div className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative">
-  <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center">
+  <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center">
     <Lock className="h-3 w-3 text-gray-400" />
   </div>
 </div>
