@@ -1,12 +1,10 @@
-import RewardCard from "@/components/transactioncontent";
 import React from "react";
-import Component from "./chart1";
 import { Tooltip } from "@nextui-org/react";
 
 const TestPage = () => {
   return (
     <div>
-      <Tooltip 
+      <Tooltip
         content="Still in Initial Stage"
         placement="top"
         showArrow={false}
@@ -18,10 +16,10 @@ const TestPage = () => {
             "shadow-none",
             "backdrop-blur-none",
             "relative",
-            "mb-2 tooltip-custom" // Added custom class
+            "mb-2 tooltip-custom" // Custom class for styling
           ].join(" "),
           content: [
-            "text-[#F7F2DA]",
+            "text-[#000]", // Text color
             "text-sm",
             "font-normal",
             "px-2 py-1",
@@ -41,7 +39,7 @@ const TestPage = () => {
           }
         }}
       >
-        hello world 
+        Hover over me
       </Tooltip>
     </div>
   );

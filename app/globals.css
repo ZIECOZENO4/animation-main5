@@ -131,15 +131,18 @@
 
 .tooltip-custom {
   position: relative;
+  background-color: #F7F2DA; /* Tooltip background color */
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .tooltip-custom::after {
   content: '';
   position: absolute;
-  top: 100%; /* Positioning below the tooltip */
+  top: 100%; /* Position the arrow at the bottom of the tooltip */
   left: 50%;
   transform: translateX(-50%);
-  border-width: 10px; /* Adjust size */
+  border-width: 10px; /* Arrow size */
   border-style: solid;
-  border-color: #F7F2DA transparent transparent transparent; /* Matches tooltip background color */
+  border-color: #F7F2DA transparent transparent transparent; /* Match tooltip background color */
 }
