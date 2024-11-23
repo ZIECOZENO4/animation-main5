@@ -19,7 +19,7 @@ const TestPage = () => {
             "mb-2 tooltip-custom" // Custom class for styling
           ].join(" "),
           content: [
-            "text-[#000]", // Text color
+            "text-[#F7F2DA]", // Text color
             "text-sm",
             "font-normal",
             "px-2 py-1",
