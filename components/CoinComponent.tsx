@@ -1109,7 +1109,7 @@ const Card = () => (
             "shadow-none",
             "backdrop-blur-none",
             "relative",
-            "mb-2 tooltip-custom" // Custom class for styling
+            "mb-8 tooltip-custom" // Custom class for styling
           ].join(" "),
           content: [
             "text-[#F7F2DA]", // Text color
@@ -1333,7 +1333,7 @@ const Card2 = () => (
             "shadow-none",
             "backdrop-blur-none",
             "relative",
-            "mb-2 tooltip-custom" // Custom class for styling
+            "mb-8 tooltip-custom" // Custom class for styling
           ].join(" "),
           content: [
             "text-[#F7F2DA]", // Text color
