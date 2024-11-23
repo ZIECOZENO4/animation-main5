@@ -1321,41 +1321,42 @@ const Card2 = () => (
     whileHover={{ scale: 1.07 }}
   >
     {/* Anonymous Stage Overlay - Shows on component hover */}
-    <Tooltip 
-  content="Still in Anonymous Stage"
-  placement="top"
-  showArrow={false}
-  offset={-5}
-  classNames={{
-    base: [
-      "py-2 px-4",
-      "border-none",
-      "shadow-none",
-      "backdrop-blur-none",
-      "relative",
-      "mb-2  " // Added margin bottom
-    ].join(" "),
-    content: [
-      "text-[#F7F2DA]",
-      "text-sm",
-      "font-normal",
-      "px-2 py-1",
-      "rounded-none"
-    ].join(" ")
-  }}
-  motionProps={{
-    variants: {
-      exit: {
-        opacity: 0,
-        transition: { duration: 0.1, ease: "easeIn" }
-      },
-      enter: {
-        opacity: 1,
-        transition: { duration: 0.15, ease: "easeOut" }
-      }
-    }
-  }}
->
+    <Tooltip
+        content="Still in Anonymous Stage"
+        placement="top"
+        showArrow={false}
+        offset={-5}
+        classNames={{
+          base: [
+            "py-2 px-4",
+            "border-none",
+            "shadow-none",
+            "backdrop-blur-none",
+            "relative",
+            "mb-2 tooltip-custom" // Custom class for styling
+          ].join(" "),
+          content: [
+            "text-[#F7F2DA]", // Text color
+            "text-sm",
+            "font-normal",
+            "px-2 py-1",
+            "rounded-none"
+          ].join(" ")
+        }}
+        motionProps={{
+          variants: {
+            exit: {
+              opacity: 0,
+              transition: { duration: 0.1, ease: "easeIn" }
+            },
+            enter: {
+              opacity: 1,
+              transition: { duration: 0.15, ease: "easeOut" }
+            }
+          }
+        }}
+      >
+
     <div className="bg-[#0A0909]  overflow-hidden" style={{ height: "150px" }}>
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">

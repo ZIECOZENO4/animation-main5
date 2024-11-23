@@ -131,7 +131,7 @@
 
 .tooltip-custom {
   position: relative;
-  background-color: #D9D9D966; /* Tooltip background color */
+  background-color: #0A0909; /* Tooltip background color */
   padding: 10px;
   border-radius: 4px;
 }
@@ -144,5 +144,5 @@
   transform: translateX(-50%);
   border-width: 10px; /* Arrow size */
   border-style: solid;
-  border-color: #D9D9D966 transparent transparent transparent; /* Match tooltip background color */
+  border-color: #0A0909 transparent transparent transparent; /* Match tooltip background color */
 }
