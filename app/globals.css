@@ -131,9 +131,10 @@
 
 .tooltip-custom {
   position: relative;
-  background-color: #0A0909; /* Tooltip background color */
+  background-color: #000000; /* Tooltip background color */
   padding: 10px;
   border-radius: 4px;
+  margin-bottom: 4px;
 }
 
 .tooltip-custom::after {
@@ -144,5 +145,5 @@
   transform: translateX(-50%);
   border-width: 10px; /* Arrow size */
   border-style: solid;
-  border-color: #0A0909 transparent transparent transparent; /* Match tooltip background color */
+  border-color: #000000 transparent transparent transparent; /* Match tooltip background color */
 }
