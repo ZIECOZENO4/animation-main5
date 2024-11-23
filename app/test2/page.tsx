@@ -38,9 +38,9 @@ const TestPage = () => {
         transition: { duration: 0.15, ease: "easeOut" }
       }
     }
-  }}
-/>
-    <Component />
+  }} >
+    hello wporld 
+  </Tooltip>
     </div>
   );
 };
