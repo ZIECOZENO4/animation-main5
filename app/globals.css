@@ -128,3 +128,18 @@
   font-style: normal;
   font-display: swap;
 }
+
+.tooltip-custom {
+  position: relative;
+}
+
+.tooltip-custom::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* Adjust based on your design */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px; /* Adjust size */
+  border-style: solid;
+  border-color: transparent transparent #F7F2DA transparent; /* Matches tooltip background color */
+}
