@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { Button } from "@nextui-org/react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@nextui-org/react"
+import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
 import { Progress } from "@nextui-org/react"
 import { InfoIcon, LoaderIcon, CheckCircle2Icon, AlertCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -290,13 +290,12 @@ export const BatchCountingButton = ({
                 <InfoIcon className="h-4 w-4" />
             </Button>
 
-            <Dialog open={showProgress} onOpenChange={setShowProgress}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle className="text-lg font-semibold">
-                            Batch Counting Progress
-                        </DialogTitle>
-                    </DialogHeader>
+            <Modal isOpen={showProgress} onOpenChange={setShowProgress}>
+  <ModalContent>
+    <ModalHeader>
+      <h2 className="text-lg font-semibold">Batch Counting Progress</h2>
+    </ModalHeader>
+    <ModalBody>
                     {isLoading ? (
                         <div className="flex items-center justify-center p-6">
                             <LoaderIcon  className="h-6 w-6 animate-spin" /> {/* Add your spinner component */}
@@ -381,8 +380,9 @@ export const BatchCountingButton = ({
                             <p className="text-muted-foreground">No batch data available</p>
                         </div>
                     )}
-                </DialogContent>
-            </Dialog>
+                     </ModalBody>
+           </ModalContent>
+</Modal>
         </div>
     )
 }
