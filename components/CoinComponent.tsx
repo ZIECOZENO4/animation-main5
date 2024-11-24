@@ -1109,7 +1109,7 @@ const Card = () => (
             "shadow-none",
             "backdrop-blur-none",
             "relative",
-            "mb-4 tooltip-custom", // Increased bottom margin
+            "mb-2 tooltip-custom", // Increased bottom margin
             "translate-y-[-8px]" // Move tooltip up slightly
           ].join(" "),
           content: [
@@ -1118,7 +1118,7 @@ const Card = () => (
             "font-normal",
             "px-2 py-1",
             "rounded-none",
-            "bg-[#D9D9D966]"
+            "bg-[#000000]"
           ].join(" ")
         }}
         motionProps={{
