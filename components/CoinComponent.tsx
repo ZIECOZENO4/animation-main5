@@ -1097,11 +1097,11 @@ const Card = () => (
     transition={{ duration: 0.5, delay: 0.1 }}
     whileHover={{ scale: 1.07 }}
   >
-           <Tooltip
+                <Tooltip
         content="Still in Initial Stage"
         placement="top"
         showArrow={false}
-        offset={-5}
+        offset={15} // Increased offset to create more space
         classNames={{
           base: [
             "py-2 px-4",
@@ -1109,14 +1109,16 @@ const Card = () => (
             "shadow-none",
             "backdrop-blur-none",
             "relative",
-            "mb-8 tooltip-custom" // Custom class for styling
+            "mb-4 tooltip-custom", // Increased bottom margin
+            "translate-y-[-8px]" // Move tooltip up slightly
           ].join(" "),
           content: [
-            "text-[#F7F2DA]", // Text color
+            "text-[#F7F2DA]",
             "text-sm",
             "font-normal",
             "px-2 py-1",
-            "rounded-none"
+            "rounded-none",
+            "bg-[#D9D9D966]"
           ].join(" ")
         }}
         motionProps={{
@@ -1132,7 +1134,6 @@ const Card = () => (
           }
         }}
       >
-
 <div
       className="bg-[#0A0909]  overflow-hidden"
       style={{ height: "150px" }}
