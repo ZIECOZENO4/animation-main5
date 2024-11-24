@@ -1326,7 +1326,7 @@ const Card2 = () => (
         content="Still in Anonymous Stage"
         placement="top"
         showArrow={false}
-        offset={-5}
+        offset={15} // Increased offset to create more space
         classNames={{
           base: [
             "py-2 px-4",
@@ -1334,14 +1334,16 @@ const Card2 = () => (
             "shadow-none",
             "backdrop-blur-none",
             "relative",
-            "mb-8 tooltip-custom" // Custom class for styling
+            "mb-2 tooltip-custom", // Increased bottom margin
+            "translate-y-[-8px]" // Move tooltip up slightly
           ].join(" "),
           content: [
-            "text-[#F7F2DA]", // Text color
+            "text-[#F7F2DA]",
             "text-sm",
             "font-normal",
             "px-2 py-1",
-            "rounded-none"
+            "rounded-none",
+            "bg-[#000000]"
           ].join(" ")
         }}
         motionProps={{
@@ -1357,7 +1359,6 @@ const Card2 = () => (
           }
         }}
       >
-
     <div className="bg-[#0A0909]  overflow-hidden" style={{ height: "150px" }}>
       <div className="p-3 text-[#F7F2DA]">
         <div className="flex justify-between items-start">
