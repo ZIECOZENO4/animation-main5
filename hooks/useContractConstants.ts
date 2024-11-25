@@ -51,7 +51,7 @@ export function useTokenFactoryDurations(): {
         query =>
             query.isError ||
             !query.data ||
-            query.data === 0n ||
+            query.data === BigInt(0) ||
             query.data === undefined
     );
 
