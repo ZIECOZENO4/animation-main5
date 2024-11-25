@@ -368,7 +368,7 @@ function formatBatchMetrics(
 export function useBatchMetrics(batchId: string, durations: BatchDurations | null) {
     const areDurationsAvailable = useMemo(() => {
         if (!durations) return false
-        return Object.values(durations).some(duration => duration > 0n)
+        return Object.values(durations).some(duration => duration > BigInt(0))
     }, [durations])
 
     return useQuery({
