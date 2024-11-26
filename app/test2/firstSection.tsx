@@ -34,7 +34,8 @@ export default function FirstSection() {
 
 
     return (
-        <div className="min-h-screen p-1 md:p-6 z-[30] lg:p-8">
+        <div className="min-h-screen p-1 md:p-6  lg:p-8">
+            hello
             <Tab className="w-full max-w-8xl mx-auto">
                 <div className='flex justify-between'>
                     <Tabs className="mb-4">
