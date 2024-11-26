@@ -1,7 +1,4 @@
 
-
-// hooks/useBatchCountingStatus.ts - Part 1: Enums and Base Types
-
 import { useQuery } from '@tanstack/react-query'
 import { gql, request, GraphQLClient } from 'graphql-request'
 import { GRAPH_API_URL } from '@/constants'
