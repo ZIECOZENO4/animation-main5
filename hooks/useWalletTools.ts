@@ -215,7 +215,7 @@ export function useWalletVotes(addresses: string[]) {
                     claimableVotes[address] = summary.unclaimedVotes.filter(vote => vote.canClaim)
 
                     const wallet = wallets.find(
-                        w => w.address.toLowerCase() === address.toLowerCase()
+                        (w: { address: string }) => w.address.toLowerCase() === address.toLowerCase()
                     )
 
                     if (wallet) {
