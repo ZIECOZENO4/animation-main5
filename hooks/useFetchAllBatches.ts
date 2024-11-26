@@ -419,8 +419,8 @@ export function useAllBatchesMetrics(durations: BatchDurations | null) {
         getNextPageParam: (lastPage) => lastPage.nextPage,
         enabled: !!areDurationsAvailable,
         initialPageParam: 0,
-        retry: 3,
-        retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+        retry: 10,
+        retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 100000),
     })
 }
 
