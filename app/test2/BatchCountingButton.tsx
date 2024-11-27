@@ -278,13 +278,13 @@ export const BatchCountingButton = ({
                 disabled={!buttonConfig.action || isLoading}
             >
                 {isLoading ? (
-                    <LoaderIcon className="h-4 w-4 animate-spin" />
+                    <LoaderIcon className="h-4 w-4 animate-spin " />
                 ) : buttonConfig.text}
             </Button>
 
             <button
                  onClick={() => setShowProgress(true)}
-                className="hover:bg-accent/20 bg-transparent"
+                className="hover:bg-accent/20 bg-transparent p-0"
                 aria-label='number'
             >
                 <ArrowUp className="h-4 w-4" />

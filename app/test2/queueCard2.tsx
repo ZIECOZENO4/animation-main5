@@ -208,7 +208,7 @@ export const QueueCard2: React.FC<QueueCardProps> = ({
                 </motion.div>
                 {/* Description */}
                 <motion.div
-                  className="my-[8px]"
+                  className="my-[4px]"
                   style={{
                     width: "180px",
                     height: "10px",
