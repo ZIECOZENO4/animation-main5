@@ -232,7 +232,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
     
                   {/* Time to Launch Section */}
                   <motion.div
-                    className="mt-[22px]"
+                    className="mt-[18px]"
                     style={{
                       width: "180px",
                       height: "10px",
@@ -289,7 +289,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
                   </motion.div>
                   {/* Description */}
                   <motion.div
-                    className="mb-[8px]"
+                    className="my-[8px]"
                     style={{
                       width: "180px",
                       height: "10px",
