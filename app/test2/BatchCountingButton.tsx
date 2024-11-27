@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Button } from "@nextui-org/react"
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
 import { Progress } from "@nextui-org/react"
-import { InfoIcon, LoaderIcon, CheckCircle2Icon, AlertCircle } from "lucide-react"
+import { InfoIcon, LoaderIcon, CheckCircle2Icon, AlertCircle, ArrowUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import { getLastUpdateTimestamp, useBatchCountingStatus } from "@/hooks/useBatchCounting"
@@ -272,7 +272,7 @@ export const BatchCountingButton = ({
                 className={cn(
                     "transition-all duration-200",
                     "font-medium rounded-[var(--radius)]",
-                    "flex items-center gap-2 px-6 py-2",
+                    "flex items-center gap-2 justify-between",
                     buttonConfig.variant
                 )}
                 disabled={!buttonConfig.action || isLoading}
@@ -282,13 +282,13 @@ export const BatchCountingButton = ({
                 ) : buttonConfig.text}
             </Button>
 
-            <Button
-                variant="shadow"
+            <button
                  onClick={() => setShowProgress(true)}
-                className="hover:bg-accent/20"
+                className="hover:bg-accent/20 bg-transparent"
+                aria-label='number'
             >
-                <InfoIcon className="h-4 w-4" />
-            </Button>
+                <ArrowUp className="h-4 w-4" />
+            </button>
 
             <Modal isOpen={showProgress} onOpenChange={setShowProgress}>
   <ModalContent>
