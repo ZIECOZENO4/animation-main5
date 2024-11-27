@@ -1,5 +1,5 @@
 // components/QueueCard.tsx
-import { Button } from "@nextui-org/react"
+import { Button, Tooltip } from "@nextui-org/react"
 import { Card } from "@nextui-org/react"
 import { Badge } from "@nextui-org/react"
 import { cn } from "@/lib/utils"
@@ -29,7 +29,6 @@ export const QueueCard: React.FC<QueueCardProps> = ({
 }) => {
     return (
         <motion.div
-        onClick={handleBatchClick}
           className= "w-full md:w-[350px] px-2 mb-4 relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
