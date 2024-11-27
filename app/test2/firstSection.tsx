@@ -5,6 +5,7 @@ import { Button, Tooltip } from "@nextui-org/react";
 import { Tabs, Tab } from '@nextui-org/react';
 import { useAllBatchesMetrics } from '@/hooks/useFetchAllBatches';
 import { BatchCard } from '../../components/tokenbatch/BatchCard';
+import { BatchCard2 } from './BatchCard2';
 import { useTokenFactoryDurations } from '@/hooks/useContractConstants';
 import "./WorkbenchFontTest.css";
   import { motion, AnimatePresence } from "framer-motion";
@@ -99,38 +100,17 @@ export default function FirstSection() {
                     </div>
                     <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
         <Link href="/test">
-          <Card />
-        </Link>
-
-        <Link href="/test">
-          <Card />
-        </Link>
-
-        <Link href="/test">
-          <Card />
-        </Link>
-        <Link href="/test">
-          <Card />
+          <BatchCard2 />
         </Link>
       </div>
                 </Tab>
                 <Tab key="following" title="Following">
                     <div className="h-[calc(100vh-200px)]">
                     <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/test">
-          <Card2 />
+                    <Link href="/test">
+          <BatchCard2 />
         </Link>
 
-        <Link href="/test">
-          <Card2 />
-        </Link>
-
-        <Link href="/test">
-          <Card2 />
-        </Link>
-        <Link href="/test">
-          <Card2 />
-        </Link>
       </div>
                     </div>
                 </Tab>
