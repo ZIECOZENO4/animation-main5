@@ -377,15 +377,69 @@ function formatBatchMetrics(batch: BatchMetrics, durations: BatchDurations): For
 interface QueryPageData {
     pageParam?: number
 }
+// export function useAllBatchesMetrics(durations: BatchDurations | null) {
+//     const areDurationsAvailable = useMemo(() => {
+//         if (!durations) return false
+//         return Object.values(durations).some(duration => duration > 0n)
+//     }, [durations])
+
+//     return useInfiniteQuery({
+//         queryKey: ['allBatchesMetrics'],
+//         queryFn: async ({ pageParam = 0 }: QueryPageData) => {
+//             try {
+//                 const result = await request<BatchesQueryResponse>(
+//                     GRAPH_API_URL,
+//                     AllBatchesMetricsQuery,
+//                     {
+//                         skip: pageParam * ITEMS_PER_PAGE,
+//                         first: ITEMS_PER_PAGE,
+//                     }
+//                 )
+
+//                 // Add debug logging in development
+//                 if (process.env.NODE_ENV === 'development') {
+//                     console.log('GraphQL Response:', JSON.stringify(result, null, 2))
+//                 }
+
+//                 return {
+//                     batches: (result?.batches ?? []).map(batch => formatBatchMetrics(batch, durations!)),
+//                     nextPage: (result?.batches?.length ?? 0) === ITEMS_PER_PAGE ? pageParam + 1 : undefined,
+//                 }
+//             } catch (error) {
+//                 if (error instanceof ClientError) {
+//                     console.error('GraphQL error:', error.response.errors)
+//                     throw new Error(
+//                         `GraphQL error: ${error.response.errors?.[0]?.message || 'Unknown error'}`
+//                     )
+//                 }
+//                 console.error('Unexpected error:', error)
+//                 throw new Error('An unexpected error occurred while fetching batch metrics')
+//             }
+//         },
+//         getNextPageParam: (lastPage) => lastPage.nextPage,
+//         enabled: !!areDurationsAvailable,
+//         initialPageParam: 0,
+//         retry: 10,
+//         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 100000),
+//     })
+// }
+
 export function useAllBatchesMetrics(durations: BatchDurations | null) {
     const areDurationsAvailable = useMemo(() => {
         if (!durations) return false
         return Object.values(durations).some(duration => duration > 0n)
     }, [durations])
 
-    return useInfiniteQuery({
+    const {
+        data,
+        isLoading,
+        isError,
+        hasNextPage,
+        fetchNextPage,
+        isFetchingNextPage
+    } = useInfiniteQuery({
         queryKey: ['allBatchesMetrics'],
-        queryFn: async ({ pageParam = 0 }: QueryPageData) => {
+        queryFn: async ({ pageParam = 0 }) => {
             try {
                 const result = await request<BatchesQueryResponse>(
                     GRAPH_API_URL,
@@ -396,14 +450,13 @@ export function useAllBatchesMetrics(durations: BatchDurations | null) {
                     }
                 )
 
-                // Add debug logging in development
-                if (process.env.NODE_ENV === 'development') {
-                    console.log('GraphQL Response:', JSON.stringify(result, null, 2))
-                }
-
                 return {
-                    batches: (result?.batches ?? []).map(batch => formatBatchMetrics(batch, durations!)),
-                    nextPage: (result?.batches?.length ?? 0) === ITEMS_PER_PAGE ? pageParam + 1 : undefined,
+                    batches: (result?.batches ?? []).map(batch => 
+                        formatBatchMetrics(batch, durations!)
+                    ),
+                    nextPage: (result?.batches?.length ?? 0) === ITEMS_PER_PAGE 
+                        ? pageParam + 1 
+                        : undefined,
                 }
             } catch (error) {
                 if (error instanceof ClientError) {
@@ -412,15 +465,34 @@ export function useAllBatchesMetrics(durations: BatchDurations | null) {
                         `GraphQL error: ${error.response.errors?.[0]?.message || 'Unknown error'}`
                     )
                 }
-                console.error('Unexpected error:', error)
-                throw new Error('An unexpected error occurred while fetching batch metrics')
+                throw error
             }
         },
         getNextPageParam: (lastPage) => lastPage.nextPage,
         enabled: !!areDurationsAvailable,
         initialPageParam: 0,
+        staleTime: 30000,
+        refetchOnWindowFocus: false,
         retry: 10,
         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 100000),
     })
-}
 
+    const formattedData = useMemo(() => {
+        if (!data) {
+            return {
+                pages: [],
+                pageParams: []
+            }
+        }
+        return data
+    }, [data])
+
+    return {
+        data: formattedData,
+        isLoading,
+        isError,
+        hasNextPage,
+        fetchNextPage,
+        isFetchingNextPage
+    }
+}
