@@ -72,6 +72,15 @@ export default function FirstSection() {
                             batch={batch}
                         />
                     ))}
+        <Link href="/test">
+        {allBatches.map((batch) => (
+                        <BatchCard2
+                            key={batch.id}
+                            batch={batch}
+                        />
+                    ))}
+        </Link>
+
                 </div>
                 <div ref={ref} className="flex justify-center mt-4">
                     {isFetchingNextPage ? (
@@ -98,20 +107,11 @@ export default function FirstSection() {
                     <div className="h-[calc(100vh-200px)]">
                         {renderContent()}
                     </div>
-                    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-        <Link href="/test">
-          <BatchCard2 />
-        </Link>
-      </div>
+      
                 </Tab>
                 <Tab key="following" title="Following">
                     <div className="h-[calc(100vh-200px)]">
-                    <div className="hidden md:flex md:justify-between align-middle flex-row my-4">
-                    <Link href="/test">
-          <BatchCard2 />
-        </Link>
-
-      </div>
+                    {renderContent()}
                     </div>
                 </Tab>
             </Tabs>

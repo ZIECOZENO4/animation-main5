@@ -12,7 +12,10 @@ import { FormattedBatch } from '@/hooks/useFetchAllBatches'
 import { QueueCard } from '@/components/tokenbatch/queueCard'
 import { BatchState } from '@/hooks/useFetchLatestBatch'
 import { toast } from 'sonner'
-
+import "./WorkbenchFontTest.css";
+  import { motion, AnimatePresence } from "framer-motion";
+import { Lock } from 'lucide-react';
+import Link from 'next/link';
 
 interface BatchCardProps {
     batch: FormattedBatch;
