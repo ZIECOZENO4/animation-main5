@@ -263,6 +263,7 @@ export const BatchCountingButton = ({
 
     return (
         <div className={cn("flex items-center gap-4", className)}>
+            <div className="flex items-center gap-2 justify-between">
             <Button
                 onClick={() => {
                     if (buttonConfig.action) {
@@ -271,7 +272,7 @@ export const BatchCountingButton = ({
                 }}
                 className={cn(
                     "transition-all duration-200",
-                    "font-medium rounded-[var(--radius)]",
+                    " rounded-[var(--radius)]",
                     "flex items-center gap-2 justify-between p-0",
                     buttonConfig.variant
                 )}
@@ -289,6 +290,8 @@ export const BatchCountingButton = ({
             >
                 <ArrowUp className="h-4 w-4" />
             </button>
+            </div>
+    
 
             <Modal isOpen={showProgress} onOpenChange={setShowProgress}>
   <ModalContent>
