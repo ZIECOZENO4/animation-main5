@@ -272,7 +272,7 @@ export const BatchCountingButton = ({
                 className={cn(
                     "transition-all duration-200",
                     "font-medium rounded-[var(--radius)]",
-                    "flex items-center gap-2 justify-between",
+                    "flex items-center gap-2 justify-between p-0",
                     buttonConfig.variant
                 )}
                 disabled={!buttonConfig.action || isLoading}
