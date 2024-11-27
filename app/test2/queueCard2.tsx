@@ -21,7 +21,7 @@ interface QueueCardProps {
     onCountResult: () => void;
 }
 
-export const QueueCard: React.FC<QueueCardProps> = ({
+export const QueueCard2: React.FC<QueueCardProps> = ({
     batch,
     phaseInfo,
     stakedValueUSD,

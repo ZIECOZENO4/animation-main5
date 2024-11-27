@@ -9,7 +9,7 @@ import Countdown from 'react-countdown'
 import { formatCurrency } from '@/lib/moreThings'
 import { getPhaseInfo, useTokenFactoryDurations } from '@/hooks/useContractConstants'
 import { FormattedBatch } from '@/hooks/useFetchAllBatches'
-import { QueueCard } from '@/components/tokenbatch/queueCard'
+import { QueueCard2 } from './queueCard2'
 import { BatchState } from '@/hooks/useFetchLatestBatch'
 import { toast } from 'sonner'
 import "./WorkbenchFontTest.css";
@@ -93,7 +93,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
     // If the phase is Queue, render the QueueCard
     if (batch.stateNumber === BatchState.QUEUE) {
         return (
-            <QueueCard
+            <QueueCard2
                 batch={batch}
                 phaseInfo={phaseInfo}
                 stakedValueUSD={stakedValueUSD}

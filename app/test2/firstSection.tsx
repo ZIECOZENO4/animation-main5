@@ -103,7 +103,7 @@ export default function FirstSection() {
                     </div>
       
                 </Tab>
-                <Tab key="following" title="Following">
+                <Tab key="anonymous" title="Anonymous">
                     <div className="h-[calc(100vh-200px)]">
                     {renderContent()}
                     </div>
