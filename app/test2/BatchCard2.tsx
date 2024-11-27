@@ -155,7 +155,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
               {/* Image container with lock */}
          
                 <motion.div 
-                  className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
+                  className="w-[100px] h-[110px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
                   whileHover={{ 
                     boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
                     transition: { duration: 0.2 }
@@ -215,7 +215,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
                   <motion.p
                     className="text-[#F7F2DA] workbench-test flex flex-row mt-[5px]"
                     style={{
-                      width: "60px",
+                   
                       height: "10px",
                       fontSize: "10px",
                       fontWeight: 200,
@@ -270,7 +270,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
                     <p className="text-[10px] text-[#F7F2DA]">   {formatCurrency(stakedValueUSD)}</p>
                   </motion.div>
                   <motion.div
-                    className="my-[8px] workbench-test"
+                    className=" workbench-test"
                     style={{
                       width: "180px",
                       height: "10px",
