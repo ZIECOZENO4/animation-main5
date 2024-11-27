@@ -65,7 +65,7 @@ export default function FirstSection() {
 
         return (
             <>
-                <div className="flex justify-between gap-4">
+                <div  className="flex justify-between gap-4">
   
         {allBatches.map((batch) => (
                         <BatchCard2

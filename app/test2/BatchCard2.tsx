@@ -16,7 +16,6 @@ import "./WorkbenchFontTest.css";
   import { motion, AnimatePresence } from "framer-motion";
 import { Lock } from 'lucide-react';
 import Link from 'next/link';
-
 interface BatchCardProps {
     batch: FormattedBatch;
 }
@@ -105,7 +104,12 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
 
     return (
         <motion.div
-        className="w-full md:w-[350px] px-2 mb-4 relative"
+          onClick={handleBatchClick}
+            className={cn(
+                "w-full md:w-[350px] px-2 mb-4 relative",
+                batch.stateNumber >= BatchState.ANONYMOUS_VOTING,
+                batch.stateNumber === BatchState.INACTIVE,
+                )}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
