@@ -193,7 +193,7 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
                     }}
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
-                    [{batch.batchId}]
+                    [#{batch.batchId}]
                   </motion.h2>
                   <motion.h2
                     className="hover:underline text-[#F7F2DA] workbench-test"
