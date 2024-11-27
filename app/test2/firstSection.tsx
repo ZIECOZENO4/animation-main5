@@ -93,7 +93,7 @@ export default function FirstSection() {
     return (
         <div className="min-h-screen p-1 md:p-6 lg:p-8">
             <Tabs className="w-full max-w-8xl mx-auto">
-                <Tab key="all" title="All">
+                <Tab key="initial" title="Initial">
                     <div className="h-[calc(100vh-200px)]">
                         {renderContent()}
                     </div>
