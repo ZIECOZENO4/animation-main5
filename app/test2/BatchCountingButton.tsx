@@ -273,7 +273,7 @@ export const BatchCountingButton = ({
                 className={cn(
                     "transition-all duration-200",
                     " rounded-[var(--radius)]",
-                    "flex items-center  text-xs p-0",
+                    "flex items-center justify-between  text-xs m-0 py-0 my-0 p-0",
                     buttonConfig.variant
                 )}
                 disabled={!buttonConfig.action || isLoading}
@@ -288,7 +288,7 @@ export const BatchCountingButton = ({
                 className="hover:bg-accent/20 bg-transparent justify-end p-0"
                 aria-label='number'
             >
-                <ArrowUp className="h-2 w-2" />
+                <ArrowUp className="h-4 w-4" />
             </button>
             </div>
     
