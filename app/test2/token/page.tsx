@@ -61,6 +61,6 @@ export default async function BatchPage({
         if (error instanceof Error) {
             return <div>{error.message}</div>;
         }
-        return <div>An error occurred while processing the batch</div>;
+        return <div>An error occurred while jhjhjhyhbb processing the batch</div>;
     }
 }
