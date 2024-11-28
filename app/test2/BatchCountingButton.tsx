@@ -286,15 +286,12 @@ export const BatchCountingButton = ({
         ) : buttonConfig.text}
     </Button>
 
-    <Button
+    <div
         onClick={() => setShowProgress(true)}
-        className="hover:bg-accent/20 bg-transparent p-0"
-        size="sm"
-        variant="ghost"
-        aria-label='number'
+        className="hover:bg-accent/20 bg-transparent p-0 cursor-pointer"
     >
         <ArrowUp className="h-4 w-4" />
-    </Button>
+    </div>
 </div>
     
 
