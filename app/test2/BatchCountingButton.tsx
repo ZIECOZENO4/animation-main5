@@ -263,7 +263,7 @@ export const BatchCountingButton = ({
 
     return (
         <div className={cn("flex items-center gap-4", className)}>
-            <div className="flex items-center gap-2 justify-between">
+            <div className="flex items-center p-0 justify-between">
             <Button
                 onClick={() => {
                     if (buttonConfig.action) {
@@ -273,22 +273,22 @@ export const BatchCountingButton = ({
                 className={cn(
                     "transition-all duration-200",
                     " rounded-[var(--radius)]",
-                    "flex items-center gap-2 justify-between p-0",
+                    "flex items-center  text-xs p-0",
                     buttonConfig.variant
                 )}
                 disabled={!buttonConfig.action || isLoading}
             >
                 {isLoading ? (
-                    <LoaderIcon className="h-4 w-4 animate-spin " />
+                    <LoaderIcon className="h-2 w-2 animate-spin " />
                 ) : buttonConfig.text}
             </Button>
 
             <button
                  onClick={() => setShowProgress(true)}
-                className="hover:bg-accent/20 bg-transparent p-0"
+                className="hover:bg-accent/20 bg-transparent justify-end p-0"
                 aria-label='number'
             >
-                <ArrowUp className="h-4 w-4" />
+                <ArrowUp className="h-2 w-2" />
             </button>
             </div>
     
