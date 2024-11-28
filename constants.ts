@@ -3,7 +3,8 @@ export const JATENGINE_CONTRACT_ADDRESS = "0x06Fd0d02EF885c8CeBC11a0E7Da198473B8
 // export const MAIN_ENGINE_ADDRESS = "0x805bCdB362492E4a4Fd185d39Ed4bd0aD4D39E48" as `0x${string}`;
 
 // export const GRAPH_API_URL = "https://api.studio.thegraph.com/query/960/jat-test-graph/version/latest";
-export const GRAPH_API_URL = "https://api.studio.thegraph.com/query/960/vote-win/version/latest";
+// export const GRAPH_API_URL = "https://api.studio.thegraph.com/query/960/vote-win/version/latest";
+export const GRAPH_API_URL = "https://api.studio.thegraph.com/query/960/vote-win-b/version/latest";
 
 
 
