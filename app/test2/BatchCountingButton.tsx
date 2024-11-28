@@ -263,34 +263,39 @@ export const BatchCountingButton = ({
 
     return (
         <div className={cn("flex items-center gap-4", className)}>
-            <div className="flex items-center p-0 justify-between">
-            <Button
-                onClick={() => {
-                    if (buttonConfig.action) {
-                        buttonConfig.action()
-                    }
-                }}
-                className={cn(
-                    "transition-all duration-200",
-                    " rounded-[var(--radius)]",
-                    "flex items-center justify-between  text-xs m-0 py-0 my-0 p-0",
-                    buttonConfig.variant
-                )}
-                disabled={!buttonConfig.action || isLoading}
-            >
-                {isLoading ? (
-                    <LoaderIcon className="h-2 w-2 animate-spin " />
-                ) : buttonConfig.text}
-            </Button>
+          <div className="flex items-center w-full justify-between gap-2">
+    <Button
+        onClick={() => {
+            if (buttonConfig.action) {
+                buttonConfig.action()
+            }
+        }}
+        className={cn(
+            "transition-all duration-200",
+            "rounded-[var(--radius)]",
+            "flex items-center justify-center",
+            "text-xs",
+            "p-0 m-0",
+            buttonConfig.variant
+        )}
+        disabled={!buttonConfig.action || isLoading}
+        size="sm"
+    >
+        {isLoading ? (
+            <LoaderIcon className="h-2 w-2 animate-spin" />
+        ) : buttonConfig.text}
+    </Button>
 
-            <button
-                 onClick={() => setShowProgress(true)}
-                className="hover:bg-accent/20 bg-transparent justify-end p-0"
-                aria-label='number'
-            >
-                <ArrowUp className="h-4 w-4" />
-            </button>
-            </div>
+    <Button
+        onClick={() => setShowProgress(true)}
+        className="hover:bg-accent/20 bg-transparent p-0"
+        size="sm"
+        variant="ghost"
+        aria-label='number'
+    >
+        <ArrowUp className="h-4 w-4" />
+    </Button>
+</div>
     
 
             <Modal isOpen={showProgress} onOpenChange={setShowProgress}>
