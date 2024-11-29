@@ -206,7 +206,7 @@ const truncateDescription = (description: string) => {
 const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {tokens.map((token) => (
-           <Link href='/test'>
+
                 <motion.div
             key={token.id}
             className="w-full md:w-[350px] px-2 mb-4 relative"
@@ -446,7 +446,6 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
         </Tooltip>
         
           </motion.div>
-           </Link>
        
         ))}
     </div>
