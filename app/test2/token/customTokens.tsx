@@ -102,7 +102,7 @@ export const CustomCard: React.FC<CustomCardProps> = ({ token, batchId, batchSta
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                     {isAnonymousPhase && (
                         <div className="absolute top-2 right-2">
-                            <Badge variant="secondary" className="bg-purple-500/20 text-purple-200">
+                            <Badge  className="bg-purple-500/20 text-purple-200">
                                 <FaLock className="h-3 w-3 mr-1" />
                                 Anonymous
                             </Badge>
