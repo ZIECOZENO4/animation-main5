@@ -17,7 +17,6 @@ import {
 } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaFilter } from "react-icons/fa";
-import { SiEthereum, SiBinance, SiPolygon } from "react-icons/si";
 import CardDemo from "./CardDemo";
 import CardGrid from "./Test";
 import "./WorkbenchFontTest.css";
@@ -207,54 +206,8 @@ const truncateDescription = (description: string) => {
 const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {tokens.map((token) => (
-            // <div key={token.id} className="border rounded-lg p-4 shadow-sm">
-            //     <div className="flex items-center gap-4">
-            //         <img 
-            //             src={token.imageUrl} 
-            //             alt={token.name} 
-            //             className="w-16 h-16 rounded-full"
-            //         />
-            //         <div>
-            //             <h3 className="text-xl font-bold">
-            //                 {token.name} ({token.symbol})
-            //             </h3>
-            //             <p className="text-sm text-gray-600">
-            //                 Batch #{token.batchId}
-            //             </p>
-            //         </div>
-            //     </div>
-
-            //     <div className="mt-4 space-y-2">
-            //         <p>{token.description}</p>
-            //         <div className="grid grid-cols-2 gap-4">
-            //             <div>
-            //                 <p className="font-semibold">Voting Metrics</p>
-            //                 <p>Votes: {token.metrics.initialVoting.totalVotes}</p>
-            //                 <p>Staked: {token.metrics.initialVoting.totalStaked}</p>
-            //                 <p>Stake %: {token.metrics.initialVoting.stakePercentage}</p>
-            //             </div>
-            //         </div>
-            //         <div className="flex gap-4">
-            //             {token.social.twitter && (
-            //                 <a href={token.social.twitter} target="_blank" rel="noopener noreferrer">
-            //                     Twitter
-            //                 </a>
-            //             )}
-            //             {token.social.telegram && (
-            //                 <a href={token.social.telegram} target="_blank" rel="noopener noreferrer">
-            //                     Telegram
-            //                 </a>
-            //             )}
-            //             {token.social.website && (
-            //                 <a href={token.social.website} target="_blank" rel="noopener noreferrer">
-            //                     Website
-            //                 </a>
-            //             )}
-            //         </div>
-            //     </div>
-
-            // </div>
-            <motion.div
+           <Link href='/test'>
+                <motion.div
             key={token.id}
             className="w-full md:w-[350px] px-2 mb-4 relative"
             initial={{ opacity: 0, y: 20 }}
@@ -493,6 +446,8 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
         </Tooltip>
         
           </motion.div>
+           </Link>
+       
         ))}
     </div>
 );
