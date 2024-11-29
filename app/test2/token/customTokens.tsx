@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { Card, CardContent } from "@nextui-org/react"
+import { Card } from "@nextui-org/react"
 import { Badge } from "@nextui-org/react"
 import { useRouter } from 'next/navigation'
 import { extractAlphabetsFromAddress } from '@/lib/extraName'
@@ -110,7 +110,7 @@ export const CustomCard: React.FC<CustomCardProps> = ({ token, batchId, batchSta
                     )}
                 </div>
 
-                <CardContent className="p-3 w-3/5 flex flex-col justify-between">
+                <div className="p-3 w-3/5 flex flex-col justify-between">
                     <div>
                         <div className="flex justify-between items-center mb-1">
                             <Badge
@@ -192,7 +192,7 @@ export const CustomCard: React.FC<CustomCardProps> = ({ token, batchId, batchSta
                             )}
                         </div>
                     </div>
-                </CardContent>
+                </div>
             </div>
         </Card>
     )
