@@ -196,6 +196,13 @@ const formatWalletAddress = (address: string): string => {
   return `${address.slice(0, 4)}...${address.slice(-4)}`;
 };
 
+const truncateDescription = (description: string) => {
+  const words = description.split(' ');
+  if (words.length <= 4) return description;
+  
+  const truncatedWords = words.slice(0, -4);
+  return `${truncatedWords.join(' ')}...`;
+};
 
 const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
@@ -364,7 +371,44 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
                       >
                          Batch #{token.batchId}
                       </motion.p>
-        
+                      <motion.div
+                        className="my-[8px] workbench-test"
+                        style={{
+                          width: "180px",
+                          height: "10px",
+                          top: "85px",
+                          left: "137px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center"
+                        }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                      >
+                        <p
+                          style={{
+                            fontSize: "10px",
+                            fontWeight: 400,
+                            lineHeight: "10px",
+                            textAlign: "left",
+                            color: "#F7F2DA"
+                          }}
+                        >
+                         Staked Amount: 
+                        </p>
+                        <p
+                          style={{
+                            fontSize: "10px",
+                            fontWeight: 400,
+                            lineHeight: "10px",
+                            textAlign: "left",
+                            color: "#F7F2DA"
+                          }}
+                        >
+                        {token.metrics.initialVoting.totalStaked}
+                        </p>
+                      </motion.div>
                       <motion.div
                         className="mt-[22px]"
                         style={{
@@ -404,63 +448,26 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
                         {formatWalletAddress(token.creator)}
                         </p>
                       </motion.div>
+
                       <motion.div
-                        className="my-[8px] workbench-test"
-                        style={{
-                          width: "180px",
-                          height: "10px",
-                          top: "85px",
-                          left: "137px",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center"
-                        }}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5, duration: 0.5 }}
-                      >
-                        <p
-                          style={{
-                            fontSize: "10px",
-                            fontWeight: 400,
-                            lineHeight: "10px",
-                            textAlign: "left",
-                            color: "#F7F2DA"
-                          }}
-                        >
-                         Staked: 
-                        </p>
-                        <p
-                          style={{
-                            fontSize: "10px",
-                            fontWeight: 400,
-                            lineHeight: "10px",
-                            textAlign: "left",
-                            color: "#F7F2DA"
-                          }}
-                        >
-                        {token.metrics.initialVoting.totalStaked}
-                        </p>
-                      </motion.div>
-                      <motion.div
-                        className="mb-[8px]"
-                        style={{
-                          width: "180px",
-                          height: "10px",
-                          top: "102px",
-                          left: "137px",
-                          fontSize: "10px",
-                          fontWeight: 400,
-                          lineHeight: "10px",
-                          textAlign: "left",
-                          color: "#F7F2DA"
-                        }}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5, duration: 0.5 }}
-                      >
-                        {token.description}
-                      </motion.div>
+    className="mb-[8px] whitespace-nowrap overflow-hidden text-ellipsis"
+    style={{
+        width: "180px",
+        height: "10px",
+        top: "102px",
+        left: "137px",
+        fontSize: "10px",
+        fontWeight: 400,
+        lineHeight: "10px",
+        textAlign: "left",
+        color: "#F7F2DA"
+    }}
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 0.5, duration: 0.5 }}
+>
+    {truncateDescription(token.description)}
+</motion.div>
                     </div>
                   </div>
                 </div>
