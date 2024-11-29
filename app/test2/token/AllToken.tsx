@@ -3,6 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { gql, request, ClientError } from 'graphql-request';
 import { GRAPH_API_URL } from '@/constants';
 import { formatUnits } from 'viem';
+import { Tabs, Tab } from "@nextui-org/react";
 
 const TOKENS_PER_PAGE = 20;
 
@@ -42,6 +43,40 @@ interface BatchesQueryResponse {
     }>;
 }
 
+interface FormattedToken {
+    id: string;
+    address: string;
+    state: number;
+    batchId: string;
+    batchState: number;
+    name: string;
+    symbol: string;
+    description: string;
+    imageUrl: string;
+    metrics: {
+        initialVoting: {
+            totalVotes: string;
+            totalStaked: string;
+            votesCount: number;
+            withdrawalsCount: number;
+            stakePercentage: string;
+        };
+        anonymousVoting: {
+            totalVotes: string;
+            totalStaked: string;
+            votesCount: number;
+            withdrawalsCount: number;
+            stakePercentage: string;
+        };
+    };
+    creator: string;
+    creationFee: string;
+    social: {
+        twitter: string;
+        telegram: string;
+        website: string;
+    };
+}
 
 // Interfaces from the hook
 interface TokenDetails {
@@ -122,6 +157,60 @@ function calculatePercentage(amount: string, total: string): string {
     return `${((amountBigInt * 10000n) / totalBigInt * BigInt(100) / 10000n).toString()}%`;
 }
 
+
+const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {tokens.map((token) => (
+            <div key={token.id} className="border rounded-lg p-4 shadow-sm">
+                <div className="flex items-center gap-4">
+                    <img 
+                        src={token.imageUrl} 
+                        alt={token.name} 
+                        className="w-16 h-16 rounded-full"
+                    />
+                    <div>
+                        <h3 className="text-xl font-bold">
+                            {token.name} ({token.symbol})
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                            Batch #{token.batchId}
+                        </p>
+                    </div>
+                </div>
+
+                <div className="mt-4 space-y-2">
+                    <p>{token.description}</p>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <p className="font-semibold">Voting Metrics</p>
+                            <p>Votes: {token.metrics.initialVoting.totalVotes}</p>
+                            <p>Staked: {token.metrics.initialVoting.totalStaked}</p>
+                            <p>Stake %: {token.metrics.initialVoting.stakePercentage}</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        {token.social.twitter && (
+                            <a href={token.social.twitter} target="_blank" rel="noopener noreferrer">
+                                Twitter
+                            </a>
+                        )}
+                        {token.social.telegram && (
+                            <a href={token.social.telegram} target="_blank" rel="noopener noreferrer">
+                                Telegram
+                            </a>
+                        )}
+                        {token.social.website && (
+                            <a href={token.social.website} target="_blank" rel="noopener noreferrer">
+                                Website
+                            </a>
+                        )}
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+);
+
 export default function AllTokensList() {
     const { 
         data, 
@@ -197,6 +286,14 @@ export default function AllTokensList() {
 
     const allTokens = data?.pages.flatMap(page => page.tokens) || [];
 
+    const initialTokens = allTokens.filter(token => 
+        parseFloat(token.metrics.initialVoting.totalStaked) > 0
+    );
+    
+    const anonymousTokens = allTokens.filter(token => 
+        parseFloat(token.metrics.anonymousVoting.totalStaked) > 0
+    );
+
     return (
         <div className="p-4">
             {status === 'pending' ? (
@@ -204,74 +301,24 @@ export default function AllTokensList() {
             ) : status === 'error' ? (
                 <div>Error fetching tokens</div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {allTokens.map((token) => (
-                        <div key={token.id} className="border rounded-lg p-4 shadow-sm">
-                            <div className="flex items-center gap-4">
-                                <img 
-                                    src={token.imageUrl} 
-                                    alt={token.name} 
-                                    className="w-16 h-16 rounded-full"
-                                />
-                                <div>
-                                    <h3 className="text-xl font-bold">
-                                        {token.name} ({token.symbol})
-                                    </h3>
-                                    <p className="text-sm text-gray-600">
-                                        Batch #{token.batchId}
-                                    </p>
-                                </div>
-                            </div>
+                <Tabs aria-label="Token Phases">
+                    <Tab key="initial" title="Initial Voting">
+                        <TokenGrid tokens={initialTokens} />
+                    </Tab>
+                    <Tab key="anonymous" title="Anonymous Voting">
+                        <TokenGrid tokens={anonymousTokens} />
+                    </Tab>
+                </Tabs>
+            )}
 
-                            <div className="mt-4 space-y-2">
-                                <p>{token.description}</p>
-                                
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p className="font-semibold">Initial Voting</p>
-                                        <p>Votes: {token.metrics.initialVoting.totalVotes}</p>
-                                        <p>Staked: {token.metrics.initialVoting.totalStaked}</p>
-                                        <p>Stake %: {token.metrics.initialVoting.stakePercentage}</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold">Anonymous Voting</p>
-                                        <p>Votes: {token.metrics.anonymousVoting.totalVotes}</p>
-                                        <p>Staked: {token.metrics.anonymousVoting.totalStaked}</p>
-                                        <p>Stake %: {token.metrics.anonymousVoting.stakePercentage}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4">
-                                    {token.social.twitter && (
-                                        <a href={token.social.twitter} target="_blank" rel="noopener noreferrer">
-                                            Twitter
-                                        </a>
-                                    )}
-                                    {token.social.telegram && (
-                                        <a href={token.social.telegram} target="_blank" rel="noopener noreferrer">
-                                            Telegram
-                                        </a>
-                                    )}
-                                    {token.social.website && (
-                                        <a href={token.social.website} target="_blank" rel="noopener noreferrer">
-                                            Website
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-
-                    {hasNextPage && (
-                        <button
-                            onClick={() => fetchNextPage()}
-                            disabled={isFetchingNextPage}
-                            className="col-span-full mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-                        >
-                            {isFetchingNextPage ? 'Loading more...' : 'Load More'}
-                        </button>
-                    )}
-                </div>
+            {hasNextPage && (
+                <button
+                    onClick={() => fetchNextPage()}
+                    disabled={isFetchingNextPage}
+                    className="col-span-full mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+                >
+                    {isFetchingNextPage ? 'Loading more...' : 'Load More'}
+                </button>
             )}
         </div>
     );
