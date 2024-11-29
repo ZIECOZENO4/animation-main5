@@ -192,54 +192,277 @@ function calculatePercentage(amount: string, total: string): string {
 
 
 const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {tokens.map((token) => (
-            <div key={token.id} className="border rounded-lg p-4 shadow-sm">
-                <div className="flex items-center gap-4">
-                    <img 
-                        src={token.imageUrl} 
-                        alt={token.name} 
-                        className="w-16 h-16 rounded-full"
-                    />
-                    <div>
-                        <h3 className="text-xl font-bold">
-                            {token.name} ({token.symbol})
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                            Batch #{token.batchId}
-                        </p>
-                    </div>
-                </div>
+            // <div key={token.id} className="border rounded-lg p-4 shadow-sm">
+            //     <div className="flex items-center gap-4">
+            //         <img 
+            //             src={token.imageUrl} 
+            //             alt={token.name} 
+            //             className="w-16 h-16 rounded-full"
+            //         />
+            //         <div>
+            //             <h3 className="text-xl font-bold">
+            //                 {token.name} ({token.symbol})
+            //             </h3>
+            //             <p className="text-sm text-gray-600">
+            //                 Batch #{token.batchId}
+            //             </p>
+            //         </div>
+            //     </div>
 
-                <div className="mt-4 space-y-2">
-                    <p>{token.description}</p>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <p className="font-semibold">Voting Metrics</p>
-                            <p>Votes: {token.metrics.initialVoting.totalVotes}</p>
-                            <p>Staked: {token.metrics.initialVoting.totalStaked}</p>
-                            <p>Stake %: {token.metrics.initialVoting.stakePercentage}</p>
-                        </div>
+            //     <div className="mt-4 space-y-2">
+            //         <p>{token.description}</p>
+            //         <div className="grid grid-cols-2 gap-4">
+            //             <div>
+            //                 <p className="font-semibold">Voting Metrics</p>
+            //                 <p>Votes: {token.metrics.initialVoting.totalVotes}</p>
+            //                 <p>Staked: {token.metrics.initialVoting.totalStaked}</p>
+            //                 <p>Stake %: {token.metrics.initialVoting.stakePercentage}</p>
+            //             </div>
+            //         </div>
+            //         <div className="flex gap-4">
+            //             {token.social.twitter && (
+            //                 <a href={token.social.twitter} target="_blank" rel="noopener noreferrer">
+            //                     Twitter
+            //                 </a>
+            //             )}
+            //             {token.social.telegram && (
+            //                 <a href={token.social.telegram} target="_blank" rel="noopener noreferrer">
+            //                     Telegram
+            //                 </a>
+            //             )}
+            //             {token.social.website && (
+            //                 <a href={token.social.website} target="_blank" rel="noopener noreferrer">
+            //                     Website
+            //                 </a>
+            //             )}
+            //         </div>
+            //     </div>
+
+            // </div>
+            <motion.div
+            key={token.id}
+            className="w-full md:w-[350px] px-2 mb-4 relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ scale: 1.07 }}
+          >
+                        <Tooltip
+                content="Still in Initial Stage"
+                placement="top"
+                showArrow={false}
+                offset={15} // Increased offset to create more space
+                classNames={{
+                  base: [
+                    "py-2 px-4",
+                    "border-none",
+                    "shadow-none",
+                    "backdrop-blur-none",
+                    "relative",
+                    "mb-2 tooltip-custom", // Increased bottom margin
+                    "translate-y-[-8px]" // Move tooltip up slightly
+                  ].join(" "),
+                  content: [
+                    "text-[#F7F2DA]",
+                    "text-sm",
+                    "font-normal",
+                    "px-2 py-1",
+                    "rounded-none",
+                    "bg-[#000000]"
+                  ].join(" ")
+                }}
+                motionProps={{
+                  variants: {
+                    exit: {
+                      opacity: 0,
+                      transition: { duration: 0.1, ease: "easeIn" }
+                    },
+                    enter: {
+                      opacity: 1,
+                      transition: { duration: 0.15, ease: "easeOut" }
+                    }
+                  }
+                }}
+              >
+        <div
+              className="bg-[#0A0909]  overflow-hidden"
+              style={{ height: "150px" }}
+            >
+              <div className="p-3 text-[#F7F2DA]">
+                <div className="flex justify-between items-start">
+                  <motion.div 
+                    className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]"
+                    whileHover={{ 
+                      boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+                      transition: { duration: 0.2 }
+                    }}
+                  />
+        
+                  <div className="text-right flex flex-col p-2">
+                    {/* Rest of your existing code remains exactly the same */}
+                    <div className="flex flex-row justify-between align-middle">
+                      <motion.h2
+                        className="text-left text-[#F7F2DA] font-normal"
+                        style={{
+                          width: "70px",
+                          height: "20px",
+                          top: "14px",
+                          left: "137px",
+                          fontSize: "20px",
+                          lineHeight: "20px"
+                        }}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                      >
+                        [{token.symbol}]
+                      </motion.h2>
+                      <motion.h2
+                        className="hover:underline text-[#F7F2DA] workbench-test"
+                        style={{
+                          width: "20px",
+                          height: "10px",
+                          top: "9px",
+                          left: "302px",
+                          fontSize: "10px",
+                          fontWeight: 200,
+                          lineHeight: "20px",
+                          textAlign: "left",
+                          color: "#F7F2DA"
+                        }}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                      >
+                        More
+                      </motion.h2>
                     </div>
-                    <div className="flex gap-4">
-                        {token.social.twitter && (
-                            <a href={token.social.twitter} target="_blank" rel="noopener noreferrer">
-                                Twitter
-                            </a>
-                        )}
-                        {token.social.telegram && (
-                            <a href={token.social.telegram} target="_blank" rel="noopener noreferrer">
-                                Telegram
-                            </a>
-                        )}
-                        {token.social.website && (
-                            <a href={token.social.website} target="_blank" rel="noopener noreferrer">
-                                Website
-                            </a>
-                        )}
+                    <div className="flex flex-col align-middle">
+                      <motion.p
+                        className="text-[#F7F2DA] workbench-test flex flex-row mt-[5px]"
+                        style={{
+                          width: "60px",
+                          height: "10px",
+                          left: "137px",
+                          fontSize: "10px",
+                          fontWeight: 200,
+                          lineHeight: "10px",
+                          textAlign: "left",
+                          color: "#F7F2DA"
+                        }}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                         Batch #{token.batchId}
+                      </motion.p>
+        
+                      <motion.div
+                        className="mt-[22px]"
+                        style={{
+                          width: "180px",
+                          height: "10px",
+                          top: "85px",
+                          left: "137px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center"
+                        }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                      >
+                        <p
+                          className="workbench-test"
+                          style={{
+                            fontSize: "10px",
+                            fontWeight: 400,
+                            lineHeight: "10px",
+                            textAlign: "left",
+                            color: "#F7F2DA"
+                          }}
+                        >
+                          Create By:
+                        </p>
+                        <p
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: 400,
+                            lineHeight: "10px",
+                            textAlign: "left",
+                            color: "#F7F2DA"
+                          }}
+                        >
+                          {token.creator}
+                        </p>
+                      </motion.div>
+                      <motion.div
+                        className="my-[8px] workbench-test"
+                        style={{
+                          width: "180px",
+                          height: "10px",
+                          top: "85px",
+                          left: "137px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center"
+                        }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                      >
+                        <p
+                          style={{
+                            fontSize: "10px",
+                            fontWeight: 400,
+                            lineHeight: "10px",
+                            textAlign: "left",
+                            color: "#F7F2DA"
+                          }}
+                        >
+                         Staked: 
+                        </p>
+                        <p
+                          style={{
+                            fontSize: "10px",
+                            fontWeight: 400,
+                            lineHeight: "10px",
+                            textAlign: "left",
+                            color: "#F7F2DA"
+                          }}
+                        >
+                        {token.metrics.initialVoting.totalStaked}
+                        </p>
+                      </motion.div>
+                      <motion.div
+                        className="mb-[8px]"
+                        style={{
+                          width: "180px",
+                          height: "10px",
+                          top: "102px",
+                          left: "137px",
+                          fontSize: "10px",
+                          fontWeight: 400,
+                          lineHeight: "10px",
+                          textAlign: "left",
+                          color: "#F7F2DA"
+                        }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5, duration: 0.5 }}
+                      >
+                        {token.description}
+                      </motion.div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+        </Tooltip>
+        
+          </motion.div>
         ))}
     </div>
 );
