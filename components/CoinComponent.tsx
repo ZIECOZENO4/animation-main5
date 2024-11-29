@@ -204,12 +204,12 @@ const truncateDescription = (description: string) => {
 };
 
 const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
-    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4 w-auto">
+    <div className="flex flex-row justify-between overflow-scroll  gap-4 w-auto">
         {tokens.map((token) => (
            <Link href='/test' key={token.id} >
                 <motion.div
            
-            className="w-full md:w-[350px] px-2 mb-4 mr-8 relative"
+            className="w-full md:w-[350px] px-2 mb-4  relative"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
