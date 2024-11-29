@@ -204,7 +204,7 @@ const truncateDescription = (description: string) => {
   return `${truncatedWords.join(' ')}...`;
 };
 
-const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
+const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {tokens.map((token) => (
             // <div key={token.id} className="border rounded-lg p-4 shadow-sm">
@@ -263,7 +263,7 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
             whileHover={{ scale: 1.07 }}
           >
                         <Tooltip
-                content="Still in Initial Stage"
+               content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
                 placement="top"
                 showArrow={false}
                 offset={15} // Increased offset to create more space
@@ -305,6 +305,22 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
             >
               <div className="p-3 text-[#F7F2DA]">
                 <div className="flex justify-between items-start">
+                {activeTab === 'Anonymous' ? (
+                  <motion.div 
+                    className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
+                    whileHover={{ 
+                      boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    <motion.div 
+                      className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Lock className="h-3 w-3 text-gray-400" />
+                    </motion.div>
+                  </motion.div>
+                ) : (
                   <motion.div 
                     className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]"
                     whileHover={{ 
@@ -312,6 +328,7 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
                       transition: { duration: 0.2 }
                     }}
                   />
+                )}
         
                   <div className="text-right flex flex-col p-2">
                     {/* Rest of your existing code remains exactly the same */}
@@ -932,31 +949,21 @@ const anonymousTokens = allTokens.filter(token =>
         <CardGrid />
       </div>
     
-      <AnimatePresence mode="wait">
-      {activeTab === 'Initial' ? (
-        <motion.div
-        key="initial"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-        >
-   
-                      <TokenGrid tokens={initialTokens} />
-        </motion.div>
-      ) : (
-        <motion.div
-        key="anonymous"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-      >
-  <TokenGrid tokens={anonymousTokens} />
-      </motion.div>
-      )}
-      
-    </AnimatePresence>
+                  {/* Animated content */}
+                  <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <TokenGrid 
+                                tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
+                                activeTab={activeTab}
+                            />
+                        </motion.div>
+                    </AnimatePresence>
     <div className="div">
      {hasNextPage && (
                         <button

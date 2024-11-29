@@ -40,7 +40,7 @@ export default defineConfig({
             ///TokenFactory a-0.12.0
             // 421614: '0x771f76df1751efcb5e3befb8d744555da9157f36',
             ///token factory b-0.13.0
-            421614: '0xE1973233469851E7f48DcB2c2c321788E47F842F',
+            421614: '0xAbb99709280356F4fc320eB4A50399eF3CD84D70',
           },
         },
         {
