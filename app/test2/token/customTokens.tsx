@@ -114,7 +114,7 @@ export const CustomCard: React.FC<CustomCardProps> = ({ token, batchId, batchSta
                     <div>
                         <div className="flex justify-between items-center mb-1">
                             <Badge
-                                variant="outline"
+                              
                                 className={`text-[10px] ${styles.textColor} border-purple-500/30 px-1.5 py-0.5`}
                             >
                                 {token.symbol}
@@ -177,7 +177,6 @@ export const CustomCard: React.FC<CustomCardProps> = ({ token, batchId, batchSta
 
                         <div className="flex items-center justify-between text-[10px]">
                             <Badge
-                                variant="secondary"
                                 className={`text-[10px] font-normal px-1.5 py-0.5 ${styles.badgeStyle}`}
                             >
                                 {isAnonymousPhase
