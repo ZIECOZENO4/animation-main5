@@ -128,7 +128,7 @@ export const CustomCard: React.FC<CustomCardProps> = ({ token, batchId, batchSta
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <Badge
-                                        variant="secondary"
+                                       
                                         className="text-[10px] font-normal px-1.5 py-0.5 cursor-pointer hover:bg-secondary/20 transition-colors duration-200"
                                     >
                                         {extractAlphabetsFromAddress(token.creator)}
