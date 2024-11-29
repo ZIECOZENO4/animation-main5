@@ -190,6 +190,12 @@ function calculatePercentage(amount: string, total: string): string {
     return `${((amountBigInt * 10000n) / totalBigInt * BigInt(100) / 10000n).toString()}%`;
 }
 
+// Add this helper function
+const formatWalletAddress = (address: string): string => {
+  if (!address || address.length < 8) return address;
+  return `${address.slice(0, 4)}...${address.slice(-4)}`;
+};
+
 
 const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
@@ -395,7 +401,7 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
                             color: "#F7F2DA"
                           }}
                         >
-                          {token.creator}
+                        {formatWalletAddress(token.creator)}
                         </p>
                       </motion.div>
                       <motion.div
