@@ -204,7 +204,9 @@ const truncateDescription = (description: string) => {
 };
 
 const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
-  <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+  <div className="w-full overflow-x-auto     [-ms-overflow-style:'none'] 
+  [scrollbar-width:'none'] 
+  [&::-webkit-scrollbar]:hidden">
   <div className="min-w-max px-4">
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
         {tokens.map((token) => (
