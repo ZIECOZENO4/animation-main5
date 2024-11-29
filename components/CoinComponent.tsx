@@ -372,7 +372,7 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
                          Batch #{token.batchId}
                       </motion.p>
                       <motion.div
-                        className="my-[8px] workbench-test"
+                        className=" mt-[22px] workbench-test"
                         style={{
                           width: "180px",
                           height: "10px",
@@ -410,7 +410,7 @@ const TokenGrid = ({ tokens }: { tokens: FormattedToken[] }) => (
                         </p>
                       </motion.div>
                       <motion.div
-                        className="mt-[22px]"
+                        className=" my-[8px]"
                         style={{
                           width: "180px",
                           height: "10px",
