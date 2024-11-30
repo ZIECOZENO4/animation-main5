@@ -30,8 +30,16 @@ interface LoadingStateProps {
     className?: string;
 }
 
-interface TokenFactoryDurationsResult {
-    data: BatchDurations | null;
+interface BatchDurations {
+    // Add your duration properties here
+    // Example:
+    initialVoting: number;
+    finalVoting: number;
+  }
+  
+  // Define the return type for the hook
+  interface TokenFactoryDurationsResult {
+    durations: BatchDurations | null;
     isLoading: boolean;
     isError: boolean;
   }
@@ -231,7 +239,7 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
 
 export function MainContent()  {
     const router = useRouter();
-    const { data: durations, isLoading: durationsLoading, isError: durationsError } = useTokenFactoryDurations();
+    const { durations, isLoading: durationsLoading, isError: durationsError } = useTokenFactoryDurations();
 
     const { data: batchMetrics, isLoading, error } = useLatestBatchMetrics(durations);
     const [searchQuery, setSearchQuery] = React.useState('');
