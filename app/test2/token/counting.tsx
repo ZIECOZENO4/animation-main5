@@ -29,6 +29,13 @@ interface CountdownRendererProps {
 interface LoadingStateProps {
     className?: string;
 }
+
+interface TokenFactoryDurationsResult {
+    data: BatchDurations | null;
+    isLoading: boolean;
+    isError: boolean;
+  }
+  
 const getProgressColor = (progress: number) => {
     if (progress >= 75) return '#22c55e';
     if (progress >= 50) return '#eab308';
@@ -222,7 +229,7 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
     );
 };
 
-export function MainContent() {
+export function MainContent()  {
     const router = useRouter();
     const { data: durations, isLoading: durationsLoading, isError: durationsError } = useTokenFactoryDurations();
 
