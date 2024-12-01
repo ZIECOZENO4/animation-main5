@@ -321,7 +321,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                       >
-                        More
+                        more
                       </motion.h2>
                     </div>
                     <div className="flex flex-col align-middle">
@@ -344,7 +344,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                          Batch #{token.batchId}
                       </motion.p>
                       <motion.div
-                        className=" mt-[22px] workbench-test"
+                        className=" mt-[22px] "
                         style={{
                           width: "180px",
                           height: "10px",
@@ -371,7 +371,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                         </p>
                         <p
                           style={{
-                            fontSize: "10px",
+                            fontSize: "12px",
                             fontWeight: 400,
                             lineHeight: "10px",
                             textAlign: "left",
@@ -409,8 +409,9 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                           Create By:
                         </p>
                         <p
+                          className="workbench-test"
                           style={{
-                            fontSize: "12px",
+                            fontSize: "10px",
                             fontWeight: 400,
                             lineHeight: "10px",
                             textAlign: "left",
