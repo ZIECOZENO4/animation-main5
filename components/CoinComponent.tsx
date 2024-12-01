@@ -203,6 +203,7 @@ const truncateDescription = (description: string) => {
   return `${truncatedWords.join(' ')}...`;
 };
 
+
 const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
   <div className="w-full overflow-x-auto  scrollbar-hide">
   <div className="min-w-max px-4">
@@ -370,16 +371,16 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                          Staked Amount: 
                         </p>
                         <p
-                          style={{
-                            fontSize: "12px",
-                            fontWeight: 400,
-                            lineHeight: "10px",
-                            textAlign: "left",
-                            color: "#F7F2DA"
-                          }}
-                        >
-                        {token.metrics.initialVoting.totalStaked}
-                        </p>
+  style={{
+    fontSize: "12px",
+    fontWeight: 400,
+    lineHeight: "10px",
+    textAlign: "left",
+    color: "#F7F2DA"
+  }}
+>
+  {Number(token.metrics.initialVoting.totalStaked).toFixed(10)}
+</p>
                       </motion.div>
                       <motion.div
                         className=" my-[8px]"
