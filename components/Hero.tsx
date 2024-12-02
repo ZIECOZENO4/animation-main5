@@ -8,8 +8,9 @@ import { StartingButton } from "./CreateButton";
 import { HeroSearchInput } from "./HeroSearch";
 import { ViewMoreButton } from "./ViewMoreButton";
 import { motion, AnimatePresence } from "framer-motion";
-import { Badge  } from "@nextui-org/react"
+import { Badge, Button  } from "@nextui-org/react"
 import {Chip} from "@nextui-org/react";
+import DigitalClock from "./timer/digital-clock";
 const profiles = [
   {
     name: "EthCome",
@@ -101,7 +102,14 @@ export function HeroSection() {
           </div>
 
 <div className="md:w-[30%] w-full">
-<ViewMoreButton />            
+<Button 
+            className={`relative rounded-none px-4 py-2 bg-[#0A0909] text-[#F7F2DA]  border-2 border-[#1a1a1a]`}
+            style={{
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
+            }}
+        >
+            <DigitalClock />
+        </Button>            
             </div>
 
         </div>

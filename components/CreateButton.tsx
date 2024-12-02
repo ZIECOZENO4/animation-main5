@@ -2,11 +2,12 @@
 import React from "react";
 import Link from "next/link";
 import {HoverBorderGradient} from './ui/hover-border-gradient'
+import { Button } from "@nextui-org/react";
 export function StartingButton() {
   return (
     <div className="m-4 flex justify-center text-center ">
         <Link  href='/create'>
-        <HoverBorderGradient
+        {/* <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
         className="bg-black text-[#F7F2DA] flex items-center space-x-2 hover:scale-110 hover:text-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out md:px-6 md:p-4 p-2 px-4"
@@ -14,7 +15,21 @@ export function StartingButton() {
             <span>Start Creating</span>
         <AceternityLogo />
     
-      </HoverBorderGradient>
+      </HoverBorderGradient> */}
+            <Button 
+            className={`relative rounded-none px-4 py-2 bg-[#0A0909] text-[#F7F2DA] hover:text-slate-500
+                border-2 border-[#1a1a1a]`}
+            style={{
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
+            }}
+      
+        >
+          <div className="flex items-center space-x-2 hover:scale-110 text-center">
+          <span>Start Creating</span>
+        <AceternityLogo />
+          </div>
+        <AceternityLogo />
+        </Button>
         </Link>
    
     </div>

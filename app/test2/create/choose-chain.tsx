@@ -178,7 +178,7 @@ const CreateTokenPage: React.FC<CreateTokenPageProps> = ({ children }) => {
         return (
             <>
                 {renderNetworkGrid()}
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
                     <ActionCard
                         message="Switch to the correct network to proceed with token creation."
                         actionText="Switch Network"
