@@ -584,6 +584,13 @@ const anonymousTokens = allTokens.filter(token =>
     { key: 'high', name: 'High Views (> 100K)' },
   ]
 
+  const CurrencyToggle = () => {
+    const [currency, setCurrency] = useState('USD');
+
+    const handleToggle = () => {
+        setCurrency(currency === 'USD' ? 'ETH' : 'USD');
+    };
+    
   return (
     <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
          <motion.div className="flex flex-row justify-between align-middle">
@@ -642,13 +649,16 @@ const anonymousTokens = allTokens.filter(token =>
             </div>
 
             <Button 
-                className="relative rounded-none px-4 py-2 bg-[#0A0909] border-2 border-[#1a1a1a]"
-                style={{
-                    boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
-                }}
-            >
-                USD
-            </Button>
+            className={`relative rounded-none px-4 py-2 bg-[#0A0909] ${
+                currency === 'ETH' ? 'text-slate-500' : 'text-[#F7F2DA]'
+            } border-2 border-[#1a1a1a]`}
+            style={{
+                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
+            }}
+            onClick={handleToggle}
+        >
+            {currency}
+        </Button>
         </motion.div>
 
       <div className="flex-row justify-between md:hidden flex align-middle ">
