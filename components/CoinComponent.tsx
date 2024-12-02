@@ -475,7 +475,8 @@ export default function ComponentCoin() {
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [activeTab, setActiveTab] = useState<'Initial' | 'Anonymous'>('Initial');
-    
+  const [currency, setCurrency] = useState('USD');
+  
   const handleTabClick = (tab: 'Initial' | 'Anonymous') => {
       setActiveTab(tab);
   };
@@ -584,13 +585,13 @@ const anonymousTokens = allTokens.filter(token =>
     { key: 'high', name: 'High Views (> 100K)' },
   ]
 
-  const CurrencyToggle = () => {
-    const [currency, setCurrency] = useState('USD');
+ 
 
     const handleToggle = () => {
         setCurrency(currency === 'USD' ? 'ETH' : 'USD');
     };
-    
+
+  
   return (
     <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
          <motion.div className="flex flex-row justify-between align-middle">
