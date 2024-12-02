@@ -35,7 +35,7 @@ export default function DigitalClock() {
   return (
     <div className="flex flex-col items-center justify-center">
    
-      <div className="flex space-x-2 text-[25px] text-[#BD8F8F] tracking-wider  leading-relaxed">
+      <div className="flex space-x-2 text-[25px] text-slate-500 tracking-wider  leading-relaxed">
         <motion.div
           key={time.hours}
           initial={{ opacity: 0, y: -20 }}
@@ -59,7 +59,7 @@ export default function DigitalClock() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className=" text-[#9CBD8F]"
+          className=" text-[#F7F2DA]"
         >
           {formatNumber(time.seconds)}
         </motion.div>
