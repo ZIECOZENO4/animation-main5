@@ -216,7 +216,7 @@ export default function TokenSubmissionForm() {
     }
     return (
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto p-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 z-50 max-w-3xl mx-auto p-6">
         <Card className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
