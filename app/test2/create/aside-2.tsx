@@ -254,8 +254,7 @@ export default function TokenSubmissionForm() {
             />
           </div>
 
-
-<div className="w-full">
+          <div>
   <label className="block text-sm font-medium mb-1">Image</label>
   <div className="mt-2">
     {imagePreview ? (
@@ -296,7 +295,7 @@ export default function TokenSubmissionForm() {
   </div>
   {form.formState.errors.image && (
     <p className="text-danger text-sm mt-1">
-      {form.formState.errors.image.message}
+      {form.formState.errors.image?.message as string}
     </p>
   )}
 </div>
