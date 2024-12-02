@@ -44,12 +44,12 @@ export function LearnMoreAboutDifferentTokens() {
     const [isNavOpen, setIsNavOpen] = useState(true);
 
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen bg-background">
+        <div className="flex flex-col lg:flex-row min-h-screen">
             {/* Sidebar Navigation */}
             <motion.aside 
                 initial={{ x: -100 }}
                 animate={{ x: 0 }}
-                className="lg:w-64 bg-card border-r border-border"
+                className="lg:w-64 bg-card border-r border-gray-500"
             >
                 <div className="sticky top-0 p-4">
                     <motion.div 

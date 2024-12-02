@@ -33,7 +33,7 @@ export default function DigitalClock() {
   const formatNumber = (num: number) => num.toString().padStart(2, "0")
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center py-2">
    
       <div className="flex space-x-2 text-[25px] text-slate-500 tracking-wider  leading-relaxed">
         <motion.div
