@@ -935,15 +935,20 @@ const anonymousTokens = allTokens.filter(token =>
                             />
                         </motion.div>
                     </AnimatePresence>
-    <div className="div">
+    <div className="items-center flex justify-center align-middle text-center">
      {hasNextPage && (
-                        <button
-                            onClick={() => fetchNextPage()}
-                            disabled={isFetchingNextPage}
-                            className="col-span-full mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-                        >
-                            {isFetchingNextPage ? 'Loading more...' : 'Load More'}
-                        </button>
+                     
+                              <Button 
+                              onClick={() => fetchNextPage()}
+                              disabled={isFetchingNextPage}
+                              className={`relative rounded-none px-8 text-xl py-2 bg-[#0A0909] text-[#F7F2DA] hover:text-slate-500 border-2 border-[#1a1a1a]`}
+                              style={{
+                                  boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
+                              }}
+                           
+                          >
+                             {isFetchingNextPage ? 'Loading more...' : 'Load More'}
+                          </Button>
                     )}
             
     </div>
