@@ -91,16 +91,16 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
     }
 
     // If the phase is Queue, render the QueueCard
-    if (batch.stateNumber === BatchState.QUEUE) {
-        return (
-            <QueueCard2
-                batch={batch}
-                phaseInfo={phaseInfo}
-                stakedValueUSD={stakedValueUSD}
-                onCountResult={handleCountResult}
-            />
-        )
-    }
+    if (batch.stateNumber === BatchState.INITIAL_COUNTING) {
+      return (
+          <QueueCard2 
+              batch={batch} 
+              phaseInfo={phaseInfo} 
+              stakedValueUSD={stakedValueUSD} 
+              onCountResult={handleCountResult} 
+          />
+      )
+  }
 
     return (
         <motion.div
