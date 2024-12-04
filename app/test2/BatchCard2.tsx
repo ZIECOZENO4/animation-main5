@@ -80,10 +80,10 @@ export const BatchCard2: React.FC<BatchCardProps> = ({ batch }) => {
 
         // For INITIAL_VOTING and QUEUE states
         if (batch.stateNumber === BatchState.INITIAL_VOTING ||
-            batch.stateNumber === BatchState.QUEUE) {
-            router.push(`/batch/${batch.batchId}`)
-            return
-        }
+          batch.stateNumber === BatchState.INITIAL_COUNTING) {
+          router.push(`/batch/${batch.batchId}`)
+          return
+      }
     }
 
     const handleCountResult = () => {
