@@ -89,10 +89,10 @@ function calculateTimeRemaining(stateUpdatedAt: Date, duration: number) {
 const CountdownRenderer: React.FC<CountdownRendererProps> = ({ timeRemaining, progress }) => {
     return (
         <div className="text-center">
-            <div className="text-2xl font-bold">
-                {String(timeRemaining.hours).padStart(2, '0')}:
-                {String(timeRemaining.minutes).padStart(2, '0')}:
-                {String(timeRemaining.seconds).padStart(2, '0')}
+            <div className="text-2xl font-bold flex gap-2 text-slate-500">
+                <p className='flex gap-4'> 00 {String(timeRemaining.hours).padStart(2, '0')}:</p>
+                 <p className='flex gap-4'> 00 {String(timeRemaining.minutes).padStart(2, '0')}:</p> 
+                 <p className='flex gap-4 text-[#F7F2DA]'> 00 {String(timeRemaining.seconds).padStart(2, '0')}</p> 
             </div>
   
         </div>
@@ -164,7 +164,7 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
       <StartingButton  />
         <div className="flex align-middle my-6 flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
               <motion.div 
-                className="relative w-32 md:w-40 md:h-40 h-32 rounded-full overflow-hidden"
+                className="relative w-32 md:w-44 md:h-44 h-32 rounded-full overflow-hidden"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               >
