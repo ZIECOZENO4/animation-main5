@@ -15,6 +15,7 @@ import StatisticsComponent from "@/components/statistics";
 import CryptoDisplay from "@/components/CryptoDisplay";
 import SuppotersComponent from "@/components/supporters";
 import ImageContent1 from "@/components/Testimonial";
+import { BatchHero } from "@/components/BatchHero";
 
 const Content = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -34,7 +35,7 @@ const Content = () => {
 
   return (
     <div className='align-middle flex flex-col'>
-      <HeroSection />
+      <BatchHero />
       <ComponentCoin />
       <CollectionsGrid />
       <StatisticsComponent />
