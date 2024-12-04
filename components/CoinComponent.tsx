@@ -31,6 +31,36 @@ import { formatUnits } from 'viem';
 
 type TabType = 'Initial' | 'Anonymous';
 
+interface TokenMetrics {
+  totalInitialVotes: string;
+  totalInitialStaked: string;
+  totalAnonymousVotes: string;
+  totalAnonymousStaked: string;
+  votesCount: number;
+  withdrawalsCount: number;
+  stakePercentage: string;
+}
+
+interface FormattedToken {
+  id: string;
+  address: string;
+  state: number;
+  batchId: string;
+  batchState: number;
+  name: string;
+  symbol: string;
+  description: string;
+  imageUrl: string;
+  metrics: TokenMetrics;
+  creator: string;
+  creationFee: string;
+  social: {
+    twitter: string;
+    telegram: string;
+    website: string;
+  };
+}
+
 
 interface ChainData {
   key: string
@@ -144,12 +174,12 @@ const GetAllBatchesTokensQuery = gql`
       id
       state
       initialVotingData {
-        initialVotes
-        initialStaked
+        totalInitialVotes
+        totalInitialStaked
       }
       anonymousVotingData {
-        anonymousVotes
-        anonymousStaked
+        totalAnonymousVotes
+        totalAnonymousStaked
       }
       tokens(
         skip: $skip
@@ -160,14 +190,10 @@ const GetAllBatchesTokensQuery = gql`
         id
         address
         state
-        initialVoting {
-          initialVotes
-          initialStaked
-        }
-        anonymousVoting {
-          anonymousVotes
-          anonymousStaked
-        }
+        totalInitialVotes
+        totalInitialStaked
+        totalAnonymousVotes
+        totalAnonymousStaked
         details {
           name
           symbol
