@@ -1,20 +1,14 @@
+
 import { useQuery } from '@tanstack/react-query'
 import { gql, request, ClientError } from 'graphql-request'
 import { GRAPH_API_URL } from '@/constants'
 import { formatUnits } from 'viem'
-import { BatchDurations, getPhaseInfo } from '@/hooks/useContractConstants'
+import { getPhaseInfo } from '@/hooks/useContractConstants'
 import { useMemo } from 'react'
+import { BatchState } from '@/app/true-types'
 
 // Enums
-export enum BatchState {
-    INACTIVE = 0,
-    INITIAL_VOTING = 1,
-    QUEUE = 2,
-    ANONYMOUS_VOTING = 3,
-    COUNTING = 4,
-    DISPUTABLE = 5,
-    COMPLETED = 6
-}
+
 
 // GraphQL Query Result Types
 interface BatchQueryResult {
@@ -27,20 +21,21 @@ interface BatchQueryResult {
         tokens: {
             id: string
             address: string
-            totalVotes: string
-            totalStaked: string
+            totalInitialVotes: string
+            totalInitialStaked: string
+            totalAnonymousStaked: string
+            totalAnonymousVotes: string
             withdrawals: { id: string }[]
         }[]
         initialVotingData: {
-            totalVotes: string
-            totalStaked: string
+            totalInitialVotes: string
+            totalInitialStaked: string
             resultsSubmitted: boolean
             topTokens: string[]
             votes: {
                 id: string
                 amount: string
-                totalStaked: string
-                totalVotes: string
+
             }[]
             withdrawals: {
                 id: string
@@ -71,14 +66,13 @@ interface BatchQueryResult {
             }[]
         }
         anonymousVotingData: {
-            totalVotes: string
-            totalStaked: string
+            totalAnonymousVotes: string
+            totalAnonymousStaked: string
             resultsSubmitted: boolean
             topTokens: string[]
             votes: {
                 id: string
-                totalStaked: string
-                totalVotes: string
+
                 stakeAmount: string
             }[]
             decryptedVotes: {
@@ -105,22 +99,23 @@ const BatchMetricsQuery = gql`
       tokens {
         id
         address
-        totalVotes
-        totalStaked
+        totalInitialVotes
+        totalInitialStaked
+        totalAnonymousVotes
+        totalAnonymousStaked
         withdrawals {
           id
         }
       }
       initialVotingData {
-        totalVotes
-        totalStaked
+        totalInitialVotes
+        totalInitialStaked
         resultsSubmitted
         topTokens
         votes {
           id
           amount
-          totalStaked
-          totalVotes
+       
         }
         withdrawals {
           id
@@ -151,14 +146,13 @@ const BatchMetricsQuery = gql`
         }
       }
       anonymousVotingData {
-        totalVotes
-        totalStaked
+        totalAnonymousVotes
+        totalAnonymousStaked
         resultsSubmitted
         topTokens
         votes {
           id
-          totalStaked
-          totalVotes
+   
           stakeAmount
         }
         decryptedVotes {
@@ -179,10 +173,9 @@ export function getStateLabel(state: number): string {
     switch (state) {
         case BatchState.INACTIVE: return 'Inactive'
         case BatchState.INITIAL_VOTING: return 'Initial Voting'
-        case BatchState.QUEUE: return 'Queue'
+        case BatchState.INITIAL_COUNTING: return 'Queue'
         case BatchState.ANONYMOUS_VOTING: return 'Anonymous Voting'
-        case BatchState.COUNTING: return 'Counting'
-        case BatchState.DISPUTABLE: return 'Disputable'
+        case BatchState.ANONYMOUS_COUNTING: return 'Anonymous Counting'
         case BatchState.COMPLETED: return 'Completed'
         default: return 'Unknown'
     }
@@ -193,64 +186,78 @@ export function isActiveVotingState(state: number): boolean {
 }
 
 function calculateTimeMetrics(batch: BatchQueryResult['batch'], duration: number) {
+    // Only calculate time metrics for voting states
+    if (batch.state !== BatchState.INITIAL_VOTING && batch.state !== BatchState.ANONYMOUS_VOTING) {
+        return {
+            elapsedTime: 0,
+            duration: 0,
+            progress: 0
+        }
+    }
+
     const currentTime = Math.floor(Date.now() / 1000)
     const stateStartTime = parseInt(batch.stateUpdatedAt)
     const elapsedTime = currentTime - stateStartTime
     const progress = Math.min((elapsedTime / duration) * 100, 100)
-    return { elapsedTime, duration, progress }
+
+    return {
+        elapsedTime,
+        duration,
+        progress
+    }
 }
 // Interface Definitions
 export interface VotingPhaseData {
-  totalVotes: number
-  totalStaked: number
-  resultsSubmitted: boolean
-  topTokens: string[]
-  participationMetrics: {
-    voteCount: number
+    totalVotes: number
     totalStaked: number
-    averageStake: number
-  }
+    resultsSubmitted: boolean
+    topTokens: string[]
+    participationMetrics: {
+        voteCount: number
+        totalStaked: number
+        averageStake: number
+    }
 }
 
 export interface FormattedToken {
-  id: string
-  address: string
-  votes: number
-  staked: number
-  withdrawalCount: number
+    id: string
+    address: string
+    votes: number
+    staked: number
+    withdrawalCount: number
 }
 
 export interface FormattedBatch {
-  id: string
-  batchId: number
-  state: string
-  stateNumber: number
-  isVotingActive: boolean
-  createdAt: Date
-  stateUpdatedAt: Date
-  stateDuration: number
-  progress: number
+    id: string
+    batchId: number
+    state: BatchState
+    stateNumber: number
+    isVotingActive: boolean
+    createdAt: Date
+    stateUpdatedAt: Date
+    stateDuration: number
+    progress: number
 }
 
 export interface BatchStatistics {
-  totalTokens: number
-  participatingTokens: number
-  totalWithdrawals: number
-  averageStakePerToken: number
-  averageVotesPerToken: number
+    totalTokens: number
+    participatingTokens: number
+    totalWithdrawals: number
+    averageStakePerToken: number
+    averageVotesPerToken: number
 }
 
 export interface FormattedBatchMetrics {
-  batch: FormattedBatch
-  tokens: FormattedToken[]
-  stats: BatchStatistics
-  initialVoting: VotingPhaseData
-  anonymousVoting: VotingPhaseData
-  currentPhaseProgress: {
-    processed: number
-    total: number
-    percentage: number
-  }
+    batch: FormattedBatch
+    tokens: FormattedToken[]
+    stats: BatchStatistics
+    initialVoting: VotingPhaseData
+    anonymousVoting: VotingPhaseData
+    currentPhaseProgress: {
+        processed: number
+        total: number
+        percentage: number
+    }
 }
 function getCountingProgress(batch: BatchQueryResult['batch']) {
     const countingStates = batch.initialVotingData.batchCountingStates
@@ -267,9 +274,9 @@ function getCountingProgress(batch: BatchQueryResult['batch']) {
 }
 
 function formatVotingPhaseData(data: BatchQueryResult['batch']['initialVotingData'] | BatchQueryResult['batch']['anonymousVotingData']): VotingPhaseData {
-    const totalVotes = Number(data.totalVotes)
-    const totalStaked = parseFloat(formatUnits(BigInt(data.totalStaked), 18))
-    const voteCount = data.votes.length
+    const totalVotes = Number('totalInitialVotes' in data ? data.totalInitialVotes : data.totalAnonymousVotes);
+    const totalStaked = parseFloat(formatUnits(BigInt('totalInitialStaked' in data ? data.totalInitialStaked : data.totalAnonymousStaked), 18));
+    const voteCount = data.votes.length;
 
     return {
         totalVotes,
@@ -287,7 +294,7 @@ function formatVotingPhaseData(data: BatchQueryResult['batch']['initialVotingDat
 // Formatting Function
 function formatBatchMetrics(
     batch: BatchQueryResult['batch'],
-    durations: BatchDurations
+    durations: bigint | undefined
 ): FormattedBatchMetrics {
     const phaseInfo = getPhaseInfo(batch.state, durations)
     const { progress, duration } = calculateTimeMetrics(batch, phaseInfo.duration)
@@ -296,14 +303,14 @@ function formatBatchMetrics(
     const formattedTokens = batch.tokens.map(token => ({
         id: token.id,
         address: token.address,
-        votes: Number(token.totalVotes),
-        staked: parseFloat(formatUnits(BigInt(token.totalStaked), 18)),
+        votes: Number(token.totalInitialVotes),
+        staked: parseFloat(formatUnits(BigInt(token.totalInitialStaked), 18)),
         withdrawalCount: token.withdrawals.length
     }))
 
     // Get counting progress from new structure
     const countingProgress = (() => {
-        if (batch.state === BatchState.COUNTING) {
+        if (batch.state === BatchState.INITIAL_COUNTING) {
             const countingStates = batch.initialVotingData.batchCountingStates
             const initializations = batch.initialVotingData.batchInitializations
             const heapUpdates = batch.initialVotingData.heapUpdates
@@ -338,7 +345,7 @@ function formatBatchMetrics(
         batch: {
             id: batch.id,
             batchId: parseInt(batch.batchId),
-            state: getStateLabel(batch.state),
+            state: batch.state,
             stateNumber: batch.state,
             isVotingActive: isActiveVotingState(batch.state),
             createdAt: new Date(parseInt(batch.createdAt) * 1000),
@@ -365,16 +372,16 @@ function formatBatchMetrics(
 }
 
 // Main Hook
-export function useBatchMetrics(batchId: string, durations: BatchDurations | null) {
+export function useBatchMetrics(batchId: string, durations: bigint | undefined) {
     const areDurationsAvailable = useMemo(() => {
         if (!durations) return false
-        return Object.values(durations).some(duration => duration > BigInt(0))
+        return Number(durations) > 0;
     }, [durations])
 
     return useQuery({
         queryKey: ['batchMetrics', batchId],
         enabled: !!areDurationsAvailable,
-        refetchInterval: 1000 * 5,
+        // refetchInterval: 1000 * 5,
         queryFn: async () => {
             try {
                 const result = await request<BatchQueryResult>(
