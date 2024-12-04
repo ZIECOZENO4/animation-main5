@@ -30,6 +30,8 @@ import { formatUnits } from 'viem';
 
 
 type TabType = 'Initial' | 'Anonymous';
+
+
 interface ChainData {
   key: string
   name: string
@@ -142,24 +144,30 @@ const GetAllBatchesTokensQuery = gql`
       id
       state
       initialVotingData {
-        totalVotes
-        totalStaked
+        initialVotes
+        initialStaked
       }
       anonymousVotingData {
-        totalVotes
-        totalStaked
+        anonymousVotes
+        anonymousStaked
       }
       tokens(
         skip: $skip
         first: $first
-        orderBy: totalStaked
+        orderBy: initialStaked
         orderDirection: desc
       ) {
         id
         address
         state
-        totalVotes
-        totalStaked
+        initialVoting {
+          initialVotes
+          initialStaked
+        }
+        anonymousVoting {
+          anonymousVotes
+          anonymousStaked
+        }
         details {
           name
           symbol
@@ -180,7 +188,7 @@ const GetAllBatchesTokensQuery = gql`
       }
     }
   }
-`;
+`
 
 function calculatePercentage(amount: string, total: string): string {
     const amountBigInt = BigInt(amount);
