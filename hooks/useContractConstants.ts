@@ -1,83 +1,25 @@
-// hooks/useTokenFactoryDurations.ts
-import { BatchState } from '@/hooks/useFetchLatestBatch';
+import { BatchState } from '@/app/true-types';
 import { TokenFactoryService } from '@/hooks/allContractVariables';
-import { useQueries } from '@tanstack/react-query';
-import { formatUnits, parseUnits } from 'viem';
+import { useQuery } from '@tanstack/react-query';
 
 const tokenFactory = new TokenFactoryService();
 
-export interface BatchDurations {
-    initialVoting: bigint;
-    anonymousVoting: bigint;
-    counting: bigint;
-    dispute: bigint;
-}
-
-export function useTokenFactoryDurations(): {
-    durations: BatchDurations | null;
-    isLoading: boolean;
-    isError: boolean;
-} {
-    const results = useQueries({
-        queries: [
-            {
-                queryKey: ['initialVotingDuration'],
-                queryFn: () => tokenFactory.getInitialVotingDuration(),
-                retry: false,
-            },
-            {
-                queryKey: ['anonymousVotingDuration'],
-                queryFn: () => tokenFactory.getAnonymousVotingDuration(),
-                retry: false,
-            },
-            {
-                queryKey: ['countingDuration'],
-                queryFn: () => tokenFactory.getCountingDuration(),
-                retry: false,
-            },
-            {
-                queryKey: ['disputeDuration'],
-                queryFn: () => tokenFactory.getDisputeDuration(),
-                retry: false,
-            },
-        ],
+export function useTokenFactoryDurations() {
+    const { data: durations, isLoading, isError } = useQuery({
+        queryKey: ['VotingDuration'],
+        queryFn: () => tokenFactory.getVotingDuration(),
+        retry: false,
     });
-
-    const isLoading = results.some(query => query.isLoading);
-    const isError = results.some(query => query.isError);
-
-    // Check if any result is invalid (undefined, null, zero, or error)
-    const hasInvalidResult = results.some(
-        query =>
-            query.isError ||
-            !query.data ||
-            query.data === BigInt(0) ||
-            query.data === undefined
-    );
-
-    // If any result is invalid, return null for durations
-    if (hasInvalidResult) {
-        return {
-            durations: null,
-            isLoading,
-            isError,
-        };
-    }
-
-    // All results are valid, return the durations object
-    const durations: BatchDurations = {
-        initialVoting: results[0].data!,
-        anonymousVoting: results[1].data!,
-        counting: results[2].data!,
-        dispute: results[3].data!,
-    };
 
     return {
         durations,
         isLoading,
-        isError,
+        isError
     };
 }
+
+
+
 export interface PhaseInfo {
     label: string;
     duration: number;
@@ -87,7 +29,7 @@ export interface PhaseInfo {
     description: string;
 }
 
-export const getPhaseInfo = (state: BatchState, durations: BatchDurations | null): PhaseInfo => {
+export const getPhaseInfo = (state: BatchState, durations: bigint | undefined): PhaseInfo => {
     if (!durations) return {
         label: 'Inactive',
         duration: 0,
@@ -107,13 +49,13 @@ export const getPhaseInfo = (state: BatchState, durations: BatchDurations | null
         },
         [BatchState.INITIAL_VOTING]: {
             label: 'Initial Voting',
-            duration: Number(durations.initialVoting),
+            duration: Number(durations),
             color: 'bg-orange-500',
             textColor: 'text-orange-950',
             strokeColor: '#F97316', // orange-500
             description: 'Initial token voting phase'
         },
-        [BatchState.QUEUE]: {
+        [BatchState.INITIAL_COUNTING]: {
             label: 'Queue',
             duration: Number(0),
             color: 'bg-rose-600',
@@ -123,28 +65,21 @@ export const getPhaseInfo = (state: BatchState, durations: BatchDurations | null
         },
         [BatchState.ANONYMOUS_VOTING]: {
             label: 'Anonymous Voting',
-            duration: Number(durations.anonymousVoting),
+            duration: Number(durations),
             color: 'bg-purple-500',
             textColor: 'text-purple-950',
             strokeColor: '#A855F7', // purple-500
             description: 'Anonymous voting period'
         },
-        [BatchState.COUNTING]: {
+        [BatchState.ANONYMOUS_COUNTING]: {
             label: 'Counting',
-            duration: Number(durations.counting),
+            duration: Number(durations),
             color: 'bg-green-500',
             textColor: 'text-green-950',
             strokeColor: '#22C55E', // green-500
             description: 'Vote counting in progress'
         },
-        [BatchState.DISPUTABLE]: {
-            label: 'Disputable',
-            duration: Number(durations.dispute),
-            color: 'bg-red-500',
-            textColor: 'text-red-950',
-            strokeColor: '#EF4444', // red-500
-            description: 'Results can be disputed'
-        },
+
         [BatchState.COMPLETED]: {
             label: 'Completed',
             duration: 0,

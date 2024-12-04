@@ -11,40 +11,17 @@ export class TokenFactoryService {
         this.contractAddress = tokenFactoryConfig.address[421614];
     }
 
-    // Time Constants
-    async getInitialVotingDuration() {
+
+
+    async getVotingDuration() {
         return this.client.readContract({
             address: this.contractAddress,
             abi: tokenFactoryConfig.abi,
-            functionName: 'INITIAL_VOTING_DURATION',
+            functionName: 'VOTING_DURATION',
         });
     }
 
-
-
-    async getAnonymousVotingDuration() {
-        return this.client.readContract({
-            address: this.contractAddress,
-            abi: tokenFactoryConfig.abi,
-            functionName: 'ANONYMOUS_VOTING_DURATION',
-        });
-    }
-
-    async getCountingDuration() {
-        return this.client.readContract({
-            address: this.contractAddress,
-            abi: tokenFactoryConfig.abi,
-            functionName: 'COUNTING_DURATION',
-        });
-    }
-
-    async getDisputeDuration() {
-        return this.client.readContract({
-            address: this.contractAddress,
-            abi: tokenFactoryConfig.abi,
-            functionName: 'DISPUTE_DURATION',
-        });
-    }
+   
 
     async getMerkleDuration() {
         return this.client.readContract({

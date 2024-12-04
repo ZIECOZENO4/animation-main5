@@ -586,7 +586,7 @@ export const semaphoreConfig = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const tokenFactoryAbi = [
   {
@@ -596,25 +596,19 @@ export const tokenFactoryAbi = [
     ],
     stateMutability: 'nonpayable',
   },
-  { type: 'error', inputs: [], name: 'BatchAlreadyProcessed' },
-  { type: 'error', inputs: [], name: 'BatchFull' },
-  { type: 'error', inputs: [], name: 'BatchInWrongState' },
-  { type: 'error', inputs: [], name: 'BatchNotActive' },
-  { type: 'error', inputs: [], name: 'BatchNotCompleted' },
   { type: 'error', inputs: [], name: 'BatchNotFound' },
-  { type: 'error', inputs: [], name: 'BatchNotFullyInitialized' },
-  { type: 'error', inputs: [], name: 'BatchNotFullyProcessed' },
-  { type: 'error', inputs: [], name: 'BatchNotInitialized' },
-  { type: 'error', inputs: [], name: 'BatchProcessingComplete' },
-  { type: 'error', inputs: [], name: 'BatchResultsNotProcessed' },
+  { type: 'error', inputs: [], name: 'BatchProcessingError' },
+  { type: 'error', inputs: [], name: 'BatchSyncError' },
   { type: 'error', inputs: [], name: 'Create2EmptyBytecode' },
-  { type: 'error', inputs: [], name: 'DisputePeriodNotEnded' },
   { type: 'error', inputs: [], name: 'EnforcedPause' },
   { type: 'error', inputs: [], name: 'ExpectedPause' },
   { type: 'error', inputs: [], name: 'FailedDeployment' },
   { type: 'error', inputs: [], name: 'FailedToJoinGroup' },
   { type: 'error', inputs: [], name: 'GroupCreationFailed' },
+  { type: 'error', inputs: [], name: 'GroupError' },
   { type: 'error', inputs: [], name: 'IdentityCommitmentAlreadyUsed' },
+  { type: 'error', inputs: [], name: 'IdentityError' },
+  { type: 'error', inputs: [], name: 'InsufficientAmount' },
   {
     type: 'error',
     inputs: [
@@ -623,20 +617,12 @@ export const tokenFactoryAbi = [
     ],
     name: 'InsufficientBalance',
   },
-  { type: 'error', inputs: [], name: 'InsufficientFee' },
-  { type: 'error', inputs: [], name: 'InsufficientStakeAmount' },
   { type: 'error', inputs: [], name: 'InvalidAddress' },
-  { type: 'error', inputs: [], name: 'InvalidBatchSize' },
-  { type: 'error', inputs: [], name: 'InvalidIdentityCommitment' },
+  { type: 'error', inputs: [], name: 'InvalidBatchState' },
   { type: 'error', inputs: [], name: 'InvalidProof' },
-  { type: 'error', inputs: [], name: 'InvalidStateTransition' },
-  { type: 'error', inputs: [], name: 'InvalidTokenCount' },
-  { type: 'error', inputs: [], name: 'NoStakeFound' },
-  { type: 'error', inputs: [], name: 'NoTokensToProcess' },
-  { type: 'error', inputs: [], name: 'NotInAnonymousVoting' },
-  { type: 'error', inputs: [], name: 'NotInCountingPeriod' },
-  { type: 'error', inputs: [], name: 'NotInInitialVoting' },
-  { type: 'error', inputs: [], name: 'NotInQueueState' },
+  { type: 'error', inputs: [], name: 'InvalidVotingState' },
+  { type: 'error', inputs: [], name: 'NoActiveBatch' },
+  { type: 'error', inputs: [], name: 'NoActiveBatchYet' },
   { type: 'error', inputs: [], name: 'NullifierAlreadyUsed' },
   {
     type: 'error',
@@ -648,24 +634,21 @@ export const tokenFactoryAbi = [
     inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
     name: 'OwnableUnauthorizedAccount',
   },
-  { type: 'error', inputs: [], name: 'PaymentFailed' },
   { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
-  { type: 'error', inputs: [], name: 'ResultsAlreadyProcessed' },
   { type: 'error', inputs: [], name: 'ResultsAlreadySubmitted' },
-  { type: 'error', inputs: [], name: 'ResultsNotFinalized' },
-  { type: 'error', inputs: [], name: 'SemaphoreError' },
+  { type: 'error', inputs: [], name: 'ResultsError' },
+  { type: 'error', inputs: [], name: 'SizeError' },
   { type: 'error', inputs: [], name: 'StakeAlreadyClaimed' },
-  { type: 'error', inputs: [], name: 'StateUpdateFailed' },
-  { type: 'error', inputs: [], name: 'TokenAlreadyCreated' },
-  { type: 'error', inputs: [], name: 'TokenCreationFailed' },
+  { type: 'error', inputs: [], name: 'StakeError' },
+  { type: 'error', inputs: [], name: 'StateTransitionError' },
+  { type: 'error', inputs: [], name: 'TokenAlreadyExists' },
+  { type: 'error', inputs: [], name: 'TokenError' },
   { type: 'error', inputs: [], name: 'TokenNotAmongWinners' },
   { type: 'error', inputs: [], name: 'TokenNotEligible' },
-  { type: 'error', inputs: [], name: 'TokenNotFound' },
   { type: 'error', inputs: [], name: 'TransferFailed' },
-  { type: 'error', inputs: [], name: 'UnauthorizedClaim' },
-  { type: 'error', inputs: [], name: 'UnauthorizedResultSubmission' },
-  { type: 'error', inputs: [], name: 'VotingNotStarted' },
+  { type: 'error', inputs: [], name: 'Unauthorized' },
   { type: 'error', inputs: [], name: 'VotingPeriodEnded' },
+  { type: 'error', inputs: [], name: 'VotingPeriodError' },
   {
     type: 'event',
     anonymous: false,
@@ -714,40 +697,9 @@ export const tokenFactoryAbi = [
         indexed: false,
       },
       {
-        name: 'totalVotes',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: false,
-      },
-      {
-        name: 'totalStaked',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: false,
-      },
-      {
-        name: 'timestamp',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: false,
-      },
-    ],
-    name: 'AnonymousResultsSubmitted',
-  },
-  {
-    type: 'event',
-    anonymous: false,
-    inputs: [
-      {
-        name: 'batchId',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: true,
-      },
-      {
-        name: 'topTokens',
-        internalType: 'address[]',
-        type: 'address[]',
+        name: 'stakedAmounts',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
         indexed: false,
       },
       {
@@ -1003,12 +955,6 @@ export const tokenFactoryAbi = [
         indexed: true,
       },
       {
-        name: 'oldState',
-        internalType: 'enum TokenFactory.BatchState',
-        type: 'uint8',
-        indexed: false,
-      },
-      {
         name: 'newState',
         internalType: 'enum TokenFactory.BatchState',
         type: 'uint8',
@@ -1252,6 +1198,31 @@ export const tokenFactoryAbi = [
     anonymous: false,
     inputs: [
       {
+        name: 'initialVotingBatchId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+      {
+        name: 'anonymousVotingBatchId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+      {
+        name: 'timestamp',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'SynchronizedBatchStateUpdate',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
         name: 'batchId',
         internalType: 'uint256',
         type: 'uint256',
@@ -1376,34 +1347,33 @@ export const tokenFactoryAbi = [
     anonymous: false,
     inputs: [
       {
-        name: 'batchId',
+        name: 'newInitialVotingId',
         internalType: 'uint256',
         type: 'uint256',
         indexed: true,
       },
       {
-        name: 'identityCommitment',
+        name: 'previousInitialNowAnonymousId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+      {
+        name: 'completedAnonymousId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+      {
+        name: 'timestamp',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
-      {
-        name: 'reason',
-        internalType: 'string',
-        type: 'string',
-        indexed: false,
-      },
     ],
-    name: 'VoteSkipped',
+    name: 'VotingPhaseTransition',
   },
   { type: 'fallback', stateMutability: 'payable' },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'ANONYMOUS_VOTING_DURATION',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
   {
     type: 'function',
     inputs: [],
@@ -1415,27 +1385,6 @@ export const tokenFactoryAbi = [
     type: 'function',
     inputs: [],
     name: 'BATCH_SIZE',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'COUNTING_DURATION',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'DISPUTE_DURATION',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'INITIAL_VOTING_DURATION',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -1490,13 +1439,40 @@ export const tokenFactoryAbi = [
   },
   {
     type: 'function',
+    inputs: [],
+    name: 'VOTING_DURATION',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [
       { name: 'batchId', internalType: 'uint256', type: 'uint256' },
       { name: 'identityCommitment', internalType: 'uint256', type: 'uint256' },
     ],
     name: 'addMemberToAnonymousVoting',
-    outputs: [],
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'anonymousResultSubmissionState',
+    outputs: [
+      {
+        name: '',
+        internalType: 'enum TokenFactory.AnonymousResultSubmissionState',
+        type: 'uint8',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'anonymousToInitialId',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1554,7 +1530,7 @@ export const tokenFactoryAbi = [
       { name: '', internalType: 'uint256', type: 'uint256' },
       { name: '', internalType: 'uint256', type: 'uint256' },
     ],
-    name: 'batchTokenResults',
+    name: 'batchTokenAnonymousResults',
     outputs: [
       { name: 'token', internalType: 'address', type: 'address' },
       { name: 'voteCount', internalType: 'uint256', type: 'uint256' },
@@ -1595,6 +1571,7 @@ export const tokenFactoryAbi = [
       },
       { name: 'createdAt', internalType: 'uint256', type: 'uint256' },
       { name: 'stateUpdatedAt', internalType: 'uint256', type: 'uint256' },
+      { name: 'tokenCount', internalType: 'uint256', type: 'uint256' },
       { name: 'totalVotes', internalType: 'uint256', type: 'uint256' },
       { name: 'totalStaked', internalType: 'uint256', type: 'uint256' },
       { name: 'anonymousTotalVotes', internalType: 'uint256', type: 'uint256' },
@@ -1610,8 +1587,8 @@ export const tokenFactoryAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'batchId', internalType: 'uint256', type: 'uint256' }],
-    name: 'checkAndUpdateBatchState',
+    inputs: [],
+    name: 'checkAndUpdateBatchStates',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
     stateMutability: 'nonpayable',
   },
@@ -1670,8 +1647,12 @@ export const tokenFactoryAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'currentInitialVotingBatchId',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'currentSyncedVoting',
+    outputs: [
+      { name: 'initialVotingId', internalType: 'uint256', type: 'uint256' },
+      { name: 'anonymousVotingId', internalType: 'uint256', type: 'uint256' },
+      { name: 'startTime', internalType: 'uint256', type: 'uint256' },
+    ],
     stateMutability: 'view',
   },
   {
@@ -1684,6 +1665,7 @@ export const tokenFactoryAbi = [
     outputs: [
       { name: 'voteHash', internalType: 'bytes32', type: 'bytes32' },
       { name: 'amount', internalType: 'uint256', type: 'uint256' },
+      { name: 'votedAt', internalType: 'uint256', type: 'uint256' },
     ],
     stateMutability: 'view',
   },
@@ -1735,10 +1717,34 @@ export const tokenFactoryAbi = [
   },
   {
     type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'initialToAnonymousId',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [{ name: 'batchId', internalType: 'uint256', type: 'uint256' }],
     name: 'initializeBatchCounting',
     outputs: [],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'isInitialResultsProcessed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '', internalType: 'uint256', type: 'uint256' },
+      { name: '', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'isVoteDecrypted',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1784,13 +1790,6 @@ export const tokenFactoryAbi = [
     name: 'renounceOwnership',
     outputs: [],
     stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    name: 'resultsProcessed',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1913,6 +1912,13 @@ export const tokenFactoryAbi = [
   },
   {
     type: 'function',
+    inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'tokenCreationTime',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [
       { name: '', internalType: 'uint256', type: 'uint256' },
       { name: '', internalType: 'address', type: 'address' },
@@ -1930,6 +1936,20 @@ export const tokenFactoryAbi = [
       { name: '', internalType: 'address', type: 'address' },
     ],
     name: 'tokenTotalStakes',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'totalDecryptedVotes',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'totalEncryptedVotes',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -1999,14 +2019,14 @@ export const tokenFactoryAbi = [
 ] as const
 
 /**
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const tokenFactoryAddress = {
-  421614: '0x771f76DF1751eFCb5e3bEfb8D744555DA9157f36',
+  421614: '0xfb0c638F62A281eB5551bd462990d68694CA57Ab',
 } as const
 
 /**
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const tokenFactoryConfig = {
   address: tokenFactoryAddress,
@@ -2577,7 +2597,7 @@ export const useWatchSemaphoreProofValidatedEvent =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactory = /*#__PURE__*/ createUseReadContract({
   abi: tokenFactoryAbi,
@@ -2585,21 +2605,9 @@ export const useReadTokenFactory = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"ANONYMOUS_VOTING_DURATION"`
- *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
- */
-export const useReadTokenFactoryAnonymousVotingDuration =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenFactoryAbi,
-    address: tokenFactoryAddress,
-    functionName: 'ANONYMOUS_VOTING_DURATION',
-  })
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"BASE_TOKEN_CREATION_FEE"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBaseTokenCreationFee =
   /*#__PURE__*/ createUseReadContract({
@@ -2611,7 +2619,7 @@ export const useReadTokenFactoryBaseTokenCreationFee =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"BATCH_SIZE"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBatchSize = /*#__PURE__*/ createUseReadContract(
   {
@@ -2622,45 +2630,9 @@ export const useReadTokenFactoryBatchSize = /*#__PURE__*/ createUseReadContract(
 )
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"COUNTING_DURATION"`
- *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
- */
-export const useReadTokenFactoryCountingDuration =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenFactoryAbi,
-    address: tokenFactoryAddress,
-    functionName: 'COUNTING_DURATION',
-  })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"DISPUTE_DURATION"`
- *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
- */
-export const useReadTokenFactoryDisputeDuration =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenFactoryAbi,
-    address: tokenFactoryAddress,
-    functionName: 'DISPUTE_DURATION',
-  })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"INITIAL_VOTING_DURATION"`
- *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
- */
-export const useReadTokenFactoryInitialVotingDuration =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenFactoryAbi,
-    address: tokenFactoryAddress,
-    functionName: 'INITIAL_VOTING_DURATION',
-  })
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"INIT_CHUNK_SIZE"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryInitChunkSize =
   /*#__PURE__*/ createUseReadContract({
@@ -2672,7 +2644,7 @@ export const useReadTokenFactoryInitChunkSize =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"MAX_TOKENS"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryMaxTokens = /*#__PURE__*/ createUseReadContract(
   {
@@ -2685,7 +2657,7 @@ export const useReadTokenFactoryMaxTokens = /*#__PURE__*/ createUseReadContract(
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"MAX_TOP_TOKENS"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryMaxTopTokens =
   /*#__PURE__*/ createUseReadContract({
@@ -2697,7 +2669,7 @@ export const useReadTokenFactoryMaxTopTokens =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"MAX_TOP_TOKENS_PER_BATCH_FOR_INITIAL_VOTING"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryMaxTopTokensPerBatchForInitialVoting =
   /*#__PURE__*/ createUseReadContract({
@@ -2709,7 +2681,7 @@ export const useReadTokenFactoryMaxTopTokensPerBatchForInitialVoting =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"MERKLE_DURATION"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryMerkleDuration =
   /*#__PURE__*/ createUseReadContract({
@@ -2721,7 +2693,7 @@ export const useReadTokenFactoryMerkleDuration =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"MIN_STAKE_AMOUNT"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryMinStakeAmount =
   /*#__PURE__*/ createUseReadContract({
@@ -2733,7 +2705,7 @@ export const useReadTokenFactoryMinStakeAmount =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"OPTIMAL_CHUNKS_PER_TX"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryOptimalChunksPerTx =
   /*#__PURE__*/ createUseReadContract({
@@ -2743,9 +2715,45 @@ export const useReadTokenFactoryOptimalChunksPerTx =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"VOTING_DURATION"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryVotingDuration =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'VOTING_DURATION',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"anonymousResultSubmissionState"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryAnonymousResultSubmissionState =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'anonymousResultSubmissionState',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"anonymousToInitialId"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryAnonymousToInitialId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'anonymousToInitialId',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batchCountingStatus"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBatchCountingStatus =
   /*#__PURE__*/ createUseReadContract({
@@ -2757,7 +2765,7 @@ export const useReadTokenFactoryBatchCountingStatus =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batchInitProgress"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBatchInitProgress =
   /*#__PURE__*/ createUseReadContract({
@@ -2769,7 +2777,7 @@ export const useReadTokenFactoryBatchInitProgress =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batchProgress"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBatchProgress =
   /*#__PURE__*/ createUseReadContract({
@@ -2779,21 +2787,21 @@ export const useReadTokenFactoryBatchProgress =
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batchTokenResults"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batchTokenAnonymousResults"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
-export const useReadTokenFactoryBatchTokenResults =
+export const useReadTokenFactoryBatchTokenAnonymousResults =
   /*#__PURE__*/ createUseReadContract({
     abi: tokenFactoryAbi,
     address: tokenFactoryAddress,
-    functionName: 'batchTokenResults',
+    functionName: 'batchTokenAnonymousResults',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batchTokenVotes"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBatchTokenVotes =
   /*#__PURE__*/ createUseReadContract({
@@ -2805,7 +2813,7 @@ export const useReadTokenFactoryBatchTokenVotes =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"batches"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryBatches = /*#__PURE__*/ createUseReadContract({
   abi: tokenFactoryAbi,
@@ -2814,21 +2822,21 @@ export const useReadTokenFactoryBatches = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"currentInitialVotingBatchId"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"currentSyncedVoting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
-export const useReadTokenFactoryCurrentInitialVotingBatchId =
+export const useReadTokenFactoryCurrentSyncedVoting =
   /*#__PURE__*/ createUseReadContract({
     abi: tokenFactoryAbi,
     address: tokenFactoryAddress,
-    functionName: 'currentInitialVotingBatchId',
+    functionName: 'currentSyncedVoting',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"encryptedVotes"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryEncryptedVotes =
   /*#__PURE__*/ createUseReadContract({
@@ -2840,7 +2848,7 @@ export const useReadTokenFactoryEncryptedVotes =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"getBatchState"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryGetBatchState =
   /*#__PURE__*/ createUseReadContract({
@@ -2852,7 +2860,7 @@ export const useReadTokenFactoryGetBatchState =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"getTokenState"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryGetTokenState =
   /*#__PURE__*/ createUseReadContract({
@@ -2864,7 +2872,7 @@ export const useReadTokenFactoryGetTokenState =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"hasCreatedTokenInBatch"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryHasCreatedTokenInBatch =
   /*#__PURE__*/ createUseReadContract({
@@ -2874,9 +2882,45 @@ export const useReadTokenFactoryHasCreatedTokenInBatch =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"initialToAnonymousId"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryInitialToAnonymousId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'initialToAnonymousId',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"isInitialResultsProcessed"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryIsInitialResultsProcessed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'isInitialResultsProcessed',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"isVoteDecrypted"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryIsVoteDecrypted =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'isVoteDecrypted',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"nullifierHashes"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryNullifierHashes =
   /*#__PURE__*/ createUseReadContract({
@@ -2888,7 +2932,7 @@ export const useReadTokenFactoryNullifierHashes =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"owner"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryOwner = /*#__PURE__*/ createUseReadContract({
   abi: tokenFactoryAbi,
@@ -2899,7 +2943,7 @@ export const useReadTokenFactoryOwner = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"paused"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryPaused = /*#__PURE__*/ createUseReadContract({
   abi: tokenFactoryAbi,
@@ -2908,21 +2952,9 @@ export const useReadTokenFactoryPaused = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"resultsProcessed"`
- *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
- */
-export const useReadTokenFactoryResultsProcessed =
-  /*#__PURE__*/ createUseReadContract({
-    abi: tokenFactoryAbi,
-    address: tokenFactoryAddress,
-    functionName: 'resultsProcessed',
-  })
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"semaphore"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactorySemaphore = /*#__PURE__*/ createUseReadContract(
   {
@@ -2935,7 +2967,7 @@ export const useReadTokenFactorySemaphore = /*#__PURE__*/ createUseReadContract(
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"semaphoreGroups"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactorySemaphoreGroups =
   /*#__PURE__*/ createUseReadContract({
@@ -2947,7 +2979,7 @@ export const useReadTokenFactorySemaphoreGroups =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"tokenBatches"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryTokenBatches =
   /*#__PURE__*/ createUseReadContract({
@@ -2957,9 +2989,21 @@ export const useReadTokenFactoryTokenBatches =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"tokenCreationTime"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryTokenCreationTime =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'tokenCreationTime',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"tokenStates"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryTokenStates =
   /*#__PURE__*/ createUseReadContract({
@@ -2971,7 +3015,7 @@ export const useReadTokenFactoryTokenStates =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"tokenTotalStakes"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryTokenTotalStakes =
   /*#__PURE__*/ createUseReadContract({
@@ -2981,9 +3025,33 @@ export const useReadTokenFactoryTokenTotalStakes =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"totalDecryptedVotes"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryTotalDecryptedVotes =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'totalDecryptedVotes',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"totalEncryptedVotes"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useReadTokenFactoryTotalEncryptedVotes =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    functionName: 'totalEncryptedVotes',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"usedIdentityCommitments"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryUsedIdentityCommitments =
   /*#__PURE__*/ createUseReadContract({
@@ -2995,7 +3063,7 @@ export const useReadTokenFactoryUsedIdentityCommitments =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"userTotalStake"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryUserTotalStake =
   /*#__PURE__*/ createUseReadContract({
@@ -3007,7 +3075,7 @@ export const useReadTokenFactoryUserTotalStake =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"voterDecryptedVotes"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useReadTokenFactoryVoterDecryptedVotes =
   /*#__PURE__*/ createUseReadContract({
@@ -3019,7 +3087,7 @@ export const useReadTokenFactoryVoterDecryptedVotes =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactory = /*#__PURE__*/ createUseWriteContract({
   abi: tokenFactoryAbi,
@@ -3029,7 +3097,7 @@ export const useWriteTokenFactory = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"addMemberToAnonymousVoting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryAddMemberToAnonymousVoting =
   /*#__PURE__*/ createUseWriteContract({
@@ -3039,21 +3107,21 @@ export const useWriteTokenFactoryAddMemberToAnonymousVoting =
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"checkAndUpdateBatchState"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"checkAndUpdateBatchStates"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
-export const useWriteTokenFactoryCheckAndUpdateBatchState =
+export const useWriteTokenFactoryCheckAndUpdateBatchStates =
   /*#__PURE__*/ createUseWriteContract({
     abi: tokenFactoryAbi,
     address: tokenFactoryAddress,
-    functionName: 'checkAndUpdateBatchState',
+    functionName: 'checkAndUpdateBatchStates',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"claimAnonymousStake"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryClaimAnonymousStake =
   /*#__PURE__*/ createUseWriteContract({
@@ -3065,7 +3133,7 @@ export const useWriteTokenFactoryClaimAnonymousStake =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"claimStakedEth"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryClaimStakedEth =
   /*#__PURE__*/ createUseWriteContract({
@@ -3077,7 +3145,7 @@ export const useWriteTokenFactoryClaimStakedEth =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"continueInitialization"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryContinueInitialization =
   /*#__PURE__*/ createUseWriteContract({
@@ -3089,7 +3157,7 @@ export const useWriteTokenFactoryContinueInitialization =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"createTokenAndVote"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryCreateTokenAndVote =
   /*#__PURE__*/ createUseWriteContract({
@@ -3101,7 +3169,7 @@ export const useWriteTokenFactoryCreateTokenAndVote =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"finalizeCounting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryFinalizeCounting =
   /*#__PURE__*/ createUseWriteContract({
@@ -3113,7 +3181,7 @@ export const useWriteTokenFactoryFinalizeCounting =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"initializeBatchCounting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryInitializeBatchCounting =
   /*#__PURE__*/ createUseWriteContract({
@@ -3125,7 +3193,7 @@ export const useWriteTokenFactoryInitializeBatchCounting =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"pause"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryPause = /*#__PURE__*/ createUseWriteContract({
   abi: tokenFactoryAbi,
@@ -3136,7 +3204,7 @@ export const useWriteTokenFactoryPause = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"processNextBatch"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryProcessNextBatch =
   /*#__PURE__*/ createUseWriteContract({
@@ -3148,7 +3216,7 @@ export const useWriteTokenFactoryProcessNextBatch =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"renounceOwnership"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryRenounceOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -3160,7 +3228,7 @@ export const useWriteTokenFactoryRenounceOwnership =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"setBatchParameters"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactorySetBatchParameters =
   /*#__PURE__*/ createUseWriteContract({
@@ -3172,7 +3240,7 @@ export const useWriteTokenFactorySetBatchParameters =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"submitAnonymousResults"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactorySubmitAnonymousResults =
   /*#__PURE__*/ createUseWriteContract({
@@ -3184,7 +3252,7 @@ export const useWriteTokenFactorySubmitAnonymousResults =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"submitAnonymousVote"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactorySubmitAnonymousVote =
   /*#__PURE__*/ createUseWriteContract({
@@ -3196,7 +3264,7 @@ export const useWriteTokenFactorySubmitAnonymousVote =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"submitDecryptedVotesBatch"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactorySubmitDecryptedVotesBatch =
   /*#__PURE__*/ createUseWriteContract({
@@ -3208,7 +3276,7 @@ export const useWriteTokenFactorySubmitDecryptedVotesBatch =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"transferOwnership"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryTransferOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -3220,7 +3288,7 @@ export const useWriteTokenFactoryTransferOwnership =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"unpause"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryUnpause = /*#__PURE__*/ createUseWriteContract(
   {
@@ -3233,7 +3301,7 @@ export const useWriteTokenFactoryUnpause = /*#__PURE__*/ createUseWriteContract(
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"voteWithEth"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWriteTokenFactoryVoteWithEth =
   /*#__PURE__*/ createUseWriteContract({
@@ -3245,7 +3313,7 @@ export const useWriteTokenFactoryVoteWithEth =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactory = /*#__PURE__*/ createUseSimulateContract({
   abi: tokenFactoryAbi,
@@ -3255,7 +3323,7 @@ export const useSimulateTokenFactory = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"addMemberToAnonymousVoting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryAddMemberToAnonymousVoting =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3265,21 +3333,21 @@ export const useSimulateTokenFactoryAddMemberToAnonymousVoting =
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"checkAndUpdateBatchState"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"checkAndUpdateBatchStates"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
-export const useSimulateTokenFactoryCheckAndUpdateBatchState =
+export const useSimulateTokenFactoryCheckAndUpdateBatchStates =
   /*#__PURE__*/ createUseSimulateContract({
     abi: tokenFactoryAbi,
     address: tokenFactoryAddress,
-    functionName: 'checkAndUpdateBatchState',
+    functionName: 'checkAndUpdateBatchStates',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"claimAnonymousStake"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryClaimAnonymousStake =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3291,7 +3359,7 @@ export const useSimulateTokenFactoryClaimAnonymousStake =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"claimStakedEth"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryClaimStakedEth =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3303,7 +3371,7 @@ export const useSimulateTokenFactoryClaimStakedEth =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"continueInitialization"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryContinueInitialization =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3315,7 +3383,7 @@ export const useSimulateTokenFactoryContinueInitialization =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"createTokenAndVote"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryCreateTokenAndVote =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3327,7 +3395,7 @@ export const useSimulateTokenFactoryCreateTokenAndVote =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"finalizeCounting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryFinalizeCounting =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3339,7 +3407,7 @@ export const useSimulateTokenFactoryFinalizeCounting =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"initializeBatchCounting"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryInitializeBatchCounting =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3351,7 +3419,7 @@ export const useSimulateTokenFactoryInitializeBatchCounting =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"pause"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryPause =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3363,7 +3431,7 @@ export const useSimulateTokenFactoryPause =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"processNextBatch"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryProcessNextBatch =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3375,7 +3443,7 @@ export const useSimulateTokenFactoryProcessNextBatch =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"renounceOwnership"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryRenounceOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3387,7 +3455,7 @@ export const useSimulateTokenFactoryRenounceOwnership =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"setBatchParameters"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactorySetBatchParameters =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3399,7 +3467,7 @@ export const useSimulateTokenFactorySetBatchParameters =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"submitAnonymousResults"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactorySubmitAnonymousResults =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3411,7 +3479,7 @@ export const useSimulateTokenFactorySubmitAnonymousResults =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"submitAnonymousVote"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactorySubmitAnonymousVote =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3423,7 +3491,7 @@ export const useSimulateTokenFactorySubmitAnonymousVote =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"submitDecryptedVotesBatch"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactorySubmitDecryptedVotesBatch =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3435,7 +3503,7 @@ export const useSimulateTokenFactorySubmitDecryptedVotesBatch =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"transferOwnership"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryTransferOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3447,7 +3515,7 @@ export const useSimulateTokenFactoryTransferOwnership =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"unpause"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryUnpause =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3459,7 +3527,7 @@ export const useSimulateTokenFactoryUnpause =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenFactoryAbi}__ and `functionName` set to `"voteWithEth"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useSimulateTokenFactoryVoteWithEth =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3471,7 +3539,7 @@ export const useSimulateTokenFactoryVoteWithEth =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3482,7 +3550,7 @@ export const useWatchTokenFactoryEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"AnonymousMemberRegistered"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryAnonymousMemberRegisteredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3494,7 +3562,7 @@ export const useWatchTokenFactoryAnonymousMemberRegisteredEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"AnonymousResultsSubmitted"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryAnonymousResultsSubmittedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3506,7 +3574,7 @@ export const useWatchTokenFactoryAnonymousResultsSubmittedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"AnonymousStakeClaimed"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryAnonymousStakeClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3518,7 +3586,7 @@ export const useWatchTokenFactoryAnonymousStakeClaimedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"AnonymousVoteSubmitted"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryAnonymousVoteSubmittedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3530,7 +3598,7 @@ export const useWatchTokenFactoryAnonymousVoteSubmittedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"BatchCountingFinalized"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryBatchCountingFinalizedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3542,7 +3610,7 @@ export const useWatchTokenFactoryBatchCountingFinalizedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"BatchCountingStateUpdate"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryBatchCountingStateUpdateEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3554,7 +3622,7 @@ export const useWatchTokenFactoryBatchCountingStateUpdateEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"BatchInitializationProgress"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryBatchInitializationProgressEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3566,7 +3634,7 @@ export const useWatchTokenFactoryBatchInitializationProgressEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"BatchStateUpdated"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryBatchStateUpdatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3578,7 +3646,7 @@ export const useWatchTokenFactoryBatchStateUpdatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"DecryptedVoteRecorded"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryDecryptedVoteRecordedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3590,7 +3658,7 @@ export const useWatchTokenFactoryDecryptedVoteRecordedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"HeapProcessingUpdate"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryHeapProcessingUpdateEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3602,7 +3670,7 @@ export const useWatchTokenFactoryHeapProcessingUpdateEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"InitialVoteSubmitted"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryInitialVoteSubmittedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3614,7 +3682,7 @@ export const useWatchTokenFactoryInitialVoteSubmittedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"OwnershipTransferred"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3626,7 +3694,7 @@ export const useWatchTokenFactoryOwnershipTransferredEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"Paused"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryPausedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3638,7 +3706,7 @@ export const useWatchTokenFactoryPausedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"StakeClaimed"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryStakeClaimedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3650,7 +3718,7 @@ export const useWatchTokenFactoryStakeClaimedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"StakeWithdrawn"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryStakeWithdrawnEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3660,9 +3728,21 @@ export const useWatchTokenFactoryStakeWithdrawnEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"SynchronizedBatchStateUpdate"`
+ *
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
+ */
+export const useWatchTokenFactorySynchronizedBatchStateUpdateEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tokenFactoryAbi,
+    address: tokenFactoryAddress,
+    eventName: 'SynchronizedBatchStateUpdate',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"TokenCreated"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryTokenCreatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3674,7 +3754,7 @@ export const useWatchTokenFactoryTokenCreatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"TokenStateUpdated"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryTokenStateUpdatedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3686,7 +3766,7 @@ export const useWatchTokenFactoryTokenStateUpdatedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"Unpaused"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
 export const useWatchTokenFactoryUnpausedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -3696,13 +3776,13 @@ export const useWatchTokenFactoryUnpausedEvent =
   })
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"VoteSkipped"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenFactoryAbi}__ and `eventName` set to `"VotingPhaseTransition"`
  *
- * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0x771f76df1751efcb5e3befb8d744555da9157f36)
+ * [__View Contract on Arbitrum Sepolia Arbiscan__](https://sepolia.arbiscan.io/address/0xfb0c638F62A281eB5551bd462990d68694CA57Ab)
  */
-export const useWatchTokenFactoryVoteSkippedEvent =
+export const useWatchTokenFactoryVotingPhaseTransitionEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: tokenFactoryAbi,
     address: tokenFactoryAddress,
-    eventName: 'VoteSkipped',
+    eventName: 'VotingPhaseTransition',
   })

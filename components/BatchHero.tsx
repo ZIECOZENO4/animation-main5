@@ -3,12 +3,8 @@
 
 "use client";
 
-import { Search } from 'lucide-react';
 import { Button } from '@nextui-org/react';
-import { Input } from '@nextui-org/react';
-import { Skeleton } from "@nextui-org/react";
 import { useRouter } from 'next/navigation';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import React, { useEffect, useState } from 'react';
 import { BatchState, FormattedBatchMetrics, useLatestBatchMetrics } from '@/hooks/useFetchLatestBatch';

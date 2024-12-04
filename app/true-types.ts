@@ -1,0 +1,8 @@
+export enum BatchState {
+    INACTIVE,
+    INITIAL_VOTING,
+    INITIAL_COUNTING,
+    ANONYMOUS_VOTING,
+    ANONYMOUS_COUNTING,
+    COMPLETED
+}
