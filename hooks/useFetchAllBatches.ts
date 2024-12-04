@@ -4,9 +4,9 @@ import { gql, request, ClientError } from 'graphql-request'
 import { GRAPH_API_URL } from '@/constants'
 import { getStateLabel, isActiveVotingState } from './useFetchLatestBatch'
 import { formatUnits } from 'viem'
-import { BatchDurations, getPhaseInfo } from '@/hooks/useContractConstants'
+import { getPhaseInfo } from '@/hooks/useContractConstants'
 import { useMemo } from 'react'
-import { BatchState } from './useFetchABatch'
+import { BatchState } from '@/app/true-types'
 
 const ITEMS_PER_PAGE = 10
 
@@ -26,19 +26,17 @@ const AllBatchesMetricsQuery = gql`
       tokens {
         id
         address
-        totalVotes
-        totalStaked
+  
       }
       initialVotingData {
-        totalVotes
-        totalStaked
+        totalInitialVotes
+        totalInitialStaked
         resultsSubmitted
         topTokens
         votes {
           id
           amount
-          totalStaked
-          totalVotes
+       
         }
         withdrawals {
           id
@@ -79,14 +77,13 @@ const AllBatchesMetricsQuery = gql`
         }
       }
       anonymousVotingData {
-        totalVotes
-        totalStaked
+        totalAnonymousVotes
+        totalAnonymousStaked
         resultsSubmitted
         topTokens
         votes {
           id
-          totalStaked
-          totalVotes
+       
           stakeAmount
         }
         decryptedVotes {
@@ -108,7 +105,6 @@ const AllBatchesMetricsQuery = gql`
   }
 `
 
-// Types for batch counting states
 interface BatchCountingState {
     id: string
     previousState: number
@@ -147,39 +143,26 @@ interface FinalResult {
 }
 
 interface VotingPhaseData {
-    totalVotes: string
-    totalStaked: string
+    totalInitialVotes?: string
+    totalInitialStaked?: string
+    totalAnonymousVotes?: string
+    totalAnonymousStaked?: string
     resultsSubmitted: boolean
     topTokens: string[]
     votes: {
         id: string
-        totalStaked: string
-        totalVotes: string
+
         amount?: string
         stakeAmount?: string
     }[]
-    withdrawals?: {
-        id: string
-        amount: string
-    }[]
+    withdrawals?: { id: string; amount: string }[]
     batchCountingStates: BatchCountingState[]
     batchInitializations: BatchInitialization[]
     heapUpdates: HeapUpdate[]
     finalResults: FinalResult[]
-    memberRegistrations?: {
-        id: string
-        identityCommitment: string
-        timestamp: string
-    }[]
-    stakeClaims?: {
-        id: string
-        amountClaimed: string
-        timestamp: string
-    }[]
-    decryptedVotes?: {
-        id: string
-        stakedAmount: string
-    }[]
+    memberRegistrations?: { id: string; identityCommitment: string; timestamp: string }[]
+    stakeClaims?: { id: string; amountClaimed: string; timestamp: string }[]
+    decryptedVotes?: { id: string; stakedAmount: string }[]
 }
 
 interface BatchMetrics {
@@ -191,8 +174,7 @@ interface BatchMetrics {
     tokens: {
         id: string
         address: string
-        totalVotes: string
-        totalStaked: string
+
     }[]
     initialVotingData: VotingPhaseData
     anonymousVotingData: VotingPhaseData
@@ -202,7 +184,6 @@ interface BatchesQueryResponse {
     batches: BatchMetrics[]
 }
 
-// Processing states interfaces
 interface ProcessingState {
     current: number
     total: number
@@ -224,7 +205,6 @@ interface BatchProcessingStates {
     }
 }
 
-// Formatted types
 interface FormattedVotingPhase {
     totalVotes: number
     totalStaked: number
@@ -241,7 +221,7 @@ interface FormattedVotingPhase {
 export interface FormattedBatch {
     id: string
     batchId: number
-    state: string
+    state: BatchState
     stateNumber: number
     isVotingActive: boolean
     createdAt: Date
@@ -252,7 +232,11 @@ export interface FormattedBatch {
     anonymousVoting: FormattedVotingPhase
 }
 
-function formatVotingPhase(data: VotingPhaseData | null | undefined): FormattedVotingPhase {
+interface QueryPageData {
+    pageParam?: number
+}
+
+function formatVotingPhase(data: VotingPhaseData | null | undefined, phase: 'initial' | 'anonymous'): FormattedVotingPhase {
     if (!data) {
         return {
             totalVotes: 0,
@@ -268,14 +252,27 @@ function formatVotingPhase(data: VotingPhaseData | null | undefined): FormattedV
         }
     }
 
-    const totalVotes = Number(data?.totalVotes ?? '0')
-    const totalStaked = parseFloat(formatUnits(BigInt(data?.totalStaked ?? '0'), 18))
-    const voteCount = data?.votes?.length ?? 0
-    const processingStates: BatchProcessingStates = {}
+    const totalVotes = phase === 'initial'
+        ? Number(data?.totalInitialVotes ?? '0')
+        : Number(data?.totalAnonymousVotes ?? '0');
+
+    const totalStaked = parseFloat(
+        formatUnits(
+            BigInt(
+                phase === 'initial'
+                    ? data?.totalInitialStaked ?? '0'
+                    : data?.totalAnonymousStaked ?? '0'
+            ),
+            18
+        )
+    );
+
+    const voteCount = data?.votes?.length ?? 0;
+    const processingStates: BatchProcessingStates = {};
 
     // Format counting state
     if (data.batchCountingStates?.length > 0) {
-        const latestCount = data.batchCountingStates[0]
+        const latestCount = data.batchCountingStates[0];
         if (latestCount) {
             processingStates.counting = {
                 current: Number(latestCount.processedCount ?? '0'),
@@ -290,7 +287,7 @@ function formatVotingPhase(data: VotingPhaseData | null | undefined): FormattedV
 
     // Format initialization state
     if (data.batchInitializations?.length > 0) {
-        const latestInit = data.batchInitializations[0]
+        const latestInit = data.batchInitializations[0];
         if (latestInit) {
             processingStates.initialization = {
                 current: Number(latestInit.batchesProcessed ?? '0'),
@@ -305,11 +302,11 @@ function formatVotingPhase(data: VotingPhaseData | null | undefined): FormattedV
 
     // Format heap processing state
     if (data.heapUpdates?.length > 0) {
-        const latestHeap = data.heapUpdates[0]
+        const latestHeap = data.heapUpdates[0];
         if (latestHeap) {
-            const processed = Number(latestHeap.processedTokens ?? '0')
-            const remaining = Number(latestHeap.remainingTokens ?? '0')
-            const total = processed + remaining
+            const processed = Number(latestHeap.processedTokens ?? '0');
+            const remaining = Number(latestHeap.remainingTokens ?? '0');
+            const total = processed + remaining;
             processingStates.heap = {
                 current: processed,
                 total,
@@ -321,7 +318,7 @@ function formatVotingPhase(data: VotingPhaseData | null | undefined): FormattedV
 
     // Format final results
     if (data.finalResults?.length > 0) {
-        const final = data.finalResults[0]
+        const final = data.finalResults[0];
         if (final) {
             processingStates.final = {
                 topTokens: final.finalTopTokens ?? [],
@@ -347,99 +344,52 @@ function formatVotingPhase(data: VotingPhaseData | null | undefined): FormattedV
         processingStates
     }
 }
-
 function calculateTimeMetrics(batch: BatchMetrics, duration: number) {
-    const currentTime = Math.floor(Date.now() / 1000)
-    const stateStartTime = parseInt(batch.stateUpdatedAt ?? '0')
-    const elapsedTime = currentTime - stateStartTime
-    const progress = Math.min((elapsedTime / duration) * 100, 100)
-    return { progress }
+    const currentTime = Math.floor(Date.now() / 1000);
+    const stateStartTime = parseInt(batch.stateUpdatedAt ?? '0');
+    const elapsedTime = currentTime - stateStartTime;
+
+    // Only calculate progress for voting states
+    const isVotingState = batch.state === BatchState.INITIAL_VOTING ||
+        batch.state === BatchState.ANONYMOUS_VOTING;
+
+    const progress = isVotingState
+        ? Math.min((elapsedTime / duration) * 100, 100)
+        : 0; // Return 0 progress for non-voting states
+
+    return { progress };
 }
 
-function formatBatchMetrics(batch: BatchMetrics, durations: BatchDurations): FormattedBatch {
-    const phaseInfo = getPhaseInfo(batch.state ?? 0, durations)
-    const { progress } = calculateTimeMetrics(batch, phaseInfo.duration)
+function formatBatchMetrics(batch: BatchMetrics, durations: bigint | undefined): FormattedBatch {
+    const phaseInfo = getPhaseInfo(batch.state ?? 0, durations);
+    const { progress } = calculateTimeMetrics(batch, phaseInfo.duration);
+    const batchState = (batch.state ?? 0) as BatchState;
+    const showProgress = batchState === BatchState.INITIAL_VOTING ||
+        batchState === BatchState.ANONYMOUS_VOTING;
 
     return {
         id: batch.id ?? '',
         batchId: parseInt(batch.batchId ?? '0'),
-        state: getStateLabel(batch.state ?? 0),
-        stateNumber: (batch.state ?? 0) as BatchState,
-        isVotingActive: isActiveVotingState(batch.state ?? 0),
+        state: batchState,
+        stateNumber: batchState,
+        isVotingActive: isActiveVotingState(batchState),
         createdAt: new Date(parseInt(batch.createdAt ?? '0') * 1000),
         stateUpdatedAt: new Date(parseInt(batch.stateUpdatedAt ?? '0') * 1000),
-        progress,
+        progress: showProgress ? progress : 0,
         totalTokens: batch.tokens?.length ?? 0,
-        initialVoting: formatVotingPhase(batch.initialVotingData),
-        anonymousVoting: formatVotingPhase(batch.anonymousVotingData)
-    }
+        initialVoting: formatVotingPhase(batch.initialVotingData, 'initial'),
+        anonymousVoting: formatVotingPhase(batch.anonymousVotingData, 'anonymous')
+    };
 }
-interface QueryPageData {
-    pageParam?: number
-}
-// export function useAllBatchesMetrics(durations: BatchDurations | null) {
-//     const areDurationsAvailable = useMemo(() => {
-//         if (!durations) return false
-//         return Object.values(durations).some(duration => duration > 0n)
-//     }, [durations])
-
-//     return useInfiniteQuery({
-//         queryKey: ['allBatchesMetrics'],
-//         queryFn: async ({ pageParam = 0 }: QueryPageData) => {
-//             try {
-//                 const result = await request<BatchesQueryResponse>(
-//                     GRAPH_API_URL,
-//                     AllBatchesMetricsQuery,
-//                     {
-//                         skip: pageParam * ITEMS_PER_PAGE,
-//                         first: ITEMS_PER_PAGE,
-//                     }
-//                 )
-
-//                 // Add debug logging in development
-//                 if (process.env.NODE_ENV === 'development') {
-//                     console.log('GraphQL Response:', JSON.stringify(result, null, 2))
-//                 }
-
-//                 return {
-//                     batches: (result?.batches ?? []).map(batch => formatBatchMetrics(batch, durations!)),
-//                     nextPage: (result?.batches?.length ?? 0) === ITEMS_PER_PAGE ? pageParam + 1 : undefined,
-//                 }
-//             } catch (error) {
-//                 if (error instanceof ClientError) {
-//                     console.error('GraphQL error:', error.response.errors)
-//                     throw new Error(
-//                         `GraphQL error: ${error.response.errors?.[0]?.message || 'Unknown error'}`
-//                     )
-//                 }
-//                 console.error('Unexpected error:', error)
-//                 throw new Error('An unexpected error occurred while fetching batch metrics')
-//             }
-//         },
-//         getNextPageParam: (lastPage) => lastPage.nextPage,
-//         enabled: !!areDurationsAvailable,
-//         initialPageParam: 0,
-//         retry: 10,
-//         retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 100000),
-//     })
-// }
-
-export function useAllBatchesMetrics(durations: BatchDurations | null) {
+export function useAllBatchesMetrics(durations: bigint | undefined) {
     const areDurationsAvailable = useMemo(() => {
         if (!durations) return false
-        return Object.values(durations).some(duration => duration > 0n)
+        return Number(durations) > 0
     }, [durations])
 
-    const {
-        data,
-        isLoading,
-        isError,
-        hasNextPage,
-        fetchNextPage,
-        isFetchingNextPage
-    } = useInfiniteQuery({
+    return useInfiniteQuery({
         queryKey: ['allBatchesMetrics'],
-        queryFn: async ({ pageParam = 0 }) => {
+        queryFn: async ({ pageParam = 0 }: QueryPageData) => {
             try {
                 const result = await request<BatchesQueryResponse>(
                     GRAPH_API_URL,
@@ -450,13 +400,13 @@ export function useAllBatchesMetrics(durations: BatchDurations | null) {
                     }
                 )
 
+                if (process.env.NODE_ENV === 'development') {
+                    console.log('GraphQL Response:', JSON.stringify(result, null, 2))
+                }
+
                 return {
-                    batches: (result?.batches ?? []).map(batch => 
-                        formatBatchMetrics(batch, durations!)
-                    ),
-                    nextPage: (result?.batches?.length ?? 0) === ITEMS_PER_PAGE 
-                        ? pageParam + 1 
-                        : undefined,
+                    batches: (result?.batches ?? []).map(batch => formatBatchMetrics(batch, durations!)),
+                    nextPage: (result?.batches?.length ?? 0) === ITEMS_PER_PAGE ? pageParam + 1 : undefined,
                 }
             } catch (error) {
                 if (error instanceof ClientError) {
@@ -465,34 +415,14 @@ export function useAllBatchesMetrics(durations: BatchDurations | null) {
                         `GraphQL error: ${error.response.errors?.[0]?.message || 'Unknown error'}`
                     )
                 }
-                throw error
+                console.error('Unexpected error:', error)
+                throw new Error('An unexpected error occurred while fetching batch metrics')
             }
         },
         getNextPageParam: (lastPage) => lastPage.nextPage,
         enabled: !!areDurationsAvailable,
         initialPageParam: 0,
-        staleTime: 30000,
-        refetchOnWindowFocus: false,
-        retry: 10,
-        retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 100000),
+        retry: 3,
+        retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     })
-
-    const formattedData = useMemo(() => {
-        if (!data) {
-            return {
-                pages: [],
-                pageParams: []
-            }
-        }
-        return data
-    }, [data])
-
-    return {
-        data: formattedData,
-        isLoading,
-        isError,
-        hasNextPage,
-        fetchNextPage,
-        isFetchingNextPage
-    }
 }
