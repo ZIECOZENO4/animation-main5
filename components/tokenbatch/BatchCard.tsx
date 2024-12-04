@@ -76,29 +76,28 @@ export const BatchCard: React.FC<BatchCardProps> = ({ batch }) => {
             return
         }
 
-        // For INITIAL_VOTING and QUEUE states
-        if (batch.stateNumber === BatchState.INITIAL_VOTING ||
-            batch.stateNumber === BatchState.QUEUE) {
-            router.push(`/batch/${batch.batchId}`)
-            return
-        }
+ 
+if (batch.stateNumber === BatchState.INITIAL_VOTING ||
+    batch.stateNumber === BatchState.INITIAL_COUNTING) { 
+    router.push(`/batch/${batch.batchId}`)
+    return
+}
     }
 
     const handleCountResult = () => {
         toast.info("counting result function called")
     }
 
-    // If the phase is Queue, render the QueueCard
-    if (batch.stateNumber === BatchState.QUEUE) {
-        return (
-            <QueueCard
-                batch={batch}
-                phaseInfo={phaseInfo}
-                stakedValueUSD={stakedValueUSD}
-                onCountResult={handleCountResult}
-            />
-        )
-    }
+if (batch.stateNumber === BatchState.INITIAL_COUNTING) {
+    return (
+        <QueueCard
+            batch={batch} 
+            phaseInfo={phaseInfo} 
+            stakedValueUSD={stakedValueUSD} 
+            onCountResult={handleCountResult} 
+        />
+    )
+}
 
     return (
         <Card
