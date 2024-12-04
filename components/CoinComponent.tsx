@@ -61,7 +61,6 @@ interface FormattedToken {
   };
 }
 
-
 interface ChainData {
   key: string
   name: string
@@ -108,41 +107,6 @@ interface BatchesQueryResponse {
             withdrawals?: Array<{ id: string }>;
         }>;
     }>;
-}
-
-interface FormattedToken {
-    id: string;
-    address: string;
-    state: number;
-    batchId: string;
-    batchState: number;
-    name: string;
-    symbol: string;
-    description: string;
-    imageUrl: string;
-    metrics: {
-        initialVoting: {
-            totalVotes: string;
-            totalStaked: string;
-            votesCount: number;
-            withdrawalsCount: number;
-            stakePercentage: string;
-        };
-        anonymousVoting: {
-            totalVotes: string;
-            totalStaked: string;
-            votesCount: number;
-            withdrawalsCount: number;
-            stakePercentage: string;
-        };
-    };
-    creator: string;
-    creationFee: string;
-    social: {
-        twitter: string;
-        telegram: string;
-        website: string;
-    };
 }
 
 // Interfaces from the hook
@@ -413,7 +377,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
     color: "#F7F2DA"
   }}
 >
-  {Number(token.metrics.initialVoting.totalStaked).toFixed(10)}
+{Number(token.metrics.totalInitialStaked).toFixed(10)}
 </p>
                       </motion.div>
                       <motion.div
@@ -534,42 +498,33 @@ export default function ComponentCoin() {
                 }
             );
 
-            const formattedTokens = result.batches.flatMap(batch => 
-                batch.tokens.map(token => ({
-                    id: token.id,
-                    address: token.address,
-                    state: token.state,
-                    batchId: batch.id,
-                    batchState: batch.state,
-                    name: token.details.name,
-                    symbol: token.details.symbol,
-                    description: token.details.description,
-                    imageUrl: token.details.imageUrl,
-                    metrics: {
-                        initialVoting: {
-                            totalVotes: formatUnits(BigInt(token.totalVotes), 18),
-                            totalStaked: formatUnits(BigInt(token.totalStaked), 18),
-                            votesCount: token.votes?.length ?? 0,
-                            withdrawalsCount: token.withdrawals?.length ?? 0,
-                            stakePercentage: calculatePercentage(token.totalStaked, batch.initialVotingData.totalStaked)
-                        },
-                        anonymousVoting: {
-                            totalVotes: formatUnits(BigInt(batch.anonymousVotingData.totalVotes), 18),
-                            totalStaked: formatUnits(BigInt(batch.anonymousVotingData.totalStaked), 18),
-                            votesCount: token.votes?.length ?? 0,
-                            withdrawalsCount: token.withdrawals?.length ?? 0,
-                            stakePercentage: calculatePercentage(token.totalStaked, batch.anonymousVotingData.totalStaked)
-                        }
-                    },
-                    creator: token.details.creator,
-                    creationFee: formatUnits(BigInt(token.details.creationFee), 18),
-                    social: {
-                        twitter: token.details.twitter,
-                        telegram: token.details.telegram,
-                        website: token.details.website
-                    }
-                }))
-            );
+            const formattedTokens = result.batches.flatMap(batch => batch.tokens.map(token => ({
+              id: token.id,
+              address: token.address,
+              state: token.state,
+              batchId: batch.id,
+              batchState: batch.state,
+              name: token.details.name,
+              symbol: token.details.symbol,
+              description: token.details.description,
+              imageUrl: token.details.imageUrl,
+              metrics: {
+                totalInitialVotes: formatUnits(BigInt(token.totalInitialVotes), 18),
+                totalInitialStaked: formatUnits(BigInt(token.totalInitialStaked), 18),
+                totalAnonymousVotes: formatUnits(BigInt(token.totalAnonymousVotes), 18),
+                totalAnonymousStaked: formatUnits(BigInt(token.totalAnonymousStaked), 18),
+                votesCount: token.votes?.length ?? 0,
+                withdrawalsCount: token.withdrawals?.length ?? 0,
+                stakePercentage: calculatePercentage(token.totalInitialStaked, batch.initialVotingData.totalInitialStaked)
+              },
+              creator: token.details.creator,
+              creationFee: formatUnits(BigInt(token.details.creationFee), 18),
+              social: {
+                twitter: token.details.twitter,
+                telegram: token.details.telegram,
+                website: token.details.website
+              }
+            })));
 
             return {
                 tokens: formattedTokens,
