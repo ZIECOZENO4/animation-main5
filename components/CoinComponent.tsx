@@ -31,6 +31,7 @@ import { formatUnits } from 'viem';
 
 type TabType = 'Initial' | 'Anonymous';
 
+// Update the TokenMetrics interface
 interface TokenMetrics {
   totalInitialVotes: string;
   totalInitialStaked: string;
@@ -41,6 +42,7 @@ interface TokenMetrics {
   stakePercentage: string;
 }
 
+// Update the FormattedToken interface
 interface FormattedToken {
   id: string;
   address: string;
@@ -108,6 +110,79 @@ interface BatchesQueryResponse {
         }>;
     }>;
 }
+
+interface VotingData {
+  initialVotes: string;
+  initialStaked: string;
+}
+
+interface AnonymousVotingData {
+  anonymousVotes: string;
+  anonymousStaked: string;
+}
+
+// Update the token interface to include voting properties
+interface Token {
+  id: string;
+  address: string;
+  state: number;
+  totalVotes: string;
+  totalStaked: string;
+  initialVoting: VotingData;
+  anonymousVoting: AnonymousVotingData;
+  details: {
+    name: string;
+    symbol: string;
+    description: string;
+    imageUrl: string;
+    twitter: string;
+    telegram: string;
+    website: string;
+    creator: string;
+    creationFee: string;
+  };
+  votes?: { id: string }[];
+  withdrawals?: { id: string }[];
+}
+
+interface BatchToken {
+  id: string;
+  address: string;
+  state: number;
+  totalVotes: string;
+  totalStaked: string;
+  initialVoting: {
+    initialVotes: string;
+    initialStaked: string;
+  };
+  anonymousVoting: {
+    anonymousVotes: string;
+    anonymousStaked: string;
+  };
+  details: {
+    name: string;
+    symbol: string;
+    description: string;
+    imageUrl: string;
+    twitter: string;
+    telegram: string;
+    website: string;
+    creator: string;
+    creationFee: string;
+  };
+  votes?: { id: string }[];
+  withdrawals?: { id: string }[];
+}
+
+interface Batch {
+  id: string;
+  state: number;
+  initialVotingData: {
+    totalInitialStaked: string;
+  };
+  tokens: BatchToken[];
+}
+
 
 // Interfaces from the hook
 interface TokenDetails {
@@ -478,79 +553,79 @@ export default function ComponentCoin() {
   const handleTabClick = (tab: 'Initial' | 'Anonymous') => {
       setActiveTab(tab);
   };
-  const { 
-    data, 
-    fetchNextPage, 
-    hasNextPage, 
-    isFetchingNextPage, 
-    status 
-} = useInfiniteQuery({
-    queryKey: ['allTokens'],
-    initialPageParam: 0,
-    queryFn: async ({ pageParam = 0 }) => {
-        try {
-            const result = await request<BatchesQueryResponse>(
-                GRAPH_API_URL,
-                GetAllBatchesTokensQuery,
-                {
-                    skip: pageParam * TOKENS_PER_PAGE,
-                    first: TOKENS_PER_PAGE,
-                }
-            );
 
-            const formattedTokens = result.batches.flatMap(batch => batch.tokens.map(token => ({
-              id: token.id,
-              address: token.address,
-              state: token.state,
-              batchId: batch.id,
-              batchState: batch.state,
-              name: token.details.name,
-              symbol: token.details.symbol,
-              description: token.details.description,
-              imageUrl: token.details.imageUrl,
-              metrics: {
-                totalInitialVotes: formatUnits(BigInt(token.totalInitialVotes), 18),
-                totalInitialStaked: formatUnits(BigInt(token.totalInitialStaked), 18),
-                totalAnonymousVotes: formatUnits(BigInt(token.totalAnonymousVotes), 18),
-                totalAnonymousStaked: formatUnits(BigInt(token.totalAnonymousStaked), 18),
-                votesCount: token.votes?.length ?? 0,
-                withdrawalsCount: token.withdrawals?.length ?? 0,
-                stakePercentage: calculatePercentage(token.totalInitialStaked, batch.initialVotingData.totalInitialStaked)
-              },
-              creator: token.details.creator,
-              creationFee: formatUnits(BigInt(token.details.creationFee), 18),
-              social: {
-                twitter: token.details.twitter,
-                telegram: token.details.telegram,
-                website: token.details.website
-              }
-            })));
-
-            return {
-                tokens: formattedTokens,
-                nextPage: formattedTokens.length === TOKENS_PER_PAGE ? pageParam + 1 : undefined,
-            };
-        } catch (error) {
-            if (error instanceof ClientError) {
-                console.error('GraphQL error:', error.response.errors);
-                throw new Error(`GraphQL error: ${error.response.errors?.[0]?.message || 'Unknown error'}`);
-            }
-            throw error;
+const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery({
+  queryKey: ['allTokens'],
+  initialPageParam: 0,
+  queryFn: async ({ pageParam = 0 }) => {
+    try {
+      const result = await request<{ batches: Batch[] }>(
+        GRAPH_API_URL,
+        GetAllBatchesTokensQuery,
+        {
+          skip: pageParam * TOKENS_PER_PAGE,
+          first: TOKENS_PER_PAGE,
         }
-    },
-    getNextPageParam: (lastPage) => lastPage.nextPage,
+      );
+
+      const formattedTokens = result.batches.flatMap((batch: Batch) => 
+        batch.tokens.map((token: BatchToken) => ({
+          id: token.id,
+          address: token.address,
+          state: token.state,
+          batchId: batch.id,
+          batchState: batch.state,
+          name: token.details.name,
+          symbol: token.details.symbol,
+          description: token.details.description,
+          imageUrl: token.details.imageUrl,
+          metrics: {
+            totalInitialVotes: formatUnits(BigInt(token.initialVoting.initialVotes), 18),
+            totalInitialStaked: formatUnits(BigInt(token.initialVoting.initialStaked), 18),
+            totalAnonymousVotes: formatUnits(BigInt(token.anonymousVoting.anonymousVotes), 18),
+            totalAnonymousStaked: formatUnits(BigInt(token.anonymousVoting.anonymousStaked), 18),
+            votesCount: token.votes?.length ?? 0,
+            withdrawalsCount: token.withdrawals?.length ?? 0,
+            stakePercentage: calculatePercentage(
+              token.initialVoting.initialStaked,
+              batch.initialVotingData.totalInitialStaked
+            )
+          },
+          creator: token.details.creator,
+          creationFee: formatUnits(BigInt(token.details.creationFee), 18),
+          social: {
+            twitter: token.details.twitter,
+            telegram: token.details.telegram,
+            website: token.details.website
+          }
+        }))
+      );
+
+      return {
+        tokens: formattedTokens,
+        nextPage: formattedTokens.length === TOKENS_PER_PAGE ? pageParam + 1 : undefined,
+      };
+    } catch (error) {
+      if (error instanceof ClientError) {
+        console.error('GraphQL error:', error.response.errors);
+        throw new Error(`GraphQL error: ${error.response.errors?.[0]?.message || 'Unknown error'}`);
+      }
+      throw error;
+    }
+  },
+  getNextPageParam: (lastPage) => lastPage.nextPage,
 });
 
 const allTokens = data?.pages.flatMap(page => page.tokens) || [];
 
-const initialTokens = allTokens.filter(token => 
-    parseFloat(token.metrics.initialVoting.totalStaked) > 0
-);
 
 const anonymousTokens = allTokens.filter(token => 
-    parseFloat(token.metrics.anonymousVoting.totalStaked) > 0
+  parseFloat(token.metrics.totalAnonymousStaked) > 0
 );
 
+const initialTokens = allTokens.filter(token => 
+  parseFloat(token.metrics.totalInitialStaked) > 0
+); 
 
 
   const chainData: ChainData[] = [
@@ -918,10 +993,10 @@ const anonymousTokens = allTokens.filter(token =>
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <TokenGrid 
-                                tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
-                                activeTab={activeTab}
-                            />
+                           <TokenGrid 
+  tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
+  activeTab={activeTab}
+/>
                         </motion.div>
                     </AnimatePresence>
     <div className="items-center flex justify-center align-middle text-center">
