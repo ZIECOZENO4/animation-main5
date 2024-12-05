@@ -45,7 +45,7 @@ export default function Component() {
       `}</style>
 
       <main className="max-w-3xl mx-auto ">
-        <h1 className="text-xl md:text-2xl sm:text-3xl text-center mb-8 sm:mb-12">Fill the details to kick off your new coin</h1>
+        <h1 className="text-xl md:text-2xl sm:text-3xl text-center mb-8 sm:mb-12">Fill the details to kick off your new token</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex flex-col w-full gap-4 md:hidden">
             <div>
@@ -222,7 +222,7 @@ export default function Component() {
       <div className='flex flex-col flex-grow'>
         <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
           <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
-          DEPLOY COIN
+          DEPLOY TOKEN
           </span>
         </div>
         <div className="top-[69.7px] left-[1305px] w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black"></div>
@@ -239,7 +239,7 @@ export default function Component() {
         <ModalHeader className="text-[#F7F2DA]">Success</ModalHeader>
         <ModalBody>
           <p className="text-[#F7F2DA]">
-            Your coin has been successfully created!
+            Your token has been successfully created!
           </p>
         </ModalBody>
         <ModalFooter>

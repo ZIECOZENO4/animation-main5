@@ -7,27 +7,27 @@ import Component from './content'
 import { useRouter } from "next/navigation"
 
 const CreatePage = () => {
-  const [showPopup, setShowPopup] = useState(false)
-  const router = useRouter()
+  // const [showPopup, setShowPopup] = useState(false)
+  // const router = useRouter()
 
-  useEffect(() => {
-    setShowPopup(true)
-  }, [])
+  // useEffect(() => {
+  //   setShowPopup(true)
+  // }, [])
 
-  const closePopup = () => {
-    setShowPopup(false)
-  }
+  // const closePopup = () => {
+  //   setShowPopup(false)
+  // }
 
-  const handleNavigation = (path: string) => {
-    setShowPopup(false)
-    setTimeout(() => router.push(path), 200) // Delay to allow close animation
-  }
+  // const handleNavigation = (path: string) => {
+  //   setShowPopup(false)
+  //   setTimeout(() => router.push(path), 200) // Delay to allow close animation
+  // }
 
   return (
     <div className="relative">
       <Component />
       
-      {showPopup && (
+      {/* {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
          <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -83,7 +83,7 @@ const CreatePage = () => {
         </div>
       </motion.div>
         </div>
-      )}
+      )} */}
     </div>
   )
 }
