@@ -194,7 +194,7 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
                     </Chip>
                 </div>
 
-                <p className="mt-2 justify-center sm:justify-start  text-gray-500 flex"> Total Votes:{" "}<span className='ml-2 text-[#F7F2DA]'>  {batchMetrics.stats.totalVotes.toLocaleString()}</span> </p>
+                <p className="mt-2 justify-center sm:justify-start  text-gray-500 flex"> Total Votes:{" "}<span className='ml-2 text-[#F7F2DA]'> {batchMetrics.stats.totalVotes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span> </p>
                 
                 <p className=" justify-center sm:justify-start text-gray-500 flex">Total Staked:{" "}<span className='ml-2 text-[#F7F2DA]'>     <span className="font-medium text-foreground"
                                     style={{ fontSize: newCalculateFontSize(batchMetrics.stats.totalStaked.initial.toFixed(9), 'md') }}>
