@@ -1,4 +1,4 @@
-
+"use client"
 import { useAllTokens } from '@/hooks/useFetchAllToken';
 import { Card, Chip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
