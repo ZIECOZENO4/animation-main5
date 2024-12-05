@@ -1,9 +1,9 @@
 import React from 'react'
-import AllTokensList from '../token/AllToken'
+import { TokenLists } from '../token/AllToken'
 
 const AllPage = () => {
   return (
-    <div><AllTokensList /></div>
+    <div><TokenLists /></div>
   )
 }
 
