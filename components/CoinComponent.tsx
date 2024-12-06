@@ -266,7 +266,7 @@ const useTokensQuery = () => {
           }
         );
         
-        const formattedTokens: FormattedToken[] = result.tokens.map(token => ({
+        const formattedTokens: FormattedToken[] = (result.tokens || []).map(token => ({
           id: token.id,
           address: token.address,
           state: token.state,
@@ -616,11 +616,8 @@ export default function ComponentCoin() {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  const allTokens: FormattedToken[] = data?.pages.flatMap(page => page.tokens) || [];
-  const anonymousTokens = allTokens.filter(token => 
-    token.metrics?.totalAnonymousStaked ? 
-    parseFloat(token.metrics.totalAnonymousStaked) > 0 : false
-  );
+  const allTokens: FormattedToken[] = data?.pages?.flatMap(page => page.tokens) || [];
+  const anonymousTokens = allTokens.filter(token => token.metrics?.totalAnonymousStaked ? parseFloat(token.metrics.totalAnonymousStaked) > 0 : false);
   
   const initialTokens = allTokens.filter(token => 
     token.metrics?.totalInitialStaked ? 
