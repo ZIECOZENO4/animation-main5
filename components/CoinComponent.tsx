@@ -27,8 +27,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { gql, request, ClientError } from 'graphql-request';
 import { GRAPH_API_URL } from '@/constants';
 import { formatUnits } from 'viem';
-
-
+import { useAllTokens } from '@/hooks/useFetchAllToken';
 
 type TabType = 'Initial' | 'Anonymous';
 
@@ -43,36 +42,45 @@ interface TokenMetrics {
   stakePercentage: string;
 }
 
-interface FormattedToken {
-  id: string;
-  address: string;
-  state: number;
-  batchId: string; // Add this if available from the query
-  batchState: number; // Add this if available from the query
+// Update the TokenDetails interface
+interface TokenDetails {
   name: string;
   symbol: string;
   description: string;
   imageUrl: string;
-  metrics: {
+  twitter: string;
+  telegram: string;
+  website: string;
+  creator: string;      // Add this field
+  creationFee: string;  // Add this field
+}
+
+// Update the FormattedToken interface
+interface FormattedToken {
+  id: string;
+  address: string;
+  batchId: string;
+  state: number;
+  details: TokenDetails;
+  metrics?: {
     totalInitialVotes: string;
     totalInitialStaked: string;
     totalAnonymousVotes: string;
     totalAnonymousStaked: string;
     votesCount: number;
     withdrawalsCount: number;
-    stakePercentage: string; // Add this if needed
+    stakePercentage: string;
   };
-  creator: string;
-  creationFee: string;
-  social: {
-    twitter: string;
-    telegram: string;
-    website: string;
+  votes: {
+    initial: number;
+    anonymous: number;
+    total: number;
   };
-}
-interface ChainData {
-  key: string
-  name: string
+  staked: {
+    initial: number;
+    anonymous: number;
+    total: number;
+  };
 }
 
 interface TooltipProps {
@@ -80,6 +88,10 @@ interface TooltipProps {
   content: React.ReactNode;
 }
 
+interface ChainData {
+  key: string;
+  name: string;
+}
 const TOKENS_PER_PAGE = 20;
 
 // First, define the interfaces for the GraphQL response
@@ -191,18 +203,6 @@ interface Batch {
 }
 
 
-// Interfaces from the hook
-interface TokenDetails {
-    name: string;
-    symbol: string;
-    description: string;
-    imageUrl: string;
-    twitter: string;
-    telegram: string;
-    website: string;
-    creator: string;
-    creationFee: string;
-}
 
 interface TokenResponse {
   id: string;
@@ -282,27 +282,28 @@ const useTokensQuery = () => {
           id: token.id,
           address: token.address,
           state: token.state,
-          batchId: "0", // Add missing property
-          batchState: 0, // Add missing property
-          name: token.details.name,
-          symbol: token.details.symbol,
-          description: token.details.description,
-          imageUrl: token.details.imageUrl,
-          metrics: {
-            totalInitialVotes: formatUnits(BigInt(token.totalInitialVotes), 18),
-            totalInitialStaked: formatUnits(BigInt(token.totalInitialStaked), 18),
-            totalAnonymousVotes: formatUnits(BigInt(token.totalAnonymousVotes), 18),
-            totalAnonymousStaked: formatUnits(BigInt(token.totalAnonymousStaked), 18),
-            votesCount: token.votes?.length ?? 0,
-            withdrawalsCount: token.withdrawals?.length ?? 0,
-            stakePercentage: "0" // Add missing property
-          },
-          creator: token.details.creator,
-          creationFee: formatUnits(BigInt(token.details.creationFee), 18),
-          social: {
+          batchId: "0",
+          details: {
+            name: token.details.name,
+            symbol: token.details.symbol,
+            description: token.details.description,
+            imageUrl: token.details.imageUrl,
             twitter: token.details.twitter,
             telegram: token.details.telegram,
-            website: token.details.website
+            website: token.details.website,
+            creator: token.details.creator,
+            creationFee: token.details.creationFee
+          },
+          votes: {
+            initial: Number(token.totalInitialVotes),
+            anonymous: Number(token.totalAnonymousVotes),
+            total: Number(token.totalInitialVotes) + Number(token.totalAnonymousVotes)
+          },
+          staked: {
+            initial: parseFloat(formatUnits(BigInt(token.totalInitialStaked), 18)),
+            anonymous: parseFloat(formatUnits(BigInt(token.totalAnonymousStaked), 18)),
+            total: parseFloat(formatUnits(BigInt(token.totalInitialStaked), 18)) + 
+                   parseFloat(formatUnits(BigInt(token.totalAnonymousStaked), 18))
           }
         }));
 
@@ -439,7 +440,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                       >
-                        [{token.symbol}]
+                        [{token.details.symbol}]
                       </motion.h2>
                       <motion.h2
                         className="hover:underline text-[#F7F2DA] workbench-test"
@@ -515,7 +516,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
     color: "#F7F2DA"
   }}
 >
-{Number(token.metrics.totalInitialStaked).toFixed(10)}
+{token.staked.total.toFixed(6)} ETH
 </p>
                       </motion.div>
                       <motion.div
@@ -555,7 +556,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                             color: "#F7F2DA"
                           }}
                         >
-                        {formatWalletAddress(token.creator)}
+                        {formatWalletAddress(token.details.creator)}
                         </p>
                       </motion.div>
 
@@ -576,7 +577,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
     animate={{ opacity: 1, x: 0 }}
     transition={{ delay: 0.5, duration: 0.5 }}
 >
-    {truncateDescription(token.description)}
+    {truncateDescription(token.details.description)}
 </motion.div>
                     </div>
                   </div>
@@ -596,6 +597,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
 
 export default function ComponentCoin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: tokens, isLoading, error } = useAllTokens();
   const [selectedChain, setSelectedChain] = useState("All Chains");
   const [minMarketCap, setMinMarketCap] = useState("");
   const [maxMarketCap, setMaxMarketCap] = useState("");
@@ -628,9 +630,15 @@ export default function ComponentCoin() {
   }, [inView, hasNextPage, fetchNextPage]);
 
   const allTokens: FormattedToken[] = data?.pages.flatMap(page => page.tokens) || [];
-  const anonymousTokens = allTokens.filter(token => parseFloat(token.metrics.totalAnonymousStaked) > 0);
-  const initialTokens = allTokens.filter(token => parseFloat(token.metrics.totalInitialStaked) > 0);
-
+  const anonymousTokens = allTokens.filter(token => 
+    token.metrics?.totalAnonymousStaked ? 
+    parseFloat(token.metrics.totalAnonymousStaked) > 0 : false
+  );
+  
+  const initialTokens = allTokens.filter(token => 
+    token.metrics?.totalInitialStaked ? 
+    parseFloat(token.metrics.totalInitialStaked) > 0 : false
+  );
 
 
   const chainData: ChainData[] = [
