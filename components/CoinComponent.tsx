@@ -602,12 +602,17 @@ export default function ComponentCoin() {
   const [maxPrice, setMaxPrice] = useState('')
   const [activeTab, setActiveTab] = useState<'Initial' | 'Anonymous'>('Initial');
   const [currency, setCurrency] = useState('USD');
-  
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, error } = useTokensQuery();
+  console.log('Query Status:', status);
+
+  if (status === 'error') {
+      console.error('Error loading tokens:', error);
+      return <div>Error loading tokens: {error.message}</div>;
+  }
+
   const handleTabClick = (tab: 'Initial' | 'Anonymous') => {
       setActiveTab(tab);
   };
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useTokensQuery();
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -615,7 +620,10 @@ export default function ComponentCoin() {
       fetchNextPage();
     }
   }, [inView, hasNextPage, fetchNextPage]);
-
+  
+  if (status === 'success') {
+        console.log('Fetched Data:', data);
+    }
   const allTokens: FormattedToken[] = data?.pages?.flatMap(page => page.tokens) || [];
   const anonymousTokens = allTokens.filter(token => token.metrics?.totalAnonymousStaked ? parseFloat(token.metrics.totalAnonymousStaked) > 0 : false);
   
