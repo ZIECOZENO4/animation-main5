@@ -5,6 +5,7 @@ import { X } from "lucide-react"
 import React, { useState, useEffect } from 'react'
 import Component from './content'
 import { useRouter } from "next/navigation"
+import TokenSubmissionForm from "./aside-2";
 
 const CreatePage = () => {
   // const [showPopup, setShowPopup] = useState(false)
@@ -25,8 +26,8 @@ const CreatePage = () => {
 
   return (
     <div className="relative">
-      <Component />
-      
+      {/* <Component /> */}
+      <TokenSubmissionForm />
       {/* {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
          <motion.div
