@@ -86,9 +86,9 @@ const CountdownRenderer: React.FC<CountdownRendererProps> = ({ timeRemaining, pr
     return (
         <div className="text-center">
             <div className="text-2xl font-bold flex gap-2 text-slate-500">
-                <p className='flex gap-2'> 00 {String(timeRemaining.hours).padStart(2, '0')} {" "}:</p>
-                 <p className='flex gap-2'> 00 {String(timeRemaining.minutes).padStart(2, '0')} {" "}:</p> 
-                 <p className='flex gap-2 text-[#F7F2DA]'> 00 {String(timeRemaining.seconds).padStart(2, '0')}</p> 
+                <p className='flex gap-1'> 00 {String(timeRemaining.hours).padStart(2, '0')} {" "}:</p>
+                 <p className='flex gap-1'> 00 {String(timeRemaining.minutes).padStart(2, '0')} {" "}:</p> 
+                 <p className='flex gap-1 text-[#F7F2DA]'> 00 {String(timeRemaining.seconds).padStart(2, '0')}</p> 
             </div>
   
         </div>
@@ -209,7 +209,7 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
                 <p className="text-slate-500 mt-2">
                   The progress of this Bath is currently:   {progress.toFixed(2)}%
                 </p>
-                <Chip color="default" className='text-sm md:text-md my-1 font-bold'>OXvfdt.....hghuya</Chip>
+                <Chip color="default" className='text-sm md:text-md my-1 font-bold'>Initial and Anonymous</Chip>
               </motion.div>
             </div>
             <div className="gap-4 my-2 flex flex-col w-full md:flex-row ">
@@ -254,7 +254,17 @@ export function BatchHero()  {
       
         <div className="div">
      {isLoading ? (
-                           <HeroSection />
+                        //    <HeroSection />
+                        <div className="flex justify-center items-center h-auto mt-4">
+                        <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                      <StartingButton  />
+                      <div className="text-center text-destructive p-4">
+                                <p className="font-medium">Loading batch metrics</p>
+                                <p className="text-sm">Please Wait</p>
+                            </div>
+                           
+                          </BackgroundGradient>
+                        </div>
                     ) : error ? (
                        
                         <div className="flex justify-center items-center h-auto mt-4">
@@ -269,7 +279,17 @@ export function BatchHero()  {
                         </div>
                     ) :
                         !batchMetrics ? (
-                            <NoActiveBatch />
+                            // <NoActiveBatch />
+                            <div className="flex justify-center items-center h-auto mt-4">
+                            <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                          <StartingButton  />
+                          <div className="text-center text-destructive p-4">
+                                    <p className="font-medium">No batch metrics found</p>
+                                    <p className="text-sm">Pleasee Create Batch</p>
+                                </div>
+                               
+                              </BackgroundGradient>
+                            </div>
                         ) :
 
                             batchMetrics ? (
