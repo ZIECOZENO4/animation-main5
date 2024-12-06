@@ -85,7 +85,7 @@ function calculateTimeRemaining(stateUpdatedAt: Date, duration: number) {
 const CountdownRenderer: React.FC<CountdownRendererProps> = ({ timeRemaining, progress }) => {
     return (
         <div className="text-center">
-            <div className="text-2xl font-bold flex gap-2 text-slate-500">
+            <div className="text-2xl font-bold flex gap-1 text-slate-500">
                 <p className='flex gap-1'> 00 {String(timeRemaining.hours).padStart(2, '0')} {" "}:</p>
                  <p className='flex gap-1'> 00 {String(timeRemaining.minutes).padStart(2, '0')} {" "}:</p> 
                  <p className='flex gap-1 text-[#F7F2DA]'> 00 {String(timeRemaining.seconds).padStart(2, '0')}</p> 

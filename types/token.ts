@@ -1,13 +1,13 @@
-// types/token.ts
+
 interface TokenDetails {
-    name: string;
-    symbol: string;
-    description: string;
-    imageUrl: string;
-    twitter: string;
-    telegram: string;
-    website: string;
-  }
+  name: string;
+  symbol: string;
+  description: string;
+  imageUrl: string;
+  twitter?: string; // Optional, can be undefined
+  telegram?: string; // Optional, can be undefined
+  website?: string; // Optional, can be undefined
+}
   
   export interface FormattedToken {
     id: string;
