@@ -227,15 +227,11 @@ interface TokenResponse {
   withdrawals?: { id: string }[];
 }
 const GetAllBatchesTokensQuery = gql`
-  query GetAllBatchesTokens($skip: Int!, $first: Int!, $orderDirection: OrderDirection!) {
-    tokens(
-      skip: $skip
-      first: $first
-      orderBy: totalStaked
-      orderDirection: $orderDirection
-    ) {
+  query GetAllBatchesTokens {
+    tokens {
       id
       address
+      batchId
       state
       totalInitialVotes
       totalInitialStaked
@@ -249,14 +245,6 @@ const GetAllBatchesTokensQuery = gql`
         twitter
         telegram
         website
-        creator
-        creationFee
-      }
-      votes {
-        id
-      }
-      withdrawals {
-        id
       }
     }
   }
@@ -597,7 +585,6 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
 
 export default function ComponentCoin() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: tokens, isLoading, error } = useAllTokens();
   const [selectedChain, setSelectedChain] = useState("All Chains");
   const [minMarketCap, setMinMarketCap] = useState("");
   const [maxMarketCap, setMaxMarketCap] = useState("");
