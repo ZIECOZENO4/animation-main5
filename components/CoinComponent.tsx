@@ -624,7 +624,11 @@ export default function ComponentCoin() {
   if (status === 'success') {
         console.log('Fetched Data:', data);
     }
-  const allTokens: FormattedToken[] = data?.pages?.flatMap(page => page.tokens) || [];
+  
+    const allTokens = data?.pages?.flatMap(page => page.tokens) || [];
+
+
+
   const anonymousTokens = allTokens.filter(token => token.metrics?.totalAnonymousStaked ? parseFloat(token.metrics.totalAnonymousStaked) > 0 : false);
   
   const initialTokens = allTokens.filter(token => 
@@ -998,6 +1002,20 @@ export default function ComponentCoin() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
+
+<div className="token-grid">
+            {allTokens.map(token => (
+                <div key={token.id} className="token-card">
+                    <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
+                    <h2>{token.details.name} ({token.details.symbol})</h2>
+                    <p>{token.details.description}</p>
+                    <p>Created by: {formatWalletAddress(token.details.creator)}</p>
+                    <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
+                    <p>Batch ID: {token.batchId}</p>
+                </div>  
+                            ))}
+                            </div>
+                    
                            <TokenGrid 
   tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
   activeTab={activeTab}
