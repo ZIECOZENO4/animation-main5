@@ -119,7 +119,7 @@ const MdNavBar = () => {
             </Link>
 
             {/* Center Section: Navigation Items */}
-            <div className="md:flex-grow md:flex hidden md:items-center  md:pl-[15%]  md:justify-center">
+            {/* <div className="md:flex-grow md:flex hidden md:items-center  md:pl-[15%]  md:justify-center">
                 <nav className="flex items-center">
                     {navItems.map((item) => (
                         <motion.div
@@ -151,7 +151,7 @@ const MdNavBar = () => {
                         </motion.div>
                     ))}
                 </nav>
-            </div>
+            </div> */}
 
             {/* Right Section: Cubic Button and Notification Icon */}
             <div className="flex items-center justify-end mr-2">
