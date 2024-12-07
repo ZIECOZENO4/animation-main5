@@ -35,7 +35,7 @@ interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   isLoading?: boolean;
 }
 const tokenFactory = new TokenFactoryService(421614); // Arbitrum Sepolia chainId
-const [deployError, setDeployError] = useState<string | null>(null);
+
 const SubmitButton: React.FC<CustomButtonProps> = ({ 
   children, 
   isLoading,
@@ -155,7 +155,7 @@ export default function TokenSubmissionForm({
       return () => URL.revokeObjectURL(previewUrl);
     }
   }, [setFiles]);
-  
+
   // Initialize dropzone after form
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: handleFileChange,
