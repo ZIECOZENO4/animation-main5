@@ -188,8 +188,8 @@ export default function TokenSubmissionForm({
           const uploadToast = toast.loading("Uploading image...");
           try {
             const uploadedFiles = await startUpload([data.image]);
-            if (uploadedFiles && uploadedFiles[0]) {
-              imageUrl = uploadedFiles[0].url; // Set the image URL
+            if (uploadedFiles && uploadedFiles.length > 0) {
+              imageUrl = uploadedFiles[0].url; // Set the image URL from the upload response
               toast.success("Image uploaded successfully!");
             } else {
               setDeployError('Image upload failed');
