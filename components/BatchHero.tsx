@@ -24,6 +24,8 @@ import { Badge} from "@nextui-org/react"
 import {Chip} from "@nextui-org/react";
 import DigitalClock from "./timer/digital-clock";
 
+export const dynamic = 'force-dynamic'
+
 interface CountdownRendererProps {
     timeRemaining: {
         total: number;
@@ -255,6 +257,7 @@ export function BatchHero()  {
             // Convert the numeric batchId to string since your store expects a string
             const batchId = batchMetrics.batch.batchId.toString();
             setCurrentBatchId(batchId);
+            console.log('Batch data retrieved:', batchMetrics);
         }
     }, [batchMetrics?.batch.batchId, setCurrentBatchId, batchMetrics]);
 
