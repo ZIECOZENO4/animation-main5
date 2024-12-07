@@ -47,6 +47,7 @@ interface TokenDetails {
   name: string;
   symbol: string;
   description: string;
+  address: string;
   imageUrl: string;
   twitter: string;
   telegram: string;
@@ -280,6 +281,7 @@ const useTokensQuery = () => {
             telegram: token.details.telegram,
             website: token.details.website,
             creator: token.details.creator,
+            address: token.address,
             creationFee: token.details.creationFee
           },
           votes: {
