@@ -55,8 +55,18 @@ export default function TokenSubmissionForm() {
     const chainId = useChainId();
     const { addNormalTransaction } = useNormalTransactionStore();
     const [errors, setErrors] = useState<Array<{ id: number, error: unknown, name: string }>>([]);
-
-
+    const [minAmount, setMinAmount] = useState<string>('0');
+    useEffect(() => {
+      const fetchMinAmount = async () => {
+        try {
+          const amount = await tokenFactory.getBaseTokenCreationFee();
+          setMinAmount(amount.toString());
+        } catch (error) {
+          console.error("Error fetching min amount:", error);
+        }
+      };
+      fetchMinAmount();
+    }, []);
 
 
     const form = useForm<FormValues>({
@@ -299,15 +309,25 @@ export default function TokenSubmissionForm() {
     </p>
   )}
 </div>
-          <div className="mt-6">
-            <label className="block text-sm font-medium mb-1">ETH Amount to stake</label>
-            <Input
-              type="number"
-              step="0.01"
-              {...form.register("ethAmount")}
-              variant="bordered"
-            />
-          </div>
+<div className="mt-6">
+  <label className="block text-sm font-medium mb-1">ETH Amount to stake</label>
+  <Input
+    type="number"
+    step="0.01"
+    placeholder={`Minimum ${minAmount} ETH`}
+    defaultValue=""
+    {...form.register("ethAmount", {
+      valueAsNumber: true,
+      required: "ETH amount is required"
+    })}
+    variant="bordered"
+  />
+  {form.formState.errors.ethAmount && (
+    <p className="text-danger text-sm mt-1">
+      {form.formState.errors.ethAmount.message}
+    </p>
+  )}
+</div>
     
           <Button
             variant="flat"
