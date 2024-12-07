@@ -36,35 +36,6 @@ interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 }
 const tokenFactory = new TokenFactoryService(421614); // Arbitrum Sepolia chainId
 
-const SubmitButton: React.FC<CustomButtonProps> = ({ 
-  children, 
-  isLoading,
-  disabled,
-  ...props 
-}) => (
-  <div className="w-full">
-    <button 
-      {...props} 
-      disabled={disabled || isLoading}
-      className='flex flex-row w-full shake-button'
-    >
-      <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black" />
-      <div className='flex flex-col flex-grow'>
-        <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
-          <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
-            {isLoading ? "Processing..." : children}
-          </span>
-        </div>
-        <div className="top-[69.7px] left-[1305px] w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black" />
-      </div>
-    </button>
-    {deployError && (
-      <div className="mt-2 text-red-500 text-sm">
-        {deployError}
-      </div>
-    )}
-  </div>
-);
 const formSchema = z.object({
     name: z.string().min(2, { message: "Token name must be at least 2 characters." }),
     ticker: z.string().min(1, { message: "Ticker is required." }).max(10, { message: "Ticker must not exceed 10 characters." }),
@@ -301,6 +272,37 @@ async function onSubmit(data: FormValues) {
     toast.dismiss();
   }
 }
+
+
+const SubmitButton: React.FC<CustomButtonProps> = ({ 
+  children, 
+  isLoading,
+  disabled,
+  ...props 
+}) => (
+  <div className="w-full">
+    <button 
+      {...props} 
+      disabled={disabled || isLoading}
+      className='flex flex-row w-full shake-button'
+    >
+      <div className="top-9 left-[1305.31px] w-[2.84px] h-[36.22px] bg-[#787878] border-t-[0.63px] border-solid border-black" />
+      <div className='flex flex-col flex-grow'>
+        <div className="w-full h-[33.39px] top-9 left-[1307.83px] bg-[#787878] items-center shadow-md flex justify-center">
+          <span className="text-[#F7F2DA] text-xl font-normal leading-5 text-center">
+            {isLoading ? "Processing..." : children}
+          </span>
+        </div>
+        <div className="top-[69.7px] left-[1305px] w-full h-[3.15px] bg-[#787878] border-t-[0.63px] border-solid border-black" />
+      </div>
+    </button>
+    {deployError && (
+      <div className="mt-2 text-red-500 text-sm">
+        {deployError}
+      </div>
+    )}
+  </div>
+);
 
     return (
 <div className="min-h-screen mt-8 text-gray-300 p-4">
