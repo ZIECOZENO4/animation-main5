@@ -1002,7 +1002,7 @@ export default function ComponentCoin() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-<div className="token-grid">
+{/* <div className="token-grid">
             {allTokens.map(token => (
                 <div key={token.id} className="token-card">
                     <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
@@ -1013,8 +1013,9 @@ export default function ComponentCoin() {
                     <p>Batch ID: {token.batchId}</p>
                 </div>  
                             ))}
-                            </div>                   
+                            </div>                    */}
 <div className="token-grid">
+  initial tokens
             {initialTokens.map(token => (
                 <div key={token.id} className="token-card">
                     <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
@@ -1027,6 +1028,7 @@ export default function ComponentCoin() {
                             ))}
                             </div>
                             <div className="token-grid">
+                              anonymous tokens 
             {anonymousTokens.map(token => (
                 <div key={token.id} className="token-card">
                     <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
