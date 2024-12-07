@@ -120,7 +120,19 @@ export default function TokenSubmissionForm({
     const [files, setFiles] = useState<File[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formReady, setFormReady] = useState(false);
 
+    useEffect(() => {
+      const initForm = async () => {
+        await form.reset();
+        setFormReady(true);
+      };
+      initForm();
+    }, []);
+    
+    if (!formReady) {
+      return <div>Loading form...</div>;
+    }
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
