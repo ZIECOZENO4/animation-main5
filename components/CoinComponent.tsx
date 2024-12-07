@@ -595,19 +595,19 @@ export default function ComponentCoin() {
   const [isMarketCapOpen, setIsMarketCapOpen] = useState(false)
   const [isPriceOpen, setIsPriceOpen] = useState(false)
   const [isLaunched, setIsLaunched] = useState(true)
-  const { data: tokens, isLoading, error } = useAllTokens();
+
   // Selected values
   const [selectedMarketCap, setSelectedMarketCap] = useState('Number Of Views')
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [activeTab, setActiveTab] = useState<'Initial' | 'Anonymous'>('Initial');
   const [currency, setCurrency] = useState('USD');
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status} = useTokensQuery();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, error } = useTokensQuery();
   console.log('Query Status:', status);
 
   if (status === 'error') {
       console.error('Error loading tokens:', error);
-      return <div>Error loading tokens: </div>;
+      return <div>Error loading tokens: {error.message}</div>;
   }
 
   const handleTabClick = (tab: 'Initial' | 'Anonymous') => {
@@ -624,14 +624,17 @@ export default function ComponentCoin() {
   if (status === 'success') {
         console.log('Fetched Data:', data);
     }
-    if (isLoading) return <div>Loading tokens...</div>;
-  if (error) return <div>Error loading tokens</div>;
+  
     const allTokens = data?.pages?.flatMap(page => page.tokens) || [];
 
 
 
-    const initialTokens = tokens?.filter(token => token.votes.initial > 0);
-    const anonymousTokens = tokens?.filter(token => token.votes.anonymous > 0);
+  const anonymousTokens = allTokens.filter(token => token.metrics?.totalAnonymousStaked ? parseFloat(token.metrics.totalAnonymousStaked) > 0 : false);
+  
+  const initialTokens = allTokens.filter(token => 
+    token.metrics?.totalInitialStaked ? 
+    parseFloat(token.metrics.totalInitialStaked) > 0 : false
+  );
 
 
   const chainData: ChainData[] = [
@@ -661,7 +664,259 @@ export default function ComponentCoin() {
         setCurrency(currency === 'USD' ? 'ETH' : 'USD');
     };
 
-  
+    const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab: 'Initial' | 'Anonymous' }) => (
+      <div className="w-full overflow-x-auto  scrollbar-hide">
+      <div className="min-w-max px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+            {tokens.map((token) => (
+               <Link href='/test' key={token.id} >
+                    <motion.div
+               
+                className="w-full md:w-[350px] px-2 mb-4  relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                whileHover={{ scale: 1.07 }}
+              >
+                            <Tooltip
+                   content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
+                    placement="top"
+                    showArrow={false}
+                    offset={15} // Increased offset to create more space
+                    classNames={{
+                      base: [
+                        "py-2 px-4",
+                        "border-none",
+                        "shadow-none",
+                        "backdrop-blur-none",
+                        "relative",
+                        "mb-2 tooltip-custom", // Increased bottom margin
+                        "translate-y-[-8px]" // Move tooltip up slightly
+                      ].join(" "),
+                      content: [
+                        "text-[#F7F2DA]",
+                        "text-sm",
+                        "font-normal",
+                        "px-2 py-1",
+                        "rounded-none",
+                        "bg-[#000000]"
+                      ].join(" ")
+                    }}
+                    motionProps={{
+                      variants: {
+                        exit: {
+                          opacity: 0,
+                          transition: { duration: 0.1, ease: "easeIn" }
+                        },
+                        enter: {
+                          opacity: 1,
+                          transition: { duration: 0.15, ease: "easeOut" }
+                        }
+                      }
+                    }}
+                  >
+            <div
+                  className="bg-[#0A0909]  overflow-hidden"
+                  style={{ height: "150px" }}
+                >
+                  <div className="p-3 text-[#F7F2DA]">
+                    <div className="flex justify-between items-start">
+                    {activeTab === 'Anonymous' ? (
+                      <motion.div 
+                        className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966] relative"
+                        whileHover={{ 
+                          boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+                          transition: { duration: 0.2 }
+                        }}
+                      >
+                        <motion.div 
+                          className="absolute -top-1 -right-1 w-6 h-6 bg-[#1A1A1A] rounded-md flex items-center justify-center"
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <Lock className="h-3 w-3 text-gray-400" />
+                        </motion.div>
+                      </motion.div>
+                    ) : (
+                      <motion.div 
+                        className="w-[100px] h-[100px] my-[10px] mx-[10px] bg-[#D9D9D966]"
+                        whileHover={{ 
+                          boxShadow: "0 0 8px rgba(247, 242, 218, 0.3)",
+                          transition: { duration: 0.2 }
+                        }}
+                      />
+                    )}
+            
+                      <div className="text-right flex flex-col p-2">
+                        {/* Rest of your existing code remains exactly the same */}
+                        <div className="flex flex-row justify-between align-middle">
+                          <motion.h2
+                            className="text-left text-[#F7F2DA] font-normal"
+                            style={{
+                              width: "70px",
+                              height: "20px",
+                              top: "14px",
+                              left: "137px",
+                              fontSize: "20px",
+                              lineHeight: "20px"
+                            }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.5 }}
+                          >
+                            [{token.details.symbol}]
+                          </motion.h2>
+                          <motion.h2
+                            className="hover:underline text-[#F7F2DA] workbench-test"
+                            style={{
+                              width: "20px",
+                              height: "10px",
+                              top: "9px",
+                              left: "302px",
+                              fontSize: "10px",
+                              fontWeight: 200,
+                              lineHeight: "20px",
+                              textAlign: "left",
+                              color: "#F7F2DA"
+                            }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.5 }}
+                          >
+                            more
+                          </motion.h2>
+                        </div>
+                        <div className="flex flex-col align-middle">
+                          <motion.p
+                            className="text-[#F7F2DA] workbench-test flex flex-row mt-[5px]"
+                            style={{
+                              width: "60px",
+                              height: "10px",
+                              left: "137px",
+                              fontSize: "10px",
+                              fontWeight: 200,
+                              lineHeight: "10px",
+                              textAlign: "left",
+                              color: "#F7F2DA"
+                            }}
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
+                          >
+                             Batch #{token.batchId}
+                          </motion.p>
+                          <motion.div
+                            className=" mt-[22px] "
+                            style={{
+                              width: "180px",
+                              height: "10px",
+                              top: "85px",
+                              left: "137px",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center"
+                            }}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.5, duration: 0.5 }}
+                          >
+                            <p
+                              style={{
+                                fontSize: "10px",
+                                fontWeight: 400,
+                                lineHeight: "10px",
+                                textAlign: "left",
+                                color: "#F7F2DA"
+                              }}
+                            >
+                             Staked Amount: 
+                            </p>
+                            <p
+      style={{
+        fontSize: "12px",
+        fontWeight: 400,
+        lineHeight: "10px",
+        textAlign: "left",
+        color: "#F7F2DA"
+      }}
+    >
+    {token.staked.total.toFixed(6)} ETH
+    </p>
+                          </motion.div>
+                          <motion.div
+                            className=" my-[8px]"
+                            style={{
+                              width: "180px",
+                              height: "10px",
+                              top: "85px",
+                              left: "137px",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center"
+                            }}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.5, duration: 0.5 }}
+                          >
+                            <p
+                              className="workbench-test"
+                              style={{
+                                fontSize: "10px",
+                                fontWeight: 400,
+                                lineHeight: "10px",
+                                textAlign: "left",
+                                color: "#F7F2DA"
+                              }}
+                            >
+                              Create By:
+                            </p>
+                            <p
+                              className="workbench-test"
+                              style={{
+                                fontSize: "10px",
+                                fontWeight: 400,
+                                lineHeight: "10px",
+                                textAlign: "left",
+                                color: "#F7F2DA"
+                              }}
+                            >
+                            {formatWalletAddress(token.details.creator)}
+                            </p>
+                          </motion.div>
+    
+                          <motion.div
+        className="mb-[8px] whitespace-nowrap overflow-hidden text-ellipsis"
+        style={{
+            width: "180px",
+            height: "10px",
+            top: "102px",
+            left: "137px",
+            fontSize: "10px",
+            fontWeight: 400,
+            lineHeight: "10px",
+            textAlign: "left",
+            color: "#F7F2DA"
+        }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+    >
+        {truncateDescription(token.details.description)}
+    </motion.div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </Tooltip>
+            
+              </motion.div>
+               </Link>
+            ))}
+        </div>
+        </div>
+        </div>
+    );
+
   return (
     <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
          <motion.div className="flex flex-row justify-between align-middle">
@@ -999,7 +1254,14 @@ export default function ComponentCoin() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-{/* <div className="token-grid">
+               
+                 
+                           <TokenGrid 
+  tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
+  activeTab={activeTab}
+/>
+
+<div className="token-grid">
             {allTokens.map(token => (
                 <div key={token.id} className="token-card">
                     <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
@@ -1010,48 +1272,7 @@ export default function ComponentCoin() {
                     <p>Batch ID: {token.batchId}</p>
                 </div>  
                             ))}
-                            </div>                    */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-[#F7F2DA]">
-            Initial Voting Tokens ({initialTokens?.length || 0})
-          </h2>
-          <div className="space-y-4">
-            {initialTokens?.map(token => (
-         <div key={token.id} className="token-card">
-         <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
-         <h2>{token.details.name} ({token.details.symbol})</h2>
-         <p>{token.details.description}</p>
-         {/* <p>Created by: {formatWalletAddress(token.details.creator)} </p> */}
-         <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
-         <p>Batch ID: {token.batchId}</p>
-     </div>  
-            ))}
-          </div>
-        </div>
-        
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-[#F7F2DA]">
-            Anonymous Voting Tokens ({anonymousTokens?.length || 0})
-          </h2>
-          <div className="space-y-4">
-            {anonymousTokens?.map(token => (
-             <div key={token.id} className="token-card">
-             <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
-             <h2>{token.details.name} ({token.details.symbol})</h2>
-             <p>{token.details.description}</p>
-             {/* <p>Created by: {formatWalletAddress(token.details.creator)}</p> */}
-             <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
-             <p>Batch ID: {token.batchId}</p>
-         </div>  
-            ))}
-          </div>
-        </div>
-      </div>
-                           {/* <TokenGrid 
-  tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
-  activeTab={activeTab}
-/> */}
+                            </div>    
                         </motion.div>
                     </AnimatePresence>
     <div className="items-center flex justify-center align-middle text-center">
