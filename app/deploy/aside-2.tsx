@@ -108,7 +108,6 @@ export default function TokenSubmissionForm({
       telegram: '',
       website: '',
       ethAmount: 0,
-      image: undefined,
     },
     mode: 'onChange'
   });
