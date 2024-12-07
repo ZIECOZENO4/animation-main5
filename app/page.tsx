@@ -37,11 +37,6 @@ const Content = () => {
     <div className='align-middle flex flex-col'>
       <BatchHero />
       <ComponentCoin />
-      <CollectionsGrid />
-      <StatisticsComponent />
-      <CryptoDisplay />
-      <ImageContent1 />
-      <SuppotersComponent />
       <Footer />
       {showPopup && (
         <WalletPopup onClose={handleClosePopup} />

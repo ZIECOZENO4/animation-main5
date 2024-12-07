@@ -1002,7 +1002,7 @@ export default function ComponentCoin() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-{/* <div className="token-grid">
+<div className="token-grid">
             {allTokens.map(token => (
                 <div key={token.id} className="token-card">
                     <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
@@ -1013,33 +1013,8 @@ export default function ComponentCoin() {
                     <p>Batch ID: {token.batchId}</p>
                 </div>  
                             ))}
-                            </div>                    */}
-<div className="token-grid">
-  initial tokens
-            {initialTokens.map(token => (
-                <div key={token.id} className="token-card">
-                    <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
-                    <h2>{token.details.name} ({token.details.symbol})</h2>
-                    <p>{token.details.description}</p>
-                    <p>Created by: {formatWalletAddress(token.details.creator)}</p>
-                    <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
-                    <p>Batch ID: {token.batchId}</p>
-                </div>  
-                            ))}
-                            </div>
-                            <div className="token-grid">
-                              anonymous tokens 
-            {anonymousTokens.map(token => (
-                <div key={token.id} className="token-card">
-                    <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
-                    <h2>{token.details.name} ({token.details.symbol})</h2>
-                    <p>{token.details.description}</p>
-                    <p>Created by: {formatWalletAddress(token.details.creator)}</p>
-                    <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
-                    <p>Batch ID: {token.batchId}</p>
-                </div>  
-                            ))}
                             </div>                   
+                 
                            <TokenGrid 
   tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
   activeTab={activeTab}

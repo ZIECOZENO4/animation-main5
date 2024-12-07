@@ -13,7 +13,7 @@ const Footer = () => {
             <h1
               className="text-3xl  leading-10 tracking-tight text-left text-[#F7F2DA] text-center sm:leading-none md:text-6xl text-4xl lg:text-7xl"
             >
-              <span className="inline md:block">OmniPump</span>
+              <span className="inline md:block">Kannon</span>
               <br />
               <span
   className="mt-2 bg-clip-text text-transparent bg-gradient-to-r from-slate-600 via-slate-500 to-slate-400 md:inline-block"
@@ -28,8 +28,8 @@ ultimate{" "}
             <div
               className="mx-auto rounded-lg font-black mt-5 text-zinc-400 md:mt-12 md:max-w-lg text-center lg:text-lg"
             >
-              <Link href="/lunch" className="bg-tkb border text-sm text-[#F7F2DA] py-3 px-7 rounded-full" >
-         Start Lunch
+              <Link href="/create" className="bg-tkb border text-sm text-[#F7F2DA] py-3 px-7 rounded-full" >
+         Start Creating
               </Link>
             </div>
           </div>
@@ -50,7 +50,7 @@ ultimate{" "}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <p className="text-gray-200 text-sm">
-            &copy; OmniPump All rights reserved 2019.
+            &copy; Kannon All rights reserved 2019.
           </p>
           <p className="text-gray-400 text-sm mt-2">
             <Link href="#" className="text-slate-600 hover:text-slate-100 hover:underline">
