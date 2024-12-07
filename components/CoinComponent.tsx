@@ -1487,7 +1487,7 @@ export default function ComponentCoin() {
                                 color: "#F7F2DA"
                               }}
                             >
-                            {formatWalletAddress(token.details.creator)}
+                            {formatWalletAddress(token.details.address)}
                             </p>
                           </motion.div>
     
