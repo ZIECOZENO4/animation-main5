@@ -101,30 +101,33 @@ export default function TokenSubmissionForm({
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      ticker: '',
-      description: '',
-      twitter: '',
-      telegram: '',
-      website: '',
-      ethAmount: 0,
+        name: '',
+        ticker: '',
+        description: '',
+        twitter: '',
+        telegram: '',
+        website: '',
+        ethAmount: 0,
+
+
     },
-    mode: 'onChange'
-  });
+});
+
 
   const { isValid } = form.formState;
+
+
   const handleFileChange = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
-      const file = acceptedFiles[0];
-      // Create preview URL
-      const previewUrl = URL.createObjectURL(file);
-      setImagePreview(previewUrl);
-      setFiles(acceptedFiles);
-      
-      // Clean up preview URL when component unmounts
-      return () => URL.revokeObjectURL(previewUrl);
+        const file = acceptedFiles[0];
+        form.setValue('image', file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImagePreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
     }
-  }, [setFiles]);
+}, [form]);
 
   // Initialize dropzone after form
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -153,73 +156,46 @@ export default function TokenSubmissionForm({
       fileInputRef.current?.click();
     }
 
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        if (acceptedFiles.length > 0) {
-            const file = acceptedFiles[0];
-            form.setValue('image', file);
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-        }
-    }, [form]);
     const removeError = (id: number) => {
         setErrors(prev => prev.filter(e => e.id !== id));
     };
 
   
     async function onSubmit(data: FormValues) {
-      try {
-        setDeployError(null);
-    
-        if (!userAddress) {
-          setDeployError('Please connect your wallet first');
-          toast.error('Please connect your wallet to continue.');
+      if (!userAddress) {
+          toast.error('Please connect your wallet to like the comment.');
           return;
-        }
-    
-        let imageUrl = '';
-        const preparingTokenToast = toast.info("Preparing to create token...");
-    
-        // Check if an image file was uploaded
-        if (data.image instanceof File) {
-          const uploadToast = toast.loading("Uploading image...");
+      }
+      let imageUrl = '';
+      const preparingTokenToast = toast.info("Preparing to create token...");
+
+      if (data.image instanceof File) {
+
+          toast.loading("Uploading image...");
           try {
-            const uploadedFiles = await startUpload([data.image]);
-            if (uploadedFiles && uploadedFiles.length > 0) {
-              imageUrl = uploadedFiles[0].url; // Set the image URL from the upload response
-              toast.success("Image uploaded successfully!");
-            } else {
-              setDeployError('Image upload failed');
-              toast.error("Image upload failed. Please try again.");
-              return;
-            }
+              const uploadedFiles = await startUpload([data.image]);
+              if (uploadedFiles && uploadedFiles[0]) {
+                  imageUrl = uploadedFiles[0].url;
+                  toast.success("Image uploaded successfully!");
+              }
+              toast.dismiss();
           } catch (error) {
-            console.error("Image upload error:", error);
-            setDeployError('Failed to upload image');
-            toast.error("Failed to upload image. Please try again.");
-            return;
+              console.error("Image upload error:", error);
+              toast.error("Failed to upload image. Please try again.");
+              return;
           } finally {
-            toast.dismiss(uploadToast);
+              toast.dismiss();
           }
-        } else {
-          setDeployError('Image URL is required');
-          toast.error("Image URL is required");
+      }
+      const ethAmount = parseUnits(data.ethAmount.toString(), 18);
+      if (!imageUrl) {
+          toast.error("image url is noot found");
           return;
-        }
-    
-        // Ensure the image URL is valid before proceeding
-        if (!imageUrl) {
-          setDeployError('Image URL is required');
-          toast.error("Image URL is required");
-          return;
-        }
-    
-        const ethAmount = parseUnits(data.ethAmount.toString(), 18);
-        
-        const tokenParams = {
-          userAddress: userAddress,
+      }
+
+
+      const tokenParams = {
+          userAddress: userAddress, // This will be set by the contract
           name: data.name,
           symbol: data.ticker,
           description: data.description,
@@ -227,51 +203,62 @@ export default function TokenSubmissionForm({
           twitter: data.twitter || 'non',
           telegram: data.telegram || 'non',
           website: data.website || 'non'
-        };
-    
-        if (chainId === SEPOLIA_ARBITRUM_CHAIN_ID) {
-          await createTokenAndAddVote(
-            { args: [tokenParams], value: ethAmount },
-            {
+      };
+
+
+
+      if (chainId === SEPOLIA_ARBITRUM_CHAIN_ID) {
+
+          createTokenAndAddVote({
+              args: [tokenParams],
+              value: ethAmount,
+          }, {
               onSuccess: async (data) => {
-                toast.success('Token creation initiated. Waiting for confirmation...');
-                addNormalTransaction({
-                  hash: data,
-                  status: NormalTxStatus.PENDING,
-                  additionalData: {
-                    type: 'tokenCreation',
-                    tokenAmount: "1000000000",
-                    ethAmount: form.getValues('ethAmount').toString(),
-                    tokenName: form.getValues('name'),
-                    tokenTicker: form.getValues('ticker'),
-                    transactionHash: data,
-                  }
-                });
-                handleSuccess();
+
+
+
+                  toast.success('Token creation initiated. Waiting for confirmation...');
+
+
+                  addNormalTransaction({
+                      hash: data,
+                      status: NormalTxStatus.PENDING,
+                      additionalData: {
+                          type: 'tokenCreation',
+                          tokenAmount: "1000000000",
+                          ethAmount: form.getValues('ethAmount').toString(),
+                          tokenName: form.getValues('name'),
+                          tokenTicker: form.getValues('ticker'),
+                          transactionHash: data,
+                      }
+                  });
               },
               onError: (error) => {
-                console.error('Contract write error:', error);
-                setDeployError(error.message || 'Failed to create token');
-                setErrors([
-                  ...errors,
-                  { id: new Date().getTime(), name: 'Error Creating Token', error }
-                ]);
-                toast.error('There was an error creating the token. Please try again.');
+                  console.error('Contract write error:', error);
+                  //set a new error 
+                  setErrors([
+                      ...errors,
+                      {
+                          id: new Date().getTime(),
+                          name: 'Error Creating Token',
+                          error: error,
+                      }
+                  ]);
+                  toast.error('There was an error creating the token. Please try again.');
               }
-            }
-          );
-        } else {
-          setDeployError('Unsupported chain');
-          toast.error('Unsupported chain. Please switch to Arbitrum Sepolia.');
-        }
-      } catch (error) {
-        console.error('Submission error:', error);
-        setDeployError('An unexpected error occurred');
-        toast.error('An unexpected error occurred. Please try again.');
-      } finally {
-        toast.dismiss();
+          });
+          toast.dismiss(preparingTokenToast);
+
+      } else {
+
+          ///apply cross chain here later 
+
+
+
+
       }
-    }
+
+  }
 
 
 const SubmitButton: React.FC<CustomButtonProps> = ({ 
