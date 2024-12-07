@@ -99,7 +99,16 @@ const NoActiveBatch: React.FC = () => {
     const router = useRouter();
 
     return (
-    <HeroSection />
+        <div className="flex justify-center items-center h-auto mt-4">
+        <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+      <StartingButton  />
+      <div className="text-center text-destructive p-4">
+                <p className="font-medium">No batch metrics found</p>
+                <p className="text-sm">Pleasee Create Batch</p>
+            </div>
+           
+          </BackgroundGradient>
+        </div>
     );
 };
 

@@ -595,19 +595,19 @@ export default function ComponentCoin() {
   const [isMarketCapOpen, setIsMarketCapOpen] = useState(false)
   const [isPriceOpen, setIsPriceOpen] = useState(false)
   const [isLaunched, setIsLaunched] = useState(true)
-
+  const { data: tokens, isLoading, error } = useAllTokens();
   // Selected values
   const [selectedMarketCap, setSelectedMarketCap] = useState('Number Of Views')
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [activeTab, setActiveTab] = useState<'Initial' | 'Anonymous'>('Initial');
   const [currency, setCurrency] = useState('USD');
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, error } = useTokensQuery();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status} = useTokensQuery();
   console.log('Query Status:', status);
 
   if (status === 'error') {
       console.error('Error loading tokens:', error);
-      return <div>Error loading tokens: {error.message}</div>;
+      return <div>Error loading tokens: </div>;
   }
 
   const handleTabClick = (tab: 'Initial' | 'Anonymous') => {
@@ -624,17 +624,14 @@ export default function ComponentCoin() {
   if (status === 'success') {
         console.log('Fetched Data:', data);
     }
-  
+    if (isLoading) return <div>Loading tokens...</div>;
+  if (error) return <div>Error loading tokens</div>;
     const allTokens = data?.pages?.flatMap(page => page.tokens) || [];
 
 
 
-  const anonymousTokens = allTokens.filter(token => token.metrics?.totalAnonymousStaked ? parseFloat(token.metrics.totalAnonymousStaked) > 0 : false);
-  
-  const initialTokens = allTokens.filter(token => 
-    token.metrics?.totalInitialStaked ? 
-    parseFloat(token.metrics.totalInitialStaked) > 0 : false
-  );
+    const initialTokens = tokens?.filter(token => token.votes.initial > 0);
+    const anonymousTokens = tokens?.filter(token => token.votes.anonymous > 0);
 
 
   const chainData: ChainData[] = [
@@ -1014,11 +1011,47 @@ export default function ComponentCoin() {
                 </div>  
                             ))}
                             </div>                   
-                 
-                           <TokenGrid 
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 className="text-2xl font-bold mb-4 text-[#F7F2DA]">
+            Initial Voting Tokens ({initialTokens?.length || 0})
+          </h2>
+          <div className="space-y-4">
+            {initialTokens?.map(token => (
+         <div key={token.id} className="token-card">
+         <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
+         <h2>{token.details.name} ({token.details.symbol})</h2>
+         <p>{token.details.description}</p>
+         {/* <p>Created by: {formatWalletAddress(token.details.creator)} </p> */}
+         <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
+         <p>Batch ID: {token.batchId}</p>
+     </div>  
+            ))}
+          </div>
+        </div>
+        
+        <div>
+          <h2 className="text-2xl font-bold mb-4 text-[#F7F2DA]">
+            Anonymous Voting Tokens ({anonymousTokens?.length || 0})
+          </h2>
+          <div className="space-y-4">
+            {anonymousTokens?.map(token => (
+             <div key={token.id} className="token-card">
+             <img src={token.details.imageUrl} alt={token.details.name} className="token-image" />
+             <h2>{token.details.name} ({token.details.symbol})</h2>
+             <p>{token.details.description}</p>
+             {/* <p>Created by: {formatWalletAddress(token.details.creator)}</p> */}
+             <p>Staked Amount: {token.staked.total.toFixed(6)} ETH</p>
+             <p>Batch ID: {token.batchId}</p>
+         </div>  
+            ))}
+          </div>
+        </div>
+      </div>
+                           {/* <TokenGrid 
   tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
   activeTab={activeTab}
-/>
+/> */}
                         </motion.div>
                     </AnimatePresence>
     <div className="items-center flex justify-center align-middle text-center">
