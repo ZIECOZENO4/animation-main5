@@ -105,35 +105,28 @@ const secondaryVariant = {
   },
 };
 
+
 export default function TokenSubmissionForm({
   onChange,
 }: {
   onChange?: (files: File[]) => void;
 }) {
-    const [showMoreOptions, setShowMoreOptions] = useState(false);
-    const { address: userAddress } = useAccount();
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
-    const chainId = useChainId();
-    const { addNormalTransaction } = useNormalTransactionStore();
-    const [errors, setErrors] = useState<Array<{ id: number, error: unknown, name: string }>>([]);
-    const [minAmount, setMinAmount] = useState<string>('0');
-    const [files, setFiles] = useState<File[]>([]);
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formReady, setFormReady] = useState(false);
-
-    useEffect(() => {
-      const initForm = async () => {
-        await form.reset();
-        setFormReady(true);
-      };
-      initForm();
-    }, []);
-    
-    if (!formReady) {
-      return <div>Loading form...</div>;
-    }
+  // Move all hooks to the top level
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
+  const [deployError, setDeployError] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [minAmount, setMinAmount] = useState<string>('0');
+  const [errors, setErrors] = useState<Array<{ id: number, error: unknown, name: string }>>([]);
+  const [formReady, setFormReady] = useState(false);
   
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { address: userAddress } = useAccount();
+  const chainId = useChainId();
+  const { addNormalTransaction } = useNormalTransactionStore();
+
+  // Initialize form before any other hooks
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -144,21 +137,12 @@ export default function TokenSubmissionForm({
       telegram: '',
       website: '',
       ethAmount: 0,
-      image: undefined, // Add image field with undefined as default
+      image: undefined,
     },
     mode: 'onChange'
   });
 
   const { isValid } = form.formState;
-
-  const handleSuccess = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   const handleFileChange = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
@@ -172,27 +156,32 @@ export default function TokenSubmissionForm({
     }
   }, [setFiles]);
   
+  // Initialize dropzone after form
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: handleFileChange,
+    accept: {
+      'image/*': ['.jpeg', '.png', '.jpg', '.gif']
+    },
+    maxFiles: 1
+  });
+
+  const { startUpload, isUploading } = useUploadThing("imageUploader");
+  const { data: hash, writeContractAsync: createTokenAndAddVote, isPending: isWritePending } = useWriteTokenFactoryCreateTokenAndVote();
+
+
+  const handleSuccess = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  
     const handleClick = () => {
       fileInputRef.current?.click();
-    };
-  
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-      onDrop: handleFileChange,
-      accept: {
-        'image/*': ['.jpeg', '.png', '.jpg', '.gif']
-      },
-      maxFiles: 1
-    });
-
-    const { startUpload, isUploading } = useUploadThing("imageUploader");
-
-    const { data: hash,
-        error: writeError,
-        writeContractAsync: createTokenAndAddVote,
-        isPending: isWritePending,
-        isSuccess: isWriteSuccess
-    } = useWriteTokenFactoryCreateTokenAndVote();
-
+    }
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
@@ -314,149 +303,6 @@ async function onSubmit(data: FormValues) {
 }
 
     return (
-
-//       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 z-50 max-w-3xl mx-auto p-6">
-//         <Card className="p-6">
-//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Name</label>
-//               <Input
-                // {...form.register("name")}
-                // placeholder="Token name"
-//                 variant="bordered"
-//               />
-           
-//             </div>
-    
-//             <div>
-//               <label className="block text-sm font-medium mb-1">Ticker</label>
-//               <Input
-
-//                 variant="bordered"
-//               />
-           
-//             </div>
-//           </div>
-    
-//           <div className="mt-6">
-//             <label className="block text-sm font-medium mb-1">Description</label>
-//             <Textarea
-//            
-//               placeholder="Token description"
-//               variant="bordered"
-//               minRows={3}
-//             />
-//           </div>
-
-//           <div>
-//   <label className="block text-sm font-medium mb-1">Image</label>
-//   <div className="mt-2">
-//     {imagePreview ? (
-//       <Card className="mt-4 w-fit">
-//         <NextUIImage
-//           src={imagePreview}
-//           alt="Preview"
-//           width={200}
-//           height={200}
-//           classNames={{
-//             wrapper: "rounded-lg",
-//             img: "object-cover w-[200px] h-[200px]"
-//           }}
-//         />
-//       </Card>
-//     ) : (
-//       <div {...getRootProps()} className="w-full">
-//         <Card
-//           className={`flex flex-col items-center justify-center h-64 border-2 border-dashed cursor-pointer transition-colors ${
-//             isDragActive 
-//               ? "border-primary bg-primary/10" 
-//               : "border-default-200 bg-default-100"
-//           } hover:bg-default-200`}
-//         >
-//           <div className="flex flex-col items-center justify-center pt-5 pb-6">
-//             <Upload className="w-8 h-8 mb-4" />
-//             <p className="mb-2 text-sm">
-//               <span className="font-semibold">Click to upload</span> or drag and drop
-//             </p>
-//             <p className="text-xs text-default-500">
-//               PNG, JPG or GIF (MAX. 800x400px)
-//             </p>
-//           </div>
-//    
-//         </Card>
-//       </div>
-//     )}
-//   </div>
-
-// </div>
-// <div className="mt-6">
-//   <label className="block text-sm font-medium mb-1"></label>
-//   <Input
- 
-//     variant="bordered"
-//   />
-
-// </div>
-    
-//           <Button
-//             variant="flat"
-//             onPress={() => setShowMoreOptions(!showMoreOptions)}
-//             className="w-full mt-6"
-//             endContent={
-//               <ChevronDown 
-//                 className={`transition-transform duration-200 ${
-//                   showMoreOptions ? "rotate-180" : ""
-//                 }`}
-//               />
-//             }
-//           >
-//             {showMoreOptions ? "Hide" : "Show"} More Options
-//           </Button>
-    
-//           {showMoreOptions && (
-//             <div className="space-y-6 mt-6">
-//               <div>
-//                 <label className="block text-sm font-medium mb-1">Twitter Link</label>
-//                 <Input
-//                   {...form.register("twitter")}
-//                   placeholder="https://twitter.com/..."
-//                   variant="bordered"
-//                 />
-//               </div>
-    
-//               <div>
-//                 <label className="block text-sm font-medium mb-1">Telegram Link</label>
-//                 <Input
-//                   {...form.register("telegram")}
-//                   placeholder="https://t.me/..."
-//                   variant="bordered"
-//                 />
-//               </div>
-    
-//               <div>
-//                 <label className="block text-sm font-medium mb-1">Website</label>
-//                 <Input
-//                   {...form.register("website")}
-//                   placeholder="https://..."
-//                   variant="bordered"
-//                 />
-//               </div>
-//             </div>
-//           )}
-    
-//           <div className="flex justify-center mt-6">
-//             <Button
-//               type="submit"
-//               color="primary"
-//               isLoading={isUploading || isWritePending}
-//               className="w-full max-w-md"
-//             >
-//               {isUploading ? "Uploading..." : isWritePending ? "Creating Token..." : "Submit"}
-//             </Button>
-//           </div>
-//         </Card>
-//       </form>
-
 <div className="min-h-screen mt-8 text-gray-300 p-4">
 <style jsx global>{`
   input:focus,
