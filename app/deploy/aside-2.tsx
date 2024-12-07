@@ -119,15 +119,17 @@ export default function TokenSubmissionForm({
 
   const handleFileChange = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
-        const file = acceptedFiles[0];
-        form.setValue('image', file);
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImagePreview(reader.result as string);
-        };
-        reader.readAsDataURL(file);
+      const file = acceptedFiles[0];
+      form.setValue('image', file); // Set the file in the form state
+      const reader = new FileReader();
+      
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string); // Set the image preview
+      };
+      
+      reader.readAsDataURL(file); // Read the file as a data URL
     }
-}, [form]);
+  }, [form]);
 
   // Initialize dropzone after form
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -371,119 +373,123 @@ const SubmitButton: React.FC<CustomButtonProps> = ({
       ></textarea>
     </div>
     <div>
-      <label className="block mb-2">Image</label>
-      <div className="w-full" {...getRootProps()}>
-      <motion.div
-        onClick={handleClick}
-        whileHover="animate"
-        className="px-2 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
-      >
+  <label className="block mb-2">Image</label>
+  <div className="w-full" {...getRootProps()}>
+    <motion.div
+      onClick={handleClick}
+      whileHover="animate"
+      className="px-2 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
+    >
       <input
-      ref={fileInputRef}
-      id="file-upload-handle"
-      {...getInputProps()}
-      type="file"
-      onChange={(e) => handleFileChange(Array.from(e.target.files || []))}
-      className="hidden"
-      aria-label='number'
-    />
-         
-        <div className="flex flex-col items-center justify-center w-full">
-          <div className="relative w-full  mx-auto">
-            {files.length > 0 &&
-              files.map((file, idx) => (
+        ref={fileInputRef}
+        id="file-upload-handle"
+        {...getInputProps()}
+        type="file"
+        className="hidden"
+        aria-label='number'
+      />
+      <div className="flex flex-col items-center justify-center w-full">
+        <div className="relative w-full mx-auto">
+          {imagePreview ? (
+            <img src={imagePreview} alt="Preview" className="object-cover w-full h-64 rounded-md" />
+          ) : (
+            <>
+              {files.length > 0 &&
+                files.map((file, idx) => (
+                  <motion.div
+                    key={"file" + idx}
+                    layoutId={idx === 0 ? "file-upload" : "file-upload-" + idx}
+                    className={cn(
+                      "relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
+                      "shadow-sm"
+                    )}
+                  >
+                    <div className="flex justify-between w-full items-center gap-4">
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        layout
+                        className="text-base text-neutral-700 dark:text-neutral-300 truncate max-w-xs"
+                      >
+                        {file.name}
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        layout
+                        className="rounded-lg px-2 py-1 w-fit flex-shrink-0 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-[#F7F2DA] shadow-input"
+                      >
+                        {(file.size / (1024 * 1024)).toFixed(2)} MB
+                      </motion.p>
+                    </div>
+
+                    <div className="flex text-sm md:flex-row flex-col items-start md:items-center w-full mt-2 justify-between text-neutral-600 dark:text-neutral-400">
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        layout
+                        className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 "
+                      >
+                        {file.type}
+                      </motion.p>
+
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        layout
+                      >
+                        modified{" "}
+                        {new Date(file.lastModified).toLocaleDateString()}
+                      </motion.p>
+                    </div>
+                  </motion.div>
+                ))}
+              {!files.length && (
                 <motion.div
-                  key={"file" + idx}
-                  layoutId={idx === 0 ? "file-upload" : "file-upload-" + idx}
+                  layoutId="file-upload"
+                  variants={mainVariant}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                  }}
                   className={cn(
-                    "relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
-                    "shadow-sm"
+                    "relative group-hover/file:shadow-2xl z-40 bg-white dark:bg-neutral-900 flex flex-col items-center justify-center h-64 mt-4 w-full mx-auto rounded-md",
+                    "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
                   )}
                 >
-                  <div className="flex justify-between w-full items-center gap-4">
+                  {isDragActive ? (
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      layout
-                      className="text-base text-neutral-700 dark:text-neutral-300 truncate max-w-xs"
+                      className="text-neutral-600 flex flex-col items-center"
                     >
-                      {file.name}
+                      Drop it
+                      <IconUpload className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
                     </motion.p>
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      layout
-                      className="rounded-lg px-2 py-1 w-fit flex-shrink-0 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-[#F7F2DA] shadow-input"
-                    >
-                      {(file.size / (1024 * 1024)).toFixed(2)} MB
-                    </motion.p>
-                  </div>
-
-                  <div className="flex text-sm md:flex-row flex-col items-start md:items-center w-full mt-2 justify-between text-neutral-600 dark:text-neutral-400">
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      layout
-                      className="px-1 py-0.5 rounded-md bg-gray-100 dark:bg-neutral-800 "
-                    >
-                      {file.type}
-                    </motion.p>
-
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      layout
-                    >
-                      modified{" "}
-                      {new Date(file.lastModified).toLocaleDateString()}
-                    </motion.p>
-                  </div>
+                  ) : (
+                    <>
+                      <IconUpload className="h-8 w-8 text-neutral-600 dark:text-neutral-300 mb-4" />
+                      <p className="text-center text-neutral-600 dark:text-neutral-300">Click to upload or drag and drop</p>
+                      <p className="text-sm text-center text-gray-500 mt-2">PNG, JPG or GIF (MAX. 800x400px)</p>
+                    </>
+                  )}
                 </motion.div>
-              ))}
-            {!files.length && (
-              <motion.div
-                layoutId="file-upload"
-                variants={mainVariant}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                }}
-                className={cn(
-                  "relative group-hover/file:shadow-2xl z-40 bg-white dark:bg-neutral-900 flex flex-col items-center justify-center h-64 mt-4 w-full mx-auto rounded-md",
-                  "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
-                )}
-              >
-                {isDragActive ? (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-neutral-600 flex flex-col items-center"
-                  >
-                    Drop it
-                    <IconUpload className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
-                  </motion.p>
-                ) : (
-                  <>
-                    <IconUpload className="h-8 w-8 text-neutral-600 dark:text-neutral-300 mb-4" />
-                    <p className="text-center text-neutral-600 dark:text-neutral-300">Click to upload or drag and drop</p>
-                    <p className="text-sm text-center text-gray-500 mt-2">PNG, JPG or GIF (MAX. 800x400px)</p>
-                  </>
-                )}
-              </motion.div>
-            )}
+              )}
 
-            {!files.length && (
-              <motion.div
-                variants={secondaryVariant}
-                className="absolute opacity-0 border border-dashed border-sky-400 inset-0 z-30 bg-transparent flex items-center justify-center h-64 mt-4 w-full mx-auto rounded-md"
-              ></motion.div>
-            )}
-          </div>
+              {!files.length && (
+                <motion.div
+                  variants={secondaryVariant}
+                  className="absolute opacity-0 border border-dashed border-sky-400 inset-0 z-30 bg-transparent flex items-center justify-center h-64 mt-4 w-full mx-auto rounded-md"
+                ></motion.div>
+              )}
+            </>
+          )}
         </div>
-      </motion.div>
-    </div>
-    </div>
+      </div>
+    </motion.div>
+  </div>
+</div>
     <div className="flex space-x-4">
       <div className="flex-1">
         <label className="block mb-2">ETH Amount to stake</label>

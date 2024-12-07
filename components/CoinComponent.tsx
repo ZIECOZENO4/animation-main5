@@ -1002,7 +1002,6 @@ export default function ComponentCoin() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-
 <div className="token-grid">
             {allTokens.map(token => (
                 <div key={token.id} className="token-card">
@@ -1014,8 +1013,7 @@ export default function ComponentCoin() {
                     <p>Batch ID: {token.batchId}</p>
                 </div>  
                             ))}
-                            </div>
-                    
+                            </div>                   
 <div className="token-grid">
             {initialTokens.map(token => (
                 <div key={token.id} className="token-card">
