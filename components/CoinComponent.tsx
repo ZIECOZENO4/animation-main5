@@ -1256,10 +1256,10 @@ export default function ComponentCoin() {
                         >
                
                  
-                           <TokenGrid 
+                           {/* <TokenGrid 
   tokens={activeTab === 'Initial' ? initialTokens : anonymousTokens}
   activeTab={activeTab}
-/>
+/> */}
 
 {/* <div className="token-grid">
             {allTokens.map(token => (
@@ -1276,7 +1276,7 @@ export default function ComponentCoin() {
                              <div className="w-full overflow-x-auto  scrollbar-hide">
       <div className="min-w-max px-4">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {tokens.map((token) => (
+            {allTokens.map((token) => (
                <Link href='/test' key={token.id} >
                     <motion.div
                
