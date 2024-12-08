@@ -97,6 +97,8 @@ const CountdownRenderer: React.FC<CountdownRendererProps> = ({ timeRemaining, pr
     );
 };
 
+
+
 const NoActiveBatch: React.FC = () => {
     const router = useRouter();
 
