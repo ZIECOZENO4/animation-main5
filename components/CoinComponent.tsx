@@ -487,6 +487,7 @@ const TokenGrid = ({ tokens, activeTab }: { tokens: FormattedToken[], activeTab:
                         transition={{ delay: 0.5, duration: 0.5 }}
                       >
                         <p
+                         className="workbench-test"
                           style={{
                             fontSize: "10px",
                             fontWeight: 400,
@@ -920,7 +921,7 @@ export default function ComponentCoin() {
     );
 
   return (
-    <motion.div className="flex flex-col my-8 gap-4 px-4 md:px-8">
+    <motion.div className="flex flex-col my-8 gap-4 min-h-screen px-4 md:px-8">
          <motion.div className="flex flex-row justify-between align-middle">
             <div className="flex justify-center space-x-4">
                 <motion.div
@@ -1430,6 +1431,7 @@ export default function ComponentCoin() {
                             transition={{ delay: 0.5, duration: 0.5 }}
                           >
                             <p
+                                  className="workbench-test"
                               style={{
                                 fontSize: "10px",
                                 fontWeight: 400,
