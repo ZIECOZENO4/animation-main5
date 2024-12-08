@@ -165,7 +165,7 @@ export default function TokenSubmissionForm({
   
     async function onSubmit(data: FormValues) {
       if (!userAddress) {
-          toast.error('Please connect your wallet to create a token.');
+          toast.error('Please connect your wallet to create token');
           return;
       }
       let imageUrl = '';
@@ -207,22 +207,7 @@ export default function TokenSubmissionForm({
           website: data.website || 'non'
       };
 
-      const gasEstimate = await contract.estimateGas.createTokenAndVote(tokenParams);
-      try {
-        const result = await contract.createTokenAndVote(tokenParams, {
-          value: ethers.utils.parseEther("1000"), // Adjust this value if needed
-          gasLimit: gasEstimate,
-          gasPrice: gasPrice
-        });
-        // Handle success
-      } catch (error) {
-        if (error instanceof ContractFunctionExecutionError) {
-          toast.error("Insufficient funds for transaction. Please check your balance and try again.");
-        } else {
-          toast.error("An error occurred while processing the transaction.");
-        }
-        console.error(error);
-      }
+
 
       if (chainId === SEPOLIA_ARBITRUM_CHAIN_ID) {
 
