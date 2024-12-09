@@ -6,30 +6,18 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useRouter } from 'next/navigation';
 import { useQueries, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import { Badge, Card, CardHeader, Modal, ModalContent, Tabs } from "@nextui-org/react";
 import { ExternalLink, CheckCircle, XCircle, Clock, ChevronUp, ChevronDown, ArrowRight } from "lucide-react";
 import { SEPOLIA_ARBITRUM_CHAIN_ID } from '@/constants';
 import { format, formatDistanceToNow } from 'date-fns';
 import { usePublicClient } from 'wagmi';
 import { newCalculateFontSize } from '@/lib/newCalculateFontSize';
 import { PublicClient, TransactionReceipt, WaitForTransactionReceiptTimeoutError } from 'viem';
-import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    Tab,
-    Tabs,
-    Card,
-    CardHeader,
-    CardBody,
-    Badge,
-    Button,
-    Link
-  } from "@nextui-org/react";
+import Link from 'next/link';
 import { MessageStatus, NormalTransaction, NormalTxStatus, Transaction, UnifiedSearchParams, useNormalTransactionStore, useSheetStore, useTransactionStore } from '@/zustand-store';
 import { useEthereumPrice } from '@/hooks/useEthPrice';
 import { getChainIconByChainId } from '@/lib/chainsAndIcons';
-
+import { useDisclosure } from '@nextui-org/react';
 
 const TWO_HOURS_IN_MS = 2 * 60 * 60 * 1000 // 2 hours in milliseconds
 
@@ -109,7 +97,7 @@ export const TransactionManager: React.FC = () => {
     const queryClient = useQueryClient();
     const publicClient = usePublicClient();
     const { data: ethPrice } = useEthereumPrice();
-    const { isOpen, openSheet, closeSheet } = useSheetStore();
+    const { isOpen, onOpenChange } = useDisclosure(); 
 
     const crossChainQueries = useQueries({
         queries: transactions.map((tx) => ({
@@ -239,72 +227,39 @@ export const TransactionManager: React.FC = () => {
 
     return (
         <>
-             <Modal 
-      isOpen={isOpen} 
-      onOpenChange={closeSheet}
-      scrollBehavior="inside"
-      classNames={{
-        base: "bg-background/80 backdrop-blur-md",
-        body: "p-0"
-      }}
-    >
-                  <ModalContent>
-        <ModalHeader>
-          <h2>Transaction Details</h2>
-        </ModalHeader>
-        <ModalBody>
-        <Tabs 
-            defaultSelectedKey="all" 
-            className="w-full mt-6"
-          >
-            <Tab key="all" title="All">
-              {sortedTransactions.map((tx) => (
-                <TransactionItem 
-                  key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash}
-                  tx={tx}
-                  ethPrice={ethPrice ? ethPrice.ethereum.usd : 0}
-                />
-              ))}
-            </Tab>
-            <Tab key="pending" title="Pending">
-              {sortedTransactions
-                .filter(tx => (
-                  tx.type === 'cross-chain' && 
-                  (tx.status === MessageStatus.INFLIGHT || tx.status === MessageStatus.CONFIRMING)
-                ) || (
-                  tx.type === 'normal' && 
-                  tx.status === NormalTxStatus.PENDING
-                ))
-                .map((tx) => (
-                  <TransactionItem
-                    key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash}
-                    tx={tx} 
-                    ethPrice={ethPrice ? ethPrice.ethereum.usd : 0}
-                  />
-                ))
-              }
-            </Tab>
-            <Tab key="completed" title="Completed">
-              {sortedTransactions
-                .filter(tx => (
-                  tx.type === 'cross-chain' && 
-                  tx.status !== MessageStatus.INFLIGHT && 
-                  tx.status !== MessageStatus.CONFIRMING
-                ) || (
-                  tx.type === 'normal' && 
-                  tx.status !== NormalTxStatus.PENDING
-                ))
-                .map((tx) => (
-                  <TransactionItem
-                    key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash}
-                    tx={tx}
-                    ethPrice={ethPrice ? ethPrice.ethereum.usd : 0}
-                  />
-                ))
-              }
-            </Tab>
-          </Tabs>
-                  </ModalBody>
+           <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
+                    <div>
+                        <h1 className="text-popover-foreground">Transaction Details</h1>
+                    </div>
+                    <div className="w-full mt-6">
+                        <div className="flex flex-row justify-between items-center w-full">
+                            <div >All</div>
+                            <div >Pending</div>
+                            <div >Completed</div>
+                        </div>
+                        <div  className="mt-4">
+                            {sortedTransactions.map((tx) => (
+                                <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
+                            ))}
+                        </div>
+                        <div  className="mt-4">
+                            {sortedTransactions.filter(tx =>
+                                (tx.type === 'cross-chain' && (tx.status === MessageStatus.INFLIGHT || tx.status === MessageStatus.CONFIRMING)) ||
+                                (tx.type === 'normal' && tx.status === NormalTxStatus.PENDING)
+                            ).map((tx) => (
+                                <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
+                            ))}
+                        </div>
+                        <div className="mt-4">
+                            {sortedTransactions.filter(tx =>
+                                (tx.type === 'cross-chain' && tx.status !== MessageStatus.INFLIGHT && tx.status !== MessageStatus.CONFIRMING) ||
+                                (tx.type === 'normal' && tx.status !== NormalTxStatus.PENDING)
+                            ).map((tx) => (
+                                <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
+                            ))}
+                        </div>
+                    </div>
                 </ModalContent>
             </Modal>
         </>
@@ -375,7 +330,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
     const href = `/reciept?type=${tx.type}&hash=${hash}`;
 
     return (
-        <Link href={href}
+        <Link href={href} passHref
 
             target="_blank"
             rel="noopener noreferrer">
@@ -390,13 +345,13 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
             >
                 <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
-                        <CardBody className="text-sm font-semibold text-primary flex items-center">
-                            <Badge variant="shadow" className={`mr-2 ${getTransactionTypeColor()}`}>
+                        <div className="text-sm font-semibold text-primary flex items-center">
+                            <Badge  className={`mr-2 ${getTransactionTypeColor()}`}>
                                 {type === 'tokenBuy' ? 'Buy' : type === 'tokenSell' ? 'Sell' : 'Tx'}
                             </Badge>
                             {tx.type === 'cross-chain' ? 'Cross-Chain' : 'Normal'}
-                        </CardBody>
-                        <Badge variant="shadow"  className={`${color} text-white `}>
+                        </div>
+                        <Badge  className={`${color} text-white `}>
                             <StatusIcon className="mr-1 h-3 w-3" />
                             <span style={{ fontSize: newCalculateFontSize(text, "sm") }}>
                                 {text}
@@ -405,7 +360,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
                         </Badge>
                     </div>
                 </CardHeader>
-                <CardBody>
+                <div>
                     <div className="space-y-3">
                         {renderAmount()}
                         {tx.type === 'cross-chain' && (
@@ -426,7 +381,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
                             </span>
                         </div>
                     </div>
-                </CardBody>
+                </div>
             </Card>
         </Link>
     );
