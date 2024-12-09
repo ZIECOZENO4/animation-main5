@@ -1,3 +1,4 @@
+"use client";
 import { useTransactionStore, useNormalTransactionStore, MessageStatus, NormalTxStatus } from "@/zustand-store";
 import { useEffect, useState } from "react";
 
