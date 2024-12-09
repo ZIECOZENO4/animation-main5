@@ -155,7 +155,7 @@ const MdNavBar = () => {
 
             {/* Right Section: Cubic Button and Notification Icon */}
             <div className="flex items-center justify-end mr-2">
-                <div   onClick={toggleNotification} className="md:w-auto hidden text-[#F7F2DA] rounded-md sm:flex w-12">
+                <div   onClick={toggleNotification} className="w-auto text-[#F7F2DA] rounded-md flex w-12">
                     <CubicButton />
                 </div>
        
@@ -187,10 +187,8 @@ const MdNavBar = () => {
             >
               <div className="p-4">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl text-center font-bold md:hidden px-4 md:px-8">
-                    Quick Links
-                  </h2>
-                  <h2 className="text-md text-center  hidden sm:flex px-4 md:px-8">
+            
+                  <h2 className="text-md text-center  flex px-4 md:px-8">
                   Wallet Details 
                   </h2>
 
@@ -208,62 +206,9 @@ const MdNavBar = () => {
                   <div className="p-[3px]">
                   <CubicButtonSide />
                   </div>
-                  <div className="md:hidden p-3 gap-4 aligm-middle flex flex-col">
-                    <Link href="/">
-                      <button className="p-[3px] relative w-full">
-                        <div className="absolute inset-0 bg-gradient-to-r  from-slate-500 to-slate-700 rounded-lg" />
-                        <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                          Home
-                        </div>
-                      </button>
-                    </Link>
-                    <Link href="/create">
-                      <button className="p-[3px] relative w-full">
-                        <div className="absolute inset-0 bg-gradient-to-r  from-slate-500 to-slate-700 rounded-lg" />
-                        <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                          Create
-                        </div>
-                      </button>
-                    </Link>
-                    <Link href="/liquidity">
-                      <button className="p-[3px] relative w-full">
-                        <div className="absolute inset-0 bg-gradient-to-r  from-slate-500 to-slate-700 rounded-lg" />
-                        <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                          Liquidity
-                        </div>
-                      </button>
-                    </Link>
-             
-                    <Link href="/lisiting">
-                      <button className="p-[3px] relative w-full">
-                        <div className="absolute inset-0 bg-gradient-to-r  from-slate-500 to-slate-700 rounded-lg" />
-                        <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                          Listing
-                        </div>
-                      </button>
-                    </Link>    
-                       <Link href="/website-comment">
-                      <button className="p-[3px] relative w-full">
-                        <div className="absolute inset-0 bg-gradient-to-r  from-slate-500 to-slate-700 rounded-lg" />
-                        <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                     Comment
-                        </div>
-                      </button>
-                    </Link>
-                    <Link href="/contact">
-                      <button className="p-[3px] relative w-full">
-                        <div className="absolute inset-0 bg-gradient-to-r  from-slate-500 to-slate-700 rounded-lg" />
-                        <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-[#F7F2DA] hover:bg-transparent">
-                          Contact
-                        </div>
-                      </button>
-                    </Link>
-                 
-                  </div>
+               
                   <div className="space-y-4 mt-6">
-                    <h2 className="text-xl text-center font-bold mt-6 md:hidden px-4 md:px-8">
-                      Transaction History
-                    </h2>
+                  
                     <NotificationAlert />
                   </div>
                   {/* Add more notifications as needed */}

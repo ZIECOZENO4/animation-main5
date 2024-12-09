@@ -98,24 +98,6 @@ const CountdownRenderer: React.FC<CountdownRendererProps> = ({ timeRemaining, pr
 };
 
 
-
-const NoActiveBatch: React.FC = () => {
-    const router = useRouter();
-
-    return (
-        <div className="flex justify-center items-center h-auto mt-4">
-        <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
-      <StartingButton  />
-      <div className="text-center text-destructive p-4">
-                <p className="font-medium">No batch metrics found</p>
-                <p className="text-sm">Pleasee Create Batch</p>
-            </div>
-           
-          </BackgroundGradient>
-        </div>
-    );
-};
-
 interface BatchContentProps {
     batchMetrics: FormattedBatchMetrics;
     // Replace 'any' with your actual BatchMetrics type
@@ -161,9 +143,9 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
     }, [batchMetrics.batch.stateUpdatedAt, batchMetrics.batch.stateDuration]);
 
     // Check if the batch is completed or inactive
-    if (shouldShowNoActiveBatch()) {
-        return <NoActiveBatch />;
-    }
+    // if (shouldShowNoActiveBatch()) {
+    //     return <PreviousBatchContent />;
+    // }
 
 
     return (
@@ -247,6 +229,138 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
     );
 };
 
+const PreviousBatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
+    const progress = batchMetrics.batch.progress;
+    const progressColor = getProgressColor(progress);
+    const { data: ethPrice } = useEthereumPrice();
+    const [isHovered, setIsHovered] = React.useState(false);
+    const [previousBatch, setPreviousBatch] = React.useState<any>(null);
+
+    React.useEffect(() => {
+        const storedBatch = localStorage.getItem('previousBatch');
+        if (storedBatch) {
+            setPreviousBatch(JSON.parse(storedBatch));
+        }
+    }, []);
+
+    React.useEffect(() => {
+        localStorage.setItem('previousBatch', JSON.stringify(batchMetrics));
+    }, [batchMetrics]);
+
+    const calculateEthValue = (stakedAmount: number) => {
+        if (!ethPrice?.ethereum?.usd) return 0;
+        return stakedAmount * ethPrice.ethereum.usd;
+    };
+
+    const formatUSD = (value: number) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(value);
+    };
+
+    if (!isHovered) {
+        return (
+            <div 
+                className="flex justify-center items-center h-auto mt-4"
+                onMouseEnter={() => setIsHovered(true)}
+            >
+                <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                    <StartingButton />
+                    <div className="text-center text-[#F7F2DA] p-4">
+                        <p className="font-medium">Previous Batch #{batchMetrics.batch.batchId}</p>
+                        <p className="text-sm text-gray-500">Hover to view details</p>
+                    </div>
+                </BackgroundGradient>
+            </div>
+        );
+    }
+
+    return (
+        <div 
+            className="flex justify-center items-center h-auto mt-4"
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                <StartingButton />
+                <div className="flex align-middle my-6 flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <motion.div 
+                        className="relative w-32 md:w-44 md:h-44 h-32 rounded-full overflow-hidden"
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                    >
+                        <img
+                            alt="Profile picture"
+                            className="object-cover opacity-50"
+                            src='https://cryptologos.cc/logos/ethereum-eth-logo.png'
+                        />
+                        <div className="absolute inset-0 rounded-full border-2 border-slate-800 opacity-50"></div>
+                    </motion.div>
+                    <motion.div 
+                        className="text-center sm:text-left"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <h2 className="text-2xl md:text-3xl text-light text-[#F7F2DA]">Previous Batch [#{batchMetrics.batch.batchId}]</h2>
+                        <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-2 text-[#F7F2DA]">
+                            <Chip color='default' variant='shadow' className='font-bold'>
+                                {batchMetrics.batch.state}
+                            </Chip>
+                            <Chip color='warning' variant='dot' className='font-bold'>Completed</Chip>
+                        </div>
+
+                        <p className="mt-2 justify-center sm:justify-start text-gray-500 flex">
+                            Total Votes:{" "}<span className='ml-2 text-[#F7F2DA]'> 
+                                {batchMetrics.stats.totalVotes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+                            </span>
+                        </p>
+                        
+                        <p className="justify-center sm:justify-start text-gray-500 flex">
+                            Total Staked:{" "}<span className='ml-2 text-[#F7F2DA]'>
+                                <span className="font-medium text-foreground"
+                                    style={{ fontSize: newCalculateFontSize(batchMetrics.stats.totalStaked.initial.toFixed(9), 'md') }}>
+                                    {batchMetrics.stats.totalStaked.initial.toFixed(9)}
+                                    {ethPrice?.ethereum?.usd && (
+                                        <span className="ml-1 text-sm text-muted-foreground">
+                                            ({formatUSD(calculateEthValue(batchMetrics.stats.totalStaked.initial))})
+                                        </span>
+                                    )}
+                                </span>
+                            </span>
+                        </p>
+                        <p className="justify-center sm:justify-start text-gray-500 flex">
+                            Participating Tokens:{" "}<span className='ml-2 text-[#F7F2DA]'>
+                                {batchMetrics.stats.participatingTokens}
+                            </span>
+                        </p>
+                        <p className="text-slate-500 mt-2">
+                            Final Progress: {progress.toFixed(2)}%
+                        </p>
+                        <Chip color="default" className='text-sm md:text-md my-1 font-bold'>Completed</Chip>
+                    </motion.div>
+                </div>
+                <div className="gap-4 my-2 flex flex-col w-full md:flex-row ">
+                    <div className="md:w-[70%] w-full">
+                        <HeroSearchInput />
+                    </div>
+                    <div className="md:w-[30%] w-full">
+                        <Button 
+                            className="relative rounded-none px-4 py-2 bg-[#0A0909] text-[#F7F2DA] border-2 border-[#1a1a1a]"
+                            style={{
+                                boxShadow: '4px 4px 0 0 rgba(26, 26, 26, 0.9), 8px 8px 0 0 rgba(26, 26, 26, 0.7)',
+                            }}
+                        >
+                            <span className="text-gray-500">Batch Completed</span>
+                        </Button>
+                    </div>
+                </div>
+            </BackgroundGradient>
+        </div>
+    );
+};
+
 export function BatchHero()  {
     const router = useRouter();
     const { durations, isLoading: durationsLoading, isError: durationsError } = useTokenFactoryDurations();
@@ -263,52 +377,62 @@ export function BatchHero()  {
         }
     }, [batchMetrics?.batch.batchId, setCurrentBatchId, batchMetrics]);
 
+    const [previousBatch, setPreviousBatch] = useState<FormattedBatchMetrics | null>(null);
+
+    // Load previous batch metrics from localStorage if available
+    useEffect(() => {
+        const storedBatch = localStorage.getItem('previousBatch');
+        if (storedBatch) {
+            setPreviousBatch(JSON.parse(storedBatch));
+        }
+    }, []);
+
+    // Store current batch metrics in localStorage
+    useEffect(() => {
+        if (batchMetrics) {
+            localStorage.setItem('previousBatch', JSON.stringify(batchMetrics));
+        }
+    }, [batchMetrics]);
 
     return (
-      
         <div className="div">
-     {isLoading ? (
-                        //    <HeroSection />
-                        <div className="flex justify-center items-center h-auto mt-4">
-                        <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
-                      <StartingButton  />
-                      <div className="text-center text-destructive p-4">
-                                <p className="font-medium">Loading batch metrics</p>
-                                <p className="text-sm">Please Wait</p>
-                            </div>
-                           
-                          </BackgroundGradient>
+            {isLoading ? (
+                <div className="flex justify-center items-center h-auto mt-4">
+                    <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                        <StartingButton />
+                        <div className="text-center text-destructive p-4">
+                            <p className="font-medium">Loading batch metrics</p>
+                            <p className="text-sm">Please Wait</p>
                         </div>
-                    ) : error ? (
-                       
-                        <div className="flex justify-center items-center h-auto mt-4">
-                        <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
-                      <StartingButton  />
-                      <div className="text-center text-destructive p-4">
-                                <p className="font-medium">Error loading batch metrics</p>
-                                <p className="text-sm">{error.message}</p>
-                            </div>
-                           
-                          </BackgroundGradient>
+                    </BackgroundGradient>
+                </div>
+            ) : error ? (
+                <div className="flex justify-center items-center h-auto mt-4">
+                    <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                        <StartingButton />
+                        <div className="text-center text-destructive p-4">
+                            <p className="font-medium">Error loading batch metrics</p>
+                            <p className="text-sm">{error.message}</p>
                         </div>
-                    ) :
-                        !batchMetrics ? (
-                            // <NoActiveBatch />
-                            <div className="flex justify-center items-center h-auto mt-4">
-                            <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
-                          <StartingButton  />
-                          <div className="text-center text-destructive p-4">
-                                    <p className="font-medium">No batch metrics found</p>
-                                    <p className="text-sm">Pleasee Create Batch</p>
-                                </div>
-                               
-                              </BackgroundGradient>
-                            </div>
-                        ) :
-
-                            batchMetrics ? (
-                                <BatchContent batchMetrics={batchMetrics} />
-                            ) : null}
+                    </BackgroundGradient>
+                </div>
+            ) : !batchMetrics ? (
+                previousBatch ? (
+                    <PreviousBatchContent batchMetrics={previousBatch} />
+                ) : (
+                    <div className="flex justify-center items-center h-auto mt-4">
+                    <BackgroundGradient className="flex flex-col rounded-[22px] w-full align-middle items-center p-4 sm:p-10 bg-black">
+                        <StartingButton />
+                        <div className="text-center text-destructive p-4">
+                            <p className="font-medium">No batch metrics found refresh or create batch</p>
+                            <p className="text-sm">Refresh Page</p>
+                        </div>
+                    </BackgroundGradient>
+                </div>
+                )
+            ) : (
+                <BatchContent batchMetrics={batchMetrics} />
+            )}
         </div>
     );
 }
