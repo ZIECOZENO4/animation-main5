@@ -1276,7 +1276,7 @@ export default function ComponentCoin() {
                 </div>  
                             ))}
                             </div>     */}
-                             <div className="w-full overflow-x-auto  scrollbar-hide">
+                             <div className="w-full overflow-x-auto -ml-4 scrollbar-hide">
       <div className="min-w-max px-4">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {allTokens.map((token) => (
