@@ -1,17 +1,12 @@
-import React, { Suspense } from 'react';
-
-const NavigationBar = React.lazy(() => 
-    import('./navbar22').then(module => ({ default: module.NavigationBar }))
-);
+import React from "react";
+import TestContent from "./content";
 
 const TestPage = () => {
-    return (
-        <div className='px-[30px]'>
-            <Suspense fallback={<div>Loading...</div>}>
-                <NavigationBar />
-            </Suspense>
-        </div>
-    );
+  return (
+    <div className='px-[30px]'>
+      <TestContent />
+    </div>
+  );
 };
 
 export default TestPage;
