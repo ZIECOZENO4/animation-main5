@@ -28,6 +28,7 @@ import { gql, request, ClientError } from 'graphql-request';
 import { GRAPH_API_URL } from '@/constants';
 import { formatUnits } from 'viem';
 import { useAllTokens } from '@/hooks/useFetchAllToken';
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 type TabType = 'Initial' | 'Anonymous';
 
@@ -1282,50 +1283,15 @@ export default function ComponentCoin() {
             {allTokens.map((token) => (
                <Link href='/test' key={token.id} >
                     <motion.div
-               
+                data-tooltip-id="card-hover"
                 className="w-full md:w-[350px] px-2 mb-4  relative"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 whileHover={{ scale: 1.07 }}
               >
-                            <Tooltip
-                   content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
-                    placement="top"
-                    showArrow={false}
-                    offset={15} // Increased offset to create more space
-                    classNames={{
-                      base: [
-                        "py-2 px-4",
-                        "border-none",
-                        "shadow-none",
-                        "backdrop-blur-none",
-                        "relative",
-                        "mb-2 tooltip-custom", // Increased bottom margin
-                        "translate-y-[-8px]" // Move tooltip up slightly
-                      ].join(" "),
-                      content: [
-                        "text-[#F7F2DA]",
-                        "text-sm",
-                        "font-normal",
-                        "px-2 py-1",
-                        "rounded-none",
-                        "bg-[#000000]"
-                      ].join(" ")
-                    }}
-                    motionProps={{
-                      variants: {
-                        exit: {
-                          opacity: 0,
-                          transition: { duration: 0.1, ease: "easeIn" }
-                        },
-                        enter: {
-                          opacity: 1,
-                          transition: { duration: 0.15, ease: "easeOut" }
-                        }
-                      }
-                    }}
-                  >
+ 
+                
             <div
                   className="bg-[#0A0909]  overflow-hidden"
                   style={{ height: "150px" }}
@@ -1519,12 +1485,17 @@ export default function ComponentCoin() {
                     </div>
                   </div>
                 </div>
-            </Tooltip>
+            
             
               </motion.div>
                </Link>
             ))}
         </div>
+        <ReactTooltip
+        id="card-hover"
+
+        content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
+      />
         </div>
         </div>
                         </motion.div>

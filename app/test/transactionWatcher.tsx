@@ -97,8 +97,9 @@ export const TransactionManager: React.FC = () => {
     const queryClient = useQueryClient();
     const publicClient = usePublicClient();
     const { data: ethPrice } = useEthereumPrice();
-    const { isOpen, onOpenChange } = useDisclosure(); 
-
+    const { isOpen, onOpenChange } = useDisclosure(); // Aliased to 'isModalOpen'
+    const { isOpen: isSheetOpen, openSheet, closeSheet } = useSheetStore(); // Zustand store
+    
     const crossChainQueries = useQueries({
         queries: transactions.map((tx) => ({
             queryKey: ['cross-chain-transaction', tx.srcTxHash],
@@ -227,7 +228,7 @@ export const TransactionManager: React.FC = () => {
 
     return (
         <>
-           <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <Modal open={isOpen as boolean} onOpenChange={onOpenChange as (isOpen: boolean) => void}>
                 <ModalContent className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
                     <div>
                         <h1 className="text-popover-foreground">Transaction Details</h1>
