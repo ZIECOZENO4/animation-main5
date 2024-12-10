@@ -1609,7 +1609,8 @@ export default function ComponentCoin() {
         </div>
         <ReactTooltip
         id="card-hover"
-
+        className='font-mono bg-black'
+        border={true}
         content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
       />
         </div>
