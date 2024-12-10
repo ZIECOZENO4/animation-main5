@@ -180,13 +180,17 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
                     <Chip color='default' variant='shadow' className='font-bold'>
                         {batchMetrics.batch.state}
                     </Chip>
-                    <Chip color='warning' variant='dot' className='font-bold'>
-                    {batchMetrics.batch.isVotingActive && (
-                                    <span >
-                                        Voting Active
-                                    </span>
-                                )}
-                    </Chip>
+               <Chip 
+  color={progress === 100 ? 'success' : 'warning'} 
+  variant='dot' 
+  className='font-bold'
+>
+  {batchMetrics.batch.isVotingActive && (
+    <span>
+      {progress >= 99.99 ? 'Vote Completed' : 'Voting Active'}
+    </span>
+  )}
+</Chip>
                 </div>
 
                 <p className="mt-2 justify-center sm:justify-start  text-gray-500 flex"> Total Votes:{" "}<span className='ml-2 text-[#F7F2DA]'> {batchMetrics.stats.totalVotes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </span> </p>
