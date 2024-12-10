@@ -1609,8 +1609,7 @@ export default function ComponentCoin() {
         </div>
         <ReactTooltip
   id="card-hover"
-  className="font-mono"
-  classNames={{
+  className={{
     base: [
       "py-2 px-4",
       "border-none",
