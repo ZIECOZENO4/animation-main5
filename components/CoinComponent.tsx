@@ -1055,7 +1055,7 @@ export default function ComponentCoin() {
       </span>
     </div>
       </div>
-      <div className="relative w-[20rem]">
+      <div className="relative w-[12rem]">
         <motion.button
           onClick={() => setIsChainOpen(!isChainOpen)}
           className="w-full px-4 py-2 text-left bg-[#0A0909] border-2 border-[#1a1a1a] 
