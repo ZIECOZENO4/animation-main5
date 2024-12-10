@@ -606,7 +606,37 @@ export default function ComponentCoin() {
   const [maxPrice, setMaxPrice] = useState('')
   const [activeTab, setActiveTab] = useState<'Initial' | 'Anonymous'>('Initial');
   const [currency, setCurrency] = useState('USD');
+  const [shuffledOrder, setShuffledOrder] = useState<number[]>([]);
+  const [allTokens, setAllTokens] = useState<FormattedToken[]>([]);
+  
+  // Move the tokens fetching logic here
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, error } = useTokensQuery();
+  
+  useEffect(() => {
+    if (status === 'success' && data?.pages) {
+      const tokens = data.pages.flatMap(page => page.tokens) || [];
+      setAllTokens(tokens);
+    }
+  }, [data, status]);
+  
+  useEffect(() => {
+    if (allTokens.length > 0) {
+      setShuffledOrder(allTokens.map((_, index) => index));
+    }
+  }, [allTokens]);
+  
+  const shuffleArray = (array: number[]) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+  
+  const handleShuffle = () => {
+    setShuffledOrder(shuffleArray(shuffledOrder));
+  };
   console.log('Query Status:', status);
 
   if (status === 'error') {
@@ -629,7 +659,7 @@ export default function ComponentCoin() {
         console.log('Fetched Data:', data);
     }
   
-    const allTokens = data?.pages?.flatMap(page => page.tokens) || [];
+    // const allTokens = data?.pages?.flatMap(page => page.tokens) || [];
 
 
 
@@ -1012,7 +1042,8 @@ export default function ComponentCoin() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           whileHover={{ scale: 1.07 }}
-          className="flex items-center"
+          className="flex items-center cursor-pointer"
+          onClick={handleShuffle}
         >
       <div className="relative">
   <Shuffle className="h-5 w-5 text-[#F7F2DA80]" />
@@ -1280,16 +1311,23 @@ export default function ComponentCoin() {
                              <div className="w-full overflow-x-auto -ml-4 scrollbar-hide">
       <div className="min-w-max px-4">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {allTokens.map((token) => (
-               <Link href='/test' key={token.id} >
-                    <motion.div
-                data-tooltip-id="card-hover"
-                className="w-full md:w-[350px] px-2 mb-4  relative"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                whileHover={{ scale: 1.07 }}
-              >
+        {shuffledOrder.map((index) => {
+      const token = allTokens[index];
+      return (
+        <Link href='/test' key={token.id}>
+          <motion.div
+            data-tooltip-id="card-hover"
+            className="w-full md:w-[350px] px-2 mb-4 relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            layout // Add this to enable smooth position transitions
+            transition={{
+              duration: 0.5,
+              delay: 0.1,
+              layout: { duration: 0.6, type: "spring" }
+            }}
+            whileHover={{ scale: 1.07 }}
+          >
  
                 
             <div
@@ -1488,8 +1526,9 @@ export default function ComponentCoin() {
             
             
               </motion.div>
-               </Link>
-            ))}
+        </Link>
+      );
+    })}
         </div>
         <ReactTooltip
         id="card-hover"
