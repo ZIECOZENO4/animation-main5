@@ -1608,32 +1608,10 @@ export default function ComponentCoin() {
     })}
         </div>
         <ReactTooltip
-  id="card-hover"
-  className={{
-    base: [
-      "py-2 px-4",
-      "border-none",
-      "shadow-none",
-      "backdrop-blur-none",
-      "relative",
-      "font-mono",
-      "bg-black"
-    ].join(" "),
-    content: [
-      "text-[#F7F2DA]",
-      "text-sm",
-      "font-mono",
-      "px-2 py-1",
-      "rounded-none",
-      "bg-black"
-    ].join(" ")
-  }}
-  style={{
-    fontFamily: "monospace",
-    backgroundColor: "#000000"
-  }}
-  content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
-/>
+        id="card-hover"
+        className=''
+        content={activeTab === 'Initial' ? "Still in Initial Stage" : "Anonymous Voting Stage"}
+      />
         </div>
         </div>
                         </motion.div>
