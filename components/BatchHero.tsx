@@ -88,9 +88,9 @@ const CountdownRenderer: React.FC<CountdownRendererProps> = ({ timeRemaining, pr
     return (
         <div className="text-center">
             <div className="text-2xl font-bold flex gap-1 text-slate-500">
-                <p className='flex '>{String(timeRemaining.hours).padStart(2, '0')} H{""}:</p>
-                 <p className='flex '>  {String(timeRemaining.minutes).padStart(2, '0')} M{""}:</p> 
-                 <p className='flex  text-[#F7F2DA]'> {String(timeRemaining.seconds).padStart(2, '0')} S{""}</p> 
+                <p className='flex '>{String(timeRemaining.hours).padStart(2, '0')}H:</p>
+                 <p className='flex '>  {String(timeRemaining.minutes).padStart(2, '0')}M:</p> 
+                 <p className='flex  text-[#F7F2DA]'> {String(timeRemaining.seconds).padStart(2, '0')}S{""}</p> 
             </div>
   
         </div>
