@@ -228,8 +228,8 @@ export const TransactionManager: React.FC = () => {
 
     return (
         <>
-                <Modal open={isOpen as boolean} onOpenChange={onOpenChange as (isOpen: boolean) => void}>
-                <ModalContent className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
+                
+                <div className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
                     <div>
                         <h1 className="text-popover-foreground">Transaction Details</h1>
                     </div>
@@ -261,8 +261,8 @@ export const TransactionManager: React.FC = () => {
                             ))}
                         </div>
                     </div>
-                </ModalContent>
-            </Modal>
+                </div>
+      
         </>
     );
 };
