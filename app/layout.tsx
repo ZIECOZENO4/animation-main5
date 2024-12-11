@@ -18,8 +18,8 @@ const workbench = Workbench({
 });
 
 export const metadata: Metadata = {
-  title: "OmniPump",
-  description: "Generate and create your own coin",
+  title: "Kannon",
+  description: "Kannon token and voting system",
 };
 
 const DynamicBackgroundVideo = dynamic(() => import('@/components/BackgroundVideo'), {

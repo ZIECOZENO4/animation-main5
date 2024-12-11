@@ -211,7 +211,7 @@ const BatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => {
                 <Chip color="default" className='text-sm md:text-md my-1 font-bold'>Initial and Anonymous</Chip>
               </motion.div>
             </div>
-            <div className="gap-4 my-2 flex flex-col w-full md:flex-row ">
+            <div className="gap-4 my-2 flex flex-col align-middle w-full md:flex-row ">
               <div className="md:w-[70%] w-full">
     <HeroSearchInput />
               </div>
@@ -345,7 +345,7 @@ const PreviousBatchContent: React.FC<BatchContentProps> = ({ batchMetrics }) => 
                         <Chip color="default" className='text-sm md:text-md my-1 font-bold'>Completed</Chip>
                     </motion.div>
                 </div>
-                <div className="gap-4 my-2 flex flex-col w-full md:flex-row ">
+                <div className="gap-4 my-2 flex flex-col align-middle w-full md:flex-row ">
                     <div className="md:w-[70%] w-full">
                         <HeroSearchInput />
                     </div>
