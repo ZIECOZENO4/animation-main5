@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@layerzerolabs/scan-client": "^0.0.8",
     "@nextui-org/react": "^2.4.8",
+    "@radix-ui/react-slot": "^1.1.0",
     "@rainbow-me/rainbowkit": "^2.2.0",
     "@react-three/drei": "^9.113.0",
     "@react-three/fiber": "^8.17.10",
