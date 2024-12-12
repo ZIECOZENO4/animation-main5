@@ -1,11 +1,9 @@
-import TokenSubmissionForm from "./aside-2";
-import CreateTokenPage from "./choose-chain";
+import TransactionItem from "@/app/test/transactionWatcher";
+
 export default function Home() {
 
     return (
-        <CreateTokenPage>
-            <TokenSubmissionForm />
-        </CreateTokenPage>
+ <TransactionItem />
 
     );
 }
