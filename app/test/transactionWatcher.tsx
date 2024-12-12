@@ -4,9 +4,10 @@ import { createClient } from '@layerzerolabs/scan-client';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useRouter } from 'next/navigation';
 import { useQueries, useQueryClient, UseQueryResult } from '@tanstack/react-query';
-import { Badge, Card, CardHeader, Modal, ModalContent, Tabs } from "@nextui-org/react";
+import { Badge } from "@nextui-org/react";
 import { ExternalLink, CheckCircle, XCircle, Clock, ChevronUp, ChevronDown, ArrowRight } from "lucide-react";
 import { SEPOLIA_ARBITRUM_CHAIN_ID } from '@/constants';
 import { format, formatDistanceToNow } from 'date-fns';
@@ -17,7 +18,7 @@ import Link from 'next/link';
 import { MessageStatus, NormalTransaction, NormalTxStatus, Transaction, UnifiedSearchParams, useNormalTransactionStore, useSheetStore, useTransactionStore } from '@/zustand-store';
 import { useEthereumPrice } from '@/hooks/useEthPrice';
 import { getChainIconByChainId } from '@/lib/chainsAndIcons';
-import { useDisclosure } from '@nextui-org/react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tab';
 
 const TWO_HOURS_IN_MS = 2 * 60 * 60 * 1000 // 2 hours in milliseconds
 
@@ -26,10 +27,6 @@ const lzClient = createClient('testnet');
 const needsContinuousChecking = (status: MessageStatus): boolean => {
     return [MessageStatus.PENDING, MessageStatus.INFLIGHT, MessageStatus.CONFIRMING].includes(status);
 };
-
-
-
-
 
 // Wrapper function for waitForTransactionReceipt
 const waitForTransactionReceiptWrapper = async (
@@ -97,9 +94,8 @@ export const TransactionManager: React.FC = () => {
     const queryClient = useQueryClient();
     const publicClient = usePublicClient();
     const { data: ethPrice } = useEthereumPrice();
-    const { isOpen, onOpenChange } = useDisclosure(); // Aliased to 'isModalOpen'
-    const { isOpen: isSheetOpen, openSheet, closeSheet } = useSheetStore(); // Zustand store
-    
+    const { isOpen, openSheet, closeSheet } = useSheetStore();
+
     const crossChainQueries = useQueries({
         queries: transactions.map((tx) => ({
             queryKey: ['cross-chain-transaction', tx.srcTxHash],
@@ -228,41 +224,41 @@ export const TransactionManager: React.FC = () => {
 
     return (
         <>
+            <Sheet open={isOpen} onOpenChange={closeSheet}>
+                <SheetContent className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
+                    <SheetHeader>
+                        <SheetTitle className="text-popover-foreground">Transaction Details</SheetTitle>
+                    </SheetHeader>
+                    <Tab defaultValue="all" className="w-full mt-6">
                 
-                <div className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
-                    <div>
-                        <h1 className="text-popover-foreground">Transaction Details</h1>
-                    </div>
-                    <div className="w-full mt-6">
-                        <div className="flex flex-row justify-between items-center w-full">
-                            <div >All</div>
-                            <div >Pending</div>
-                            <div >Completed</div>
-                        </div>
-                        <div  className="mt-4">
+                            <Tabs value="all">All</Tabs>
+                            <Tabs value="pending">Pending</Tabs>
+                            <Tabs value="completed">Completed</Tabs>
+                    
+                        <TabsContent value="all" className="mt-4">
                             {sortedTransactions.map((tx) => (
                                 <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
                             ))}
-                        </div>
-                        <div  className="mt-4">
+                        </TabsContent>
+                        <TabsContent value="pending" className="mt-4">
                             {sortedTransactions.filter(tx =>
                                 (tx.type === 'cross-chain' && (tx.status === MessageStatus.INFLIGHT || tx.status === MessageStatus.CONFIRMING)) ||
                                 (tx.type === 'normal' && tx.status === NormalTxStatus.PENDING)
                             ).map((tx) => (
                                 <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
                             ))}
-                        </div>
-                        <div className="mt-4">
+                        </TabsContent>
+                        <TabsContent value="completed" className="mt-4">
                             {sortedTransactions.filter(tx =>
                                 (tx.type === 'cross-chain' && tx.status !== MessageStatus.INFLIGHT && tx.status !== MessageStatus.CONFIRMING) ||
                                 (tx.type === 'normal' && tx.status !== NormalTxStatus.PENDING)
                             ).map((tx) => (
                                 <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
                             ))}
-                        </div>
-                    </div>
-                </div>
-      
+                        </TabsContent>
+                    </Tab>
+                </SheetContent>
+            </Sheet>
         </>
     );
 };
@@ -335,7 +331,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
 
             target="_blank"
             rel="noopener noreferrer">
-            <Card
+            <div
                 className={`mb-4 overflow-hidden transition-all duration-300  hover:shadow-xl cursor-pointer bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-md border border-primary/20 hover:border-primary/40`}
                 // onClick={() => handleClick(tx.type, tx.type === 'cross-chain' ? (tx as Transaction).srcTxHash : (tx as NormalTransaction).hash)}
                 style={{
@@ -344,14 +340,14 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
                     WebkitBackdropFilter: 'blur(10px)',
                 }}
             >
-                <CardHeader className="pb-2">
+                <div className="pb-2">
                     <div className="flex items-center justify-between">
-                        <div className="text-sm font-semibold text-primary flex items-center">
+                        <h1 className="text-sm font-semibold text-primary flex items-center">
                             <Badge  className={`mr-2 ${getTransactionTypeColor()}`}>
                                 {type === 'tokenBuy' ? 'Buy' : type === 'tokenSell' ? 'Sell' : 'Tx'}
                             </Badge>
                             {tx.type === 'cross-chain' ? 'Cross-Chain' : 'Normal'}
-                        </div>
+                        </h1>
                         <Badge  className={`${color} text-white `}>
                             <StatusIcon className="mr-1 h-3 w-3" />
                             <span style={{ fontSize: newCalculateFontSize(text, "sm") }}>
@@ -360,7 +356,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
                             </span>
                         </Badge>
                     </div>
-                </CardHeader>
+                </div>
                 <div>
                     <div className="space-y-3">
                         {renderAmount()}
@@ -383,7 +379,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ tx, ethPrice }) => {
                         </div>
                     </div>
                 </div>
-            </Card>
+            </div>
         </Link>
     );
 };
