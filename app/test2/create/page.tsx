@@ -1,9 +1,9 @@
-import TransactionItem from "@/app/test/transactionWatcher";
+import { NavigationBar } from "@/app/test/navbar22";
 
 export default function Home() {
 
     return (
- <TransactionItem />
+ <NavigationBar />
 
     );
 }
