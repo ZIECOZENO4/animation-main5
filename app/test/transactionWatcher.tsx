@@ -225,16 +225,16 @@ export const TransactionManager: React.FC = () => {
     return (
         <>
             <Sheet open={isOpen} onOpenChange={closeSheet}>
-                <SheetContent className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
+                <div className="bg-popover/80 backdrop-blur-md max-h-screen overflow-y-auto border-l border-border">
                     <SheetHeader>
                         <SheetTitle className="text-popover-foreground">Transaction Details</SheetTitle>
                     </SheetHeader>
-                    <Tab defaultValue="all" className="w-full mt-6">
-                
-                            <Tabs value="all">All</Tabs>
-                            <Tabs value="pending">Pending</Tabs>
-                            <Tabs value="completed">Completed</Tabs>
-                    
+                    <Tabs defaultValue="all" className="w-full mt-6">
+                        <TabsList className="flex flex-row justify-between items-center w-full">
+                            <TabsTrigger value="all">All</TabsTrigger>
+                            <TabsTrigger value="pending">Pending</TabsTrigger>
+                            <TabsTrigger value="completed">Completed</TabsTrigger>
+                        </TabsList>
                         <TabsContent value="all" className="mt-4">
                             {sortedTransactions.map((tx) => (
                                 <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
@@ -256,8 +256,8 @@ export const TransactionManager: React.FC = () => {
                                 <TransactionItem key={tx.type === 'cross-chain' ? tx.srcTxHash : tx.hash} tx={tx} ethPrice={ethPrice ? ethPrice.ethereum.usd : 0} />
                             ))}
                         </TabsContent>
-                    </Tab>
-                </SheetContent>
+                    </Tabs>
+                </div>
             </Sheet>
         </>
     );
