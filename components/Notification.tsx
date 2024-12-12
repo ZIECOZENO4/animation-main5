@@ -3,6 +3,8 @@ import {Tabs, Tab, Card, CardBody, Switch} from "@nextui-org/react";
 import RewardCard from "./transactioncontent";
 import { NavigationBar } from "@/app/test/navbar22";
 
+
+
 export default function NotificationAlert() {
   const [isVertical, setIsVertical] = React.useState(false);
   return (
